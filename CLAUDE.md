@@ -59,13 +59,16 @@ design-system/
 ```
 
 **Namespaces** :
+`@brique-rouge/tokens
+@brique-rouge/react
+@brique-rouge/storybook`
 
 ---
 
 ## 5. Tokens
 
 ### Source de vérité
-Figma Variables — fichier `skRy27piDeBGQwD8Bi0EAU`
+Figma Variables — fichier `NZtxQVYKRqeaGcC7hT5pjw`
 
 ### Collections Figma
 - Primitives
@@ -82,7 +85,13 @@ Figma Variables — fichier `skRy27piDeBGQwD8Bi0EAU`
 ### Nomenclature
 Échelle numérique (`spacing.01`, `spacing.02`…) — pas de t-shirt sizing.
 
----
+### Exports package tokens
+```
+@brique-rouge/tokens/css/colors-light
+@brique-rouge/tokens/css/colors-dark
+@brique-rouge/tokens/css/numbers
+@brique-rouge/tokens/css/typography
+```
 
 ## Packages
 
