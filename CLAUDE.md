@@ -98,8 +98,91 @@ Figma Variables — fichier `NZtxQVYKRqeaGcC7hT5pjw`
 @brique-rouge-DS/tokens/css/numbers
 @brique-rouge-DS/tokens/css/typography
 ```
+---
+
+## 6. Règles absolues — à ne jamais enfreindre
+
+### 6.1 Figma est la source de vérité
+- Toujours lire Figma avant d'implémenter ou modifier un composant.
+- Reproduire exactement ce qui est dans Figma : variants, props, états, tailles, tokens.
+- Si quelque chose semble étrange ou incohérent : **le signaler, mais l'implémenter quand même**.
+- C'est Romain qui décide si c'est une erreur ou une intention design.
+- **Ne jamais corriger, améliorer ou interpréter le design de sa propre initiative.**
+
+### 6.2 Anti-régression
+- Identifier le périmètre exact de chaque changement avant de toucher au code.
+- Ne modifier que ce périmètre — rien d'autre.
+- Ne jamais modifier ce qui fonctionne déjà.
+- Valider mentalement chaque ligne modifiée avant de l'écrire.
+
+### 6.3 Accessibilité (WCAG 2.1 AA — non négociable)
+- Navigation clavier complète
+- Focus visible
+- ARIA correct
+- Compatibilité lecteurs d'écran
+- Contrastes suffisants
+- Logique d'états accessible
+
+### 6.4 Sécurité
+- Pas de `dangerouslySetInnerHTML`
+- Pas de patterns XSS
+- Pas de dépendances inutiles
+
+### 6.5 Qualité de code
+- TypeScript strict — pas de `any`
+- CSS Modules + CSS Variables uniquement
+- Pas de Tailwind
+- Pas de sur-ingénierie
+- Code lisible, maintenable, documenté
 
 ---
+
+## 7. Workflow composants
+
+### Ordre impératif pour chaque nouveau composant ou modification
+
+```
+1. Lire Figma via MCP (get_design_context)
+2. Faire le diff avec le code existant
+3. Identifier le périmètre exact des changements
+4. Implémenter uniquement ce qui a changé
+5. Vérifier les tests existants — ne pas les casser
+6. Ajouter ou mettre à jour les tests
+7. Mettre à jour la story Storybook
+8. Push GitHub
+```
+
+### IDs Figma — format
+- URLs Figma : format tiret (`18-765`)
+- Appels MCP : format deux-points (`18:765`)
+
+---
+
+## 8. Conventions composants React
+
+### API
+- `children` pour le contenu textuel (pas de prop `label`)
+- Props booléennes sans valeur : `<Button loading />` pas `<Button loading={true} />`
+- `forwardRef` systématique
+- `displayName` défini
+
+### CSS Modules
+- Classes : kebab-case avec préfixe sémantique (`level-primary`, `size-m`, `is-loading`)
+- États disabled : sélecteur `:disabled` natif uniquement — **pas** `[aria-disabled='true']`
+- L'attribut `aria-disabled` sert à la communication avec les lecteurs d'écran, pas au style
+
+### États loading
+- Pas de `disabled` HTML natif en état loading
+- `aria-busy="true"` + `aria-disabled="true"` exposés
+- Click bloqué via handler (`if (loading) return`)
+- `loadingLabel` (défaut : `"Chargement en cours"`) dans un `<span class="srOnly">`
+
+### data-attributes
+- `data-level` et `data-size` obligatoires sur le `<button>` natif (utilisés par les tests)
+
+---
+
+
 
 ## Packages
 
