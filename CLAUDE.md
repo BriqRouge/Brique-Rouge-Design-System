@@ -9,7 +9,7 @@ Il suit une architecture monorepo avec pnpm + Turborepo.
 
 ## 1. Contexte du projet
 
-Design System open-source de Romain Richard.
+Design System open-source de Damien Ramzi (sur un template de Romain Richard).
 
 - **GitHub** : https://github.com/BriqRouge/my-personal-design-system
 - **Figma** : fichier `NZtxQVYKRqeaGcC7hT5pjw` ("Portfolio Damien Ramzi")
