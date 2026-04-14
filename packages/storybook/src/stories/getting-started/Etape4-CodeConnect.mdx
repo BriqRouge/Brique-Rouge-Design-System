@@ -1,0 +1,77 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Démarrage/Étape 4 — Code Connect" />
+
+# Étape 4 — Connecter Figma et le code (Code Connect)
+
+> ⚠️ Cette étape est optionnelle et avancée.
+> Elle est recommandée une fois que tu as au moins 2-3 composants validés.
+
+Code Connect relie chaque composant Figma à son équivalent en code.
+Quand un designer sélectionne un composant dans Figma,
+il voit directement le code React correspondant dans le panneau Dev.
+
+## Prérequis
+
+- Avoir au moins un composant implémenté et validé
+- Avoir accès au panneau Dev de Figma (plan Pro ou supérieur)
+- Avoir la CLI Figma installée :
+
+```bash
+pnpm add -g @figma/code-connect
+```
+
+## Structure d'un fichier Code Connect
+
+Chaque composant a un fichier `[NomComposant].figma.tsx` :
+
+```tsx
+import figma from "@figma/code-connect";
+import { [NomComposant] } from "./[NomComposant]";
+
+figma.connect(
+  [NomComposant],
+  "https://www.figma.com/file/[CLÉ_FIGMA]?node-id=[NODE_ID]",
+  {
+    props: {
+      // Mapping entre les propriétés Figma et les props React
+      variant: figma.enum("Variant", {
+        primary: "primary",
+        secondary: "secondary",
+      }),
+      disabled: figma.boolean("Disabled"),
+    },
+    example: ({ variant, disabled }) => (
+      <[NomComposant] variant={variant} disabled={disabled} />
+    ),
+  }
+);
+```
+
+## Prompt type — Générer le fichier Code Connect
+
+Utilise ce prompt dans Claude AI après avoir validé le composant :
+
+```
+Le composant [NomComposant] est implémenté et validé.
+Node ID Figma : [NODE_ID]
+Clé du fichier Figma : [CLÉ_FIGMA]
+
+Génère le fichier [NomComposant].figma.tsx pour Code Connect.
+Base-toi sur :
+- L'API React validée : [colle l'API]
+- Les propriétés Figma identifiées lors de la lecture du composant
+
+Le fichier doit mapper fidèlement les propriétés Figma vers les props React.
+```
+
+## Publier les connexions
+
+Une fois les fichiers `.figma.tsx` créés :
+
+```bash
+pnpm figma connect publish
+```
+
+✅ Dans Figma, sélectionne un composant et ouvre le panneau Dev.
+Tu vois le code React ? Code Connect est en place.

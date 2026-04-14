@@ -1,0 +1,23 @@
+{
+  "name": "design-system-starter",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Template monorepo pour industrialiser un Design System",
+  "scripts": {
+    "dev": "turbo run dev --filter=@starter/storybook",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "tokens": "turbo run build --filter=@starter/tokens"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0",
+    "prettier": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "packageManager": "pnpm@8.15.0"
+}

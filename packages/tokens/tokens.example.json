@@ -1,0 +1,213 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tokens-studio/tokens-schema/main/schema.json",
+  "_comment": "Exemple de structure après export Figma Variables. Copier dans tokens.json pour tester.",
+  "color": {
+    "light": {
+      "background": {
+        "neutral": {
+          "default": {
+            "$value": { "hex": "#FFFFFF", "alpha": 1, "components": { "r": 255, "g": 255, "b": 255 } },
+            "$type": "color"
+          },
+          "alt": {
+            "$value": { "hex": "#F5F5F5", "alpha": 1, "components": { "r": 245, "g": 245, "b": 245 } },
+            "$type": "color"
+          },
+          "subtle": {
+            "$value": { "hex": "#EBEBEB", "alpha": 1, "components": { "r": 235, "g": 235, "b": 235 } },
+            "$type": "color"
+          }
+        },
+        "brand": {
+          "primary": {
+            "$value": { "hex": "#0066FF", "alpha": 1, "components": { "r": 0, "g": 102, "b": 255 } },
+            "$type": "color"
+          },
+          "secondary": {
+            "$value": { "hex": "#0052CC", "alpha": 1, "components": { "r": 0, "g": 82, "b": 204 } },
+            "$type": "color"
+          }
+        },
+        "accent": {
+          "default": {
+            "$value": { "hex": "#111111", "alpha": 1, "components": { "r": 17, "g": 17, "b": 17 } },
+            "$type": "color"
+          }
+        }
+      },
+      "text": {
+        "neutral": {
+          "default": {
+            "$value": { "hex": "#111111", "alpha": 1, "components": { "r": 17, "g": 17, "b": 17 } },
+            "$type": "color"
+          },
+          "alt": {
+            "$value": { "hex": "#555555", "alpha": 1, "components": { "r": 85, "g": 85, "b": 85 } },
+            "$type": "color"
+          },
+          "subtle": {
+            "$value": { "hex": "#888888", "alpha": 1, "components": { "r": 136, "g": 136, "b": 136 } },
+            "$type": "color"
+          }
+        },
+        "brand": {
+          "primary": {
+            "$value": { "hex": "#0066FF", "alpha": 1, "components": { "r": 0, "g": 102, "b": 255 } },
+            "$type": "color"
+          }
+        },
+        "accent": {
+          "default": {
+            "$value": { "hex": "#FFFFFF", "alpha": 1, "components": { "r": 255, "g": 255, "b": 255 } },
+            "$type": "color"
+          }
+        }
+      },
+      "border": {
+        "neutral": {
+          "default": {
+            "$value": { "hex": "#E0E0E0", "alpha": 1, "components": { "r": 224, "g": 224, "b": 224 } },
+            "$type": "color"
+          },
+          "strong": {
+            "$value": { "hex": "#BBBBBB", "alpha": 1, "components": { "r": 187, "g": 187, "b": 187 } },
+            "$type": "color"
+          }
+        }
+      }
+    },
+    "dark": {
+      "background": {
+        "neutral": {
+          "default": {
+            "$value": { "hex": "#111111", "alpha": 1, "components": { "r": 17, "g": 17, "b": 17 } },
+            "$type": "color"
+          },
+          "alt": {
+            "$value": { "hex": "#1A1A1A", "alpha": 1, "components": { "r": 26, "g": 26, "b": 26 } },
+            "$type": "color"
+          },
+          "subtle": {
+            "$value": { "hex": "#222222", "alpha": 1, "components": { "r": 34, "g": 34, "b": 34 } },
+            "$type": "color"
+          }
+        },
+        "brand": {
+          "primary": {
+            "$value": { "hex": "#4D94FF", "alpha": 1, "components": { "r": 77, "g": 148, "b": 255 } },
+            "$type": "color"
+          }
+        },
+        "accent": {
+          "default": {
+            "$value": { "hex": "#FFFFFF", "alpha": 1, "components": { "r": 255, "g": 255, "b": 255 } },
+            "$type": "color"
+          }
+        }
+      },
+      "text": {
+        "neutral": {
+          "default": {
+            "$value": { "hex": "#FFFFFF", "alpha": 1, "components": { "r": 255, "g": 255, "b": 255 } },
+            "$type": "color"
+          },
+          "alt": {
+            "$value": { "hex": "#AAAAAA", "alpha": 1, "components": { "r": 170, "g": 170, "b": 170 } },
+            "$type": "color"
+          },
+          "subtle": {
+            "$value": { "hex": "#666666", "alpha": 1, "components": { "r": 102, "g": 102, "b": 102 } },
+            "$type": "color"
+          }
+        },
+        "brand": {
+          "primary": {
+            "$value": { "hex": "#4D94FF", "alpha": 1, "components": { "r": 77, "g": 148, "b": 255 } },
+            "$type": "color"
+          }
+        },
+        "accent": {
+          "default": {
+            "$value": { "hex": "#111111", "alpha": 1, "components": { "r": 17, "g": 17, "b": 17 } },
+            "$type": "color"
+          }
+        }
+      },
+      "border": {
+        "neutral": {
+          "default": {
+            "$value": { "hex": "#333333", "alpha": 1, "components": { "r": 51, "g": 51, "b": 51 } },
+            "$type": "color"
+          }
+        }
+      }
+    }
+  },
+  "number": {
+    "spacing": {
+      "01": { "$value": 2, "$type": "number" },
+      "02": { "$value": 4, "$type": "number" },
+      "03": { "$value": 8, "$type": "number" },
+      "04": { "$value": 12, "$type": "number" },
+      "05": { "$value": 16, "$type": "number" },
+      "06": { "$value": 24, "$type": "number" },
+      "07": { "$value": 32, "$type": "number" },
+      "08": { "$value": 48, "$type": "number" },
+      "09": { "$value": 64, "$type": "number" },
+      "10": { "$value": 96, "$type": "number" }
+    },
+    "radius": {
+      "01": { "$value": 4, "$type": "number" },
+      "02": { "$value": 6, "$type": "number" },
+      "03": { "$value": 8, "$type": "number" },
+      "04": { "$value": 12, "$type": "number" },
+      "full": { "$value": 9999, "$type": "number" }
+    },
+    "border-width": {
+      "01": { "$value": 1, "$type": "number" },
+      "02": { "$value": 2, "$type": "number" }
+    },
+    "opacity": {
+      "disabled": { "$value": 0.4, "$type": "number" },
+      "hover": { "$value": 0.08, "$type": "number" }
+    }
+  },
+  "typography": {
+    "body": {
+      "sm": {
+        "fontSize": { "$value": 12, "$type": "number" },
+        "lineHeight": { "$value": 18, "$type": "number" }
+      },
+      "default": {
+        "fontSize": { "$value": 14, "$type": "number" },
+        "lineHeight": { "$value": 20, "$type": "number" }
+      },
+      "lg": {
+        "fontSize": { "$value": 16, "$type": "number" },
+        "lineHeight": { "$value": 24, "$type": "number" }
+      }
+    },
+    "heading": {
+      "xs": {
+        "fontSize": { "$value": 16, "$type": "number" },
+        "lineHeight": { "$value": 22, "$type": "number" }
+      },
+      "sm": {
+        "fontSize": { "$value": 20, "$type": "number" },
+        "lineHeight": { "$value": 28, "$type": "number" }
+      },
+      "md": {
+        "fontSize": { "$value": 24, "$type": "number" },
+        "lineHeight": { "$value": 32, "$type": "number" }
+      },
+      "lg": {
+        "fontSize": { "$value": 32, "$type": "number" },
+        "lineHeight": { "$value": 40, "$type": "number" }
+      },
+      "xl": {
+        "fontSize": { "$value": 40, "$type": "number" },
+        "lineHeight": { "$value": 48, "$type": "number" }
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Démarrage/Étape 2 — Premier composant" />
+
+# Étape 2 — Créer ton premier composant
+
+Cette étape te guide dans le workflow complet de création d'un composant,
+de Figma jusqu'au code.
+
+Tu utilises **deux outils Claude distincts** :
+- **Claude AI** (claude.ai) — pour lire Figma et définir l'API du composant
+- **Claude Code** (terminal) — pour implémenter les fichiers
+
+## 1. Préparer le composant dans Figma
+
+Avant de demander à Claude de lire un composant, il doit être finalisé dans Figma :
+- Tous les variants définis
+- Tous les états représentés (default, hover, focus, disabled, error…)
+- Les variables Figma branchées sur les éléments
+
+### Trouver le Node ID
+
+1. Dans Figma, sélectionne le **Component Set** de ton composant
+   (le composant parent qui contient tous les variants)
+2. Regarde l'URL dans ton navigateur :
+   `https://www.figma.com/file/XXXX/...?node-id=18-797`
+3. Copie la valeur après `node-id=` : `18-797`
+4. Remplace le tiret par deux-points : `18:797` — c'est ton Node ID
+
+## 2. Lire le composant avec Claude AI
+
+Ouvre **claude.ai** et utilise ce prompt :
+
+```
+Lis le composant Figma avec le node ID [NODE_ID] dans le fichier [CLÉ_FIGMA].
+Pour ce composant :
+
+- Identifie tous les variants et leurs valeurs
+- Identifie tous les états (default, hover, focus, disabled, error…)
+- Identifie les tailles si applicable
+- Identifie les tokens utilisés (couleurs, espacements, typographie)
+- Propose une API React propre et cohérente qui reflète fidèlement la structure Figma
+
+Ne génère pas de code pour l'instant — je veux d'abord valider l'API.
+```
+
+> **Où trouver la clé Figma ?**
+> Dans l'URL de ton fichier : `https://www.figma.com/file/[CLÉ_FIGMA]/nom-du-fichier`
+
+## 3. Valider l'API
+
+Avant de lancer l'implémentation, vérifie que l'API proposée par Claude
+correspond à ton intention de design :
+
+- Les props reflètent bien les variants Figma ?
+- Les états sont tous couverts ?
+- Les noms sont clairs et cohérents avec le reste du DS ?
+
+C'est ton rôle de designer — valide avant de continuer.
+
+## 4. Implémenter avec Claude Code
+
+Une fois l'API validée, ouvre ton terminal et lance Claude Code :
+
+```bash
+claude
+```
+
+Utilise ce prompt type :
+
+```
+Travaille sur la branche feat/composant-[NOM]
+(à créer depuis main si elle n'existe pas).
+
+Implémente le composant [NomComposant] dans packages/react/src/components/.
+
+API validée :
+[Colle ici l'API validée avec Claude AI]
+
+Tokens à utiliser :
+[Liste les tokens identifiés à l'étape précédente]
+
+Pour ce composant, crée :
+- [NomComposant].tsx — implémentation React avec TypeScript strict
+- [NomComposant].module.css — styles avec CSS Modules et tokens CSS
+- [NomComposant].test.tsx — tests unitaires, d'interaction et d'accessibilité (jest-axe)
+- index.ts — export du composant
+- Stories Storybook dans packages/storybook/src/stories/composants/[NomComposant]/
+
+Règles absolues :
+- Tokens CSS uniquement — pas de valeur arbitraire
+- WCAG 2.1 AA — navigation clavier, focus visible, ARIA correct
+- TypeScript strict — pas de any
+- Pas de dangerouslySetInnerHTML
+
+Après implémentation :
+- Lance les tests : pnpm test
+- Vérifie que Storybook compile : make dev
+- Pousse la branche sur GitHub
+```
+
+## 5. Vérifier dans Storybook
+
+Navigue dans **Composants** dans le menu à gauche.
+
+Compare le rendu avec ton composant Figma :
+- Les variants s'affichent correctement ?
+- Les états fonctionnent ?
+- La navigation clavier fonctionne (touche Tab) ?
+
+## 6. Mettre à jour COMPONENTS.md
+
+Après validation, documente le composant dans `COMPONENTS.md`.
+Ce fichier est lu par Claude Code pour les futures générations.
+
+```
+Le composant [NomComposant] vient d'être validé.
+Voici son API : [colle l'API]
+Voici les tokens qu'il utilise : [liste les tokens]
+
+Mets à jour COMPONENTS.md pour ajouter ce composant
+en respectant le format existant.
+```
+
+✅ Le composant apparaît dans Storybook et dans COMPONENTS.md ?
+Continue avec **Étape 3 — CI/CD**.
