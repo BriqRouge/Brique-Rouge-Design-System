@@ -1,61 +1,69 @@
 // mapping.config.js
 // ─── Le seul fichier à modifier pour adapter le système à tes collections Figma ───
-// Ajoute autant d'entrées que tu as de collections dans ton fichier Figma Variables.
+// Correspond aux collections exportées depuis Figma : "primitive" et "semantic".
 
 export default {
   collections: [
+    // ─── Tokens sémantiques (à utiliser dans les composants) ──────────────────
+
     {
-      // Nom exact de la collection dans Figma (sensible à la casse)
-      // Correspond au chemin de la clé racine dans tokens.json, séparé par "/"
-      figmaCollection: 'color/light',
-      // Nom du fichier CSS généré dans packages/tokens/build/css/
-      output: 'colors-light.css',
-      // Type de tokens : "color" | "number" | "typography"
+      // Couleurs sémantiques : background, text, border
+      figmaCollection: 'semantic/color',
+      output: 'colors.css',
       type: 'color',
-      // Mode Figma si applicable (détermine le sélecteur CSS)
-      // "light" → :root | tout autre valeur → [data-theme="<mode>"]
-      mode: 'light',
+      mode: 'light', // → sélecteur :root
     },
     {
-      figmaCollection: 'color/dark',
-      output: 'colors-dark.css',
-      type: 'color',
-      mode: 'dark',
-    },
-    {
-      figmaCollection: 'number',
-      output: 'numbers.css',
+      // Espacements sémantiques : component (xs→xl) et layout (sm→xl)
+      // stripDepth:1 → conserve "spacing" dans le nom : --spacing-component-xs
+      figmaCollection: 'semantic/spacing',
+      output: 'spacing.css',
       type: 'number',
-      // Pas de mode → :root
+      stripDepth: 1,
     },
     {
-      figmaCollection: 'typography',
+      // Typographie sémantique : body, heading, label
+      figmaCollection: 'semantic/typography',
       output: 'typography.css',
       type: 'typography',
     },
+    {
+      // Border-radius sémantiques : sm, md, lg, full
+      // stripDepth:1 → conserve "border-radius" dans le nom : --border-radius-sm
+      figmaCollection: 'semantic/border-radius',
+      output: 'border-radius.css',
+      type: 'number',
+      stripDepth: 1,
+    },
 
-    // ─── Exemples commentés pour guider le designer ─────────────────────────
-    //
-    // Collection d'effets (ombres, flous) :
-    // {
-    //   figmaCollection: 'effect',
-    //   output: 'effects.css',
-    //   type: 'number',
-    // },
-    //
-    // Deuxième mode de couleur (ex: high contrast) :
-    // {
-    //   figmaCollection: 'color/high-contrast',
-    //   output: 'colors-high-contrast.css',
-    //   type: 'color',
-    //   mode: 'high-contrast',
-    // },
-    //
-    // Tokens de taille (icônes, composants) :
-    // {
-    //   figmaCollection: 'size',
-    //   output: 'sizes.css',
-    //   type: 'number',
-    // },
+    // ─── Tokens primitifs (palette de référence) ──────────────────────────────
+
+    {
+      // Palette de couleurs brutes : neutral, purple-mountain, etc.
+      figmaCollection: 'primitive/color',
+      output: 'primitive-colors.css',
+      type: 'color',
+      mode: 'light', // → sélecteur :root
+    },
+    {
+      // Espacements primitifs — stripDepth:1 → --spacing-x1, --spacing-x2…
+      figmaCollection: 'primitive/spacing',
+      output: 'primitive-spacing.css',
+      type: 'number',
+      stripDepth: 1,
+    },
+    {
+      // Border-radius primitifs — stripDepth:1 → --border-radius-sm…
+      figmaCollection: 'primitive/border-radius',
+      output: 'primitive-border-radius.css',
+      type: 'number',
+      stripDepth: 1,
+    },
+    {
+      // Typographie primitive : font-family, font-size, font-weight, line-height
+      figmaCollection: 'primitive/typography',
+      output: 'primitive-typography.css',
+      type: 'typography',
+    },
   ],
 };

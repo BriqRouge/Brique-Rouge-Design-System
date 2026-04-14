@@ -1,0 +1,122 @@
+/* ──────────────────────────────────────────────────────────────
+   Button — CSS Module
+   Tokens : packages/tokens/build/css/
+────────────────────────────────────────────────────────────── */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-component-sm);
+  border-radius: var(--border-radius-button);
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--body-font-family, 'ABC Favorit Pro Variable', sans-serif);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Tailles ─────────────────────────────────────────────── */
+
+.size--nm {
+  height: 40px;
+  min-width: 40px;
+  padding: var(--spacing-component-sm) var(--spacing-component-md);
+  font-size: 14px;
+}
+
+.size--md {
+  height: 48px;
+  min-width: 56px;
+  padding: var(--spacing-component-md);
+  font-size: 16px;
+}
+
+/* ── Contained ───────────────────────────────────────────── */
+
+.contained {
+  background-color: var(--background-button-idle);
+  border-color: var(--border-button-contained);
+  color: var(--text-button-contained);
+}
+
+.contained:hover:not(:disabled) {
+  background-color: var(--background-button-hovered);
+}
+
+/* ── Outlined ────────────────────────────────────────────── */
+
+.outlined {
+  background-color: transparent;
+}
+
+/* Outlined light/default — pour fonds sombres (couleurs claires) */
+.outlined--light,
+.outlined--default {
+  border-color: var(--border-button-outlined-white);
+  color: var(--text-button-outline-white);
+}
+
+.outlined--light:hover:not(:disabled),
+.outlined--default:hover:not(:disabled) {
+  background-color: var(--background-button-idle);
+  border-color: var(--border-button-contained);
+  color: var(--text-button-contained);
+}
+
+/* Outlined dark — pour fonds clairs (couleurs sombres) */
+.outlined--dark {
+  border-color: var(--border-button-outlined-black);
+  color: var(--text-button-outline-black);
+}
+
+.outlined--dark:hover:not(:disabled) {
+  background-color: var(--background-button-hovered-black);
+  border-color: var(--border-button-outlined-black);
+  color: var(--text-button-outline-white);
+}
+
+/* ── Icônes ──────────────────────────────────────────────── */
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.size--nm .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.size--md .icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── Label ───────────────────────────────────────────────── */
+
+.label {
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 0;
+}

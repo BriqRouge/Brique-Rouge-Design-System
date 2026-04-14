@@ -150,7 +150,10 @@ function getSelector(collection) {
 // ─── Build : une instance Style Dictionary par collection ─────────────────
 for (const col of mapping.collections) {
   const prefixSegments = col.figmaCollection.split('/');
-  const prefixLength = prefixSegments.length;
+  // stripDepth contrôle combien de segments sont retirés du nom de la variable CSS.
+  // Par défaut = nombre de segments dans figmaCollection.
+  // Réduire stripDepth conserve plus de contexte dans le nom (ex: --spacing-component-xs).
+  const prefixLength = col.stripDepth ?? prefixSegments.length;
 
   const sd = new StyleDictionary({
     source: [tokensPath],
