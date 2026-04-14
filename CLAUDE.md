@@ -11,7 +11,7 @@ Il suit une architecture monorepo avec pnpm + Turborepo.
 
 Design System open-source de Damien Ramzi (sur un template de Romain Richard).
 
-- **GitHub** : https://github.com/BriqRouge/my-personal-design-system
+- **GitHub** : https://github.com/BriqRouge/Brique-Rouge-Design-System
 - **Figma** : fichier `NZtxQVYKRqeaGcC7hT5pjw` ("Portfolio Damien Ramzi")
 - **Licence** : MIT
 
