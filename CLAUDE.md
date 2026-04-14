@@ -293,57 +293,75 @@ Ces décisions sont prises et ne se remettent pas en question sauf demande expli
 
 ---
 
+## 16. Workflow Git
 
+Le branch `main` est protégé. Toute modification passe obligatoirement par une PR.
 
-## Packages
+Workflow à suivre pour chaque tâche :
 
-- `@starter/tokens` — tokens CSS générés depuis Figma via Style Dictionary
-- `@starter/react` — composants React du Design System
-- `@starter/storybook` — documentation Storybook
+1. Créer une branche : `feat/component-button` (convention `feat/component-[name]` ou `feat/screens-[name]`)
+2. Committer les fichiers sur cette branche
+3. Push la branche : `git push origin feat/component-button`
+4. Ouvrir une PR sur GitHub vers `main`
+5. Attendre que les 2 status checks CI passent (Tests + Lint)
+6. Merger la PR dans `main`
 
-## Règles absolues à toujours respecter
+Ne jamais push directement sur `main`.
+Ne jamais force push.
 
-1. Toujours travailler sur une branche dédiée (jamais directement sur main)
-   Convention : `feat/composant-[nom]` · `fix/[sujet]` · `chore/[sujet]`
+---
 
-2. Toujours lire COMPONENTS.md avant d'implémenter un composant
+## 17. Génération d'interfaces
 
-3. Tokens CSS — convention de nommage stricte :
-   Les tokens suivent la structure sémantique définie dans COMPONENTS.md.
-   - Utilise uniquement les tokens définis dans `packages/tokens/build/css/`
-   - Ne jamais inventer une valeur arbitraire si un token existe
-   - Ne jamais préfixer les tokens avec `--color-*`
-   - La structure est : `--[catégorie]-[variante]-[état]`
-     ex: `--background-neutral-default`, `--text-brand-primary`
+Avant toute génération d'interface ou de maquette Figma, consulter `COMPONENTS.md`.
 
-4. Accessibilité WCAG 2.1 AA non négociable :
-   - Navigation clavier complète
-   - Focus visible
-   - ARIA correct
-   - Contrastes vérifiés
+Ce fichier liste :
+- les composants React disponibles avec leur API exacte
+- les node IDs Figma correspondants
+- l'ensemble des tokens CSS à utiliser
 
-5. Chaque composant doit avoir :
-   - Son implémentation React + CSS Module
-   - Ses tests (unitaires + accessibilité avec jest-axe)
-   - Ses stories Storybook (Docs, Playground, Variants, États)
+Règle absolue : aucune valeur arbitraire (couleur hex, px hardcodé, etc.) si un token existe.
 
-6. Jamais de `any` TypeScript
-   Jamais de `dangerouslySetInnerHTML`
-   Jamais de style arbitraire si un token existe
+---
 
-## Structure d'un composant
+## 18. Workflow — Génération d'interfaces et maquettes Figma
 
+Ce workflow permet de générer des interfaces codées conformes au DS,
+puis de les exporter comme maquettes Figma.
+
+### Étape 1 — Description (claude.ai)
+Décrire l'écran en langage naturel à Claude.
+Claude génère le prompt structuré pour Claude Code.
+
+### Étape 2 — Génération du code (Claude Code)
+Claude Code lit COMPONENTS.md comme référence unique et produit :
+- `packages/storybook/src/stories/screens/NomEcran.tsx`
+- `packages/storybook/src/stories/screens/NomEcran.module.css`
+- `packages/storybook/src/stories/screens/NomEcran.stories.tsx`
+
+Règles strictes :
+- Uniquement les composants de `@brique-rouge/react`
+- Uniquement les tokens CSS de `@brique-rouge/tokens` (variables CSS, aucune valeur arbitraire)
+- Accessibilité WCAG 2.1 AA obligatoire
+- Story sous `Screens/NomEcran`
+
+### Étape 3 — Itération design (localhost:6007)
+Valider le rendu dans Storybook.
+Itérer via des prompts de correction jusqu'à validation complète.
+Ne passer à l'étape suivante qu'une fois le rendu validé.
+
+### Étape 4 — Génération maquette Figma (à mettre en place)
+La génération de maquettes Figma nécessite un outil d'écriture MCP local
+(ex. figma-use) — à configurer ultérieurement.
+Page cible : "Screens" (à créer dans le fichier `NZtxQVYKRqeaGcC7hT5pjw`)
+
+### Identification des composants DS dans le DOM
+Tous les composants portent `data-component="ds-br-[nom]"` sur leur nœud racine.
+Vérification rapide dans DevTools Console :
+
+```js
+document.querySelectorAll('[data-component^="ds-br"]')
+  .forEach(el => console.log(el.dataset.component))
 ```
-packages/react/src/components/[NomComposant]/
-├── [NomComposant].tsx
-├── [NomComposant].module.css
-├── [NomComposant].test.tsx
-├── index.ts
-└── [NomComposant].figma.tsx  (après validation du composant)
-```
 
-## Workflow Git
-
-Toujours commencer par :
-> "Travaille sur la branche `feat/composant-[nom]`
-> (à créer depuis main si elle n'existe pas)."
+---
