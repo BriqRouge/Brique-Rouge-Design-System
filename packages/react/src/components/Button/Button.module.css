@@ -1,0 +1,109 @@
+﻿/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-component-sm);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-button);
+  cursor: pointer;
+  font-family: var(--typography-body-font-family, inherit);
+  font-weight: var(--typography-label-font-weight);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease-out,
+    border-color 150ms ease-out,
+    color 150ms ease-out,
+    opacity 150ms ease-out;
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─── Icônes ────────────────────────────────────────────────────────────────── */
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+/* ─── Tailles ───────────────────────────────────────────────────────────────── */
+
+.size-nm {
+  --icon-size: var(--sizing-x4);
+  height: var(--sizing-button-nm);
+  min-width: var(--sizing-button-nm);
+  padding-top: var(--spacing-component-sm);
+  padding-bottom: var(--spacing-component-sm);
+  padding-left: var(--spacing-component-md);
+  padding-right: var(--spacing-component-md);
+  font-size: var(--typography-font-size-sm);
+}
+
+.size-md {
+  --icon-size: var(--sizing-x6);
+  height: var(--sizing-x12);
+  min-width: var(--sizing-x14);
+  padding: var(--spacing-component-md);
+  font-size: var(--typography-font-size-base);
+}
+
+/* ─── Variant : contained ───────────────────────────────────────────────────── */
+
+.variant-contained {
+  background-color: var(--color-background-button-idle);
+  border-color: var(--color-border-button-contained);
+  color: var(--color-text-button-contained);
+}
+
+.variant-contained:hover:not(:disabled) {
+  background-color: var(--color-background-button-hovered);
+}
+
+/* ─── Variant : outlined light ──────────────────────────────────────────────── */
+
+.variant-outlined.color-scheme-light {
+  background-color: transparent;
+  border-color: var(--color-border-button-outlined-white);
+  color: var(--color-text-button-outline-white);
+}
+
+.variant-outlined.color-scheme-light:hover:not(:disabled) {
+  background-color: var(--color-background-button-idle);
+  border-color: var(--color-border-button-contained);
+  color: var(--color-text-button-contained);
+}
+
+/* ─── Variant : outlined dark ───────────────────────────────────────────────── */
+
+.variant-outlined.color-scheme-dark {
+  background-color: transparent;
+  border-color: var(--color-border-button-outlined-black);
+  color: var(--color-text-button-outline-black);
+}
+
+.variant-outlined.color-scheme-dark:hover:not(:disabled) {
+  background-color: var(--color-background-button-hovered-black);
+  border-color: var(--color-background-button-hovered-black);
+  color: var(--color-text-button-outline-white);
+}
+
+/* ─── Focus visible ─────────────────────────────────────────────────────────── */
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-text-focus, currentColor);
+  outline-offset: 2px;
+}
