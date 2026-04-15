@@ -180,5 +180,5 @@ make dev
 
 ---
 
-Auteur : Romain Richard — Senior Product Designer, UX Strategist
+Auteur : Damien Ramzi — Senior Product Designer, UX Strategist (sur la base du template de Romain Richard).
 Licence : MIT
