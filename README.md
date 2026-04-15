@@ -160,7 +160,7 @@ make setup
 make dev
 ```
 
-> Ouvre ton navigateur sur **http://localhost:6007**
+> Ouvre ton navigateur sur **http://localhost:6007** ou **https://briqrouge.github.io/Brique-Rouge-Design-System**
 
 ✅ Tu vois Storybook s'ouvrir dans ton navigateur ?
 **La suite du guide est directement dans Storybook.**
@@ -180,5 +180,5 @@ make dev
 
 ---
 
-Auteur : Romain Richard — Lead System Designer
+Auteur : Romain Richard — Senior Product Designer, UX Strategist
 Licence : MIT
