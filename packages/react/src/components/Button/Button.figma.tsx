@@ -1,5 +1,5 @@
 ﻿import figma from "@figma/code-connect";
-import { Button } from "./Button";
+import { Button, type ButtonVariant, type ButtonColorScheme, type ButtonSize } from "./Button";
 
 /**
  * Code Connect — Button
@@ -32,7 +32,7 @@ figma.connect(
       }),
       children: figma.string("Label"),
     },
-    example: ({ variant, colorScheme, size, children }) => (
+    example: ({ variant, colorScheme, size, children }: { variant: ButtonVariant; colorScheme: ButtonColorScheme; size: ButtonSize; children: string }) => (
       <Button variant={variant} colorScheme={colorScheme} size={size}>
         {children}
       </Button>

@@ -14,7 +14,7 @@
     "target": "ES2020",
     "module": "ESNext",
     "paths": {
-      "@starter/*": ["./packages/*/src"]
+      "@brique-rouge/*": ["./packages/*/src"]
     }
   }
 }

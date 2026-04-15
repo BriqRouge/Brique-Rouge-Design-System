@@ -4,11 +4,11 @@
   "version": "0.0.0",
   "description": "Template monorepo pour industrialiser un Design System",
   "scripts": {
-    "dev": "turbo run dev --filter=@starter/storybook",
+    "dev": "turbo run dev --filter=@brique-rouge/storybook",
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
-    "tokens": "turbo run build --filter=@starter/tokens"
+    "tokens": "turbo run build --filter=@brique-rouge/tokens"
   },
   "devDependencies": {
     "turbo": "^2.0.0",
