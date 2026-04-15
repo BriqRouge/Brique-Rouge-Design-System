@@ -185,12 +185,12 @@ Figma Variables â€” fichier `NZtxQVYKRqeaGcC7hT5pjw`
 ## 9. Composants existants
 
 ### Button (`packages/react/src/components/Button/`)
-- **Commit** : `b7b2f04`
+- **Commit** : `514e779`
 - **Fichiers** : `Button.tsx`, `Button.module.css`, `Button.test.tsx`, `index.ts`
 - **Story** : `packages/storybook/src/stories/components/Button.stories.tsx`
 - **API** : `children`, `variant` (`contained`|`outlined`), `colorScheme` (`default`|`light`|`dark`), `size` (`nm`|`md`), `leftIcon`, `rightIcon`, `disabled` + props HTML natives
 - **Tokens** : `color/background/button/idle`, `color/background/button/hovered`, `color/background/button/hovered-black`, `color/border/button/*`, `color/text/button/*`, `color/icon/button/*`, `border-radius/button`
-- **Tests** : 16 tests â€” 16 passants
+- **Tests** : 18 tests — 18 passants
 
 ---
 
@@ -364,5 +364,4 @@ document.querySelectorAll('[data-component^="ds-br"]')
   .forEach(el => console.log(el.dataset.component))
 ```
 
----
 ---
