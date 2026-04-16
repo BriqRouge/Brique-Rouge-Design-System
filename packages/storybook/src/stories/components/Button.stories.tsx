@@ -7,6 +7,10 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/NZtxQVYKRqeaGcC7hT5pjw?node-id=1345-21426',
+    },
   },
   argTypes: {
     variant: {

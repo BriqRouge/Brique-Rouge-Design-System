@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@brique-rouge/react": "workspace:*",
-    "@brique-rouge/tokens": "workspace:*"
+    "@brique-rouge/tokens": "workspace:*",
+    "@storybook/addon-designs": "^8.2.1"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^8.6.18",
