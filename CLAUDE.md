@@ -280,12 +280,12 @@ Ces dÃ©cisions sont prises et ne se remettent pas en question sauf demande exp
 
 ---
 
-## 14. Prochaines Ã©tapes
+## 14. Prochaines étapes
 
-1. Prochain composant â€” **Ã  dÃ©finir** (node Figma Ã  renseigner)
-2. **Code Connect** â€” mapping Figma â†” React
-3. **GitHub Actions** CI/CD
-4. Automatisation progressive du workflow
+1. Prochain composant — **à définir** avec claude.ai (node Figma à renseigner)
+2. ~~**Code Connect** — mapping Figma ↔ React~~ ✅ **Fait** (`figma.config.json` configuré, scripts figma en place)
+3. ~~**GitHub Actions** CI/CD~~ ✅ **Fait** (`ci.yml` + `storybook.yml`)
+4. **Automatisation progressive du workflow** — à définir selon les besoins réels (ex : sync tokens Figma, previews PR Storybook, déclenchement Code Connect automatique)
 
 ---
 
