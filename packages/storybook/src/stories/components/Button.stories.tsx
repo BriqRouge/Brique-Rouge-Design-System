@@ -5,7 +5,9 @@ const meta = {
   title: 'Composants/Button',
   component: Button,
   tags: ['autodocs'],
-  layout: 'centered',
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     variant: {
       description: 'Style visuel du bouton',
