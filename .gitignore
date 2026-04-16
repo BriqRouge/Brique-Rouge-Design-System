@@ -6,3 +6,9 @@ build/
 .DS_Store
 storybook-static/
 coverage/
+
+# Exports Figma Variables (fichiers sources non versionnés)
+tokens.json
+packages/tokens/design-tokens.tokens.json
+packages/tokens/primitive.json
+packages/tokens/semantic.json
