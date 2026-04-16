@@ -135,6 +135,16 @@ Figma Variables â€” fichier `NZtxQVYKRqeaGcC7hT5pjw`
 - Pas de sur-ingÃ©nierie
 - Code lisible, maintenable, documentÃ©
 
+
+### 6.6 Tokens dans Figma — zéro valeur arbitraire (non négociable)
+S'applique à **tout travail direct dans Figma via `use_figma`** (création de frames, screens, maquettes).
+
+- **Avant toute création de node**, inspecter les Figma Variables avec `getLocalVariableCollectionsAsync`
+- **Binder systématiquement** les variables aux propriétés : fills via `setBoundVariableForPaint`, spacing/sizing via `setBoundVariable`
+- **Jamais de valeur RGB hardcodée** si un token de couleur existe
+- **Jamais de valeur px hardcodée** si un token de spacing, sizing ou border-radius existe
+- La règle §17 ("aucune valeur arbitraire si un token existe") s'applique au code **et** à Figma
+
 ---
 
 ## 7. Workflow composants
