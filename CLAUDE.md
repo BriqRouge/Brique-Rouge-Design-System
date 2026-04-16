@@ -375,3 +375,28 @@ document.querySelectorAll('[data-component^="ds-br"]')
 ```
 
 ---
+## 19. Skill ds-br-screen — obligatoire avant tout travail sur un screen
+
+Le skill `.claude/skills/ds-br-screen/` doit être chargé **avant tout travail sur un screen**, que ce soit :
+- Génération de code (Storybook)
+- Création ou modification de maquettes Figma via `use_figma`
+
+### Ordre de chargement obligatoire
+
+1. Lire `.claude/skills/ds-br-screen/SKILL.md`
+2. Lire les références obligatoires :
+   - `reference/typography.md`
+   - `reference/color-and-contrast.md`
+   - `reference/spatial-design.md`
+3. Lire les références additionnelles selon le contexte (motion, interaction, ux-writing)
+
+### Après toute création ou modification
+
+Lancer `/audit-screen` pour vérifier systématiquement :
+- Tokens DS : zéro valeur hardcodée (couleurs, spacing, border-radius, **effets/shadows**)
+- Accessibilité
+- Anti-patterns visuels
+
+**Ne jamais déclarer un screen « terminé » sans avoir passé `/audit-screen`.**
+
+---
