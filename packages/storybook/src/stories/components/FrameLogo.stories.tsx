@@ -50,6 +50,7 @@ export const Decoratif: Story = {
 
 export const PlusieursLogos: Story = {
   name: 'Plusieurs logos',
+  args: { src: LOGO_PLACEHOLDER, alt: 'Logo A' },
   render: () => (
     <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
       <FrameLogo src={LOGO_PLACEHOLDER} alt="Logo A" />
