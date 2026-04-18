@@ -12,11 +12,11 @@ const meta = {
   },
   argTypes: {
     src: {
-      description: 'URL de l'image du logo',
+      description: "URL de l'image du logo",
       control: 'text',
     },
     alt: {
-      description: 'Texte alternatif pour l'accessibilité',
+      description: "Texte alternatif pour l'accessibilité",
       control: 'text',
     },
   },
@@ -28,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     src: LOGO_PLACEHOLDER,
-    alt: 'Logo de l'entreprise',
+    alt: "Logo de l'entreprise",
   },
 };
 
@@ -62,6 +62,6 @@ export const PlusieursLogos: Story = {
 export const Playground: Story = {
   args: {
     src: LOGO_PLACEHOLDER,
-    alt: 'Logo de l'entreprise',
+    alt: "Logo de l'entreprise",
   },
 };
