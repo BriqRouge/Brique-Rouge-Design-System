@@ -240,6 +240,67 @@ export function TypographyTokens() {
   );
 }
 
+// ─── Composant : barres de dimensions (sizing) ────────────────────────────
+
+function isSizingVar(name: string): boolean {
+  return name.startsWith('--sizing-');
+}
+
+export function SizingTokens() {
+  const [vars, setVars] = useState<TokenVar[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const all = getCSSVars(':root');
+    setVars(all.filter((v) => isSizingVar(v.name)));
+    setLoaded(true);
+  }, []);
+
+  if (!loaded) return null;
+
+  if (vars.length === 0) {
+    return <EmptyTokenNotice type="dimension" />;
+  }
+
+  const max = Math.max(...vars.map((v) => parsePx(v.value)), 1);
+
+  return (
+    <table style={styles.table}>
+      <thead>
+        <tr>
+          <th style={{ ...styles.th, width: 200 }}>Aperçu</th>
+          <th style={styles.th}>Token</th>
+          <th style={styles.th}>Valeur</th>
+        </tr>
+      </thead>
+      <tbody>
+        {vars.map(({ name, value }) => {
+          const px = parsePx(value);
+          const widthPct = Math.max((px / max) * 160, 2);
+          return (
+            <tr key={name}>
+              <td style={styles.td}>
+                <div
+                  style={{
+                    width: widthPct,
+                    height: 10,
+                    borderRadius: 2,
+                    background: '#00897B',
+                    opacity: 0.7,
+                    minWidth: 2,
+                  }}
+                />
+              </td>
+              <td style={{ ...styles.td, color: '#333' }}>{name}</td>
+              <td style={{ ...styles.td, color: '#888' }}>{value}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
 // ─── Composant : barres d'espacement ──────────────────────────────────────
 
 function isSpacingVar(name: string): boolean {
