@@ -1,6 +1,6 @@
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
 
-.button {
+.menuButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -97,7 +97,7 @@
 
 /* ─── État désactivé ────────────────────────────────────────────────────────── */
 
-.button:disabled {
+.menuButton:disabled {
   background-color: var(--color-background-button-disabled);
   border-color: var(--color-border-button-disabled);
   color: var(--color-text-button-disabled);
@@ -106,11 +106,11 @@
 
 /* ─── Focus visible ─────────────────────────────────────────────────────────── */
 
-.button:focus {
+.menuButton:focus {
   outline: none;
 }
 
-.button:focus-visible {
+.menuButton:focus-visible {
   outline: 2px solid var(--color-border-button-focus);
   outline-offset: 2px;
 }

@@ -1,7 +1,7 @@
 import { forwardRef, useState, useEffect, useRef, useId } from 'react';
-import { Button } from '../Button';
+import { MenuButton } from '../MenuButton';
 import { DropdownMenu } from '../DropdownMenu';
-import type { ButtonVariant, ButtonColorScheme, ButtonSize } from '../Button';
+import type { MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize } from '../MenuButton';
 import styles from './DropdownMenuTrigger.module.css';
 
 interface DropdownMenuTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -14,11 +14,11 @@ interface DropdownMenuTriggerProps extends React.HTMLAttributes<HTMLDivElement> 
   /** Icône à droite du bouton trigger */
   triggerRightIcon?: React.ReactNode;
   /** Variant du bouton trigger */
-  triggerVariant?: ButtonVariant;
+  triggerVariant?: MenuButtonVariant;
   /** Color scheme du bouton trigger */
-  triggerColorScheme?: ButtonColorScheme;
+  triggerColorScheme?: MenuButtonColorScheme;
   /** Size du bouton trigger */
-  triggerSize?: ButtonSize;
+  triggerSize?: MenuButtonSize;
   /** État contrôlé (optionnel — si non fourni, le composant gère son état en interne) */
   open?: boolean;
   /** Callback quand l'état open/close change */
@@ -129,7 +129,7 @@ const DropdownMenuTrigger = forwardRef<HTMLDivElement, DropdownMenuTriggerProps>
         onBlur={handleBlur}
         {...props}
       >
-        <Button
+        <MenuButton
           variant={triggerVariant}
           colorScheme={triggerColorScheme}
           size={triggerSize}
@@ -142,7 +142,7 @@ const DropdownMenuTrigger = forwardRef<HTMLDivElement, DropdownMenuTriggerProps>
           onClick={handleOpen}
         >
           {triggerLabel}
-        </Button>
+        </MenuButton>
         <DropdownMenu
           id={menuId}
           className={styles.menu}

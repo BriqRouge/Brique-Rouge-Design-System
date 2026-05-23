@@ -1,17 +1,17 @@
 import { forwardRef } from 'react';
-import styles from './Button.module.css';
+import styles from './MenuButton.module.css';
 
-type ButtonVariant = 'contained' | 'outlined';
-type ButtonColorScheme = 'default' | 'light' | 'dark';
-type ButtonSize = 'nm' | 'md';
+type MenuButtonVariant = 'contained' | 'outlined';
+type MenuButtonColorScheme = 'default' | 'light' | 'dark';
+type MenuButtonSize = 'nm' | 'md';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface MenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Type visuel du bouton */
-  variant?: ButtonVariant;
+  variant?: MenuButtonVariant;
   /** Schéma de couleur — 'default' pour contained, 'light'|'dark' pour outlined */
-  colorScheme?: ButtonColorScheme;
+  colorScheme?: MenuButtonColorScheme;
   /** Taille du bouton */
-  size?: ButtonSize;
+  size?: MenuButtonSize;
   /** Icône à gauche du label */
   leftIcon?: React.ReactNode;
   /** Icône à droite du label */
@@ -20,7 +20,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
   (
     {
       variant = 'contained',
@@ -37,7 +37,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const classes = [
-      styles.button,
+      styles.menuButton,
       styles[`variant-${variant}`],
       styles[`size-${size}`],
       variant === 'outlined' ? styles[`color-scheme-${colorScheme}`] : '',
@@ -53,7 +53,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         data-variant={variant}
         data-size={size}
-        data-component="ds-br-button"
+        data-component="ds-br-menu-button"
         className={classes}
         {...props}
       >
@@ -73,7 +73,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = 'Button';
+MenuButton.displayName = 'MenuButton';
 
-export { Button };
-export type { ButtonProps, ButtonVariant, ButtonColorScheme, ButtonSize };
+export { MenuButton };
+export type { MenuButtonProps, MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize };
