@@ -1,9 +1,9 @@
 ﻿import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@brique-rouge/react';
+import { MenuButton } from '@brique-rouge/react';
 
 const meta = {
-  title: 'Composants/Button',
-  component: Button,
+  title: 'Composants/MenuButton',
+  component: MenuButton,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
@@ -37,7 +37,7 @@ const meta = {
       control: 'boolean',
     },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof MenuButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -54,11 +54,11 @@ export const Variants: Story = {
   args: { children: 'Variants' },
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Button variant="contained">Contained</Button>
+      <MenuButton variant="contained">Contained</MenuButton>
       <div style={{ background: '#262626', padding: '16px', borderRadius: '8px' }}>
-        <Button variant="outlined" colorScheme="light">Outlined light</Button>
+        <MenuButton variant="outlined" colorScheme="light">Outlined light</MenuButton>
       </div>
-      <Button variant="outlined" colorScheme="dark">Outlined dark</Button>
+      <MenuButton variant="outlined" colorScheme="dark">Outlined dark</MenuButton>
     </div>
   ),
 };
@@ -67,8 +67,8 @@ export const Tailles: Story = {
   args: { children: 'Tailles' },
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Button size="nm">Normal (nm)</Button>
-      <Button size="md">Medium (md)</Button>
+      <MenuButton size="nm">Normal (nm)</MenuButton>
+      <MenuButton size="md">Medium (md)</MenuButton>
     </div>
   ),
 };
@@ -77,8 +77,8 @@ export const Disabled: Story = {
   args: { children: 'Disabled' },
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-      <Button disabled variant="contained">Contained désactivé</Button>
-      <Button disabled variant="outlined" colorScheme="dark">Outlined désactivé</Button>
+      <MenuButton disabled variant="contained">Contained désactivé</MenuButton>
+      <MenuButton disabled variant="outlined" colorScheme="dark">Outlined désactivé</MenuButton>
     </div>
   ),
 };

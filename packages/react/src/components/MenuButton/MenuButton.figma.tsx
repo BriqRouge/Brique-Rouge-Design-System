@@ -1,8 +1,8 @@
 ﻿import figma from "@figma/code-connect";
-import { Button, type ButtonVariant, type ButtonColorScheme, type ButtonSize } from "./Button";
+import { MenuButton, type MenuButtonVariant, type MenuButtonColorScheme, type MenuButtonSize } from "./MenuButton";
 
 /**
- * Code Connect — Button
+ * Code Connect — MenuButton
  * Composant Figma : node 1345:21426
  * Fichier Figma   : NZtxQVYKRqeaGcC7hT5pjw
  *
@@ -13,7 +13,7 @@ import { Button, type ButtonVariant, type ButtonColorScheme, type ButtonSize } f
  *   State         → interne     (géré via CSS :hover, jamais exposé)
  */
 figma.connect(
-  Button,
+  MenuButton,
   "https://www.figma.com/design/NZtxQVYKRqeaGcC7hT5pjw?node-id=1345-21426",
   {
     props: {
@@ -32,10 +32,10 @@ figma.connect(
       }),
       children: figma.string("Label"),
     },
-    example: ({ variant, colorScheme, size, children }: { variant: ButtonVariant; colorScheme: ButtonColorScheme; size: ButtonSize; children: string }) => (
-      <Button variant={variant} colorScheme={colorScheme} size={size}>
+    example: ({ variant, colorScheme, size, children }: { variant: MenuButtonVariant; colorScheme: MenuButtonColorScheme; size: MenuButtonSize; children: string }) => (
+      <MenuButton variant={variant} colorScheme={colorScheme} size={size}>
         {children}
-      </Button>
+      </MenuButton>
     ),
   }
 );

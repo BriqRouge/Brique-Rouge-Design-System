@@ -27,7 +27,7 @@ const preview: Preview = {
             'Ã‰tape 4 â€” Code Connect',
           ],
           'Fondations',
-          ['Couleurs', 'Typographie', 'Espacements'],
+          ['Couleurs', 'Typographie', 'Espacements', 'Dimensions'],
           'Composants',
         ],
       },
