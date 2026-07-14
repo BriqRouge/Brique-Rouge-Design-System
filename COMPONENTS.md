@@ -134,8 +134,7 @@ interface TopNavProps {
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-background-projects-{project}` | — | Fond de la pilule (un par projet) |
-| `--color-text-nav-bar-{project}` | — | Couleur du sous-titre (un par projet) |
-| `--color-{famille}-50` | — | Couleur du titre — primitif `-50` de la famille de couleur propre à chaque projet (pas encore de token semantic dédié) |
+| `--color-text-nav-bar-{project}` | — | Couleur du titre **et** du sous-titre (un par projet — même couleur pour les deux) |
 | `--color-border-menu-button-outlined-white`, `--color-text-menu-button-outline-white` | — | Bouton retour (`MenuButton` outlined/light/md) |
 | `--spacing-x10`, `--spacing-x12`, `--spacing-x6` | `40px`, `48px`, `24px` | Padding du conteneur |
 | `--spacing-component-md`, `--spacing-component-lg`, `--spacing-component-sm` | `16px`, `24px`, `8px` | Padding/gap de la pilule |
@@ -147,4 +146,4 @@ interface TopNavProps {
 - Réutilise `MenuButton` (bouton retour) et `DropdownMenuTrigger` (sélecteur de projets) — ne pas dupliquer leur logique
 - Le contenu du menu déroulant est entièrement fourni par le consommateur via `children` — TopNav ne connaît pas la liste des projets
 - État homepage : `project` non fourni → pas de bouton retour ni de titre, le trigger est aligné à droite
-- ⚠️ Couleur du titre dérivée en code du primitif `-50` de la famille de couleur du projet (pas de token semantic Figma dédié pour l'instant — à revoir si un token `color/text/nav-bar-title` est ajouté) : `bpce` → `purple-mountain-50`, `ibp` → `purple-50`, `opco-atlas` → `sundown-50`, `conseil-constitutionnel` → `tree-of-life-50`, `odaptos` → `deep-sea-50`
+- Titre et sous-titre partagent la même couleur (`color/text/nav-bar/{project}`), seul le `font-weight` diffère (medium vs regular)

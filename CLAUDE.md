@@ -261,7 +261,7 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 - **API** : `children` (requis, contenu du menu déroulant "Sélection projets"), `project` (`odaptos`|`bpce`|`ibp`|`opco-atlas`|`conseil-constitutionnel`, absent = état homepage), `title` (requis si `project` fourni), `subtitle`, `onBackClick` + props HTML natives (`HTMLElement`, racine `<nav>`)
 - **Composition** : réutilise `MenuButton` (bouton retour, `outlined`/`light`/`md`) et `DropdownMenuTrigger` (sélecteur de projets, `triggerSize="md"`) — le contenu du dropdown est fourni par le consommateur via `children`, TopNav ne connaît pas la liste des projets
 - **États** : homepage (pas de `project`) → pas de bouton retour ni titre, trigger aligné à droite ; page projet (`project` fourni) → fond coloré, bouton retour "Accueil", titre + sous-titre
-- **Tokens** : `color/background/projects/*`, `color/text/nav-bar/*` (sous-titre), primitifs `-50` par famille de couleur pour le titre (pas de token semantic dédié — voir COMPONENTS.md)
+- **Tokens** : `color/background/projects/*`, `color/text/nav-bar/*` (titre et sous-titre — même couleur pour les deux)
 - **data-attributes** : `data-project` (sur la pilule, absent en homepage)
 - **Tests** : 12 tests — 12 passants
 
