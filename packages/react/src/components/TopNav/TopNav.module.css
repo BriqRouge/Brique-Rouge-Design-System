@@ -1,0 +1,87 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.topNav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--spacing-x10) var(--spacing-x12) var(--spacing-x6);
+  box-sizing: border-box;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 88px;
+  border-radius: var(--border-radius-button-rounded);
+  padding-right: var(--spacing-component-md);
+  box-sizing: border-box;
+}
+
+.pill[data-project] {
+  justify-content: space-between;
+  padding-left: var(--spacing-component-lg);
+}
+
+.trigger {
+  flex-shrink: 0;
+}
+
+/* ─── Groupe bouton retour + titre ────────────────────────────────────────── */
+
+.projectGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-component-sm);
+  min-width: 0;
+}
+
+.titleBlock {
+  margin: 0;
+  font-family: var(--typography-font-family-sans);
+  font-size: var(--typography-font-size-xl);
+  line-height: normal;
+}
+
+.title {
+  font-weight: var(--typography-font-weight-medium);
+  color: var(--top-nav-title-color);
+}
+
+.subtitle {
+  font-weight: var(--typography-font-weight-regular);
+  color: var(--top-nav-subtitle-color);
+}
+
+/* ─── Couleurs par projet ──────────────────────────────────────────────────── */
+
+.pill[data-project='odaptos'] {
+  background-color: var(--color-background-projects-odaptos);
+  --top-nav-title-color: var(--color-deep-sea-50);
+  --top-nav-subtitle-color: var(--color-text-nav-bar-odaptos);
+}
+
+.pill[data-project='bpce'] {
+  background-color: var(--color-background-projects-bpce);
+  --top-nav-title-color: var(--color-purple-mountain-50);
+  --top-nav-subtitle-color: var(--color-text-nav-bar-bpce);
+}
+
+.pill[data-project='ibp'] {
+  background-color: var(--color-background-projects-ibp);
+  --top-nav-title-color: var(--color-purple-50);
+  --top-nav-subtitle-color: var(--color-text-nav-bar-ibp);
+}
+
+.pill[data-project='opco-atlas'] {
+  background-color: var(--color-background-projects-opco-atlas);
+  --top-nav-title-color: var(--color-sundown-50);
+  --top-nav-subtitle-color: var(--color-text-nav-bar-opco-atlas);
+}
+
+.pill[data-project='conseil-constitutionnel'] {
+  background-color: var(--color-background-projects-conseil-constitutionnel);
+  --top-nav-title-color: var(--color-tree-of-life-50);
+  --top-nav-subtitle-color: var(--color-text-nav-bar-conseil-constitutionnel);
+}
