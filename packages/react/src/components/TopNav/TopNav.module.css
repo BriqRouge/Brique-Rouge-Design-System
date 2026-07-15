@@ -1,0 +1,82 @@
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+
+.topNav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--spacing-x10) var(--spacing-x12) var(--spacing-x6);
+  box-sizing: border-box;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 88px;
+  border-radius: var(--border-radius-button-rounded);
+  padding-right: var(--spacing-component-md);
+  box-sizing: border-box;
+}
+
+.pill[data-project] {
+  justify-content: space-between;
+  padding-left: var(--spacing-component-lg);
+}
+
+.trigger {
+  flex-shrink: 0;
+}
+
+/* ─── Groupe bouton retour + titre ────────────────────────────────────────── */
+
+.projectGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-component-sm);
+  min-width: 0;
+}
+
+.titleBlock {
+  margin: 0;
+  font-family: var(--typography-font-family-sans);
+  font-size: var(--typography-font-size-xl);
+  line-height: normal;
+  color: var(--top-nav-text-color);
+}
+
+.title {
+  font-weight: var(--typography-font-weight-medium);
+}
+
+.subtitle {
+  font-weight: var(--typography-font-weight-regular);
+}
+
+/* ─── Couleurs par projet ──────────────────────────────────────────────────── */
+/* Titre et sous-titre partagent la même couleur de texte (color/text/nav-bar/{project}) */
+
+.pill[data-project='odaptos'] {
+  background-color: var(--color-background-projects-odaptos);
+  --top-nav-text-color: var(--color-text-nav-bar-odaptos);
+}
+
+.pill[data-project='bpce'] {
+  background-color: var(--color-background-projects-bpce);
+  --top-nav-text-color: var(--color-text-nav-bar-bpce);
+}
+
+.pill[data-project='ibp'] {
+  background-color: var(--color-background-projects-ibp);
+  --top-nav-text-color: var(--color-text-nav-bar-ibp);
+}
+
+.pill[data-project='opco-atlas'] {
+  background-color: var(--color-background-projects-opco-atlas);
+  --top-nav-text-color: var(--color-text-nav-bar-opco-atlas);
+}
+
+.pill[data-project='conseil-constitutionnel'] {
+  background-color: var(--color-background-projects-conseil-constitutionnel);
+  --top-nav-text-color: var(--color-text-nav-bar-conseil-constitutionnel);
+}

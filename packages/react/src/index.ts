@@ -15,3 +15,6 @@ export type { DropdownMenuProps } from './components/DropdownMenu';
 
 export { DropdownMenuTrigger } from './components/DropdownMenuTrigger';
 export type { DropdownMenuTriggerProps } from './components/DropdownMenuTrigger';
+
+export { TopNav } from './components/TopNav';
+export type { TopNavProps, TopNavProject } from './components/TopNav';

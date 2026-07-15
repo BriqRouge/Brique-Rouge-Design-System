@@ -106,3 +106,44 @@ interface FrameLogoProps extends React.HTMLAttributes<HTMLDivElement> {
 - Image en `object-fit: cover` — toujours passer une URL valide
 - Si le logo est purement décoratif, laisser `alt=""` (défaut)
 - Si le logo est informatif, renseigner un `alt` descriptif
+
+### TopNav
+
+**Package :** `@brique-rouge/react`
+**Chemin :** `packages/react/src/components/TopNav/`
+
+#### API
+
+```ts
+type TopNavProject = 'odaptos' | 'bpce' | 'ibp' | 'opco-atlas' | 'conseil-constitutionnel';
+
+// project absent = état homepage (pas de bouton retour ni de titre)
+// project fourni = title requis, subtitle optionnel
+interface TopNavProps {
+  children:      React.ReactNode;     // requis — contenu du menu déroulant "Sélection projets" (ex: <DropdownMenuButton />)
+  project?:      TopNavProject;
+  title?:        string;              // requis si project est fourni
+  subtitle?:     string;
+  onBackClick?:  () => void;
+  className?:    string;
+}
+```
+
+#### Tokens CSS utilisés
+
+| Token | Valeur | Usage |
+|-------|--------|-------|
+| `--color-background-projects-{project}` | — | Fond de la pilule (un par projet) |
+| `--color-text-nav-bar-{project}` | — | Couleur du titre **et** du sous-titre (un par projet — même couleur pour les deux) |
+| `--color-border-menu-button-outlined-white`, `--color-text-menu-button-outline-white` | — | Bouton retour (`MenuButton` outlined/light/md) |
+| `--spacing-x10`, `--spacing-x12`, `--spacing-x6` | `40px`, `48px`, `24px` | Padding du conteneur |
+| `--spacing-component-md`, `--spacing-component-lg`, `--spacing-component-sm` | `16px`, `24px`, `8px` | Padding/gap de la pilule |
+| `--border-radius-button-rounded` | `999px` | Border-radius de la pilule |
+| `--typography-font-size-xl` | `20px` | Taille du titre/sous-titre |
+
+#### Règles d'usage
+
+- Réutilise `MenuButton` (bouton retour) et `DropdownMenuTrigger` (sélecteur de projets) — ne pas dupliquer leur logique
+- Le contenu du menu déroulant est entièrement fourni par le consommateur via `children` — TopNav ne connaît pas la liste des projets
+- État homepage : `project` non fourni → pas de bouton retour ni de titre, le trigger est aligné à droite
+- Titre et sous-titre partagent la même couleur (`color/text/nav-bar/{project}`), seul le `font-weight` diffère (medium vs regular)
