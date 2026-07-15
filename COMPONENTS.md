@@ -138,7 +138,7 @@ interface TopNavProps {
 | `--color-border-menu-button-outlined-white`, `--color-text-menu-button-outline-white` | — | Bouton retour (`MenuButton` outlined/light/md) |
 | `--spacing-x10`, `--spacing-x12`, `--spacing-x6` | `40px`, `48px`, `24px` | Padding du conteneur |
 | `--spacing-component-md`, `--spacing-component-lg`, `--spacing-component-sm` | `16px`, `24px`, `8px` | Padding/gap de la pilule |
-| `--border-radius-button-rounded` | `999px` | Border-radius de la pilule |
+| `--border-radius-button` | `999px` | Border-radius de la pilule |
 | `--typography-font-size-xl` | `20px` | Taille du titre/sous-titre |
 
 #### Règles d'usage

@@ -14,7 +14,7 @@
   justify-content: flex-end;
   width: 100%;
   min-height: 88px;
-  border-radius: var(--border-radius-button-rounded);
+  border-radius: var(--border-radius-button);
   padding-right: var(--spacing-component-md);
   box-sizing: border-box;
 }

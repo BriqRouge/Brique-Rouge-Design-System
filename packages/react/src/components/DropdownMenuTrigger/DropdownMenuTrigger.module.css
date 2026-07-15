@@ -8,7 +8,13 @@
 
 /* Fallback #0000001a = valeur correcte du token manquant en Figma Variables.
    À supprimer une fois --elevation-3-ambient-shadow-color ajouté et le build relancé. */
+/* position: absolute — sinon le menu fermé (visibility:hidden, pas display:none)
+   réserve quand même son espace de mise en page et fausse la hauteur des conteneurs parents. */
 .menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10;
   box-shadow:
     var(--elevation-3-key-shadow-offset-x)
     var(--elevation-3-key-shadow-offset-y)
