@@ -6,6 +6,7 @@
   width: 276px;
   padding: var(--spacing-x4);
   box-sizing: border-box;
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
   background-color: var(--color-background-projects-body);
 }
 

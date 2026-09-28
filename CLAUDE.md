@@ -270,8 +270,8 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 - **Fichiers** : `ProjectCardDescription.tsx`, `ProjectCardDescription.module.css`, `ProjectCardDescription.test.tsx`, `index.ts`
 - **Story** : `packages/storybook/src/stories/components/ProjectCardDescription.stories.tsx`
 - **API** : `children` (requis, titre du projet — support multi-lignes), `project` (requis), `year` (requis), `category` (requis) + props HTML natives (`HTMLDivElement`)
-- **Tokens** : `--color-background-projects-body`, `--color-neutral-900` (texte), `--typography-font-family-sans`, `--typography-font-size-base|sm`, `--typography-font-weight-medium|regular`, `--spacing-x4`
-- **Layout** : largeur fixe 276px, **hauteur automatique** (décision Damien — le titre s'affiche sur 2 lignes par design, une hauteur figée à 120px comme dans le frame Figma tronquerait la catégorie)
+- **Tokens** : `--color-background-projects-body`, `--color-neutral-900` (texte), `--typography-font-family-sans`, `--typography-font-size-base|sm`, `--typography-font-weight-medium|regular`, `--spacing-x4`, `--border-radius-lg` (coins bas uniquement)
+- **Layout** : largeur fixe 276px, **hauteur automatique** (décision Damien — le titre s'affiche sur 2 lignes par design, une hauteur figée à 120px comme dans le frame Figma tronquerait la catégorie) ; coins bas arrondis à 12px, coins hauts carrés
 - **Écarts signalés vs Figma** (validés par Damien) : couleur de texte non liée à une variable Figma (mappée sur `--color-neutral-900`, pas de token noir pur) ; poids de police `Light`/`Medium` variable sans équivalent exact (mappés sur `regular`/`medium`)
 - **Tests** : 7 tests — 7 passants
 

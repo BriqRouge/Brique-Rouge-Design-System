@@ -179,6 +179,7 @@ interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElemen
 | `--typography-font-weight-medium` | `500` | Poids du titre |
 | `--typography-font-weight-regular` | `400` | Poids du nom du projet, de l'année et de la catégorie |
 | `--spacing-x4` | `16px` | Padding + gap entre les 3 sections |
+| `--border-radius-lg` | `12px` | Arrondi des coins bas uniquement (coins hauts carrés) |
 
 #### Règles d'usage
 
