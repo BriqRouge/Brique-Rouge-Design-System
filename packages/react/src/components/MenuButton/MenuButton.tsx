@@ -3,7 +3,7 @@ import styles from './MenuButton.module.css';
 
 type MenuButtonVariant = 'contained' | 'outlined';
 type MenuButtonColorScheme = 'default' | 'light' | 'dark';
-type MenuButtonSize = 'nm' | 'md';
+type MenuButtonSize = 'sm' | 'nm' | 'md';
 
 interface MenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Type visuel du bouton */

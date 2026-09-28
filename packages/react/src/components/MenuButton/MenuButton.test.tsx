@@ -45,6 +45,11 @@ describe('MenuButton — data-attributes', () => {
     expect(btn).toHaveAttribute('data-variant', 'outlined');
     expect(btn).toHaveAttribute('data-size', 'md');
   });
+
+  it('expose data-size="sm"', () => {
+    render(<MenuButton size="sm">Action</MenuButton>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-size', 'sm');
+  });
 });
 
 describe('MenuButton — icônes', () => {
@@ -119,6 +124,11 @@ describe('MenuButton — accessibilité', () => {
     const { container } = render(
       <MenuButton aria-label="Supprimer le projet" leftIcon={<svg aria-hidden="true" />}>{null}</MenuButton>
     );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('taille sm : aucune violation axe', async () => {
+    const { container } = render(<MenuButton size="sm">Créer le projet</MenuButton>);
     expect(await axe(container)).toHaveNoViolations();
   });
 });

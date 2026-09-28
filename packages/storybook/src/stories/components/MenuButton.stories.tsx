@@ -26,7 +26,7 @@ const meta = {
     size: {
       description: 'Taille du bouton',
       control: 'select',
-      options: ['nm', 'md'],
+      options: ['sm', 'nm', 'md'],
     },
     children: {
       description: 'Label du bouton',
@@ -67,6 +67,7 @@ export const Tailles: Story = {
   args: { children: 'Tailles' },
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <MenuButton size="sm">Small (sm)</MenuButton>
       <MenuButton size="nm">Normal (nm)</MenuButton>
       <MenuButton size="md">Medium (md)</MenuButton>
     </div>
