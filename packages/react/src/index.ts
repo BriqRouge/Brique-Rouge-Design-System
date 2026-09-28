@@ -18,3 +18,6 @@ export type { DropdownMenuTriggerProps } from './components/DropdownMenuTrigger'
 
 export { TopNav } from './components/TopNav';
 export type { TopNavProps, TopNavProject } from './components/TopNav';
+
+export { ProjectCardDescription } from './components/ProjectCardDescription';
+export type { ProjectCardDescriptionProps } from './components/ProjectCardDescription';

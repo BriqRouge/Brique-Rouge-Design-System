@@ -147,3 +147,43 @@ interface TopNavProps {
 - Le contenu du menu déroulant est entièrement fourni par le consommateur via `children` — TopNav ne connaît pas la liste des projets
 - État homepage : `project` non fourni → pas de bouton retour ni de titre, le trigger est aligné à droite
 - Titre et sous-titre partagent la même couleur (`color/text/nav-bar/{project}`), seul le `font-weight` diffère (medium vs regular)
+
+---
+
+### ProjectCardDescription
+
+**Package :** `@brique-rouge/react`
+**Chemin :** `packages/react/src/components/ProjectCardDescription/`
+**Node Figma :** `1902:22312` ("Project-Cards-Description")
+
+#### API
+
+```ts
+interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
+  children:  React.ReactNode; // requis — titre du projet (contenu principal, peut être multi-lignes)
+  project:   string;          // requis — nom du projet (ex: "Odaptos")
+  year:      string;          // requis — année du projet (ex: "2024")
+  category:  string;          // requis — catégorie/rôle (ex: "Product Design")
+}
+```
+
+#### Tokens CSS utilisés
+
+| Token | Valeur | Usage |
+|-------|--------|-------|
+| `--color-background-projects-body` | `#e5e5e5` | Fond de la carte |
+| `--color-neutral-900` | `#171717` | Couleur de tout le texte (voir note ci-dessous) |
+| `--typography-font-family-sans` | `ABC Favorit Pro Variable` | Police (tous les textes) |
+| `--typography-font-size-base` | `16px` | Taille du nom du projet et du titre |
+| `--typography-font-size-sm` | `14px` | Taille de l'année et de la catégorie |
+| `--typography-font-weight-medium` | `500` | Poids du titre |
+| `--typography-font-weight-regular` | `400` | Poids du nom du projet, de l'année et de la catégorie |
+| `--spacing-x4` | `16px` | Padding + gap entre les 3 sections |
+| `--border-radius-lg` | `12px` | Arrondi des coins bas uniquement (coins hauts carrés) |
+
+#### Règles d'usage
+
+- Largeur fixe 276px (spec Figma) ; **hauteur automatique** (pas 120px fixe) — le titre du Figma source s'affiche volontairement sur 2 lignes, une hauteur figée tronquerait la catégorie dès que le titre dépasse 1 ligne
+- `children` = titre du projet ; supporte un retour à la ligne manuel (`<br />`) ou un wrap naturel
+- **Écart signalé vs Figma** : dans le fichier Figma, le texte n'est lié à aucune variable de couleur (`color/text/*`) — mappé sur `--color-neutral-900` (le noir pur du Figma ne correspond à aucun token existant)
+- **Écart signalé vs Figma** : les poids de police Figma (`Light` pour les labels, `Medium` variable ~571 pour le titre) n'ont pas d'équivalent exact dans `--typography-font-weight-*` — mappés sur `regular` (400) et `medium` (500)
