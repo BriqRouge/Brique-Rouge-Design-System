@@ -19,9 +19,10 @@ const meta = {
       options: ['contained', 'outlined'],
     },
     colorScheme: {
-      description: 'Schéma de couleur (ignoré si variant="contained")',
+      description:
+        '\'default\' : neutre — \'light\'/\'dark\' : outlined sur fond coloré — \'info\'/\'warning\' : schéma sémantique (contained et outlined)',
       control: 'select',
-      options: ['default', 'light', 'dark'],
+      options: ['default', 'light', 'dark', 'info', 'warning'],
     },
     size: {
       description: 'Taille du bouton',
@@ -59,6 +60,19 @@ export const Variants: Story = {
         <MenuButton variant="outlined" colorScheme="light">Outlined light</MenuButton>
       </div>
       <MenuButton variant="outlined" colorScheme="dark">Outlined dark</MenuButton>
+    </div>
+  ),
+};
+
+export const SchemasSemantiques: Story = {
+  name: 'Schémas sémantiques (info/warning)',
+  args: { children: 'Schémas sémantiques' },
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+      <MenuButton variant="contained" colorScheme="info">Découvrir</MenuButton>
+      <MenuButton variant="outlined" colorScheme="info">Découvrir</MenuButton>
+      <MenuButton variant="contained" colorScheme="warning">Découvrir</MenuButton>
+      <MenuButton variant="outlined" colorScheme="warning">Découvrir</MenuButton>
     </div>
   ),
 };

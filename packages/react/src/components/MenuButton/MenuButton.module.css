@@ -95,6 +95,60 @@
   color: var(--color-text-button-outline-white);
 }
 
+/* ─── Variant : contained info ──────────────────────────────────────────────── */
+
+.variant-contained.color-scheme-info {
+  background-color: var(--color-button-info);
+  border-color: var(--color-button-info);
+  color: var(--color-text-button-primary);
+}
+
+.variant-contained.color-scheme-info:hover:not(:disabled) {
+  background-color: var(--color-button-info-hover);
+  border-color: var(--color-button-info-hover);
+}
+
+/* ─── Variant : contained warning ───────────────────────────────────────────── */
+
+.variant-contained.color-scheme-warning {
+  background-color: var(--color-button-warning);
+  border-color: var(--color-button-warning);
+  color: var(--color-text-button-primary);
+}
+
+.variant-contained.color-scheme-warning:hover:not(:disabled) {
+  background-color: var(--color-button-warning-hover);
+  border-color: var(--color-button-warning-hover);
+}
+
+/* ─── Variant : outlined info ────────────────────────────────────────────────── */
+
+.variant-outlined.color-scheme-info {
+  background-color: transparent;
+  border-color: var(--color-button-info);
+  color: var(--color-icon-button-info);
+}
+
+.variant-outlined.color-scheme-info:hover:not(:disabled) {
+  background-color: var(--color-button-info-hover);
+  border-color: var(--color-button-info-hover);
+  color: var(--color-text-button-primary);
+}
+
+/* ─── Variant : outlined warning ─────────────────────────────────────────────── */
+
+.variant-outlined.color-scheme-warning {
+  background-color: transparent;
+  border-color: var(--color-button-warning);
+  color: var(--color-icon-button-warning);
+}
+
+.variant-outlined.color-scheme-warning:hover:not(:disabled) {
+  background-color: var(--color-button-warning-hover);
+  border-color: var(--color-button-warning-hover);
+  color: var(--color-text-button-primary);
+}
+
 /* ─── État désactivé ────────────────────────────────────────────────────────── */
 
 .menuButton:disabled {

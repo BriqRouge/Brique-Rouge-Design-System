@@ -194,12 +194,14 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 - **Commit** : `7745697`
 - **Fichiers** : `MenuButton.tsx`, `MenuButton.module.css`, `MenuButton.test.tsx`, `MenuButton.figma.tsx`, `index.ts`
 - **Story** : `packages/storybook/src/stories/components/MenuButton.stories.tsx`
-- **API** : `children` (requis), `variant` (`contained`|`outlined`), `colorScheme` (`default`|`light`|`dark`), `size` (`nm`|`md`), `leftIcon`, `rightIcon`, `disabled` + props HTML natives
+- **API** : `children` (requis), `variant` (`contained`|`outlined`), `colorScheme` (`default`|`light`|`dark`|`info`|`warning`), `size` (`nm`|`md`), `leftIcon`, `rightIcon`, `disabled` + props HTML natives
 - **Types exportés** : `MenuButtonProps`, `MenuButtonVariant`, `MenuButtonColorScheme`, `MenuButtonSize`
 - **data-component** : `ds-br-menu-button`
+- **data-attributes** : `data-variant`, `data-size`, `data-color-scheme` (utilisés par les tests)
 - **Tokens** : `color/background/button/idle|hovered|hovered-black|disabled`, `color/border/button/contained|outlined-white|outlined-black|focus|disabled`, `color/text/button/contained|outline-white|outline-black|disabled`, `color/icon/button/contained|outline-white|outline-black|disabled`, `border-radius/button`, `typography/button/nm` (`font-family` + `font-size` 14px), `typography/button/md` (`font-family` + `font-size` 16px)
 - **Padding** : nm → 8px vertical / 12px horizontal (`--sizing-x3`), md → 8px vertical / 14px horizontal (`--spacing-x3-5`)
-- **Tests** : 18 tests — 18 passants
+- **Schémas sémantiques `info`/`warning`** (node Figma `1506:20751`, composant "Button" — variantes primary-info/warning et secondary-info/warning) : s'appliquent aussi bien en `contained` qu'en `outlined` (contrairement à `light`/`dark`, réservés à `outlined`). Tokens : `color/button/info|warning|info-hover|warning-hover`, `color/icon/button/info|warning`, `color/text/button/primary`. Le composant Figma "Button" source définit aussi des schémas `success`/`error` et un variant `tertiary` (lien souligné), non repris ici faute d'usage actuel dans le DS.
+- **Tests** : 24 tests — 24 passants
 
 ### FrameLogo (`packages/react/src/components/FrameLogo/`)
 - **Commit** : `49a78d7`

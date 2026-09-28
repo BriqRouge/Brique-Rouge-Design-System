@@ -90,6 +90,28 @@ describe('MenuButton — interaction', () => {
   });
 });
 
+describe('MenuButton — schémas sémantiques (info/warning)', () => {
+  it('expose data-color-scheme="info" en variant contained', () => {
+    render(<MenuButton variant="contained" colorScheme="info">Découvrir</MenuButton>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-color-scheme', 'info');
+  });
+
+  it('expose data-color-scheme="warning" en variant contained', () => {
+    render(<MenuButton variant="contained" colorScheme="warning">Découvrir</MenuButton>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-color-scheme', 'warning');
+  });
+
+  it('expose data-color-scheme="info" en variant outlined', () => {
+    render(<MenuButton variant="outlined" colorScheme="info">Découvrir</MenuButton>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-color-scheme', 'info');
+  });
+
+  it('expose data-color-scheme="warning" en variant outlined', () => {
+    render(<MenuButton variant="outlined" colorScheme="warning">Découvrir</MenuButton>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-color-scheme', 'warning');
+  });
+});
+
 describe('MenuButton — accessibilité', () => {
   it('contained : aucune violation axe', async () => {
     const { container } = render(<MenuButton variant="contained">Créer le projet</MenuButton>);
@@ -118,6 +140,20 @@ describe('MenuButton — accessibilité', () => {
   it('icon-only avec aria-label : aucune violation axe', async () => {
     const { container } = render(
       <MenuButton aria-label="Supprimer le projet" leftIcon={<svg aria-hidden="true" />}>{null}</MenuButton>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('contained info : aucune violation axe', async () => {
+    const { container } = render(
+      <MenuButton variant="contained" colorScheme="info">Découvrir</MenuButton>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('outlined warning : aucune violation axe', async () => {
+    const { container } = render(
+      <MenuButton variant="outlined" colorScheme="warning">Découvrir</MenuButton>
     );
     expect(await axe(container)).toHaveNoViolations();
   });

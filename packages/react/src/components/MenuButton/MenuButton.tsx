@@ -2,13 +2,13 @@ import { forwardRef } from 'react';
 import styles from './MenuButton.module.css';
 
 type MenuButtonVariant = 'contained' | 'outlined';
-type MenuButtonColorScheme = 'default' | 'light' | 'dark';
+type MenuButtonColorScheme = 'default' | 'light' | 'dark' | 'info' | 'warning';
 type MenuButtonSize = 'nm' | 'md';
 
 interface MenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Type visuel du bouton */
   variant?: MenuButtonVariant;
-  /** Schéma de couleur — 'default' pour contained, 'light'|'dark' pour outlined */
+  /** Schéma de couleur — 'default' pour neutre, 'light'|'dark' pour outlined sur fond coloré, 'info'|'warning' pour les schémas sémantiques (contained et outlined) */
   colorScheme?: MenuButtonColorScheme;
   /** Taille du bouton */
   size?: MenuButtonSize;
@@ -36,11 +36,12 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref
   ) => {
+    const isSemanticColorScheme = colorScheme === 'info' || colorScheme === 'warning';
     const classes = [
       styles.menuButton,
       styles[`variant-${variant}`],
       styles[`size-${size}`],
-      variant === 'outlined' ? styles[`color-scheme-${colorScheme}`] : '',
+      variant === 'outlined' || isSemanticColorScheme ? styles[`color-scheme-${colorScheme}`] : '',
       className,
     ]
       .filter(Boolean)
@@ -53,6 +54,7 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
         disabled={disabled}
         data-variant={variant}
         data-size={size}
+        data-color-scheme={colorScheme}
         data-component="ds-br-menu-button"
         className={classes}
         {...props}
