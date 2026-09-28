@@ -99,10 +99,22 @@ export const AvecIcones: Story = {
   name: 'Avec icônes',
   args: { children: 'Avec icônes' },
   render: () => (
-    <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-      <Button leftIcon={<DownloadIcon />}>Télécharger</Button>
-      <Button rightIcon={<MailIcon />}>Contacter</Button>
-      <Button leftIcon={<DownloadIcon />} rightIcon={<MailIcon />}>Découvrir</Button>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="primary" leftIcon={<DownloadIcon />}>Télécharger</Button>
+        <Button variant="primary" rightIcon={<MailIcon />}>Contacter</Button>
+        <Button variant="primary" leftIcon={<DownloadIcon />} rightIcon={<MailIcon />}>Découvrir</Button>
+      </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="secondary" leftIcon={<DownloadIcon />}>Télécharger</Button>
+        <Button variant="secondary" rightIcon={<MailIcon />}>Contacter</Button>
+        <Button variant="secondary" leftIcon={<DownloadIcon />} rightIcon={<MailIcon />}>Découvrir</Button>
+      </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="tertiary" leftIcon={<DownloadIcon />}>Télécharger</Button>
+        <Button variant="tertiary" rightIcon={<MailIcon />}>Contacter</Button>
+        <Button variant="tertiary" leftIcon={<DownloadIcon />} rightIcon={<MailIcon />}>Découvrir</Button>
+      </div>
     </div>
   ),
 };
