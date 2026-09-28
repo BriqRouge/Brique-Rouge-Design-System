@@ -20,19 +20,18 @@ Claude Code lit ce fichier avant toute implémentation.
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/Button/`
+**Node Figma :** `1506:20751` (composant "Button" — source de vérité pour tous les boutons du DS)
 
 #### API
 
 ```ts
-type ButtonVariant     = 'contained' | 'outlined';
-type ButtonColorScheme = 'default' | 'light' | 'dark';
-type ButtonSize        = 'nm' | 'md';
+type ButtonVariant     = 'primary' | 'secondary' | 'tertiary';
+type ButtonColorScheme = 'neutral' | 'info' | 'warning' | 'success' | 'error';
 
 interface ButtonProps {
   children:      React.ReactNode;    // requis — contenu textuel du bouton
-  variant?:      ButtonVariant;      // default: 'contained'
-  colorScheme?:  ButtonColorScheme;  // default: 'default' — ignoré si variant='contained'
-  size?:         ButtonSize;         // default: 'nm'
+  variant?:      ButtonVariant;      // default: 'primary'
+  colorScheme?:  ButtonColorScheme;  // default: 'neutral' — ignoré si variant='tertiary'
   leftIcon?:     React.ReactNode;
   rightIcon?:    React.ReactNode;
   disabled?:     boolean;
@@ -47,32 +46,33 @@ interface ButtonProps {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-background-button-idle` | `#f5f5f5` | Fond contained (idle) |
-| `--color-background-button-hovered` | `#e5e5e5` | Fond contained/outlined-light (hover) |
-| `--color-background-button-hovered-black` | `#171717` | Fond outlined-dark (hover) |
-| `--color-background-button-disabled` | `#f5f5f5` | Fond état disabled (tous variants) |
-| `--color-border-button-contained` | `#d4d4d4` | Bordure contained |
-| `--color-border-button-outlined-white` | `#f5f5f5` | Bordure outlined light |
-| `--color-border-button-outlined-black` | `#171717` | Bordure outlined dark |
-| `--color-border-button-focus` | `#3453dc` | Outline focus visible |
-| `--color-border-button-disabled` | `#d4d4d4` | Bordure état disabled |
-| `--color-text-button-contained` | `#737373` | Texte contained |
-| `--color-text-button-outline-white` | `#f5f5f5` | Texte outlined light |
-| `--color-text-button-outline-black` | `#171717` | Texte outlined dark |
-| `--color-text-button-disabled` | `#d4d4d4` | Texte état disabled |
-| `--border-radius-button` | `999px` | Border-radius |
+| `--color-button-primary` / `-hover` | `#262626` / `#404040` | Fond primary neutre |
+| `--color-button-secondary-hover` | `#262626` | Fond secondary neutre (hover, remplit) |
+| `--color-button-info` / `-hover` | `#3453dc` / `#2c41c9` | Fond primary + bordure/fond hover secondary, info |
+| `--color-button-warning` / `-hover` | `#e1742e` / `#d35c23` | Idem, warning |
+| `--color-button-success` / `-hover` | `#23a019` / `#1f7d18` | Idem, success |
+| `--color-button-error` / `-hover` | `#e22020` / `#be1717` | Idem, error |
+| `--color-button-focus` | `#567be9` | Outline focus visible |
+| `--color-border-button-secondary` | `#262626` | Bordure secondary neutre |
+| `--color-text-button-primary` / `-hover` | `#fafafa` | Texte sur fond plein (primary, ou secondary au hover) |
+| `--color-text-button-secondary` / `-hover` | `#262626` / `#fafafa` | Texte secondary neutre (idle / hover) |
+| `--color-text-button-tertiary` / `-hover` / `-focus` | `#262626` / `#404040` / `#3453dc` | Texte tertiary selon l'état |
+| `--color-icon-button-info` / `warning` | `#3453dc` / `#e1742e` | Icône + texte secondary info/warning (idle) |
+| `--border-radius-button` | `999px` | Border-radius (pill) |
 | `--spacing-component-sm` | `8px` | Gap + padding vertical |
-| `--sizing-x3` | `12px` | Padding horizontal nm |
-| `--spacing-x3-5` | `14px` | Padding horizontal md |
+| `--sizing-x3` | `12px` | Padding horizontal |
+| `--sizing-button-nm` | `40px` | Hauteur (taille unique, pas de variant size) |
 
 #### Règles d'usage
 
-- `contained` : toujours sur fond sombre (texte et bordure gris clair)
-- `outlined light` / `outlined default` : fond sombre → outline blanc, hover remplit en clair
-- `outlined dark` : fond clair → outline noir, hover remplit en noir
-- Taille `nm` = 40px de hauteur, `md` = 48px de hauteur
-- État disabled : couleurs dédiées (pas d'opacité)
+- `primary` : fond plein — neutre (`#262626`) ou couleur sémantique
+- `secondary` : bordure 2px, fond transparent — au hover, se remplit en plein (couleur sémantique ou neutre) avec texte blanc
+- `tertiary` : lien souligné, sans fond ni bordure — **toujours neutre**, `colorScheme` est ignoré
+- `colorScheme` (`info`/`warning`/`success`/`error`) s'applique à `primary` et `secondary`, jamais à `tertiary`
+- Taille unique (40px de hauteur) — pas de variant `size` comme sur MenuButton
+- État disabled : réutilise les tokens neutres génériques (`color/background/button/disabled` etc.) — le Figma source ne définit pas d'état disabled dédié par schéma de couleur
 - Toujours fournir `aria-label` si le bouton ne contient que des icônes — passer `children={null}`
+- Ne pas confondre avec `MenuButton` : composant distinct, plus ancien, utilisé notamment par `TopNav` (bouton retour, trigger de dropdown) — les deux composants coexistent intentionnellement
 
 ---
 
