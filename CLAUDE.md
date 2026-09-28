@@ -212,11 +212,12 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 - **API** : `children` (requis), `variant` (`primary`|`secondary`|`tertiary`), `colorScheme` (`neutral`|`info`|`warning`|`success`|`error`, ignoré si `variant="tertiary"`), `leftIcon`, `rightIcon`, `disabled` + props HTML natives
 - **Types exportés** : `ButtonProps`, `ButtonVariant`, `ButtonColorScheme`
 - **data-component** : `ds-br-button`
-- **data-attributes** : `data-variant`, `data-color-scheme` (utilisés par les tests)
+- **data-attributes** : `data-variant`, `data-color-scheme`, `data-icon-only` (utilisés par les tests)
 - **Tokens** : `color/button/primary|info|warning|success|error` (+ leurs `-hover`), `color/button/secondary-hover`, `color/button/focus`, `color/border/button/secondary`, `color/text/button/primary|secondary|tertiary` (+ variantes `-hover`/`-focus`), `color/icon/button/info|warning`, `border-radius/button`, `typography/button/nm|md`
 - **Règles** : `tertiary` toujours neutre (lien souligné, `colorScheme` ignoré) ; `secondary` se remplit en plein au hover (texte blanc) ; taille unique 40px (pas de variant `size`, contrairement à `MenuButton`) ; état disabled réutilise les tokens neutres génériques (le Figma source n'en définit pas de dédié par schéma de couleur)
+- **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur = 40px) via la classe `iconOnly`, qui force `width` (le `min-width` seul ne suffisait pas : la bordure de 2px faisait dépasser la largeur naturelle du contenu au-delà du `min-width`, donnant un bouton ovale de ~43px de large)
 - **Composant distinct de `MenuButton`** (plus ancien, utilisé par `TopNav`) — les deux coexistent intentionnellement, périmètres différents
-- **Tests** : 23 tests — 23 passants
+- **Tests** : 25 tests — 25 passants
 
 ### MenuButton (`packages/react/src/components/MenuButton/`)
 - **Commit** : `7745697`

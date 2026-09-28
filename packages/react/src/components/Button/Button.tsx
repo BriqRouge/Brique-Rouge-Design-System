@@ -33,10 +33,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const hasSemanticColorScheme = variant !== 'tertiary' && colorScheme !== 'neutral';
+    const isIconOnly = !children && (Boolean(leftIcon) || Boolean(rightIcon));
     const classes = [
       styles.button,
       styles[`variant-${variant}`],
       hasSemanticColorScheme ? styles[`color-scheme-${colorScheme}`] : '',
+      isIconOnly ? styles.iconOnly : '',
       className,
     ]
       .filter(Boolean)
@@ -49,6 +51,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         data-variant={variant}
         data-color-scheme={colorScheme}
+        data-icon-only={isIconOnly}
         data-component="ds-br-button"
         className={classes}
         {...props}

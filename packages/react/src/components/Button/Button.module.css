@@ -35,6 +35,15 @@
   height: var(--sizing-x4);
 }
 
+/* ─── Icône seule (bouton strictement rond) ──────────────────────────────────── */
+
+.iconOnly {
+  width: var(--sizing-button-nm);
+  min-width: var(--sizing-button-nm);
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* ─── Variant : primary (neutre) ─────────────────────────────────────────────── */
 
 .variant-primary {
