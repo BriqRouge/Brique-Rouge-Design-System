@@ -190,6 +190,21 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 
 ## 9. Composants existants
 
+### AlertBanner (`packages/react/src/components/AlertBanner/`)
+- **Node Figma** : `755:21871` ("Notifications / Alert Banners")
+- **Fichiers** : `AlertBanner.tsx`, `AlertBanner.module.css`, `AlertBanner.test.tsx`, `index.ts`
+- **Story** : `packages/storybook/src/stories/components/AlertBanner.stories.tsx`
+- **API** : `title` (requis), `type` (`info`|`warning`, défaut `info`), `timestamp`, `description`, `onClose` (affiche le bouton de fermeture si fourni), `children` (CTA optionnels, ex: `<Button />`) + props HTML natives (`HTMLDivElement`)
+- **Types exportés** : `AlertBannerProps`, `AlertBannerType`
+- **data-component** : `ds-br-alert-banner`
+- **data-attributes** : `data-type`
+- **Composition** : les CTA sont fournis par le consommateur via `children` (typiquement des `<Button colorScheme="info|warning" />`) — AlertBanner ne connaît pas leur contenu, cohérent avec le pattern déjà établi par `TopNav`
+- **Layout** : largeur 100% (responsive, contrairement au frame Figma fixé à 641px) ; hauteur automatique
+- **Tokens** : `color/background/notification/info|warning`, `color/border/notification/info|warning`, `color/text/notification/info|warning` (titre + description), `color/text/notification/info-timestamp|warning-timestamp`, `color/icon/notification/info|warning` (icône d'en-tête), `color/icon/notification/info-close|warning-close` (bouton fermeture), `border-radius/lg`, `spacing/x1|x2|x4`
+- **Icônes** : `InfoIcon`/`WarningIcon`/`CloseIcon` dessinées à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `TopNav` — pas d'assets Figma exportés (nécessaire pour la recoloration par type)
+- **Écart signalé vs Figma** (validé par Damien) : le contenu du Figma est du lorem ipsum générique avec des icônes de boutons placeholder (téléchargement/mail) — le composant expose donc `leftIcon`/`rightIcon`/label entièrement personnalisables via `Button`, rien n'est figé en dur
+- **Tests** : 15 tests — 15 passants
+
 ### Button (`packages/react/src/components/Button/`)
 - **Node Figma** : `1506:20751` (composant "Button" — source de vérité pour tous les boutons du DS)
 - **Fichiers** : `Button.tsx`, `Button.module.css`, `Button.test.tsx`, `index.ts`
