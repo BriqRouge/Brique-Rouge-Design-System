@@ -1,6 +1,29 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from '@brique-rouge/react';
 
+function DownloadIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M8 2v7.5M4.5 6.5 8 10l3.5-3.5M2.5 12.5h11"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="m2.5 4.5 5.5 4 5.5-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 const meta = {
   title: 'Composants/Button',
   component: Button,
@@ -68,6 +91,41 @@ export const SchemasSemantiques: Story = {
       <Button variant="secondary" colorScheme="success">Découvrir</Button>
       <Button variant="primary" colorScheme="error">Découvrir</Button>
       <Button variant="secondary" colorScheme="error">Découvrir</Button>
+    </div>
+  ),
+};
+
+export const AvecIcones: Story = {
+  name: 'Avec icônes',
+  args: { children: 'Avec icônes' },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="primary" leftIcon={<DownloadIcon />}>Télécharger</Button>
+        <Button variant="primary" rightIcon={<MailIcon />}>Contacter</Button>
+        <Button variant="primary" leftIcon={<DownloadIcon />} rightIcon={<MailIcon />}>Découvrir</Button>
+      </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="secondary" leftIcon={<DownloadIcon />}>Télécharger</Button>
+        <Button variant="secondary" rightIcon={<MailIcon />}>Contacter</Button>
+        <Button variant="secondary" leftIcon={<DownloadIcon />} rightIcon={<MailIcon />}>Découvrir</Button>
+      </div>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Button variant="tertiary" leftIcon={<DownloadIcon />}>Télécharger</Button>
+        <Button variant="tertiary" rightIcon={<MailIcon />}>Contacter</Button>
+        <Button variant="tertiary" leftIcon={<DownloadIcon />} rightIcon={<MailIcon />}>Découvrir</Button>
+      </div>
+    </div>
+  ),
+};
+
+export const IconeSeule: Story = {
+  name: 'Icône seule',
+  args: { children: null, 'aria-label': 'Télécharger' },
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <Button variant="primary" aria-label="Télécharger" leftIcon={<DownloadIcon />}>{null}</Button>
+      <Button variant="secondary" aria-label="Télécharger" leftIcon={<DownloadIcon />}>{null}</Button>
     </div>
   ),
 };

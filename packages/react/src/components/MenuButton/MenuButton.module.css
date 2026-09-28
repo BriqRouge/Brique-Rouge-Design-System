@@ -34,7 +34,8 @@
 
 .size-sm {
   --icon-size: var(--sizing-x4);
-  height: var(--sizing-x6);
+  --button-size: var(--sizing-x6);
+  height: var(--button-size);
   padding-top: var(--spacing-component-sm);
   padding-bottom: var(--spacing-component-sm);
   padding-left: var(--sizing-x3);
@@ -45,7 +46,8 @@
 
 .size-nm {
   --icon-size: var(--sizing-x4);
-  height: var(--sizing-button-nm);
+  --button-size: var(--sizing-button-nm);
+  height: var(--button-size);
   padding-top: var(--spacing-component-sm);
   padding-bottom: var(--spacing-component-sm);
   padding-left: var(--sizing-x3);
@@ -56,7 +58,8 @@
 
 .size-md {
   --icon-size: var(--sizing-x5);
-  height: var(--sizing-x12);
+  --button-size: var(--sizing-x12);
+  height: var(--button-size);
   min-width: var(--sizing-x14);
   padding-top: var(--spacing-component-sm);
   padding-bottom: var(--spacing-component-sm);
@@ -64,6 +67,15 @@
   padding-right: var(--spacing-x3-5);
   font-family: var(--typography-button-md-font-family);
   font-size: var(--typography-button-md-font-size);
+}
+
+/* ─── Icône seule (bouton strictement rond) ──────────────────────────────────── */
+
+.iconOnly {
+  width: var(--button-size);
+  min-width: var(--button-size);
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* ─── Variant : contained ───────────────────────────────────────────────────── */

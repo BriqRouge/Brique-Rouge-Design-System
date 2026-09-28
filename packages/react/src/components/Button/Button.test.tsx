@@ -69,6 +69,16 @@ describe('Button — icônes', () => {
     expect(screen.getByTestId('icon')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Supprimer' })).toBeInTheDocument();
   });
+
+  it('expose data-icon-only="true" en mode icône seule', () => {
+    render(<Button aria-label="Supprimer" leftIcon={<svg />}>{null}</Button>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-icon-only', 'true');
+  });
+
+  it('expose data-icon-only="false" avec du texte', () => {
+    render(<Button leftIcon={<svg />}>Action</Button>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-icon-only', 'false');
+  });
 });
 
 describe('Button — disabled', () => {

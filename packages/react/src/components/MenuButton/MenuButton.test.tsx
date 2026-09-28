@@ -68,6 +68,16 @@ describe('MenuButton — icônes', () => {
     expect(screen.getByTestId('icon')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Supprimer' })).toBeInTheDocument();
   });
+
+  it('expose data-icon-only="true" en mode icône seule', () => {
+    render(<MenuButton aria-label="Supprimer" leftIcon={<svg />}>{null}</MenuButton>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-icon-only', 'true');
+  });
+
+  it('expose data-icon-only="false" avec du texte', () => {
+    render(<MenuButton leftIcon={<svg />}>Action</MenuButton>);
+    expect(screen.getByRole('button')).toHaveAttribute('data-icon-only', 'false');
+  });
 });
 
 describe('MenuButton — disabled', () => {
