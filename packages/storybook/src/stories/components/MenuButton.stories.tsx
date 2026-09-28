@@ -1,6 +1,14 @@
 ﻿import type { Meta, StoryObj } from '@storybook/react';
 import { MenuButton } from '@brique-rouge/react';
 
+function PlusIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const meta = {
   title: 'Composants/MenuButton',
   component: MenuButton,
@@ -70,6 +78,18 @@ export const Tailles: Story = {
       <MenuButton size="sm">Small (sm)</MenuButton>
       <MenuButton size="nm">Normal (nm)</MenuButton>
       <MenuButton size="md">Medium (md)</MenuButton>
+    </div>
+  ),
+};
+
+export const IconeSeule: Story = {
+  name: 'Icône seule',
+  args: { children: null, 'aria-label': 'Ajouter' },
+  render: () => (
+    <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+      <MenuButton aria-label="Ajouter" size="sm" leftIcon={<PlusIcon />}>{null}</MenuButton>
+      <MenuButton aria-label="Ajouter" size="nm" leftIcon={<PlusIcon />}>{null}</MenuButton>
+      <MenuButton aria-label="Ajouter" size="md" leftIcon={<PlusIcon />}>{null}</MenuButton>
     </div>
   ),
 };

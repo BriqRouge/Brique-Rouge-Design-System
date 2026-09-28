@@ -36,11 +36,13 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
     },
     ref
   ) => {
+    const isIconOnly = !children && (Boolean(leftIcon) || Boolean(rightIcon));
     const classes = [
       styles.menuButton,
       styles[`variant-${variant}`],
       styles[`size-${size}`],
       variant === 'outlined' ? styles[`color-scheme-${colorScheme}`] : '',
+      isIconOnly ? styles.iconOnly : '',
       className,
     ]
       .filter(Boolean)
@@ -53,6 +55,7 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
         disabled={disabled}
         data-variant={variant}
         data-size={size}
+        data-icon-only={isIconOnly}
         data-component="ds-br-menu-button"
         className={classes}
         {...props}
