@@ -1,6 +1,9 @@
 ﻿export { Button } from './components/Button';
 export type { ButtonProps, ButtonVariant, ButtonColorScheme } from './components/Button';
 
+export { AlertBanner } from './components/AlertBanner';
+export type { AlertBannerProps, AlertBannerType } from './components/AlertBanner';
+
 export { MenuButton } from './components/MenuButton';
 export type { MenuButtonProps, MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize } from './components/MenuButton';
 
