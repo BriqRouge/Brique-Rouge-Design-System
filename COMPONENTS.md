@@ -255,11 +255,12 @@ type ProjectBentoCardProject = 'odaptos' | 'bpce' | 'ibp' | 'conseil-constitutio
 type ProjectBentoCardShape  = 'square' | 'rectangle';
 
 interface ProjectBentoCardProps {
-  project:      ProjectBentoCardProject; // requis — couleur d'accent au survol
-  shape?:       ProjectBentoCardShape;   // default: 'square'
-  description?: React.ReactNode;         // révélé au survol/focus — typiquement <ProjectCardDescription />
-  children:     React.ReactNode;         // requis — contenu visuel (image, illustration…)
-  className?:   string;
+  project:        ProjectBentoCardProject; // requis — couleur d'accent au survol
+  shape?:         ProjectBentoCardShape;   // default: 'square'
+  expandOnHover?: boolean;                 // default: false — voir Règles d'usage
+  description?:   React.ReactNode;         // révélé au survol/focus — typiquement <ProjectCardDescription />
+  children:       React.ReactNode;         // requis — contenu visuel (image, illustration…)
+  className?:     string;
 }
 ```
 
@@ -279,8 +280,9 @@ interface ProjectBentoCardProps {
 
 #### Règles d'usage
 
-- Taille de base 276×276px (`square`) ou 276×576px (`rectangle`) ; au survol/focus, la largeur passe à 576px quel que soit le format
-- **Positionnement obligatoire** : conteneur parent `position: relative`, chaque carte en `position: absolute` — comme la grille bento réelle. En flux normal (flex/grid), l'agrandissement pousse les cartes voisines et leur vole le survol
+- Taille de base 276×276px (`square`) ou 276×576px (`rectangle`) ; au survol/focus, la bordure et le fond changent toujours, mais **la largeur ne passe à 576px que si `expandOnHover` est activé**
+- **`expandOnHover` : comportement non uniforme entre variantes, vérifié dans le Figma source (node `1759:22825`)** — seules 2 des 5 combinaisons s'agrandissent réellement : `Odaptos` (square) et `Conseil constitutionnel` (rectangle). `BPCE` et `iBP` changent de couleur et révèlent leur description à taille fixe ; `CV` change de couleur et transforme son illustration, sans description. Ne pas supposer un agrandissement uniforme — vérifier chaque variante individuellement avant d'implémenter une interaction Figma partagée entre plusieurs instances d'un même composant.
+- **Positionnement obligatoire** : conteneur parent `position: relative`, chaque carte en `position: absolute` — comme la grille bento réelle. En flux normal (flex/grid), l'agrandissement d'une carte `expandOnHover` pousse les cartes voisines et leur vole le survol
 - `description` n'est affiché qu'au survol (`:hover`) ou focus d'un enfant (`:focus-within`) — reste dans le DOM en permanence (opacity/transform, pas de montage conditionnel), donc lisible par un lecteur d'écran indépendamment du survol
 - Le survol clavier nécessite un enfant focusable (ex: un lien enveloppant la carte) — `:focus-within` seul ne déclenche rien si la carte ne contient aucun élément focusable
 - Transition `width` 150ms ease-out — exception documentée à la règle DS générale "n'animer que `transform`/`opacity`" : ici la largeur doit réellement changer pour révéler du contenu sans étirer le texte ; `prefers-reduced-motion` réduit la transition à 1ms

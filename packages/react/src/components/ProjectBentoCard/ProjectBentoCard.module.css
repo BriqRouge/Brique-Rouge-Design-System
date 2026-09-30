@@ -23,8 +23,12 @@
 .card:hover,
 .card:focus-within {
   z-index: 1;
-  width: 576px;
   border-color: var(--color-border-bento-cards-hovered);
+}
+
+.expandOnHover:hover,
+.expandOnHover:focus-within {
+  width: 576px;
 }
 
 .card[data-project='odaptos']:hover,

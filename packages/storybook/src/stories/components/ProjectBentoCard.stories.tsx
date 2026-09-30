@@ -23,6 +23,11 @@ const meta = {
       control: 'select',
       options: ['square', 'rectangle'],
     },
+    expandOnHover: {
+      description:
+        "S'élargit (276px→576px) au survol en plus du changement de couleur — dans le Figma source, seuls Odaptos et Conseil constitutionnel s'étendent",
+      control: 'boolean',
+    },
     description: {
       description: 'Description révélée au survol/focus — typiquement un <ProjectCardDescription />',
       control: false,
@@ -51,6 +56,7 @@ const placeholderVisual = (
 export const Default: Story = {
   args: {
     project: 'odaptos',
+    expandOnHover: true,
     children: placeholderVisual,
     description: (
       <ProjectCardDescription project="Odaptos" year="2024" category="Product Design">
@@ -63,17 +69,25 @@ export const Default: Story = {
 };
 
 export const SurvolezPourVoir: Story = {
-  name: 'Survolez pour voir (toutes les couleurs)',
+  name: 'Survolez pour voir (comportement exact par carte)',
   args: { project: 'odaptos', children: placeholderVisual },
   render: () => (
-    // Positionnement absolu obligatoire : ProjectBentoCard s'agrandit au survol
-    // (width 276px → 576px). En flux normal (flex/grid), cet agrandissement
-    // pousserait les cartes voisines et leur volerait le survol. Le conteneur
-    // parent doit être position:relative, chaque carte position:absolute —
-    // exactement comme la grille bento réelle du Figma source.
+    // Positionnement absolu obligatoire : les cartes avec expandOnHover
+    // s'agrandissent au survol (width 276px → 576px). En flux normal
+    // (flex/grid), cet agrandissement pousserait les cartes voisines et leur
+    // volerait le survol. Le conteneur parent doit être position:relative,
+    // chaque carte position:absolute — exactement comme la grille bento
+    // réelle du Figma source.
+    //
+    // Comportement exact du Figma (node 1759:22825) : seules Odaptos (square)
+    // et Conseil constitutionnel (rectangle) s'étendent au survol. BPCE et
+    // iBP changent seulement de couleur + révèlent leur description à taille
+    // fixe. CV change de couleur et transforme son illustration, sans
+    // description ni agrandissement.
     <div style={{ position: 'relative', width: '576px', height: '576px' }}>
       <ProjectBentoCard
         project="odaptos"
+        expandOnHover
         style={{ position: 'absolute', top: 0, left: 0 }}
         description={
           <ProjectCardDescription project="Odaptos" year="2024" category="Product Design">
@@ -121,6 +135,7 @@ export const FormatRectangle: Story = {
   args: {
     project: 'conseil-constitutionnel',
     shape: 'rectangle',
+    expandOnHover: true,
     children: placeholderVisual,
     description: (
       <ProjectCardDescription project="Conseil constitutionnel" year="2024" category="Product Design">
@@ -144,6 +159,7 @@ export const Playground: Story = {
   args: {
     project: 'odaptos',
     shape: 'square',
+    expandOnHover: true,
     children: placeholderVisual,
     description: (
       <ProjectCardDescription project="Odaptos" year="2024" category="Product Design">

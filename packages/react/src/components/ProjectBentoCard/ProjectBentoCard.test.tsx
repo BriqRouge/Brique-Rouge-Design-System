@@ -38,6 +38,26 @@ describe('ProjectBentoCard — rendu', () => {
     );
   });
 
+  it('expandOnHover="false" par défaut', () => {
+    const { container } = render(<ProjectBentoCard project="bpce">Contenu</ProjectBentoCard>);
+    expect(container.querySelector('[data-component="ds-br-project-bento-card"]')).toHaveAttribute(
+      'data-expand-on-hover',
+      'false'
+    );
+  });
+
+  it('expose data-expand-on-hover="true" quand demandé', () => {
+    const { container } = render(
+      <ProjectBentoCard project="odaptos" expandOnHover>
+        Contenu
+      </ProjectBentoCard>
+    );
+    expect(container.querySelector('[data-component="ds-br-project-bento-card"]')).toHaveAttribute(
+      'data-expand-on-hover',
+      'true'
+    );
+  });
+
   it("n'affiche pas de description si non fournie", () => {
     render(<ProjectBentoCard project="cv">Contenu</ProjectBentoCard>);
     expect(screen.queryByText('Product Design')).not.toBeInTheDocument();
