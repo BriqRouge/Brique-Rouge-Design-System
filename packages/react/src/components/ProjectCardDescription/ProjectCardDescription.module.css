@@ -23,9 +23,11 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-regular);
-  line-height: 24px;
+  line-height: 1; /* repli — navigateurs sans text-box-trim */
   color: var(--color-neutral-900);
   white-space: nowrap;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .year {
@@ -33,9 +35,11 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-sm);
   font-weight: var(--typography-font-weight-regular);
-  line-height: 24px;
+  line-height: 1; /* repli — navigateurs sans text-box-trim */
   color: var(--color-neutral-900);
   white-space: nowrap;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .titleWrapper {
@@ -51,10 +55,12 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-medium);
-  line-height: 18px;
+  line-height: 18px; /* repli — navigateurs sans text-box-trim */
   color: var(--color-neutral-900);
   word-break: break-word;
   white-space: pre-wrap;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
 
 .footer {
@@ -71,6 +77,8 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-sm);
   font-weight: var(--typography-font-weight-regular);
-  line-height: 24px;
+  line-height: 1; /* repli — navigateurs sans text-box-trim */
   color: var(--color-neutral-900);
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
 }
