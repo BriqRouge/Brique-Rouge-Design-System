@@ -146,6 +146,7 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 - **Jamais de valeur RGB hardcodée** si un token de couleur existe
 - **Jamais de valeur px hardcodée** si un token de spacing, sizing ou border-radius existe
 - La règle §17 ("aucune valeur arbitraire si un token existe") s'applique au code **et** à Figma
+- **Vérifié en CI** : `scripts/token-audit.mjs` (job Lint) détecte toute couleur hexadécimale codée en dur dans les CSS Modules (hors fallback `var(--token, #hex)`, usage légitime). Portée volontairement limitée aux couleurs — voir commentaire en tête du script pour le raisonnement. Exception explicite via `/* token-audit-ignore */` en tête de fichier, réservée au contenu illustratif bespoke sans équivalent DS (ex: assets Figma composés à la main)
 
 ---
 
