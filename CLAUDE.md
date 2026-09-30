@@ -190,144 +190,23 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 
 ## 9. Composants existants
 
-### AlertBanner (`packages/react/src/components/AlertBanner/`)
-- **Node Figma** : `755:21871` ("Notifications / Alert Banners")
-- **Fichiers** : `AlertBanner.tsx`, `AlertBanner.module.css`, `AlertBanner.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/AlertBanner.stories.tsx`
-- **API** : `title` (requis), `type` (`info`|`warning`, défaut `info`), `timestamp`, `description`, `onClose` (affiche le bouton de fermeture si fourni), `children` (CTA optionnels, ex: `<Button />`) + props HTML natives (`HTMLDivElement`)
-- **Types exportés** : `AlertBannerProps`, `AlertBannerType`
-- **data-component** : `ds-br-alert-banner`
-- **data-attributes** : `data-type`
-- **Composition** : les CTA sont fournis par le consommateur via `children` (typiquement des `<Button colorScheme="info|warning" />`) — AlertBanner ne connaît pas leur contenu, cohérent avec le pattern déjà établi par `TopNav`
-- **Layout** : largeur 100% (responsive, contrairement au frame Figma fixé à 641px) ; hauteur automatique
-- **Tokens** : `color/background/notification/info|warning`, `color/border/notification/info|warning`, `color/text/notification/info|warning` (titre + description), `color/text/notification/info-timestamp|warning-timestamp`, `color/icon/notification/info|warning` (icône d'en-tête), `color/icon/notification/info-close|warning-close` (bouton fermeture), `border-radius/lg`, `spacing/x1|x2|x4`
-- **Icônes** : `InfoIcon`/`WarningIcon`/`CloseIcon` dessinées à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `TopNav` — pas d'assets Figma exportés (nécessaire pour la recoloration par type)
-- **Écart signalé vs Figma** (validé par Damien) : le contenu du Figma est du lorem ipsum générique avec des icônes de boutons placeholder (téléchargement/mail) — le composant expose donc `leftIcon`/`rightIcon`/label entièrement personnalisables via `Button`, rien n'est figé en dur
-- **Tests** : 15 tests — 15 passants
+L'API complète, les tokens CSS et les règles d'usage détaillées de chaque composant
+vivent désormais dans `specs/{atoms,molecules,organisms}/{Composant}.md` — ce fichier
+n'est plus qu'un index. Voir `COMPONENTS.md` à la racine pour la liste complète avec
+liens.
 
-### Button (`packages/react/src/components/Button/`)
-- **Node Figma** : `1506:20751` (composant "Button" — source de vérité pour tous les boutons du DS)
-- **Fichiers** : `Button.tsx`, `Button.module.css`, `Button.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/Button.stories.tsx`
-- **API** : `children` (requis), `variant` (`primary`|`secondary`|`tertiary`), `colorScheme` (`neutral`|`info`|`warning`|`success`|`error`, ignoré si `variant="tertiary"`), `leftIcon`, `rightIcon`, `disabled` + props HTML natives
-- **Types exportés** : `ButtonProps`, `ButtonVariant`, `ButtonColorScheme`
-- **data-component** : `ds-br-button`
-- **data-attributes** : `data-variant`, `data-color-scheme`, `data-icon-only` (utilisés par les tests)
-- **Tokens** : `color/button/primary|info|warning|success|error` (+ leurs `-hover`), `color/button/secondary-hover`, `color/button/focus`, `color/border/button/secondary`, `color/text/button/primary|secondary|tertiary` (+ variantes `-hover`/`-focus`), `color/icon/button/info|warning`, `border-radius/button`, `typography/button/nm|md`
-- **Règles** : `tertiary` toujours neutre (lien souligné, `colorScheme` ignoré) ; `secondary` se remplit en plein au hover (texte blanc) ; taille unique 40px (pas de variant `size`, contrairement à `MenuButton`) ; état disabled réutilise les tokens neutres génériques (le Figma source n'en définit pas de dédié par schéma de couleur)
-- **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur = 40px) via la classe `iconOnly`, qui force `width` (le `min-width` seul ne suffisait pas : la bordure de 2px faisait dépasser la largeur naturelle du contenu au-delà du `min-width`, donnant un bouton ovale de ~43px de large)
-- **Composant distinct de `MenuButton`** (plus ancien, utilisé par `TopNav`) — les deux coexistent intentionnellement, périmètres différents
-- **Tests** : 25 tests — 25 passants
+| Niveau | Composants |
+|---|---|
+| **Atomes** (`packages/react/src/components/atoms/`) | `Button`, `MenuButton`, `FrameLogo`, `LogoCompanies` |
+| **Molécules** (`packages/react/src/components/molecules/`) | `AlertBanner`, `DropdownMenu`, `DropdownMenuButton`, `ProjectCardDescription` |
+| **Organismes** (`packages/react/src/components/organisms/`) | `DropdownMenuTrigger`, `TopNav`, `ProjectBentoCard` |
 
-### MenuButton (`packages/react/src/components/MenuButton/`)
-- **Commit** : `7745697`
-- **Fichiers** : `MenuButton.tsx`, `MenuButton.module.css`, `MenuButton.test.tsx`, `MenuButton.figma.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/MenuButton.stories.tsx`
-- **API** : `children` (requis), `variant` (`contained`|`outlined`), `colorScheme` (`default`|`light`|`dark`), `size` (`sm`|`nm`|`md`), `leftIcon`, `rightIcon`, `disabled` + props HTML natives
-- **Types exportés** : `MenuButtonProps`, `MenuButtonVariant`, `MenuButtonColorScheme`, `MenuButtonSize`
-- **data-component** : `ds-br-menu-button`
-- **Tokens** : `color/menu-button/idle|hovered|hovered-black|disabled`, `color/border/menu-button/contained|outlined-white|outlined-black|focus|disabled`, `color/text/menu-button/contained|outline-white|outline-black|disabled`, `color/icon/menu-button/contained|outline-white|outline-black|disabled` (namespace `menu-button` — **renommé côté Figma** début pour distinguer du composant `Button`, qui garde le namespace générique `button`), `border-radius/button`, `typography/button/sm` (`font-size` 12px, partage le `font-family` de `nm`), `typography/button/nm` (`font-family` + `font-size` 14px), `typography/button/md` (`font-family` + `font-size` 16px)
-- **Padding** : sm/nm → 8px vertical / 12px horizontal (`--sizing-x3`), md → 8px vertical / 14px horizontal (`--spacing-x3-5`)
-- **Point relevé (non modifié)** : le Figma source ne montre plus de `min-width` spécifique en `md` (semble uniforme à 40px comme `sm`/`nm`) alors que notre CSS garde `min-width: 56px` (`--sizing-x14`) pour `md` — non touché pour ne pas risquer une régression visuelle sur `TopNav`/`DropdownMenuTrigger` (déjà validés) ; à confirmer avec Damien si c'est intentionnel
-- **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur) via la classe `iconOnly` — expose `data-icon-only` (`true`/`false`)
-- **Tests** : 22 tests — 22 passants
-
-### FrameLogo (`packages/react/src/components/FrameLogo/`)
-- **Commit** : `49a78d7`
-- **Fichiers** : `FrameLogo.tsx`, `FrameLogo.module.css`, `FrameLogo.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/FrameLogo.stories.tsx`
-- **API** : `src` (requis), `alt` (défaut `''`) + props HTML natives (`HTMLDivElement`)
-- **Tokens** : `--sizing-x6` (24×24px), `--border-radius-sm` (4px), `--color-neutral-100` (fond fallback), `--elevation-1-*` (key + ambient shadow)
-- **Tests** : 8 tests — 8 passants
-
-### DropdownMenu (`packages/react/src/components/DropdownMenu/`)
-- **Commit** : `36b8093`
-- **Fichiers** : `DropdownMenu.tsx`, `DropdownMenu.module.css`, `DropdownMenu.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/DropdownMenu.stories.tsx`
-- **API** : `children` (requis), `className` + props HTML natives (`HTMLDivElement`), `role="menu"` natif
-- **Tokens** : `--color-neutral-100` (fond), `--color-neutral-300` (bordure 0.5px solid), `--border-radius-lg` (border-radius)
-- **Layout** : flex column, gap 8px, padding 8px, align-items **stretch** (les enfants remplissent la largeur du menu)
-- **Tests** : 7 tests — 7 passants
-
-### LogoCompanies (`packages/react/src/components/LogoCompanies/`)
-- **Fichiers** : `LogoCompanies.tsx`, `LogoCompanies.module.css`, `LogoCompanies.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/LogoCompanies.stories.tsx`
-- **API** : `company` (`bpce`|`conseil-constitutionnel`|`odaptos`|`ibp`|`vinci`|`tidal`|`squared-icon`|`steam`, défaut `squared-icon`), `size` (`32`|`16`|`12`|`8`, défaut `32`) + props HTML natives (`HTMLDivElement`)
-- **Accessibilité** : `role="img"` + `aria-label` auto-généré depuis le nom de la compagnie, logo `<img>` avec `aria-hidden="true"`
-- **data-attributes** : `data-company`, `data-size`
-- **Tests** : 20 tests — 20 passants
-
-### DropdownMenuButton (`packages/react/src/components/DropdownMenuButton/`)
-- **Commit** : `63a6751`
-- **Fichiers** : `DropdownMenuButton.tsx`, `DropdownMenuButton.module.css`, `DropdownMenuButton.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/DropdownMenuButton.stories.tsx`
-- **API** : `children` (requis), `company` (type `LogoCompany` — toutes les valeurs acceptées, accent couleur seulement pour `odaptos`|`bpce`|`ibp`), `src` (URL logo custom, ignoré si `company` fourni), `alt` (défaut `''`), `rightIcon` (booléen, icône lien externe), `activated` (booléen, item sélectionné), `disabled` + props HTML natives (`HTMLButtonElement`)
-- **Tokens** : `--spacing-component-sm` (gap + padding), `--sizing-x10` (hauteur), `--border-radius-dropdown-menu-button`, couleurs accent par compagnie (`--color-deep-sea-*`, `--color-maroon-flush-*`, `--color-purple-mountain-*`), `typography/dropdown-menu-button` (`font-family` + `font-size` 16px)
-- **Layout** : flex row, `width: 100%` (responsive — remplit le DropdownMenu), hauteur fixe via `--sizing-x10`
-- **data-attributes** : `data-activated`, `data-company`
-- **Tests** : 20 tests — 20 passants
-
-### DropdownMenuTrigger (`packages/react/src/components/DropdownMenuTrigger/`)
-- **Commit** : `1d457c9`
-- **Fichiers** : `DropdownMenuTrigger.tsx`, `DropdownMenuTrigger.module.css`, `DropdownMenuTrigger.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/DropdownMenuTrigger.stories.tsx`
-- **API** : `children` (requis), `triggerLabel` (requis), `triggerLeftIcon`, `triggerRightIcon`, `triggerVariant` (`contained`|`outlined`, défaut `contained`), `triggerColorScheme` (`default`|`light`|`dark`, défaut `default`), `triggerSize` (`nm`|`md`, défaut `nm`), `open` (mode contrôlé), `onOpenChange` + props HTML natives (`HTMLDivElement`)
-- **État** : géré en interne (uncontrolled) ou via `open`/`onOpenChange` (controlled).
-- **Interactions** :
-  - `mouseenter` container → ouvre immédiatement
-  - `mouseleave` container → ferme après **150ms** (timer annulable si re-enter avant expiration)
-  - `onFocus` trigger → ouvre (accessibilité clavier, WCAG 1.4.13)
-  - `onBlur` container → ferme après 150ms si le focus quitte la zone
-  - Clic trigger → ouvre uniquement (**pas de toggle** — évite la fermeture accidentelle en hover)
-  - Escape / clic extérieur → fermeture immédiate, timer annulé
-- **Dead zone** : inexistante — le `gap: 4px` entre trigger et menu est à l'intérieur du container ; `mouseenter`/`mouseleave` sont écoutés sur le container, pas sur les enfants
-- **Animation** : rendu permanent du menu piloté par `aria-hidden` (pas de montage/démontage React). Entrée 200ms `cubic-bezier(0.16, 1, 0.3, 1)` (expo-out), sortie 120ms `cubic-bezier(0.4, 0, 1, 1)` (ease-in). `opacity` + `translateY(-6px→0)`. `visibility` délayée pour exclure le menu fermé du tab order et des lecteurs d'écran.
-- **Layout** : inline-flex column, gap 4px, position relative
-- **data-attributes** : `data-state` (`open`|`closed`)
-- **Tests** : 24 tests — 24 passants
-
-### TopNav (`packages/react/src/components/TopNav/`)
-- **Fichiers** : `TopNav.tsx`, `TopNav.module.css`, `TopNav.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/TopNav.stories.tsx`
-- **API** : `children` (requis, contenu du menu déroulant "Sélection projets"), `project` (`odaptos`|`bpce`|`ibp`|`opco-atlas`|`conseil-constitutionnel`, absent = état homepage), `title` (requis si `project` fourni), `subtitle`, `onBackClick` + props HTML natives (`HTMLElement`, racine `<nav>`)
-- **Composition** : réutilise `MenuButton` (bouton retour, `outlined`/`light`/`md`) et `DropdownMenuTrigger` (sélecteur de projets, `triggerSize="md"`) — le contenu du dropdown est fourni par le consommateur via `children`, TopNav ne connaît pas la liste des projets
-- **États** : homepage (pas de `project`) → pas de bouton retour ni titre, trigger aligné à droite ; page projet (`project` fourni) → fond coloré, bouton retour "Accueil", titre + sous-titre
-- **Tokens** : `color/background/projects/*`, `color/text/nav-bar/*` (titre et sous-titre — même couleur pour les deux)
-- **data-attributes** : `data-project` (sur la pilule, absent en homepage)
-- **Tests** : 12 tests — 12 passants
-
-### ProjectCardDescription (`packages/react/src/components/ProjectCardDescription/`)
-- **Node Figma** : `1902:22312` ("Project-Cards-Description")
-- **Fichiers** : `ProjectCardDescription.tsx`, `ProjectCardDescription.module.css`, `ProjectCardDescription.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/ProjectCardDescription.stories.tsx`
-- **API** : `children` (requis, titre du projet — support multi-lignes), `project` (requis), `year` (requis), `category` (requis) + props HTML natives (`HTMLDivElement`)
-- **Tokens** : `--color-background-projects-body`, `--color-neutral-900` (texte), `--typography-font-family-sans`, `--typography-font-size-base|sm`, `--typography-font-weight-medium|regular`, `--spacing-x4`, `--border-radius-lg` (coins bas uniquement)
-- **Layout** : **largeur 100% (responsive)**, **hauteur automatique** (décision Damien — le titre s'affiche sur 2 lignes par design, une hauteur figée à 120px comme dans le frame Figma tronquerait la catégorie) ; coins bas arrondis à 12px, coins hauts carrés
-- **Largeur responsive — corrigée après signalement de Damien** : le composant avait initialement une largeur fixe (`276px`). Le JSX Figma du panneau de description révélé par `ProjectBentoCard` au survol utilise `left-[-1px] right-[-1px]` (remplit son conteneur), jamais une largeur figée — vrai aussi pour les cartes qui ne s'agrandissent pas (BPCE/iBP), juste invisible puisque leur conteneur reste à 276px. Passé à `width: 100%` ; la story Storybook fixe un wrapper à 276px via un `decorator` pour reproduire l'usage autonome par défaut. Une carte plus large qu'un autre composant DS révèle parfois un bug ailleurs — pas la peine de deviner, vérifier le node Figma exact.
-- **Hauteur trop élevée — corrigée après signalement de Damien** : le composant rendait à **148px** réels alors que le Figma en spécifie **120px** (le titre + le nom du projet/année/catégorie utilisent `line-height` 24px/18px qui, contrairement au rendu Figma via `text-box-trim`, ne se compresse pas). Corrigé en 2 temps :
-  1. **Repli universel** (tous navigateurs) : `line-height: 1` sur project/year/category (déjà un précédent dans `MenuButton`) — ramène à 130px, sans risque de troncature
-  2. **Amélioration progressive** : ajout de `text-box-trim: trim-both` + `text-box-edge: cap alphabetic` sur les 4 textes (project/year/title/category), la même technique que Figma — ramène à **114px** dans les navigateurs qui le supportent (Chrome 130+ au moment de l'écriture), ignoré silencieusement ailleurs (repli à 130px, jamais de rupture). Vérifié avec un titre long (2 lignes) dans `ProjectBentoCard` (qui a `overflow: hidden`) : aucun texte coupé.
-- **Écarts signalés vs Figma** (validés par Damien) : couleur de texte non liée à une variable Figma (mappée sur `--color-neutral-900`, pas de token noir pur) ; poids de police `Light`/`Medium` variable sans équivalent exact (mappés sur `regular`/`medium`)
-- **Tests** : 7 tests — 7 passants
-
-### ProjectBentoCard (`packages/react/src/components/ProjectBentoCard/`)
-- **Node Figma** : `1759:22825` ("Projects-Bento-Cards")
-- **Fichiers** : `ProjectBentoCard.tsx`, `ProjectBentoCard.module.css`, `ProjectBentoCard.test.tsx`, `index.ts`
-- **Story** : `packages/storybook/src/stories/components/ProjectBentoCard.stories.tsx`
-- **API** : `project` (requis, `odaptos`|`bpce`|`ibp`|`conseil-constitutionnel`|`cv` — détermine la couleur d'accent au survol), `shape` (`square`|`rectangle`, défaut `square`), `expandOnHover` (booléen, défaut `false` — voir ci-dessous), `description` (optionnel, typiquement un `<ProjectCardDescription />` révélé au survol/focus), `children` (requis, contenu visuel idle de la carte), `hoverChildren` (optionnel, contenu visuel alternatif — voir ci-dessous) + props HTML natives (`HTMLDivElement`)
-- **Types exportés** : `ProjectBentoCardProps`, `ProjectBentoCardProject`, `ProjectBentoCardShape`
-- **data-component** : `ds-br-project-bento-card`
-- **data-attributes** : `data-project`, `data-shape`, `data-expand-on-hover`, `data-has-hover-visual`
-- **Composition** : réutilise `ProjectCardDescription` comme panneau de description révélé au survol — ne pas dupliquer sa logique ; le contenu visuel (image, illustration) est fourni par le consommateur via `children`, le composant ne gère aucun asset
-- **`hoverChildren` — visuel alternatif en fondu enchaîné (crossfade), distinct du repositionnement** : prop optionnelle, même mécanique que `description` (toujours rendue dans le DOM, révélée en `opacity` au survol/focus, `children` s'estompe en retour via la classe `hasHoverVisual`). À utiliser uniquement quand le Figma source montre un **contenu réellement différent** entre idle et hover (ex: Odaptos où l'image disparaît au profit de la description). **Ne pas confondre avec un simple repositionnement/redimensionnement des mêmes éléments** (cas de Conseil constitutionnel, voir story `FormatRectangle` — le mockup téléphone/laptop est le même visuel aux deux états, seule sa position/taille change ; implémenté via une composition dédiée avec transition CSS `left/top/width/height` pilotée par `:hover`/`:focus-within` sur le composant lui-même, pas via `hoverChildren`). Défaut : absent → aucun changement (zéro régression pour les cartes dont le contenu visuel n'est pas encore arrêté, ex: BPCE/iBP au moment de l'écriture).
-- **Assets Figma manquants — vidéos, pas des images statiques** : pour la carte Conseil constitutionnel, les zones d'écran (téléphone ET ordinateur portable) sont vides dans les assets exportables par `get_design_context`/`get_metadata` — les layers concernés s'appellent explicitement `[Mobile]Home_page_record 1` et `Conseil_Constitutionnel_Clip_Accueil`, confirmant qu'il s'agit d'enregistrements vidéo prévus pour le site réel, pas d'un problème d'export. Remplacé par un fond neutre (`--color-neutral-200`) en attendant que Damien fournisse la vidéo. Composition dédiée : `ProjectBentoCard.conseilConstitutionnel.tsx`/`.module.css` (packages/storybook), assets réels (mockup téléphone + ordinateur portable, SVG/PNG) téléchargés dans `packages/storybook/src/stories/components/assets/project-bento-card/`.
-- **`expandOnHover` — comportement non uniforme, vérifié variante par variante dans le Figma source** : sur les 5 variantes (`Shape × Project`), seules **2 s'agrandissent** réellement au survol (276px → 576px de large) — `Odaptos` (square) et `Conseil constitutionnel` (rectangle). `BPCE`, `iBP` et `CV` restent à taille fixe et ne changent que de couleur (+ révèlent leur description pour BPCE/iBP, transforment leur illustration pour CV). **Erreur initiale corrigée** : la première implémentation agrandissait toutes les cartes uniformément — à vérifier au cas par cas dans Figma avant d'assumer un comportement identique entre variantes d'un même composant.
-- **Interaction/Animation** : au survol (`:hover`) ou focus d'un enfant (`:focus-within`), la bordure passe à `--color-border-bento-cards-hovered` et le fond prend la couleur du projet (toutes variantes) ; si `expandOnHover`, la largeur passe en plus à 576px (transition `width` 150ms ease-out — exception documentée à la règle DS "ne jamais animer les propriétés de layout" : ici la largeur doit changer réellement pour révéler du contenu, un `transform: scale()` aurait étiré le texte de la description) ; si `description` est fourni, il apparaît en fondu + léger déplacement vertical (opacity + transform, conforme à la règle DS motion) ; `prefers-reduced-motion` réduit toutes les transitions à 1ms
-- **Aucune donnée de motion Figma** : `get_motion_context` renvoie un tableau vide pour ce composant (idle/hovered sont de simples variantes, pas une transition "Smart Animate" configurée) — la transition CSS ci-dessus a été choisie pour être cohérente avec la convention déjà établie dans `Button`/`MenuButton` (150ms ease-out), pas extraite de Figma. Validé avec Damien.
-- **Accessibilité** : le survol au clavier nécessite un enfant focusable (ex: envelopper la carte dans un lien) — `:focus-within` seul ne suffit pas si la carte ne contient aucun élément focusable ; à documenter pour les consommateurs
-- **Positionnement obligatoire** : ce composant doit être utilisé dans un conteneur `position: relative` avec chaque carte en `position: absolute` (comme la grille bento réelle du Figma). En flux normal (flex/grid), l'agrandissement d'une carte `expandOnHover` pousse les cartes voisines et leur vole le survol (bug reproduit et corrigé dans la story Storybook)
-- **Écart signalé vs Figma, validé par Damien** : la couleur `color/background/projects/conseil-constitutionnel` avait dérivé côté Figma (`#5bdb50` vs `#32c126` chez nous) — mise à jour globalement, y compris pour `TopNav` qui partage ce token
-- **Tests** : 15 tests — 15 passants
+Classification : un **atome** est un élément indivisible. Une **molécule** assemble des
+atomes en une unité fonctionnelle précise (ex: `DropdownMenuButton` = logo + texte +
+icône). Un **organisme** compose au moins une molécule et/ou plusieurs
+atomes/organismes pour former une section d'interface complète (ex: `TopNav` compose
+`MenuButton` + `DropdownMenuTrigger`). Classer tout nouveau composant dans cette
+hiérarchie dès sa création.
 
 ---
 
@@ -460,10 +339,9 @@ Ne jamais force push.
 
 Avant toute génération d'interface ou de maquette Figma, consulter `COMPONENTS.md`.
 
-Ce fichier liste :
-- les composants React disponibles avec leur API exacte
-- les node IDs Figma correspondants
-- l'ensemble des tokens CSS à utiliser
+Ce fichier liste les composants React disponibles (classés atomes/molécules/organismes)
+avec un lien vers leur fiche détaillée dans `specs/{atoms,molecules,organisms}/` : API
+exacte, node ID Figma, tokens CSS à utiliser, règles d'usage.
 
 Règle absolue : aucune valeur arbitraire (couleur hex, px hardcodé, etc.) si un token existe.
 
@@ -479,7 +357,7 @@ Décrire l'écran en langage naturel à Claude.
 Claude génère le prompt structuré pour Claude Code.
 
 ### Étape 2 — Génération du code (Claude Code)
-Claude Code lit COMPONENTS.md comme référence unique et produit :
+Claude Code lit `COMPONENTS.md` puis les fiches `specs/` des composants concernés, et produit :
 - `packages/storybook/src/stories/screens/NomEcran.tsx`
 - `packages/storybook/src/stories/screens/NomEcran.module.css`
 - `packages/storybook/src/stories/screens/NomEcran.stories.tsx`
@@ -520,11 +398,11 @@ Le skill `.claude/skills/ds-br-screen/` doit être chargé **avant tout travail 
 ### Ordre de chargement obligatoire
 
 1. Lire `.claude/skills/ds-br-screen/SKILL.md`
-2. Lire les références obligatoires :
-   - `reference/typography.md`
-   - `reference/color-and-contrast.md`
-   - `reference/spatial-design.md`
-3. Lire les références additionnelles selon le contexte (motion, interaction, ux-writing)
+2. Lire les patterns obligatoires dans `specs/patterns/` :
+   - `specs/patterns/typography.md`
+   - `specs/patterns/color-and-contrast.md`
+   - `specs/patterns/spatial-design.md`
+3. Lire les patterns additionnels selon le contexte (motion, interaction, ux-writing)
 
 ### Après toute création ou modification
 

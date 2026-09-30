@@ -9,14 +9,14 @@ description: Génère des écrans et interfaces UI en utilisant exclusivement le
 
 Avant d'écrire la moindre ligne de code, lis dans cet ordre :
 
-1. `COMPONENTS.md` à la racine — contrat des composants et tokens disponibles
-2. Les références de ce skill selon le type d'écran :
-   - `reference/typography.md` — toujours
-   - `reference/color-and-contrast.md` — toujours
-   - `reference/spatial-design.md` — toujours
-   - `reference/motion-design.md` — si animations
-   - `reference/interaction-design.md` — si formulaires ou états interactifs
-   - `reference/ux-writing.md` — si labels, erreurs, contenus
+1. `COMPONENTS.md` à la racine — index des composants, pointe vers `specs/atoms/`, `specs/molecules/`, `specs/organisms/` pour le détail API/tokens
+2. Les patterns de composition dans `specs/patterns/` selon le type d'écran :
+   - `specs/patterns/typography.md` — toujours
+   - `specs/patterns/color-and-contrast.md` — toujours
+   - `specs/patterns/spatial-design.md` — toujours
+   - `specs/patterns/motion-design.md` — si animations
+   - `specs/patterns/interaction-design.md` — si formulaires ou états interactifs
+   - `specs/patterns/ux-writing.md` — si labels, erreurs, contenus
 
 Ne pas passer à la suite sans avoir lu ces fichiers.
 
@@ -77,7 +77,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 ## Directives esthétiques
 
 ### Typographie
-→ *Consulter `reference/typography.md` pour les échelles, pairages et stratégies de chargement.*
+→ *Consulter `specs/patterns/typography.md` pour les échelles, pairages et stratégies de chargement.*
 
 **À faire :**
 - Varier les graisses et tailles pour créer une hiérarchie visuelle claire
@@ -90,7 +90,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Tailles trop proches (14px, 15px, 16px, 18px) — hiérarchie floue
 
 ### Couleur et contraste
-→ *Consulter `reference/color-and-contrast.md` pour les tokens DS, accessibilité et mode sombre.*
+→ *Consulter `specs/patterns/color-and-contrast.md` pour les tokens DS, accessibilité et mode sombre.*
 
 **À faire :**
 - S'engager dans une palette cohérente — couleurs dominantes avec accents tranchants
@@ -103,7 +103,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Glassmorphisme décoratif — flou et transparence sans intention
 
 ### Layout et espace
-→ *Consulter `reference/spatial-design.md` pour les grilles, rythme et tokens spacing.*
+→ *Consulter `specs/patterns/spatial-design.md` pour les grilles, rythme et tokens spacing.*
 
 **À faire :**
 - Créer du rythme visuel par la variation des espacements — groupements serrés, séparations généreuses
@@ -126,7 +126,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Modales sauf vraie nécessité — paresseux
 
 ### Motion
-→ *Consulter `reference/motion-design.md` pour timing, easing et reduced motion.*
+→ *Consulter `specs/patterns/motion-design.md` pour timing, easing et reduced motion.*
 
 **À faire :**
 - Concentrer l'animation sur les moments à fort impact : un seul reveal orchestré à l'entrée de page
@@ -139,7 +139,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Ignorer `prefers-reduced-motion`
 
 ### Interaction
-→ *Consulter `reference/interaction-design.md` pour les formulaires, focus et états de chargement.*
+→ *Consulter `specs/patterns/interaction-design.md` pour les formulaires, focus et états de chargement.*
 
 **À faire :**
 - Concevoir tous les états : default, hover, focus, active, disabled, loading, error, success
@@ -151,7 +151,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Tous les boutons en contained — la hiérarchie des actions compte
 
 ### UX Writing
-→ *Consulter `reference/ux-writing.md` pour les labels, erreurs et états vides.*
+→ *Consulter `specs/patterns/ux-writing.md` pour les labels, erreurs et états vides.*
 
 **À faire :**
 - Contenu réaliste en français — noms plausibles, messages d'erreur humains et précis
@@ -211,8 +211,8 @@ Trois filtres dans l'ordre :
 
 ## Références
 
-- Composants + tokens : `COMPONENTS.md` à la racine
-- Références de ce skill : `reference/`
+- Composants + tokens : `COMPONENTS.md` à la racine, détail dans `specs/{atoms,molecules,organisms}/`
+- Patterns de composition : `specs/patterns/`
 - Commandes disponibles : `/audit-screen`, `/critique-screen`, `/polish-screen`
 - Écrans existants : `packages/storybook/src/stories/screens/`
 - Source des tokens : `packages/tokens/build/css/`
