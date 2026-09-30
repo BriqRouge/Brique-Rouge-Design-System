@@ -5,6 +5,10 @@ const meta = {
   title: 'Composants/ProjectCardDescription',
   component: ProjectCardDescription,
   tags: ['autodocs'],
+  // Largeur 100% (responsive) — le composant s'adapte à son conteneur (ex:
+  // ProjectBentoCard au survol). Le wrapper ci-dessous fixe 276px pour
+  // reproduire l'usage autonome par défaut vu dans le Figma source.
+  decorators: [(Story) => <div style={{ width: '276px' }}><Story /></div>],
   parameters: {
     layout: 'centered',
     design: {
