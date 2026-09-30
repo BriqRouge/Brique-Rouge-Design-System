@@ -50,9 +50,19 @@ Vitest + Testing Library + jest-axe
 design-system/
 ├── packages/
 │   ├── tokens/          # Design tokens → CSS Variables + JSON
-│   ├── react/           # Composants React
+│   ├── react/           # Composants React (atoms/molecules/organisms)
 │   └── storybook/       # Documentation et vitrine
+├── specs/               # Référence LLM : foundations, tokens, composants, patterns
+│   ├── foundations/     # Généré — valeurs par catégorie de token
+│   ├── tokens/          # Généré — catalogue --css-var: valeur
+│   ├── atoms/           # Fiche par composant atome
+│   ├── molecules/       # Fiche par composant molécule
+│   ├── organisms/       # Fiche par composant organisme
+│   └── patterns/        # Règles de composition (typo, couleur, spacing, motion…)
+├── scripts/
+│   └── token-audit.mjs  # CI — détecte les couleurs hardcodées
 ├── CLAUDE.md
+├── COMPONENTS.md        # Index des composants → specs/
 ├── turbo.json
 ├── pnpm-workspace.yaml
 └── tsconfig.json
@@ -290,7 +300,7 @@ Ces décisions sont prises et ne se remettent pas en question sauf demande expli
 | Tokens | Style Dictionary v4, `usesDtcg: true` |
 | Nomenclature tokens | Préfixe x (`x10`, `x12`…) — alignée sur Figma |
 | Figma | Source de vérité absolue |
-| Code Connect | Prévu — à mettre en place après stabilisation des composants |
+| Code Connect | Fait — `figma.config.json` configuré, premier mapping (`MenuButton.figma.tsx`) en place |
 | Component tokens | Intentionnellement minimaliste — pas de sur-tokenisation |
 
 ---
@@ -300,7 +310,8 @@ Ces décisions sont prises et ne se remettent pas en question sauf demande expli
 1. Prochain composant — **à définir** avec claude.ai (node Figma à renseigner)
 2. ~~**Code Connect** — mapping Figma ↔ React~~ ✅ **Fait** (`figma.config.json` configuré, scripts figma en place)
 3. ~~**GitHub Actions** CI/CD~~ ✅ **Fait** (`ci.yml` + `storybook.yml`)
-4. **Automatisation progressive du workflow** — à définir selon les besoins réels (ex : sync tokens Figma, previews PR Storybook, déclenchement Code Connect automatique)
+4. ~~**Sync tokens Figma → doc**~~ ✅ **Fait** (`generate-specs.mjs` régénère `specs/foundations/` + `specs/tokens/` à chaque build, vérifié en CI)
+5. **Automatisation progressive du workflow** — à définir selon les besoins réels (ex : previews PR Storybook, déclenchement Code Connect automatique)
 
 ---
 

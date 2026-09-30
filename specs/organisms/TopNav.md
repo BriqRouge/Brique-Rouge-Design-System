@@ -34,8 +34,8 @@ Réutilise `MenuButton` (atome — bouton retour, `outlined`/`light`/`md`) et `D
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `color/background/projects/{project}` | — | Fond de la pilule (un par projet) |
-| `color/text/nav-bar/{project}` | — | Couleur du titre **et** du sous-titre (un par projet — même couleur pour les deux) |
+| `--color-background-projects-{project}` | — | Fond de la pilule (un par projet) |
+| `--color-text-nav-bar-{project}` | — | Couleur du titre **et** du sous-titre (un par projet — même couleur pour les deux) |
 | `--color-border-menu-button-outlined-white`, `--color-text-menu-button-outline-white` | — | Bouton retour (`MenuButton` outlined/light/md) |
 | `--spacing-x10`, `--spacing-x12`, `--spacing-x6` | `40px`, `48px`, `24px` | Padding du conteneur |
 | `--spacing-component-md`, `--spacing-component-lg`, `--spacing-component-sm` | `16px`, `24px`, `8px` | Padding/gap de la pilule |
@@ -45,7 +45,7 @@ Réutilise `MenuButton` (atome — bouton retour, `outlined`/`light`/`md`) et `D
 ## Règles d'usage
 
 - **États** : homepage (pas de `project`) → pas de bouton retour ni titre, trigger aligné à droite ; page projet (`project` fourni) → fond coloré, bouton retour "Accueil", titre + sous-titre
-- Titre et sous-titre partagent la même couleur (`color/text/nav-bar/{project}`), seul le `font-weight` diffère (medium vs regular)
+- Titre et sous-titre partagent la même couleur (`--color-text-nav-bar-{project}`), seul le `font-weight` diffère (medium vs regular)
 
 ## Tests
 

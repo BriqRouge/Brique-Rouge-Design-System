@@ -58,7 +58,7 @@ interface ButtonProps {
 - `tertiary` : lien souligné, sans fond ni bordure — **toujours neutre**, `colorScheme` est ignoré
 - `colorScheme` (`info`/`warning`/`success`/`error`) s'applique à `primary` et `secondary`, jamais à `tertiary`
 - Taille unique (40px de hauteur) — pas de variant `size` comme sur `MenuButton`
-- État disabled : réutilise les tokens neutres génériques (`color/background/button/disabled` etc.) — le Figma source ne définit pas d'état disabled dédié par schéma de couleur
+- État disabled : réutilise les tokens neutres génériques (`--color-background-button-disabled` etc.) — le Figma source ne définit pas d'état disabled dédié par schéma de couleur
 - Toujours fournir `aria-label` si le bouton ne contient que des icônes — passer `children={null}`
 - **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur = 40px) via la classe `iconOnly`, qui force `width` (le `min-width` seul ne suffisait pas : la bordure de 2px faisait dépasser la largeur naturelle du contenu au-delà du `min-width`, donnant un bouton ovale de ~43px de large)
 - Ne pas confondre avec `MenuButton` : composant distinct, plus ancien, utilisé notamment par `TopNav` (bouton retour, trigger de dropdown) — les deux composants coexistent intentionnellement, périmètres différents

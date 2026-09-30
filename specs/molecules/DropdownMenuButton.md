@@ -29,7 +29,7 @@ interface DropdownMenuButtonProps extends React.HTMLAttributes<HTMLButtonElement
 - `--sizing-x10` (hauteur)
 - `--border-radius-dropdown-menu-button`
 - Couleurs accent par compagnie : `--color-deep-sea-*`, `--color-maroon-flush-*`, `--color-purple-mountain-*`
-- `typography/dropdown-menu-button` (`font-family` + `font-size` 16px)
+- `--typography-dropdown-menu-button-font-family` / `-font-size` (16px)
 
 ## Règles d'usage
 
