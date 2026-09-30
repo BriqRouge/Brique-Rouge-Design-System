@@ -79,6 +79,33 @@ describe('ProjectBentoCard — rendu', () => {
     expect(screen.getByText('Product Design')).toBeInTheDocument();
   });
 
+  it('data-has-hover-visual="false" par défaut', () => {
+    const { container } = render(<ProjectBentoCard project="bpce">Contenu</ProjectBentoCard>);
+    expect(container.querySelector('[data-component="ds-br-project-bento-card"]')).toHaveAttribute(
+      'data-has-hover-visual',
+      'false'
+    );
+  });
+
+  it("n'affiche pas de visuel alternatif si hoverChildren non fourni", () => {
+    render(<ProjectBentoCard project="bpce">Contenu idle</ProjectBentoCard>);
+    expect(screen.queryByText('Contenu hover')).not.toBeInTheDocument();
+  });
+
+  it('rend hoverChildren (toujours présent dans le DOM, révélé en CSS au survol) et expose data-has-hover-visual="true"', () => {
+    const { container } = render(
+      <ProjectBentoCard project="conseil-constitutionnel" hoverChildren="Contenu hover">
+        Contenu idle
+      </ProjectBentoCard>
+    );
+    expect(screen.getByText('Contenu idle')).toBeInTheDocument();
+    expect(screen.getByText('Contenu hover')).toBeInTheDocument();
+    expect(container.querySelector('[data-component="ds-br-project-bento-card"]')).toHaveAttribute(
+      'data-has-hover-visual',
+      'true'
+    );
+  });
+
   it('ajoute une className supplémentaire', () => {
     const { container } = render(
       <ProjectBentoCard project="odaptos" className="custom">
@@ -110,6 +137,25 @@ describe('ProjectBentoCard — accessibilité', () => {
         }
       >
         <img src="/screenshot.png" alt="Aperçu du projet iBP" />
+      </ProjectBentoCard>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('avec hoverChildren : aucune violation axe', async () => {
+    const { container } = render(
+      <ProjectBentoCard
+        project="conseil-constitutionnel"
+        shape="rectangle"
+        expandOnHover
+        hoverChildren={<img src="/screenshot-hover.png" alt="Aperçu agrandi du projet Conseil constitutionnel" />}
+        description={
+          <ProjectCardDescription project="Conseil constitutionnel" year="2024" category="Product Design">
+            Conception de l&apos;expérience utilisateur du site web
+          </ProjectCardDescription>
+        }
+      >
+        <img src="/screenshot.png" alt="Aperçu du projet Conseil constitutionnel" />
       </ProjectBentoCard>
     );
     expect(await axe(container)).toHaveNoViolations();

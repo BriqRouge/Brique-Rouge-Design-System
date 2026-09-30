@@ -21,14 +21,36 @@ interface ProjectBentoCardProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: React.ReactNode;
   /** Contenu visuel de la carte (image, illustration…) */
   children: React.ReactNode;
+  /**
+   * Contenu visuel alternatif révélé au survol/focus, en fondu enchaîné avec
+   * `children` (même mécanique que `description`). Optionnel — certaines
+   * variantes du Figma source affichent un visuel différent au survol
+   * (ex: Conseil constitutionnel, Odaptos), d'autres gardent le même visuel
+   * (leur contenu visuel n'est pas encore arrêté). Sans effet si non fourni.
+   */
+  hoverChildren?: React.ReactNode;
 }
 
 const ProjectBentoCard = forwardRef<HTMLDivElement, ProjectBentoCardProps>(
   (
-    { project, shape = 'square', expandOnHover = false, description, children, className, ...props },
+    {
+      project,
+      shape = 'square',
+      expandOnHover = false,
+      description,
+      children,
+      hoverChildren,
+      className,
+      ...props
+    },
     ref
   ) => {
-    const classes = [styles.card, expandOnHover ? styles.expandOnHover : '', className]
+    const classes = [
+      styles.card,
+      expandOnHover ? styles.expandOnHover : '',
+      hoverChildren ? styles.hasHoverVisual : '',
+      className,
+    ]
       .filter(Boolean)
       .join(' ');
 
@@ -39,10 +61,12 @@ const ProjectBentoCard = forwardRef<HTMLDivElement, ProjectBentoCardProps>(
         data-project={project}
         data-shape={shape}
         data-expand-on-hover={expandOnHover}
+        data-has-hover-visual={Boolean(hoverChildren)}
         className={classes}
         {...props}
       >
         <div className={styles.content}>{children}</div>
+        {hoverChildren && <div className={styles.hoverContent}>{hoverChildren}</div>}
         {description && <div className={styles.description}>{description}</div>}
       </div>
     );

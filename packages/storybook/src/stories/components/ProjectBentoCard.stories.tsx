@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ProjectBentoCard, ProjectCardDescription } from '@brique-rouge/react';
+import { ConseilConstitutionnelVisual } from './ProjectBentoCard.conseilConstitutionnel';
 
 const meta = {
   title: 'Composants/ProjectBentoCard',
@@ -131,12 +132,12 @@ export const SurvolezPourVoir: Story = {
 };
 
 export const FormatRectangle: Story = {
-  name: 'Format rectangle',
+  name: 'Format rectangle (Conseil constitutionnel — visuels réels)',
   args: {
     project: 'conseil-constitutionnel',
     shape: 'rectangle',
     expandOnHover: true,
-    children: placeholderVisual,
+    children: <ConseilConstitutionnelVisual />,
     description: (
       <ProjectCardDescription project="Conseil constitutionnel" year="2024" category="Product Design">
         Conception de l’expérience

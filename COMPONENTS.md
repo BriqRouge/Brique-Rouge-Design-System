@@ -261,7 +261,8 @@ interface ProjectBentoCardProps {
   shape?:         ProjectBentoCardShape;   // default: 'square'
   expandOnHover?: boolean;                 // default: false — voir Règles d'usage
   description?:   React.ReactNode;         // révélé au survol/focus — typiquement <ProjectCardDescription />
-  children:       React.ReactNode;         // requis — contenu visuel (image, illustration…)
+  children:       React.ReactNode;         // requis — contenu visuel idle de la carte
+  hoverChildren?: React.ReactNode;         // optionnel — contenu visuel alternatif, voir Règles d'usage
   className?:     string;
 }
 ```
@@ -290,3 +291,5 @@ interface ProjectBentoCardProps {
 - Transition `width` 150ms ease-out — exception documentée à la règle DS générale "n'animer que `transform`/`opacity`" : ici la largeur doit réellement changer pour révéler du contenu sans étirer le texte ; `prefers-reduced-motion` réduit la transition à 1ms
 - **Aucune donnée de motion Figma** : `get_motion_context` ne retourne rien pour ce composant — la transition ci-dessus est alignée sur la convention déjà établie dans `Button`/`MenuButton` (150ms ease-out), pas extraite de Figma
 - **Écart signalé vs Figma, validé par Damien** : la couleur `conseil-constitutionnel` avait dérivé côté Figma (`#5bdb50` vs `#32c126`) — mise à jour globalement (impacte aussi `TopNav`)
+- **`hoverChildren` vs repositionnement — deux mécaniques différentes, à ne pas confondre** : quand le Figma source montre un **contenu différent** entre idle et hover (ex: Odaptos, où l'image disparaît au profit de la description), utiliser `hoverChildren` (crossfade `opacity`, même mécanique que `description`, activé par la classe `hasHoverVisual` posée automatiquement quand la prop est fournie). Quand le Figma source montre les **mêmes éléments qui se déplacent/redimensionnent** (ex: Conseil constitutionnel — mockup téléphone + ordinateur portable identiques aux deux états, seule leur position/taille change), ne pas utiliser `hoverChildren` : passer directement la composition en `children` et transitionner `left`/`top`/`width`/`height` en CSS via `:hover`/`:focus-within` sur `[data-component="ds-br-project-bento-card"]`. Vérifier au cas par cas dans Figma (comparer les valeurs `left`/`top`/`width`/`height` entre les deux variantes idle/hover du même node) avant de choisir l'une ou l'autre — ne jamais supposer.
+- **Assets manquants dans Figma peuvent être des vidéos, pas des échecs d'export** : pour Conseil constitutionnel, les zones d'écran (téléphone et ordinateur portable) n'ont aucune image de fond dans les données retournées par `get_design_context`/`get_metadata`. Avant de conclure à un problème d'extraction, vérifier le nom des layers concernés — ici `[Mobile]Home_page_record 1` et `Conseil_Constitutionnel_Clip_Accueil` indiquent explicitement un enregistrement vidéo prévu pour le site réel, jamais fourni comme image statique côté Figma. Traiter avec un fond neutre (`--color-neutral-200`) documenté comme temporaire, plutôt que d'inventer un contenu.
