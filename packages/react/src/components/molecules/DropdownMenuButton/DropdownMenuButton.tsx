@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { LogoCompanies, type LogoCompany } from '../LogoCompanies';
+import { LogoCompanies, type LogoCompany } from '../../atoms/LogoCompanies';
 import styles from './DropdownMenuButton.module.css';
 
 interface DropdownMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

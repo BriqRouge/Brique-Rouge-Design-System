@@ -1,23 +1,23 @@
 import { forwardRef } from 'react';
 import styles from './LogoCompanies.module.css';
 
-import bpce32 from '../../assets/logos/bpce-32.png';
-import conseilConstitutionnel32 from '../../assets/logos/conseil-constitutionnel-32.png';
-import ibp32 from '../../assets/logos/ibp-32.png';
-import odaptos32 from '../../assets/logos/odaptos-32.png';
-import squaredIcon12 from '../../assets/logos/squared-icon-12.svg';
-import squaredIcon16 from '../../assets/logos/squared-icon-16.svg';
-import squaredIcon32 from '../../assets/logos/squared-icon-32.svg';
-import squaredIcon8 from '../../assets/logos/squared-icon-8.svg';
-import steam12 from '../../assets/logos/steam-12.svg';
-import steam16 from '../../assets/logos/steam-16.svg';
-import steam32 from '../../assets/logos/steam-32.svg';
-import steam8 from '../../assets/logos/steam-8.svg';
-import tidal12 from '../../assets/logos/tidal-12.svg';
-import tidal16 from '../../assets/logos/tidal-16.svg';
-import tidal32 from '../../assets/logos/tidal-32.svg';
-import tidal8 from '../../assets/logos/tidal-8.svg';
-import vinci32 from '../../assets/logos/vinci-32.png';
+import bpce32 from '../../../assets/logos/bpce-32.png';
+import conseilConstitutionnel32 from '../../../assets/logos/conseil-constitutionnel-32.png';
+import ibp32 from '../../../assets/logos/ibp-32.png';
+import odaptos32 from '../../../assets/logos/odaptos-32.png';
+import squaredIcon12 from '../../../assets/logos/squared-icon-12.svg';
+import squaredIcon16 from '../../../assets/logos/squared-icon-16.svg';
+import squaredIcon32 from '../../../assets/logos/squared-icon-32.svg';
+import squaredIcon8 from '../../../assets/logos/squared-icon-8.svg';
+import steam12 from '../../../assets/logos/steam-12.svg';
+import steam16 from '../../../assets/logos/steam-16.svg';
+import steam32 from '../../../assets/logos/steam-32.svg';
+import steam8 from '../../../assets/logos/steam-8.svg';
+import tidal12 from '../../../assets/logos/tidal-12.svg';
+import tidal16 from '../../../assets/logos/tidal-16.svg';
+import tidal32 from '../../../assets/logos/tidal-32.svg';
+import tidal8 from '../../../assets/logos/tidal-8.svg';
+import vinci32 from '../../../assets/logos/vinci-32.png';
 
 export type LogoCompany =
   | 'bpce'

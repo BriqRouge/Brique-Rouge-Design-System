@@ -1,36 +1,36 @@
-﻿export { Button } from './components/Button';
-export type { ButtonProps, ButtonVariant, ButtonColorScheme } from './components/Button';
+export { Button } from './components/atoms/Button';
+export type { ButtonProps, ButtonVariant, ButtonColorScheme } from './components/atoms/Button';
 
-export { AlertBanner } from './components/AlertBanner';
-export type { AlertBannerProps, AlertBannerType } from './components/AlertBanner';
+export { AlertBanner } from './components/molecules/AlertBanner';
+export type { AlertBannerProps, AlertBannerType } from './components/molecules/AlertBanner';
 
-export { MenuButton } from './components/MenuButton';
-export type { MenuButtonProps, MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize } from './components/MenuButton';
+export { MenuButton } from './components/atoms/MenuButton';
+export type { MenuButtonProps, MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize } from './components/atoms/MenuButton';
 
-export { FrameLogo } from './components/FrameLogo';
-export type { FrameLogoProps } from './components/FrameLogo';
+export { FrameLogo } from './components/atoms/FrameLogo';
+export type { FrameLogoProps } from './components/atoms/FrameLogo';
 
-export { LogoCompanies } from './components/LogoCompanies';
-export type { LogoCompaniesProps, LogoCompany, LogoSize } from './components/LogoCompanies';
+export { LogoCompanies } from './components/atoms/LogoCompanies';
+export type { LogoCompaniesProps, LogoCompany, LogoSize } from './components/atoms/LogoCompanies';
 
-export { DropdownMenuButton } from './components/DropdownMenuButton';
-export type { DropdownMenuButtonProps } from './components/DropdownMenuButton';
+export { DropdownMenuButton } from './components/molecules/DropdownMenuButton';
+export type { DropdownMenuButtonProps } from './components/molecules/DropdownMenuButton';
 
-export { DropdownMenu } from './components/DropdownMenu';
-export type { DropdownMenuProps } from './components/DropdownMenu';
+export { DropdownMenu } from './components/molecules/DropdownMenu';
+export type { DropdownMenuProps } from './components/molecules/DropdownMenu';
 
-export { DropdownMenuTrigger } from './components/DropdownMenuTrigger';
-export type { DropdownMenuTriggerProps } from './components/DropdownMenuTrigger';
+export { DropdownMenuTrigger } from './components/organisms/DropdownMenuTrigger';
+export type { DropdownMenuTriggerProps } from './components/organisms/DropdownMenuTrigger';
 
-export { TopNav } from './components/TopNav';
-export type { TopNavProps, TopNavProject } from './components/TopNav';
+export { TopNav } from './components/organisms/TopNav';
+export type { TopNavProps, TopNavProject } from './components/organisms/TopNav';
 
-export { ProjectCardDescription } from './components/ProjectCardDescription';
-export type { ProjectCardDescriptionProps } from './components/ProjectCardDescription';
+export { ProjectCardDescription } from './components/molecules/ProjectCardDescription';
+export type { ProjectCardDescriptionProps } from './components/molecules/ProjectCardDescription';
 
-export { ProjectBentoCard } from './components/ProjectBentoCard';
+export { ProjectBentoCard } from './components/organisms/ProjectBentoCard';
 export type {
   ProjectBentoCardProps,
   ProjectBentoCardProject,
   ProjectBentoCardShape,
-} from './components/ProjectBentoCard';
+} from './components/organisms/ProjectBentoCard';

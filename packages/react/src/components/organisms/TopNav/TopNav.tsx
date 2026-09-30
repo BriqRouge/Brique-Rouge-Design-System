@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { MenuButton } from '../MenuButton';
+import { MenuButton } from '../../atoms/MenuButton';
 import { DropdownMenuTrigger } from '../DropdownMenuTrigger';
 import styles from './TopNav.module.css';
 

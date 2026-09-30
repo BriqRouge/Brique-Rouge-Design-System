@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { describe, expect, it } from 'vitest';
 import { ProjectBentoCard } from './ProjectBentoCard';
-import { ProjectCardDescription } from '../ProjectCardDescription';
+import { ProjectCardDescription } from '../../molecules/ProjectCardDescription';
 
 describe('ProjectBentoCard — rendu', () => {
   it('affiche le contenu (children)', () => {

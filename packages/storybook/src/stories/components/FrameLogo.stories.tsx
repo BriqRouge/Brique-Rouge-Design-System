@@ -4,7 +4,7 @@ import { FrameLogo } from '@brique-rouge/react';
 const LOGO_PLACEHOLDER = 'https://placehold.co/24x24/e5e5e5/737373?text=L';
 
 const meta = {
-  title: 'Composants/FrameLogo',
+  title: 'Atomes/FrameLogo',
   component: FrameLogo,
   tags: ['autodocs'],
   parameters: {

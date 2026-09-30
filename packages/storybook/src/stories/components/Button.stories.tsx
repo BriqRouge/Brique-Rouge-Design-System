@@ -25,7 +25,7 @@ function MailIcon() {
 }
 
 const meta = {
-  title: 'Composants/Button',
+  title: 'Atomes/Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {

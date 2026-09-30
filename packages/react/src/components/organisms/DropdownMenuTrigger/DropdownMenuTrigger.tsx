@@ -1,7 +1,7 @@
 import { forwardRef, useState, useEffect, useRef, useId } from 'react';
-import { MenuButton } from '../MenuButton';
-import { DropdownMenu } from '../DropdownMenu';
-import type { MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize } from '../MenuButton';
+import { MenuButton } from '../../atoms/MenuButton';
+import { DropdownMenu } from '../../molecules/DropdownMenu';
+import type { MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize } from '../../atoms/MenuButton';
 import styles from './DropdownMenuTrigger.module.css';
 
 interface DropdownMenuTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
