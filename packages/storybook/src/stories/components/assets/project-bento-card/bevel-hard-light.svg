@@ -1,0 +1,14 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="71.6427" height="5.30275" viewBox="0 0 71.6427 5.30275" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Bevel" opacity="0.8" style="mix-blend-mode:hard-light">
+<path d="M0 0H71.6427C71.6427 3.31422 67.6625 5.30275 65.0091 5.30275H6.63358C3.98015 5.30275 0 3.31422 0 0Z" fill="#E1E2E3"/>
+<path d="M0 0H71.6427C71.6427 3.31422 67.6625 5.30275 65.0091 5.30275H6.63358C3.98015 5.30275 0 3.31422 0 0Z" fill="url(#paint0_linear_0_98)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_98" x1="71.6427" y1="5.3027" x2="0" y2="5.3027" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8A8A8A"/>
+<stop offset="0.203125" stop-color="#AAAAAA" stop-opacity="0"/>
+<stop offset="0.8125" stop-color="#AAAAAA" stop-opacity="0"/>
+<stop offset="1" stop-color="#8A8A8A"/>
+</linearGradient>
+</defs>
+</svg>

@@ -1,0 +1,126 @@
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 276px;
+  height: 276px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-bento-cards-idle);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-neutral-50);
+  transition:
+    width 150ms ease-out,
+    background-color 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.card[data-shape='rectangle'] {
+  height: 576px;
+}
+
+.card:hover,
+.card:focus-within {
+  z-index: 1;
+  border-color: var(--color-border-bento-cards-hovered);
+}
+
+.expandOnHover:hover,
+.expandOnHover:focus-within {
+  width: 576px;
+}
+
+.card[data-project='odaptos']:hover,
+.card[data-project='odaptos']:focus-within {
+  background-color: var(--color-background-projects-odaptos);
+}
+
+.card[data-project='bpce']:hover,
+.card[data-project='bpce']:focus-within {
+  background-color: var(--color-background-projects-bpce);
+}
+
+.card[data-project='ibp']:hover,
+.card[data-project='ibp']:focus-within {
+  background-color: var(--color-background-projects-ibp);
+}
+
+.card[data-project='conseil-constitutionnel']:hover,
+.card[data-project='conseil-constitutionnel']:focus-within {
+  background-color: var(--color-background-projects-conseil-constitutionnel);
+}
+
+.card[data-project='cv']:hover,
+.card[data-project='cv']:focus-within {
+  background-color: var(--color-background-projects-cv);
+}
+
+/* ─── Contenu visuel ──────────────────────────────────────────────────────── */
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.hasHoverVisual .content {
+  transition: opacity 150ms ease-out;
+}
+
+.hasHoverVisual:hover .content,
+.hasHoverVisual:focus-within .content {
+  opacity: 0;
+}
+
+/* ─── Visuel alternatif révélé au survol/focus (fondu enchaîné avec .content) ─ */
+
+.hoverContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+}
+
+.card:hover .hoverContent,
+.card:focus-within .hoverContent {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ─── Description révélée au survol/focus ────────────────────────────────── */
+
+.description {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  opacity: 0;
+  transform: translateY(var(--spacing-x2));
+  pointer-events: none;
+  transition:
+    opacity 150ms ease-out,
+    transform 150ms ease-out;
+}
+
+.card:hover .description,
+.card:focus-within .description {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .content,
+  .hoverContent,
+  .description {
+    transition-duration: 1ms;
+  }
+}

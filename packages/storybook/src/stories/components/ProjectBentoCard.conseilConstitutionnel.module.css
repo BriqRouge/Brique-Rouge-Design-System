@@ -1,0 +1,168 @@
+/*
+ * Composition du visuel "Conseil constitutionnel" (mockup ordinateur portable +
+ * mockup téléphone). Reproduit fidèlement le node Figma 1759:22826 (idle) /
+ * 1759:22840 (survol) : ce n'est PAS un changement de contenu entre idle et
+ * survol, mais les MÊMES éléments qui se repositionnent/redimensionnent —
+ * l'ordinateur portable bouge à peine, le téléphone se déplace et grandit.
+ * Transition déclenchée par l'état :hover/:focus-within de la carte parente
+ * (data-component="ds-br-project-bento-card"), pas par un état React local.
+ */
+
+.laptop {
+  position: absolute;
+  top: 142px;
+  left: 274.05px;
+  width: 490.885px;
+  height: 289px;
+  transition:
+    left 150ms ease-out,
+    top 150ms ease-out;
+}
+
+:global([data-component='ds-br-project-bento-card']):hover .laptop,
+:global([data-component='ds-br-project-bento-card']):focus-within .laptop {
+  left: 266.55px;
+  top: 142.5px;
+}
+
+.laptopShadowWrapper {
+  position: absolute;
+  bottom: -0.46%;
+  left: -1.35%;
+  right: -1.35%;
+  top: 100%;
+}
+
+.laptopShadowInset {
+  position: absolute;
+  inset: -64.13% -0.17%;
+}
+
+.laptopShadowInset img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.screenFrame {
+  position: absolute;
+  inset: 0 8.11% 2.98% 8.11%;
+}
+
+.screenFrame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.body {
+  position: absolute;
+  inset: 94.72% 0 0 0;
+}
+
+.body img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bottom {
+  position: absolute;
+  inset: 97.94% 0 0 0;
+  mix-blend-mode: multiply;
+}
+
+.bottom img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bevelHardLight {
+  position: absolute;
+  inset: 94.72% 42.7% 3.44% 42.7%;
+  mix-blend-mode: hard-light;
+}
+
+.bevelHardLight img,
+.bevelMultiply img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bevelMultiply {
+  position: absolute;
+  inset: 94.72% 42.7% 3.44% 42.7%;
+  mix-blend-mode: multiply;
+}
+
+.screenClip {
+  position: absolute;
+  inset: 5.05% 10% 10.09% 10%;
+  border-radius: 0.615px;
+  /* Pas de capture d'écran source dans Figma pour cette zone (réservée à une
+     vidéo côté site réel, cf. node "Conseil_Constitutionnel_Clip_Accueil") —
+     fond neutre en attendant le contenu final. */
+  background-color: var(--color-neutral-200);
+}
+
+.displayBottom {
+  position: absolute;
+  inset: 91.74% 8.11% 5.28% 8.11%;
+  background-color: #1b1b1b;
+}
+
+.phone {
+  position: absolute;
+  left: calc(50% + 107px);
+  top: calc(50% - 58.88px);
+  transform: translate(-50%, -50%);
+  width: 206px;
+  height: 416.243px;
+  transition:
+    left 150ms ease-out,
+    top 150ms ease-out,
+    width 150ms ease-out,
+    height 150ms ease-out;
+}
+
+:global([data-component='ds-br-project-bento-card']):hover .phone,
+:global([data-component='ds-br-project-bento-card']):focus-within .phone {
+  left: calc(50% - 149px);
+  top: calc(50% + 0.22px);
+  width: 216px;
+  height: 436.449px;
+}
+
+.phone img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.phoneScreenPlaceholder {
+  position: absolute;
+  inset: 2.24% 5.38% 2.43% 5.28%;
+  border-radius: 17.611px;
+  /* Le mockup téléphone exporté depuis Figma a un écran blanc : le layer
+     "[Mobile]Home_page_record 1" est une vidéo (enregistrement de la page
+     d'accueil), pas une image statique — rien à exporter tant que la vidéo
+     n'est pas fournie. Fond neutre en attendant, même traitement que
+     .screenClip (laptop). */
+  background-color: var(--color-neutral-200);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laptop,
+  .phone {
+    transition-duration: 1ms;
+  }
+}

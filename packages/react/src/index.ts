@@ -27,3 +27,10 @@ export type { TopNavProps, TopNavProject } from './components/TopNav';
 
 export { ProjectCardDescription } from './components/ProjectCardDescription';
 export type { ProjectCardDescriptionProps } from './components/ProjectCardDescription';
+
+export { ProjectBentoCard } from './components/ProjectBentoCard';
+export type {
+  ProjectBentoCardProps,
+  ProjectBentoCardProject,
+  ProjectBentoCardShape,
+} from './components/ProjectBentoCard';

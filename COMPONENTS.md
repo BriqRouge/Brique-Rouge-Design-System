@@ -183,7 +183,9 @@ interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElemen
 
 #### Règles d'usage
 
-- Largeur fixe 276px (spec Figma) ; **hauteur automatique** (pas 120px fixe) — le titre du Figma source s'affiche volontairement sur 2 lignes, une hauteur figée tronquerait la catégorie dès que le titre dépasse 1 ligne
+- **Largeur 100% (responsive)** — le composant remplit son conteneur (le consommateur définit la largeur, 276px par défaut dans les stories via un wrapper). Corrigé d'une largeur fixe 276px initiale : le panneau révélé par `ProjectBentoCard` au survol doit occuper toute la largeur de la carte, y compris lorsqu'elle s'agrandit à 576px — vérifié dans le JSX Figma (`left-[-1px] right-[-1px]`, jamais une largeur figée)
+- **Hauteur automatique** (pas 120px fixe) — le titre du Figma source s'affiche volontairement sur 2 lignes, une hauteur figée tronquerait la catégorie dès que le titre dépasse 1 ligne
+- **Hauteur visuelle ≈120px, conforme au Figma** : `line-height: 1` sur project/year/category (repli universel, ~130px) + `text-box-trim: trim-both` / `text-box-edge: cap alphabetic` en amélioration progressive sur les 4 textes (~114px dans les navigateurs compatibles, Chrome 130+). Ne jamais reprendre les valeurs `line-height` littérales du JSX généré par Figma (24px, 18px) sans vérifier qu'elles ne sont pas elles-mêmes compressées par `text-box-trim` côté Figma — sinon le composant rend significativement plus grand que prévu
 - `children` = titre du projet ; supporte un retour à la ligne manuel (`<br />`) ou un wrap naturel
 - **Écart signalé vs Figma** : dans le fichier Figma, le texte n'est lié à aucune variable de couleur (`color/text/*`) — mappé sur `--color-neutral-900` (le noir pur du Figma ne correspond à aucun token existant)
 - **Écart signalé vs Figma** : les poids de police Figma (`Light` pour les labels, `Medium` variable ~571 pour le titre) n'ont pas d'équivalent exact dans `--typography-font-weight-*` — mappés sur `regular` (400) et `medium` (500)
@@ -239,3 +241,55 @@ interface AlertBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 - Largeur 100% (responsive) — contrairement au frame Figma fixé à 641px ; hauteur automatique
 - Icônes (info, warning, fermeture) dessinées à la main en SVG inline avec `currentColor`, pas d'assets Figma exportés — nécessaire pour recolorer selon `type`
 - **Écart signalé vs Figma** : le contenu du Figma est du lorem ipsum avec des icônes de boutons placeholder (téléchargement/mail) — validé avec Damien que le contenu des CTA doit être entièrement personnalisable via `Button`, rien n'est figé en dur
+
+---
+
+### ProjectBentoCard
+
+**Package :** `@brique-rouge/react`
+**Chemin :** `packages/react/src/components/ProjectBentoCard/`
+**Node Figma :** `1759:22825` ("Projects-Bento-Cards")
+
+#### API
+
+```ts
+type ProjectBentoCardProject = 'odaptos' | 'bpce' | 'ibp' | 'conseil-constitutionnel' | 'cv';
+type ProjectBentoCardShape  = 'square' | 'rectangle';
+
+interface ProjectBentoCardProps {
+  project:        ProjectBentoCardProject; // requis — couleur d'accent au survol
+  shape?:         ProjectBentoCardShape;   // default: 'square'
+  expandOnHover?: boolean;                 // default: false — voir Règles d'usage
+  description?:   React.ReactNode;         // révélé au survol/focus — typiquement <ProjectCardDescription />
+  children:       React.ReactNode;         // requis — contenu visuel idle de la carte
+  hoverChildren?: React.ReactNode;         // optionnel — contenu visuel alternatif, voir Règles d'usage
+  className?:     string;
+}
+```
+
+#### Tokens CSS utilisés
+
+| Token | Valeur | Usage |
+|-------|--------|-------|
+| `--color-border-bento-cards-idle` | `#e5e5e5` | Bordure au repos |
+| `--color-border-bento-cards-hovered` | `#3453dc` | Bordure au survol/focus |
+| `--color-background-projects-odaptos` | `#3453dc` | Fond au survol, projet Odaptos |
+| `--color-background-projects-bpce` | `#9b75ab` | Fond au survol, projet BPCE |
+| `--color-background-projects-ibp` | `#949ae5` | Fond au survol, projet iBP |
+| `--color-background-projects-conseil-constitutionnel` | `#5bdb50` | Fond au survol, Conseil constitutionnel |
+| `--color-background-projects-cv` | `#efde59` | Fond au survol, carte CV |
+| `--border-radius-lg` | `12px` | Border-radius de la carte |
+| `--spacing-x2` | `8px` | Décalage vertical de la description avant apparition |
+
+#### Règles d'usage
+
+- Taille de base 276×276px (`square`) ou 276×576px (`rectangle`) ; au survol/focus, la bordure et le fond changent toujours, mais **la largeur ne passe à 576px que si `expandOnHover` est activé**
+- **`expandOnHover` : comportement non uniforme entre variantes, vérifié dans le Figma source (node `1759:22825`)** — seules 2 des 5 combinaisons s'agrandissent réellement : `Odaptos` (square) et `Conseil constitutionnel` (rectangle). `BPCE` et `iBP` changent de couleur et révèlent leur description à taille fixe ; `CV` change de couleur et transforme son illustration, sans description. Ne pas supposer un agrandissement uniforme — vérifier chaque variante individuellement avant d'implémenter une interaction Figma partagée entre plusieurs instances d'un même composant.
+- **Positionnement obligatoire** : conteneur parent `position: relative`, chaque carte en `position: absolute` — comme la grille bento réelle. En flux normal (flex/grid), l'agrandissement d'une carte `expandOnHover` pousse les cartes voisines et leur vole le survol
+- `description` n'est affiché qu'au survol (`:hover`) ou focus d'un enfant (`:focus-within`) — reste dans le DOM en permanence (opacity/transform, pas de montage conditionnel), donc lisible par un lecteur d'écran indépendamment du survol
+- Le survol clavier nécessite un enfant focusable (ex: un lien enveloppant la carte) — `:focus-within` seul ne déclenche rien si la carte ne contient aucun élément focusable
+- Transition `width` 150ms ease-out — exception documentée à la règle DS générale "n'animer que `transform`/`opacity`" : ici la largeur doit réellement changer pour révéler du contenu sans étirer le texte ; `prefers-reduced-motion` réduit la transition à 1ms
+- **Aucune donnée de motion Figma** : `get_motion_context` ne retourne rien pour ce composant — la transition ci-dessus est alignée sur la convention déjà établie dans `Button`/`MenuButton` (150ms ease-out), pas extraite de Figma
+- **Écart signalé vs Figma, validé par Damien** : la couleur `conseil-constitutionnel` avait dérivé côté Figma (`#5bdb50` vs `#32c126`) — mise à jour globalement (impacte aussi `TopNav`)
+- **`hoverChildren` vs repositionnement — deux mécaniques différentes, à ne pas confondre** : quand le Figma source montre un **contenu différent** entre idle et hover (ex: Odaptos, où l'image disparaît au profit de la description), utiliser `hoverChildren` (crossfade `opacity`, même mécanique que `description`, activé par la classe `hasHoverVisual` posée automatiquement quand la prop est fournie). Quand le Figma source montre les **mêmes éléments qui se déplacent/redimensionnent** (ex: Conseil constitutionnel — mockup téléphone + ordinateur portable identiques aux deux états, seule leur position/taille change), ne pas utiliser `hoverChildren` : passer directement la composition en `children` et transitionner `left`/`top`/`width`/`height` en CSS via `:hover`/`:focus-within` sur `[data-component="ds-br-project-bento-card"]`. Vérifier au cas par cas dans Figma (comparer les valeurs `left`/`top`/`width`/`height` entre les deux variantes idle/hover du même node) avant de choisir l'une ou l'autre — ne jamais supposer.
+- **Assets manquants dans Figma peuvent être des vidéos, pas des échecs d'export** : pour Conseil constitutionnel, les zones d'écran (téléphone et ordinateur portable) n'ont aucune image de fond dans les données retournées par `get_design_context`/`get_metadata`. Avant de conclure à un problème d'extraction, vérifier le nom des layers concernés — ici `[Mobile]Home_page_record 1` et `Conseil_Constitutionnel_Clip_Accueil` indiquent explicitement un enregistrement vidéo prévu pour le site réel, jamais fourni comme image statique côté Figma. Traiter avec un fond neutre (`--color-neutral-200`) documenté comme temporaire, plutôt que d'inventer un contenu.
