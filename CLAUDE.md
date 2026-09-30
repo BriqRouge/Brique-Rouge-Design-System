@@ -168,11 +168,25 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 1. Lire Figma via MCP (get_design_context)
 2. Faire le diff avec le code existant
 3. Identifier le périmètre exact des changements
-4. Implémenter uniquement ce qui a changé
-5. Vérifier les tests existants — ne pas les casser
-6. Ajouter ou mettre à jour les tests
-7. Mettre à jour la story Storybook
-8. Push GitHub
+4. Pour un nouveau composant : choisir son niveau atomic design
+   (atome/molécule/organisme — voir critères en §9) AVANT de créer les
+   fichiers, pour le placer directement au bon endroit
+5. Implémenter uniquement ce qui a changé, dans
+   packages/react/src/components/{atoms,molecules,organisms}/{Composant}/
+6. Vérifier les tests existants — ne pas les casser
+7. Ajouter ou mettre à jour les tests
+8. Mettre à jour la story Storybook — title au format
+   'Atomes|Molécules|Organismes/{Composant}' selon le niveau choisi
+9. Créer ou mettre à jour specs/{tier}/{Composant}.md (API, tokens,
+   règles d'usage) — c'est la fiche canonique, pas COMPONENTS.md ni
+   CLAUDE.md §9 (simples index qui pointent vers specs/)
+10. Ajouter une ligne dans COMPONENTS.md (index) pointant vers cette
+    fiche
+11. Si de nouveaux tokens ont été ajoutés à tokens.json : relancer
+    `pnpm --filter @brique-rouge/tokens build` pour régénérer
+    specs/foundations/ et specs/tokens/ (sinon le check CI "specs à
+    jour" casse)
+12. Push GitHub
 ```
 
 ### IDs Figma — format
