@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { describe, expect, it, vi } from 'vitest';
 import { AlertBanner } from './AlertBanner';
-import { Button } from '../Button';
+import { Button } from '../../atoms/Button';
 
 describe('AlertBanner — rendu', () => {
   it('affiche le titre', () => {

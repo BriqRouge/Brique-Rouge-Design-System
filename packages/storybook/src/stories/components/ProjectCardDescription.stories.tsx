@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ProjectCardDescription } from '@brique-rouge/react';
 
 const meta = {
-  title: 'Composants/ProjectCardDescription',
+  title: 'Molécules/ProjectCardDescription',
   component: ProjectCardDescription,
   tags: ['autodocs'],
   // Largeur 100% (responsive) — le composant s'adapte à son conteneur (ex:

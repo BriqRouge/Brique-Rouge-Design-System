@@ -33,7 +33,7 @@ function MailIcon() {
 }
 
 const meta = {
-  title: 'Composants/MenuButton',
+  title: 'Atomes/MenuButton',
   component: MenuButton,
   tags: ['autodocs'],
   parameters: {

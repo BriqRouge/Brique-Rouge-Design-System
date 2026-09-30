@@ -3,7 +3,7 @@ import { ProjectBentoCard, ProjectCardDescription } from '@brique-rouge/react';
 import { ConseilConstitutionnelVisual } from './ProjectBentoCard.conseilConstitutionnel';
 
 const meta = {
-  title: 'Composants/ProjectBentoCard',
+  title: 'Organismes/ProjectBentoCard',
   component: ProjectBentoCard,
   tags: ['autodocs'],
   parameters: {

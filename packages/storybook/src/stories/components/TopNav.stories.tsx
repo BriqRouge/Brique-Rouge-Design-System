@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TopNav, DropdownMenuButton } from '@brique-rouge/react';
 
 const meta = {
-  title: 'Composants/TopNav',
+  title: 'Organismes/TopNav',
   component: TopNav,
   tags: ['autodocs'],
   parameters: {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DropdownMenu, DropdownMenuButton } from '@brique-rouge/react';
 
 const meta = {
-  title: 'Composants/DropdownMenu',
+  title: 'Molécules/DropdownMenu',
   component: DropdownMenu,
   tags: ['autodocs'],
   parameters: {

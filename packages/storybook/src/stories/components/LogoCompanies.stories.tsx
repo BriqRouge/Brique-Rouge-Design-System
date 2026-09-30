@@ -3,7 +3,7 @@ import { LogoCompanies } from '@brique-rouge/react';
 import type { LogoCompany } from '@brique-rouge/react';
 
 const meta = {
-  title: 'Composants/LogoCompanies',
+  title: 'Atomes/LogoCompanies',
   component: LogoCompanies,
   tags: ['autodocs'],
   parameters: {

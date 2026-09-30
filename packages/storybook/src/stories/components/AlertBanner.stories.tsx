@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AlertBanner, Button } from '@brique-rouge/react';
 
 const meta = {
-  title: 'Composants/AlertBanner',
+  title: 'Molécules/AlertBanner',
   component: AlertBanner,
   tags: ['autodocs'],
   parameters: {
