@@ -22,6 +22,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm turbo run lint
+      - name: Token audit (couleurs hardcodées)
+        run: node scripts/token-audit.mjs
 
   test:
     name: Test
@@ -37,6 +39,12 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm turbo run build --filter=@brique-rouge/tokens
+      - name: Vérifie que specs/foundations/ et specs/tokens/ sont à jour
+        run: |
+          if ! git diff --exit-code -- specs/foundations specs/tokens; then
+            echo "::error::specs/foundations/ ou specs/tokens/ désynchronisé avec tokens.json — relancer 'pnpm --filter @brique-rouge/tokens build' et committer le résultat."
+            exit 1
+          fi
       - name: Tests
         run: |
           TEST_FILES=$(find packages -name "*.test.tsx" -o -name "*.test.ts" 2>/dev/null)
