@@ -306,6 +306,22 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 - **Écarts signalés vs Figma** (validés par Damien) : couleur de texte non liée à une variable Figma (mappée sur `--color-neutral-900`, pas de token noir pur) ; poids de police `Light`/`Medium` variable sans équivalent exact (mappés sur `regular`/`medium`)
 - **Tests** : 7 tests — 7 passants
 
+### ProjectBentoCard (`packages/react/src/components/ProjectBentoCard/`)
+- **Node Figma** : `1759:22825` ("Projects-Bento-Cards")
+- **Fichiers** : `ProjectBentoCard.tsx`, `ProjectBentoCard.module.css`, `ProjectBentoCard.test.tsx`, `index.ts`
+- **Story** : `packages/storybook/src/stories/components/ProjectBentoCard.stories.tsx`
+- **API** : `project` (requis, `odaptos`|`bpce`|`ibp`|`conseil-constitutionnel`|`cv` — détermine la couleur d'accent au survol), `shape` (`square`|`rectangle`, défaut `square`), `description` (optionnel, typiquement un `<ProjectCardDescription />` révélé au survol/focus), `children` (requis, contenu visuel de la carte) + props HTML natives (`HTMLDivElement`)
+- **Types exportés** : `ProjectBentoCardProps`, `ProjectBentoCardProject`, `ProjectBentoCardShape`
+- **data-component** : `ds-br-project-bento-card`
+- **data-attributes** : `data-project`, `data-shape`
+- **Composition** : réutilise `ProjectCardDescription` comme panneau de description révélé au survol — ne pas dupliquer sa logique ; le contenu visuel (image, illustration) est fourni par le consommateur via `children`, le composant ne gère aucun asset
+- **Interaction/Animation** : au survol (`:hover`) ou focus d'un enfant (`:focus-within`), la carte passe de 276px à 576px de large (transition `width` 150ms ease-out — exception documentée à la règle DS "ne jamais animer les propriétés de layout" : ici la largeur doit changer réellement pour révéler du contenu, un `transform: scale()` aurait étiré le texte de la description ; `prefers-reduced-motion` réduit la transition à 1ms), la bordure passe à `--color-border-bento-cards-hovered`, le fond prend la couleur du projet, et si `description` est fourni, il apparaît en fondu + léger déplacement vertical (opacity + transform, conforme à la règle DS motion)
+- **Aucune donnée de motion Figma** : `get_motion_context` renvoie un tableau vide pour ce composant (idle/hovered sont de simples variantes, pas une transition "Smart Animate" configurée) — la transition CSS ci-dessus a été choisie pour être cohérente avec la convention déjà établie dans `Button`/`MenuButton` (150ms ease-out), pas extraite de Figma. Validé avec Damien.
+- **Accessibilité** : le survol au clavier nécessite un enfant focusable (ex: envelopper la carte dans un lien) — `:focus-within` seul ne suffit pas si la carte ne contient aucun élément focusable ; à documenter pour les consommateurs
+- **Positionnement obligatoire** : ce composant doit être utilisé dans un conteneur `position: relative` avec chaque carte en `position: absolute` (comme la grille bento réelle du Figma). En flux normal (flex/grid), l'agrandissement au survol pousse les cartes voisines et leur vole le survol (bug reproduit et corrigé dans la story Storybook)
+- **Écart signalé vs Figma, validé par Damien** : la couleur `color/background/projects/conseil-constitutionnel` avait dérivé côté Figma (`#5bdb50` vs `#32c126` chez nous) — mise à jour globalement, y compris pour `TopNav` qui partage ce token
+- **Tests** : 9 tests — 9 passants
+
 ---
 
 ## 10. Tests

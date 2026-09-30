@@ -239,3 +239,50 @@ interface AlertBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 - Largeur 100% (responsive) — contrairement au frame Figma fixé à 641px ; hauteur automatique
 - Icônes (info, warning, fermeture) dessinées à la main en SVG inline avec `currentColor`, pas d'assets Figma exportés — nécessaire pour recolorer selon `type`
 - **Écart signalé vs Figma** : le contenu du Figma est du lorem ipsum avec des icônes de boutons placeholder (téléchargement/mail) — validé avec Damien que le contenu des CTA doit être entièrement personnalisable via `Button`, rien n'est figé en dur
+
+---
+
+### ProjectBentoCard
+
+**Package :** `@brique-rouge/react`
+**Chemin :** `packages/react/src/components/ProjectBentoCard/`
+**Node Figma :** `1759:22825` ("Projects-Bento-Cards")
+
+#### API
+
+```ts
+type ProjectBentoCardProject = 'odaptos' | 'bpce' | 'ibp' | 'conseil-constitutionnel' | 'cv';
+type ProjectBentoCardShape  = 'square' | 'rectangle';
+
+interface ProjectBentoCardProps {
+  project:      ProjectBentoCardProject; // requis — couleur d'accent au survol
+  shape?:       ProjectBentoCardShape;   // default: 'square'
+  description?: React.ReactNode;         // révélé au survol/focus — typiquement <ProjectCardDescription />
+  children:     React.ReactNode;         // requis — contenu visuel (image, illustration…)
+  className?:   string;
+}
+```
+
+#### Tokens CSS utilisés
+
+| Token | Valeur | Usage |
+|-------|--------|-------|
+| `--color-border-bento-cards-idle` | `#e5e5e5` | Bordure au repos |
+| `--color-border-bento-cards-hovered` | `#3453dc` | Bordure au survol/focus |
+| `--color-background-projects-odaptos` | `#3453dc` | Fond au survol, projet Odaptos |
+| `--color-background-projects-bpce` | `#9b75ab` | Fond au survol, projet BPCE |
+| `--color-background-projects-ibp` | `#949ae5` | Fond au survol, projet iBP |
+| `--color-background-projects-conseil-constitutionnel` | `#5bdb50` | Fond au survol, Conseil constitutionnel |
+| `--color-background-projects-cv` | `#efde59` | Fond au survol, carte CV |
+| `--border-radius-lg` | `12px` | Border-radius de la carte |
+| `--spacing-x2` | `8px` | Décalage vertical de la description avant apparition |
+
+#### Règles d'usage
+
+- Taille de base 276×276px (`square`) ou 276×576px (`rectangle`) ; au survol/focus, la largeur passe à 576px quel que soit le format
+- **Positionnement obligatoire** : conteneur parent `position: relative`, chaque carte en `position: absolute` — comme la grille bento réelle. En flux normal (flex/grid), l'agrandissement pousse les cartes voisines et leur vole le survol
+- `description` n'est affiché qu'au survol (`:hover`) ou focus d'un enfant (`:focus-within`) — reste dans le DOM en permanence (opacity/transform, pas de montage conditionnel), donc lisible par un lecteur d'écran indépendamment du survol
+- Le survol clavier nécessite un enfant focusable (ex: un lien enveloppant la carte) — `:focus-within` seul ne déclenche rien si la carte ne contient aucun élément focusable
+- Transition `width` 150ms ease-out — exception documentée à la règle DS générale "n'animer que `transform`/`opacity`" : ici la largeur doit réellement changer pour révéler du contenu sans étirer le texte ; `prefers-reduced-motion` réduit la transition à 1ms
+- **Aucune donnée de motion Figma** : `get_motion_context` ne retourne rien pour ce composant — la transition ci-dessus est alignée sur la convention déjà établie dans `Button`/`MenuButton` (150ms ease-out), pas extraite de Figma
+- **Écart signalé vs Figma, validé par Damien** : la couleur `conseil-constitutionnel` avait dérivé côté Figma (`#5bdb50` vs `#32c126`) — mise à jour globalement (impacte aussi `TopNav`)
