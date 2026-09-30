@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node style-dictionary.config.js"
+    "build": "node style-dictionary.config.js && node generate-specs.mjs"
   },
   "devDependencies": {
     "style-dictionary": "^4.0.0"
