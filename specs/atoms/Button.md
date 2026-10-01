@@ -40,7 +40,7 @@ interface ButtonProps {
 | `--color-button-warning` / `-hover` | `#e1742e` / `#d35c23` | Idem, warning |
 | `--color-button-success` / `-hover` | `#23a019` / `#1f7d18` | Idem, success |
 | `--color-button-error` / `-hover` | `#e22020` / `#be1717` | Idem, error |
-| `--color-button-focus` | `#567be9` | Outline focus visible |
+| `--color-button-focus` | `#567be9` | Bordure focus-visible (primary/secondary, intégrée — pas un anneau extérieur) |
 | `--color-border-button-secondary` | `#262626` | Bordure secondary neutre |
 | `--color-text-button-primary` / `-hover` | `#fafafa` | Texte sur fond plein (primary, ou secondary au hover) |
 | `--color-text-button-secondary` / `-hover` | `#262626` / `#fafafa` | Texte secondary neutre (idle / hover) |
@@ -62,6 +62,7 @@ interface ButtonProps {
 - Toujours fournir `aria-label` si le bouton ne contient que des icônes — passer `children={null}`
 - **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur = 40px) via la classe `iconOnly`, qui force `width` (le `min-width` seul ne suffisait pas : la bordure de 2px faisait dépasser la largeur naturelle du contenu au-delà du `min-width`, donnant un bouton ovale de ~43px de large)
 - Ne pas confondre avec `MenuButton` : composant distinct, plus ancien, utilisé notamment par `TopNav` (bouton retour, trigger de dropdown) — les deux composants coexistent intentionnellement, périmètres différents
+- **Focus visible — corrigé après audit rétroactif des états de tous les composants** : la première implémentation utilisait un anneau extérieur générique (`outline: 2px solid`). Vérification des variantes `Type=*-focus` du Figma source (ex: `1729:19123` primary-focus, `1506:20752` secondary-focus) : Figma ne montre pas d'anneau extérieur mais une **bordure intégrée de 2px** sur le bouton lui-même, fond inchangé par rapport à l'idle. La bordure focus est **universelle** (`--color-button-focus`, toujours la même quelle que soit `colorScheme`). `tertiary` n'a ni bordure ni fond à aucun état — seule sa couleur de texte change (déjà correct avant l'audit). Vérifié par mesure réelle (`getComputedStyle` après `Tab`), pas seulement par capture d'écran.
 
 ## Tests
 

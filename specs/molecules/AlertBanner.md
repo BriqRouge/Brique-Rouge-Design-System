@@ -53,6 +53,7 @@ interface AlertBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 - Largeur 100% (responsive) — contrairement au frame Figma fixé à 641px ; hauteur automatique
 - Icônes (`InfoIcon`/`WarningIcon`/`CloseIcon`) dessinées à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `TopNav` — pas d'assets Figma exportés (nécessaire pour la recoloration par type)
 - **Écart signalé vs Figma** (validé par Damien) : le contenu du Figma est du lorem ipsum générique avec des icônes de boutons placeholder (téléchargement/mail) — le composant expose donc `leftIcon`/`rightIcon`/label entièrement personnalisables via `Button`, rien n'est figé en dur
+- **Hover du bouton de fermeture — ajout DS, pas une correction de fidélité Figma** : ajouté lors de l'audit rétroactif des états manquants. Le nœud Figma de l'icône de fermeture (`755:21868`, "Menu / Close_SM") ne définit aucune variante `State` — Figma ne spécifie donc aucun style hover pour ce bouton. Ajouté par choix UX (validé par Damien) : `opacity: 0.7` au survol, transition 150ms, cohérent avec les conventions de transition déjà établies sur `Button`/`MenuButton`.
 
 ## Tests
 

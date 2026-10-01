@@ -45,6 +45,7 @@ interface MenuButtonProps {
 - **Point relevé (non modifié)** : le Figma source ne montre plus de `min-width` spécifique en `md` (semble uniforme à 40px comme `sm`/`nm`) alors que notre CSS garde `min-width: 56px` (`--sizing-x14`) pour `md` — non touché pour ne pas risquer une régression visuelle sur `TopNav`/`DropdownMenuTrigger` (déjà validés) ; à confirmer avec Damien si c'est intentionnel
 - **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur) via la classe `iconOnly` — expose `data-icon-only` (`true`/`false`)
 - Composant distinct de `Button` (plus récent) — les deux coexistent intentionnellement, périmètres différents
+- **Focus visible — corrigé après audit rétroactif des états de tous les composants** : la première implémentation utilisait un anneau extérieur générique (`outline: 2px solid`). Vérification des variantes `State=Focus` du Figma source (`1453:20608` contained, `1453:20612` outlined/light, `1453:20616` outlined/dark) : Figma montre un fond **identique à l'état hovered** combiné à une bordure `--color-border-menu-button-focus` (bleu universel, quel que soit `colorScheme`) — pas d'anneau extérieur. Géré par variante (`contained`, `outlined.light`, `outlined.dark`) avec le fond + texte de l'état hovered correspondant. Vérifié par mesure réelle (`getComputedStyle` après `Tab`), pas seulement par capture d'écran.
 
 ## Tests
 
