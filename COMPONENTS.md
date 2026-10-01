@@ -24,6 +24,7 @@ Claude Code lit ce fichier avant toute implémentation, puis ouvre le fichier
 | `FrameLogo` | Conteneur de logo avec ombre portée | [specs/atoms/FrameLogo.md](specs/atoms/FrameLogo.md) |
 | `LogoCompanies` | Logo d'entreprise (8 variantes) | [specs/atoms/LogoCompanies.md](specs/atoms/LogoCompanies.md) |
 | `MacbookMockup` | Mockup d'ordinateur portable pour capture d'écran | [specs/atoms/MacbookMockup.md](specs/atoms/MacbookMockup.md) |
+| `Tag` | Badge icône + texte + fermeture (4 tailles × 2 styles) | [specs/atoms/Tag.md](specs/atoms/Tag.md) |
 
 ## Molécules
 
@@ -36,6 +37,7 @@ Assemble des atomes en une unité fonctionnelle précise.
 | `DropdownMenuButton` | Item de menu déroulant (logo + texte + icône) | [specs/molecules/DropdownMenuButton.md](specs/molecules/DropdownMenuButton.md) |
 | `ProjectCardDescription` | Bloc titre/année/catégorie d'un projet | [specs/molecules/ProjectCardDescription.md](specs/molecules/ProjectCardDescription.md) |
 | `ProjectOverview` | En-tête de page projet (titre, description, rôle, contributions) | [specs/molecules/ProjectOverview.md](specs/molecules/ProjectOverview.md) |
+| `MetaInfoItem` | Item icône + texte (localisation, musique, lecture...) | [specs/molecules/MetaInfoItem.md](specs/molecules/MetaInfoItem.md) |
 
 ## Organismes
 

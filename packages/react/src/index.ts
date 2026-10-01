@@ -46,3 +46,9 @@ export type { ProjectOverviewProps } from './components/molecules/ProjectOvervie
 
 export { MacbookMockup } from './components/atoms/MacbookMockup';
 export type { MacbookMockupProps } from './components/atoms/MacbookMockup';
+
+export { Tag } from './components/atoms/Tag';
+export type { TagProps, TagSize, TagVariant } from './components/atoms/Tag';
+
+export { MetaInfoItem } from './components/molecules/MetaInfoItem';
+export type { MetaInfoItemProps } from './components/molecules/MetaInfoItem';

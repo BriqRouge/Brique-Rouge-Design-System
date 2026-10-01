@@ -9,11 +9,11 @@
 
 ```ts
 type LogoCompany = 'bpce' | 'conseil-constitutionnel' | 'odaptos' | 'ibp' | 'vinci' | 'tidal' | 'squared-icon' | 'steam';
-type LogoSize     = '32' | '16' | '12' | '8';
+type LogoSize     = 32 | 16 | 12 | 8; // nombres, pas des chaînes
 
 interface LogoCompaniesProps extends React.HTMLAttributes<HTMLDivElement> {
   company?: LogoCompany;  // défaut: 'squared-icon'
-  size?:    LogoSize;     // défaut: '32'
+  size?:    LogoSize;     // défaut: 32
 }
 ```
 
