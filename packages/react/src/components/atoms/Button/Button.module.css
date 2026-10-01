@@ -197,12 +197,18 @@
 }
 
 /* ─── Focus visible ──────────────────────────────────────────────────────────── */
+/* Corrigé après audit : Figma ne montre pas un anneau extérieur (outline) mais
+   une bordure intégrée de 2px sur le bouton lui-même, fond inchangé par
+   rapport à l'état idle (vérifié sur primary/secondary, toutes couleurs
+   sémantiques — la bordure focus est toujours --color-button-focus, jamais
+   une variante par schéma de couleur). tertiary n'a ni bordure ni fond à
+   aucun état — seule sa couleur de texte change (déjà gérée plus haut). */
 
 .button:focus {
   outline: none;
 }
 
-.button:focus-visible {
-  outline: 2px solid var(--color-button-focus);
-  outline-offset: 2px;
+.variant-primary:focus-visible,
+.variant-secondary:focus-visible {
+  border-color: var(--color-button-focus);
 }

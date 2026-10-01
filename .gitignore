@@ -7,6 +7,9 @@ build/
 storybook-static/
 coverage/
 
+# Artefacts de session Playwright MCP (captures/traces de vérification manuelle)
+.playwright-mcp/
+
 # Claude Code — settings locaux
 .claude/settings.local.json
 

@@ -100,6 +100,14 @@
   background: none;
   border: none;
   cursor: pointer;
+  opacity: 1;
+  transition: opacity 150ms ease-out;
+}
+
+/* Figma ne définit aucun état hover pour cette icône — ajout DS pour donner un
+   retour visuel au survol, cohérent avec le reste des composants interactifs. */
+.closeButton:hover {
+  opacity: 0.7;
 }
 
 .banner[data-type='info'] .closeButton {

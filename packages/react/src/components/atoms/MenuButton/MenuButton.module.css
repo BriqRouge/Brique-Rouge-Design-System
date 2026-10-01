@@ -90,6 +90,11 @@
   background-color: var(--color-menu-button-hovered);
 }
 
+.variant-contained:focus-visible {
+  background-color: var(--color-menu-button-hovered);
+  border-color: var(--color-border-menu-button-focus);
+}
+
 /* ─── Variant : outlined light ──────────────────────────────────────────────── */
 
 .variant-outlined.color-scheme-light {
@@ -101,6 +106,12 @@
 .variant-outlined.color-scheme-light:hover:not(:disabled) {
   background-color: var(--color-menu-button-hovered);
   border-color: var(--color-border-menu-button-contained);
+  color: var(--color-text-menu-button-contained);
+}
+
+.variant-outlined.color-scheme-light:focus-visible {
+  background-color: var(--color-menu-button-hovered);
+  border-color: var(--color-border-menu-button-focus);
   color: var(--color-text-menu-button-contained);
 }
 
@@ -118,6 +129,12 @@
   color: var(--color-text-menu-button-outline-white);
 }
 
+.variant-outlined.color-scheme-dark:focus-visible {
+  background-color: var(--color-menu-button-hovered-black);
+  border-color: var(--color-border-menu-button-focus);
+  color: var(--color-text-menu-button-outline-white);
+}
+
 /* ─── État désactivé ────────────────────────────────────────────────────────── */
 
 .menuButton:disabled {
@@ -128,12 +145,11 @@
 }
 
 /* ─── Focus visible ─────────────────────────────────────────────────────────── */
+/* Corrigé après audit : Figma (State=Focus, node 1453:20608/20612/20616) ne montre
+   pas d'anneau extérieur (outline) mais un fond identique à l'état hovered combiné
+   à une bordure --color-border-menu-button-focus universelle (même bleu, quel que
+   soit le color-scheme) — géré au cas par cas sur chaque variante ci-dessus. */
 
 .menuButton:focus {
   outline: none;
-}
-
-.menuButton:focus-visible {
-  outline: 2px solid var(--color-border-menu-button-focus);
-  outline-offset: 2px;
 }
