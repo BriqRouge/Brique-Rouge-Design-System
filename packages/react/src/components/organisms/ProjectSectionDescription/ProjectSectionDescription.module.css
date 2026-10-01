@@ -1,0 +1,83 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-x6);
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-x6);
+}
+
+.number {
+  font-family: var(--typography-font-family-sans);
+  font-size: var(--typography-font-size-base);
+  font-weight: var(--typography-font-weight-medium);
+  line-height: 24px;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  /* Écart signalé vs Figma (#a3a3a3) : aucun token ne correspond exactement,
+     --color-neutral-400 (#a1a1a1) est la valeur la plus proche existante. */
+  color: var(--color-neutral-400);
+  margin: 0;
+}
+
+.title {
+  font-family: var(--typography-subtitle-font-family);
+  font-size: var(--typography-font-size-3xl);
+  font-weight: var(--typography-subtitle-font-weight);
+  line-height: 40px;
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+.leadText {
+  width: 100%;
+  padding-left: var(--spacing-x14);
+  box-sizing: border-box;
+  font-family: var(--typography-subtitle-font-family);
+  font-size: var(--typography-font-size-2xl);
+  /* Poids Figma "Book" (~333) sans équivalent exact — mappé sur regular,
+     même convention que ProjectCardDescription. */
+  font-weight: var(--typography-font-weight-regular);
+  line-height: 32px;
+  color: var(--color-neutral-800);
+  margin: 0;
+}
+
+.bulletList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-x4);
+  width: 100%;
+  padding-left: var(--spacing-x14);
+  margin: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-x4);
+  font-family: var(--typography-body-font-family);
+  font-size: var(--typography-body-font-size);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: 24px;
+  color: var(--color-neutral-600);
+}
+
+.bulletIcon {
+  flex-shrink: 0;
+  width: var(--sizing-x6);
+  height: var(--sizing-x6);
+  color: var(--color-deep-sea-600);
+}
+
+.alertBanner {
+  width: 100%;
+}
