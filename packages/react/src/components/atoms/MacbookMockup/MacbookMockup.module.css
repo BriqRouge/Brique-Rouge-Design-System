@@ -1,0 +1,104 @@
+/*
+ * Mockup d'ordinateur portable (node Figma 837:19547 "Macbook Pro").
+ * Composant intentionnellement sans taille propre — le consommateur
+ * définit width/height (ex: via style ou une classe), l'aspect ratio
+ * d'origine est ~1.644:1 (842×512px dans le Figma source).
+ */
+
+.mockup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mockup img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.shadowWrapper {
+  position: absolute;
+  bottom: -0.39%;
+  left: -2.61%;
+  right: -2.61%;
+  top: 100%;
+}
+
+.shadowInset {
+  position: absolute;
+  inset: -50% -0.11%;
+}
+
+.rubberRight {
+  position: absolute;
+  inset: 99.61% 5.11% 0 89.55%;
+}
+
+.feetRight {
+  position: absolute;
+  inset: 98.83% 4.75% 0.39% 89.19%;
+}
+
+.rubberLeft {
+  position: absolute;
+  inset: 99.61% 89.55% 0 5.11%;
+}
+
+.feetLeft {
+  position: absolute;
+  inset: 98.83% 89.19% 0.39% 4.75%;
+}
+
+.body {
+  position: absolute;
+  inset: 93.36% 0 1.17% 0;
+}
+
+.bottom {
+  position: absolute;
+  inset: 98.44% 0.71% 1.17% 0.71%;
+}
+
+.bodyShades {
+  position: absolute;
+  inset: 93.36% 0 1.56% 0;
+}
+
+.screenFrame {
+  position: absolute;
+  inset: 0 9.03% 6.64% 9.03%;
+}
+
+.screen {
+  position: absolute;
+  inset: 2.15% 10.33% 10.94% 10.33%;
+  overflow: hidden;
+  border-radius: 1px;
+}
+
+.screen > * {
+  width: 100%;
+  height: 100%;
+}
+
+/* token-audit-ignore */
+.displayBottom {
+  position: absolute;
+  inset: 90.43% 9.03% 6.64% 9.03%;
+  /* Couleur bespoke du mockup (pas un token DS) — même valeur que
+     ProjectBentoCard.conseilConstitutionnel.module.css */
+  background-color: #1b1b1b;
+}
+
+.bevelHardLight {
+  position: absolute;
+  inset: 93.36% 41.33% 5.08% 43.35%;
+  mix-blend-mode: hard-light;
+}
+
+.bevelMultiply {
+  position: absolute;
+  inset: 93.36% 41.33% 5.08% 43.35%;
+  mix-blend-mode: multiply;
+}

@@ -40,3 +40,9 @@ export type { ProjectSectionDescriptionProps } from './components/organisms/Proj
 
 export { ProjectSectionsDescription } from './components/organisms/ProjectSectionsDescription';
 export type { ProjectSectionsDescriptionProps } from './components/organisms/ProjectSectionsDescription';
+
+export { ProjectOverview } from './components/molecules/ProjectOverview';
+export type { ProjectOverviewProps } from './components/molecules/ProjectOverview';
+
+export { MacbookMockup } from './components/atoms/MacbookMockup';
+export type { MacbookMockupProps } from './components/atoms/MacbookMockup';
