@@ -3,9 +3,11 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--spacing-x16);
-  /* Écart signalé vs Figma : aucun token border-radius ne va jusqu'à 40px
-     (échelle actuelle : sm 4 / md 8 / lg 12 / xl 16 / 2xl 24 / full 999) */
-  border-radius: 40px;
+  /* Corrigé après audit : le Figma source référence en réalité
+     var(--spacing/x10, 40px) pour ce radius — pas une valeur sans token
+     comme initialement signalé, juste un token de spacing réutilisé en
+     border-radius (vu sur ProjectOverview, même source Figma). */
+  border-radius: var(--spacing-x10);
   background-color: var(--color-neutral-50);
   /* Écart signalé vs Figma : 128px de padding horizontal n'a pas de token
      correspondant (échelle spacing s'arrête à --spacing-x20, 80px) */
