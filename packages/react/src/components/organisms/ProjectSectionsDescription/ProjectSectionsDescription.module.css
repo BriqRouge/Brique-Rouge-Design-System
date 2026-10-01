@@ -1,0 +1,69 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-x16);
+  /* Écart signalé vs Figma : aucun token border-radius ne va jusqu'à 40px
+     (échelle actuelle : sm 4 / md 8 / lg 12 / xl 16 / 2xl 24 / full 999) */
+  border-radius: 40px;
+  background-color: var(--color-neutral-50);
+  /* Écart signalé vs Figma : 128px de padding horizontal n'a pas de token
+     correspondant (échelle spacing s'arrête à --spacing-x20, 80px) */
+  padding: var(--spacing-x20) 128px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-x4);
+}
+
+.title {
+  font-family: var(--typography-heading-font-family);
+  font-weight: var(--typography-heading-font-weight);
+  font-size: var(--typography-font-size-5xl);
+  line-height: 56px;
+  letter-spacing: -0.96px;
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+.accentBar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x2);
+}
+
+.accentBarLong,
+.accentBarShort {
+  height: 4px;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-deep-sea-600);
+}
+
+.accentBarLong {
+  width: var(--spacing-x16);
+}
+
+.accentBarShort {
+  width: var(--spacing-x6);
+  background-color: var(--color-deep-sea-200);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-x16);
+  width: 100%;
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  border-radius: var(--border-radius-full);
+  background: linear-gradient(to bottom, var(--color-neutral-200), transparent);
+}
