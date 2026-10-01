@@ -162,10 +162,47 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 
 ## 7. Workflow composants
 
+### Étape 0 — Analyse Figma complète (obligatoire, avant d'écrire la moindre ligne de code)
+
+**Ne jamais conclure sur le comportement d'un composant à partir d'une seule
+capture d'écran ou d'une seule instance.** Une capture d'écran ne montre que
+l'apparence statique d'UN état — elle ne révèle ni les interactions, ni les
+variantes absentes de cette instance précise. Erreur déjà commise sur
+`MetaInfoItem` : vérifié uniquement via l'instance `State=Idle` de la page
+d'accueil, l'état `Hovered` (vrai lien, surbrillance au survol, icône qui
+change) n'a été découvert qu'après coup, sur signalement de Damien.
+
+Avant d'implémenter, systématiquement :
+
+1. `get_metadata` sur le composant **et sur son parent dans la bibliothèque
+   Figma** (pas seulement l'instance rencontrée en premier) pour lister
+   **toutes** les variantes (`Size=`, `State=`, `Style=`, etc.) et leurs
+   node IDs — une instance isolée ne montre qu'une combinaison de variantes
+2. `get_design_context` sur **chaque état pertinent** (`State=Idle`,
+   `State=Hovered`, `State=Focus`, `State=Disabled`, `State=Error`...),
+   pas uniquement l'état par défaut
+3. `get_motion_context` pour vérifier l'existence d'animations Smart Animate
+   authored côté Figma (confirmer explicitement l'absence plutôt que de
+   l'assumer)
+4. À partir de ces lectures, documenter avant de coder :
+   - **Composants du DS déjà utilisés** dans la structure (pour réutiliser,
+     pas dupliquer)
+   - **Tous les variants et leurs valeurs** (ex: `Size=sm|nm|md|lg`)
+   - **Tous les états** (default, hover, focus, disabled, error...)
+   - **Les tailles**, si applicable
+   - **Les tokens utilisés** (couleurs, espacements, typographie) — avec
+     vérification systématique contre le CSS réellement généré
+     (`packages/tokens/build/css/`), pas seulement la valeur de fallback
+     Figma
+   - **Les animations proposées** (ou leur absence confirmée)
+   - **La structure de grille/layout**
+5. Proposer une API React propre et cohérente qui reflète fidèlement cette
+   structure — en signalant toute incohérence Figma repérée (§6.1)
+
 ### Ordre impératif pour chaque nouveau composant ou modification
 
 ```
-1. Lire Figma via MCP (get_design_context)
+1. Étape 0 ci-dessus (analyse Figma complète — tous les états/variantes)
 2. Faire le diff avec le code existant
 3. Identifier le périmètre exact des changements
 4. Pour un nouveau composant : choisir son niveau atomic design
@@ -174,19 +211,25 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 5. Implémenter uniquement ce qui a changé, dans
    packages/react/src/components/{atoms,molecules,organisms}/{Composant}/
 6. Vérifier les tests existants — ne pas les casser
-7. Ajouter ou mettre à jour les tests
+7. Ajouter ou mettre à jour les tests (couvrir chaque état identifié en
+   étape 0, pas seulement le rendu par défaut)
 8. Mettre à jour la story Storybook — title au format
    'Atomes|Molécules|Organismes/{Composant}' selon le niveau choisi
-9. Créer ou mettre à jour specs/{tier}/{Composant}.md (API, tokens,
-   règles d'usage) — c'est la fiche canonique, pas COMPONENTS.md ni
-   CLAUDE.md §9 (simples index qui pointent vers specs/)
-10. Ajouter une ligne dans COMPONENTS.md (index) pointant vers cette
+9. Vérifier le rendu réel dans Storybook par **mesure** (Playwright
+   `getComputedStyle`/`boundingBox()` avant/après interaction), pas
+   seulement par capture d'écran visuelle — une capture ne détecte pas
+   un état CSS qui ne change pas visuellement assez pour l'œil, ni un
+   état jamais déclenché
+10. Créer ou mettre à jour specs/{tier}/{Composant}.md (API, tokens,
+    règles d'usage) — c'est la fiche canonique, pas COMPONENTS.md ni
+    CLAUDE.md §9 (simples index qui pointent vers specs/)
+11. Ajouter une ligne dans COMPONENTS.md (index) pointant vers cette
     fiche
-11. Si de nouveaux tokens ont été ajoutés à tokens.json : relancer
+12. Si de nouveaux tokens ont été ajoutés à tokens.json : relancer
     `pnpm --filter @brique-rouge/tokens build` pour régénérer
     specs/foundations/ et specs/tokens/ (sinon le check CI "specs à
     jour" casse)
-12. Push GitHub
+13. Push GitHub
 ```
 
 ### IDs Figma — format
