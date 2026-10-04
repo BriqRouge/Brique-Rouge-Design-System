@@ -10,64 +10,78 @@ couleurs, typographie, espacements, rayons de bordure.
 Cette étape transforme tes variables Figma en variables CSS
 utilisables dans tous tes composants.
 
-## 1. Exporter tes variables depuis Figma
-
-Dans Figma :
-
-1. Ouvre le panneau **Assets** (icône grille en haut à gauche)
-2. Clique sur **"Variables"**
-3. Clique sur l'icône d'export en haut à droite du panneau
-4. Choisis le format **JSON**
-5. Télécharge le fichier
-
-> Le fichier téléchargé contient toutes tes variables Figma
-> dans un format que Style Dictionary peut lire.
-
-## 2. Placer le fichier dans le projet
-
-Remplace le fichier vide par ton export :
+## Comment ça marche
 
 ```
-packages/tokens/tokens.json  ← remplace ce fichier par ton export Figma
+Figma Variables  →  packages/tokens/tokens.json  →  Style Dictionary  →  variables CSS
+(source de vérité)   (reporté à la main)            (build)               (build/css/)
 ```
 
-## 3. Adapter le mapping à tes collections
+Figma reste la source de vérité. Il n'y a pas d'export automatique :
+chaque changement fait dans Figma est **reporté à la main** dans
+`packages/tokens/tokens.json`, puis le build génère les fichiers CSS.
 
-Ouvre `packages/tokens/mapping.config.js`.
+## 1. Modifier la variable dans Figma
 
-Ce fichier fait le lien entre tes collections Figma et les fichiers CSS générés.
-Tu dois adapter les valeurs `figmaCollection` pour qu'elles correspondent
-exactement aux noms de tes collections dans Figma.
+Dans le panneau **Variables** de Figma, crée, renomme ou modifie la variable.
+Respecte la nomenclature existante (échelle numérique : `x4`, `x6`, `x3-5`…).
 
-Pour trouver le nom exact d'une collection dans Figma :
-1. Ouvre le panneau Variables dans Figma
-2. Le nom de la collection apparaît en haut de chaque groupe
-3. Reporte ce nom exactement dans `mapping.config.js`
-   (attention aux majuscules et aux espaces)
+## 2. Reporter le changement dans tokens.json
 
-Exemple :
+Ouvre `packages/tokens/tokens.json` et applique exactement le même changement,
+au même emplacement. Chaque token a une valeur (`$value`) et un type (`$type`) :
 
-```js
-export default {
-  collections: [
-    {
-      figmaCollection: "Couleurs/Light", // ← nom exact dans Figma
-      output: "colors-light.css",
-      type: "color",
-      mode: "light",
-    },
-    // Ajoute autant d'entrées que tu as de collections
-  ]
+```json
+{
+  "primitive": {
+    "typography": {
+      "line-height": {
+        "x6": {
+          "$value": 24,
+          "$type": "number"
+        }
+      }
+    }
+  }
 }
 ```
 
-## 4. Lancer le build des tokens
+Le fichier contient deux groupes racine :
 
-```bash
-make tokens
+- **`primitive`** — tokens bruts (couleurs, spacing, sizing, border-radius,
+  elevation, typographie) → `build/css/primitive.css`
+- **`semantic`** — tokens sémantiques (boutons, textes, notifications…)
+  → `build/css/semantic.css`
+
+Le nom de la variable CSS reprend le chemin du token, sans le groupe racine :
+
+```
+primitive › typography › line-height › x6   →   --typography-line-height-x6
 ```
 
-## 5. Vérifier dans Storybook
+Ce lien entre groupe racine et fichier CSS est défini dans
+`packages/tokens/mapping.config.js` (clé `figmaCollection`). Tu n'as à le
+modifier que si tu ajoutes un nouveau groupe racine.
+
+## 3. Lancer le build des tokens
+
+```bash
+pnpm --filter @brique-rouge/tokens build
+```
+
+Le build convertit automatiquement les valeurs :
+
+- **Couleur** → hex, tel que saisi (`#3453dc`, ou `#0000000f` avec opacité)
+- **Nombre** → en `px` (`24` → `24px`)
+- **Nombre sous `opacity`, `font-weight` ou un ratio de `line-height`**
+  (`tight`, `normal`…) → sans unité (`500`, `1.5`)
+- **`font-family`** → nom entre guillemets + police de secours
+  (`"GT Ultra", serif`)
+
+Le build régénère aussi la documentation `specs/foundations/` et `specs/tokens/`.
+Ajoute ces fichiers à ton commit : la CI vérifie qu'ils sont à jour.
+
+## 4. Vérifier dans Storybook
 
 Navigue dans **Fondations** dans le menu à gauche.
 
