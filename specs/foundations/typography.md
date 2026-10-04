@@ -26,6 +26,13 @@
 | `typography.line-height.tight` | `1.25` |
 | `typography.line-height.normal` | `1.5` |
 | `typography.line-height.loose` | `1.75` |
+| `typography.line-height.x4-5` | `18px` |
+| `typography.line-height.x5` | `20px` |
+| `typography.line-height.x5-5` | `22px` |
+| `typography.line-height.x6` | `24px` |
+| `typography.line-height.x8` | `32px` |
+| `typography.line-height.x10` | `40px` |
+| `typography.line-height.x14` | `56px` |
 
 ## Sémantiques
 

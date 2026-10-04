@@ -45,7 +45,7 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-regular);
-  line-height: 24px;
+  line-height: var(--typography-line-height-x6);
   color: var(--color-neutral-700);
 }
 
@@ -63,6 +63,6 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-regular);
-  line-height: 24px;
+  line-height: var(--typography-line-height-x6);
   color: var(--color-neutral-500);
 }

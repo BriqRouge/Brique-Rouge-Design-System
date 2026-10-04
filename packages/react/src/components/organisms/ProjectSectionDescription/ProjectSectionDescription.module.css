@@ -16,7 +16,7 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-medium);
-  line-height: 24px;
+  line-height: var(--typography-line-height-x6);
   letter-spacing: 2.4px;
   text-transform: uppercase;
   /* Écart signalé vs Figma (#a3a3a3) : aucun token ne correspond exactement,
@@ -29,7 +29,7 @@
   font-family: var(--typography-subtitle-font-family);
   font-size: var(--typography-font-size-3xl);
   font-weight: var(--typography-subtitle-font-weight);
-  line-height: 40px;
+  line-height: var(--typography-line-height-x10);
   color: var(--color-neutral-900);
   margin: 0;
 }
@@ -43,7 +43,7 @@
   /* Poids Figma "Book" (~333) sans équivalent exact — mappé sur regular,
      même convention que ProjectCardDescription. */
   font-weight: var(--typography-font-weight-regular);
-  line-height: 32px;
+  line-height: var(--typography-line-height-x8);
   color: var(--color-neutral-800);
   margin: 0;
 }
@@ -67,7 +67,7 @@
   font-family: var(--typography-body-font-family);
   font-size: var(--typography-body-font-size);
   font-weight: var(--typography-font-weight-regular);
-  line-height: 24px;
+  line-height: var(--typography-line-height-x6);
   color: var(--color-neutral-600);
 }
 
