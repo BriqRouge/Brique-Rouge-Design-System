@@ -104,6 +104,25 @@ StyleDictionary.registerTransform({
   },
 });
 
+// ─── Transformer : font-family → nom entre guillemets + police de secours ──
+// Figma stocke le nom seul (ex: "GT Ultra") pour pouvoir appliquer la police ;
+// la pile de secours n'existe que côté CSS. Défaut : sans-serif.
+const FONT_FALLBACKS = {
+  'GT Ultra': 'serif',
+};
+
+StyleDictionary.registerTransform({
+  name: 'text/font-family-stack',
+  type: 'value',
+  filter: (token) =>
+    (token.type ?? token.$type) === 'text' &&
+    token.path.some((p) => p.toLowerCase() === 'font-family'),
+  transform: (token) => {
+    const family = String(token.original?.$value ?? token.$value);
+    return `"${family}", ${FONT_FALLBACKS[family] ?? 'sans-serif'}`;
+  },
+});
+
 // â”€â”€â”€ Format CSS : variables avec suppression du prÃ©fixe de collection â”€â”€â”€â”€â”€
 // Chaque collection a un prÃ©fixe path (ex: ["color", "light"]).
 // Ce format le supprime pour gÃ©nÃ©rer des noms sÃ©mantiques :
@@ -140,7 +159,7 @@ StyleDictionary.registerFormat({
 
 // â”€â”€â”€ Transforms appliquÃ©s Ã  toutes les plateformes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Les filters sur chaque transformer limitent leur application au bon type.
-const VALUE_TRANSFORMS = ['color/figma-hex', 'number/px-or-opacity'];
+const VALUE_TRANSFORMS = ['color/figma-hex', 'number/px-or-opacity', 'text/font-family-stack'];
 
 // â”€â”€â”€ DÃ©termine le sÃ©lecteur CSS selon le mode de la collection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function getSelector(collection) {

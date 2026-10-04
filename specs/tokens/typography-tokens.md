@@ -7,8 +7,8 @@
 ## Primitives
 
 ```css
---typography-font-family-sans: ABC Favorit Pro Variable;
---typography-font-family-mono: GT Ultra;
+--typography-font-family-sans: "ABC Favorit Pro Variable", sans-serif;
+--typography-font-family-display: "GT Ultra", serif;
 --typography-font-size-xs: 12px;
 --typography-font-size-sm: 14px;
 --typography-font-size-base: 16px;
@@ -30,20 +30,20 @@
 ## Sémantiques
 
 ```css
---typography-body-font-family: ABC Favorit Pro Variable;
+--typography-body-font-family: "ABC Favorit Pro Variable", sans-serif;
 --typography-body-font-size: 16px;
 --typography-body-line-height: 1.5;
---typography-heading-font-family: ABC Favorit Pro Variable;
+--typography-heading-font-family: "ABC Favorit Pro Variable", sans-serif;
 --typography-heading-font-weight: 700;
---typography-subtitle-font-family: ABC Favorit Pro Variable;
---typography-subtitle-font-height: 1.75px;
+--typography-subtitle-font-family: "ABC Favorit Pro Variable", sans-serif;
+--typography-subtitle-line-height: 1.75;
 --typography-subtitle-font-weight: 500;
 --typography-label-font-weight: 500;
---typography-dropdown-menu-button-font-family: ABC Favorit Pro Variable;
+--typography-dropdown-menu-button-font-family: "ABC Favorit Pro Variable", sans-serif;
 --typography-dropdown-menu-button-font-size: 16px;
---typography-button-nm-font-family: ABC Favorit Pro Variable;
+--typography-button-nm-font-family: "ABC Favorit Pro Variable", sans-serif;
 --typography-button-nm-font-size: 14px;
---typography-button-md-font-family: ABC Favorit Pro Variable;
+--typography-button-md-font-family: "ABC Favorit Pro Variable", sans-serif;
 --typography-button-md-font-size: 16px;
 --typography-button-sm-font-size: 12px;
 ```
