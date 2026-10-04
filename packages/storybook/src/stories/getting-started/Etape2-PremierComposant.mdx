@@ -69,10 +69,12 @@ claude
 Utilise ce prompt type :
 
 ```
-Travaille sur la branche feat/composant-[NOM]
+Travaille sur la branche feat/component-[nom]
 (à créer depuis main si elle n'existe pas).
 
-Implémente le composant [NomComposant] dans packages/react/src/components/.
+Implémente le composant [NomComposant] dans
+packages/react/src/components/[atoms|molecules|organisms]/[NomComposant]/
+(niveau atomic design à choisir avant de créer les fichiers).
 
 API validée :
 [Colle ici l'API validée avec Claude AI]
@@ -85,7 +87,8 @@ Pour ce composant, crée :
 - [NomComposant].module.css — styles avec CSS Modules et tokens CSS
 - [NomComposant].test.tsx — tests unitaires, d'interaction et d'accessibilité (jest-axe)
 - index.ts — export du composant
-- Stories Storybook dans packages/storybook/src/stories/composants/[NomComposant]/
+- [NomComposant].stories.tsx dans packages/storybook/src/stories/components/
+  (title : 'Atomes|Molécules|Organismes/[NomComposant]')
 
 Règles absolues :
 - Tokens CSS uniquement — pas de valeur arbitraire
@@ -95,32 +98,37 @@ Règles absolues :
 
 Après implémentation :
 - Lance les tests : pnpm test
-- Vérifie que Storybook compile : make dev
-- Pousse la branche sur GitHub
+- Vérifie que Storybook compile : pnpm --filter @brique-rouge/storybook dev
+- Pousse la branche sur GitHub et ouvre une PR vers main
 ```
 
 ## 5. Vérifier dans Storybook
 
-Navigue dans **Composants** dans le menu à gauche.
+Navigue dans **Atomes**, **Molécules** ou **Organismes** dans le menu à gauche,
+selon le niveau du composant.
 
 Compare le rendu avec ton composant Figma :
 - Les variants s'affichent correctement ?
 - Les états fonctionnent ?
 - La navigation clavier fonctionne (touche Tab) ?
 
-## 6. Mettre à jour COMPONENTS.md
+## 6. Documenter le composant
 
-Après validation, documente le composant dans `COMPONENTS.md`.
-Ce fichier est lu par Claude Code pour les futures générations.
+Après validation, documente le composant à deux endroits :
+- **`specs/[atoms|molecules|organisms]/[NomComposant].md`** — la fiche
+  canonique : API, tokens, règles d'usage
+- **`COMPONENTS.md`** — l'index, avec une ligne qui pointe vers cette fiche
+
+Ces fichiers sont lus par Claude Code pour les futures générations.
 
 ```
 Le composant [NomComposant] vient d'être validé.
 Voici son API : [colle l'API]
 Voici les tokens qu'il utilise : [liste les tokens]
 
-Mets à jour COMPONENTS.md pour ajouter ce composant
-en respectant le format existant.
+Crée la fiche specs/[niveau]/[NomComposant].md et ajoute une ligne
+dans COMPONENTS.md, en respectant le format existant.
 ```
 
-✅ Le composant apparaît dans Storybook et dans COMPONENTS.md ?
+✅ Le composant apparaît dans Storybook, dans specs/ et dans COMPONENTS.md ?
 Continue avec **Étape 3 — CI/CD**.
