@@ -99,7 +99,9 @@ StyleDictionary.registerTransform({
     const raw = token.original?.$value ?? token.$value;
     const num = Number(raw);
     const isOpacity = token.path.some((p) => p.toLowerCase().includes('opacity'));
-    const isRaw = token.path.some((p) => ['font-weight', 'line-height'].includes(p.toLowerCase()));
+    // line-height : ratios bruts (tight, normal…) sauf l'échelle x… exprimée en px
+    const isPxScale = /^x\d/.test(token.path[token.path.length - 1]);
+    const isRaw = token.path.some((p) => ['font-weight', 'line-height'].includes(p.toLowerCase())) && !isPxScale;
     return (isOpacity || isRaw) ? String(num) : `${num}px`;
   },
 });

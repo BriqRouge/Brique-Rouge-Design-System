@@ -52,7 +52,7 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-bold);
-  line-height: 24px;
+  line-height: var(--typography-line-height-x6);
   white-space: nowrap;
 }
 
@@ -77,7 +77,7 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-xs);
   font-weight: var(--typography-font-weight-regular);
-  line-height: 20px;
+  line-height: var(--typography-line-height-x5);
   white-space: nowrap;
 }
 
@@ -136,7 +136,7 @@
   font-family: var(--typography-font-family-sans);
   font-size: var(--typography-font-size-sm);
   font-weight: var(--typography-font-weight-regular);
-  line-height: 22px;
+  line-height: var(--typography-line-height-x5-5);
 }
 
 .banner[data-type='info'] .description {
