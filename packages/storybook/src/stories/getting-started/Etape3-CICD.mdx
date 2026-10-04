@@ -43,13 +43,19 @@ clique sur **"I understand my workflows, go ahead and enable them"**.
 
 ## 4. Déclencher le premier déploiement
 
-Pousse un commit sur main pour déclencher le premier déploiement :
+La branche `main` étant protégée, on ne pousse jamais directement dessus.
+Le déploiement se déclenche quand une PR est mergée dans `main` :
 
 ```bash
+git checkout -b chore/activation-ci-cd
 git add .
 git commit -m "chore: activation CI/CD"
-git push origin main
+git push origin chore/activation-ci-cd
 ```
+
+1. Ouvre une PR vers `main` sur GitHub
+2. Attends que les vérifications CI passent (Tests et Lint)
+3. Merge la PR
 
 Puis va dans l'onglet **Actions** pour suivre le déploiement en temps réel.
 

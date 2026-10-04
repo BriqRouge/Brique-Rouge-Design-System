@@ -17,11 +17,11 @@ setup:
 
 ## Compile les tokens Style Dictionary → CSS Variables
 tokens:
-	pnpm turbo run build --filter=@starter/tokens
+	pnpm turbo run build --filter=@brique-rouge/tokens
 
 ## Lance Storybook en local sur localhost:6007 (compile les tokens d'abord)
 dev: tokens
-	pnpm turbo run dev --filter=@starter/storybook
+	pnpm turbo run dev --filter=@brique-rouge/storybook
 
 ## Lance les tests Vitest
 test:
