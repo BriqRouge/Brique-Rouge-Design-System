@@ -5,28 +5,26 @@ type ProjectBentoCardProject = 'odaptos' | 'bpce' | 'ibp' | 'conseil-constitutio
 type ProjectBentoCardShape = 'square' | 'rectangle';
 
 interface ProjectBentoCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Projet affiché — détermine la couleur d'accent au survol */
+  /** Projet affiché — détermine la couleur de la plaque de fond et de la bordure au survol */
   project: ProjectBentoCardProject;
   /** Format de la carte — 'rectangle' est deux fois plus haute que 'square' */
   shape?: ProjectBentoCardShape;
   /**
    * Si true, la carte s'élargit (276px → 576px) au survol/focus en plus du
-   * changement de couleur. Dans le Figma source, seules 2 des 5 variantes
-   * s'étendent (Odaptos en square, Conseil constitutionnel en rectangle) —
-   * les autres (BPCE, iBP, CV) ne font que changer de couleur/contenu.
+   * décalage de la façade. Dans le Figma source, seules 2 des 5 variantes
+   * s'étendent (Odaptos en square, Conseil constitutionnel en rectangle).
    * Défaut : false.
    */
   expandOnHover?: boolean;
-  /** Description révélée au survol/focus — typiquement un <ProjectCardDescription /> */
+  /** Description révélée au survol/focus en bas de la façade — typiquement un <ProjectCardDescription /> */
   description?: React.ReactNode;
   /** Contenu visuel de la carte (image, illustration…) */
   children: React.ReactNode;
   /**
    * Contenu visuel alternatif révélé au survol/focus, en fondu enchaîné avec
-   * `children` (même mécanique que `description`). Optionnel — certaines
-   * variantes du Figma source affichent un visuel différent au survol
-   * (ex: Conseil constitutionnel, Odaptos), d'autres gardent le même visuel
-   * (leur contenu visuel n'est pas encore arrêté). Sans effet si non fourni.
+   * `children` (même mécanique que `description`). À utiliser quand le Figma
+   * source montre un contenu réellement différent entre idle et survol
+   * (ex: iBP, CV). Sans effet si non fourni.
    */
   hoverChildren?: React.ReactNode;
 }
@@ -65,9 +63,14 @@ const ProjectBentoCard = forwardRef<HTMLDivElement, ProjectBentoCardProps>(
         className={classes}
         {...props}
       >
-        <div className={styles.content}>{children}</div>
-        {hoverChildren && <div className={styles.hoverContent}>{hoverChildren}</div>}
-        {description && <div className={styles.description}>{description}</div>}
+        {/* Plaque de fond (Figma "Surface BG") — couleur du projet, révélée au survol */}
+        <div className={styles.surfaceBg} aria-hidden="true" />
+        {/* Façade (Figma "Surface Front") — décalée au survol pour révéler la plaque de fond */}
+        <div className={styles.surfaceFront}>
+          <div className={styles.content}>{children}</div>
+          {hoverChildren && <div className={styles.hoverContent}>{hoverChildren}</div>}
+          {description && <div className={styles.description}>{description}</div>}
+        </div>
       </div>
     );
   }

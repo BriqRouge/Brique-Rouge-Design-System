@@ -2,20 +2,36 @@
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/ProjectCardDescription/`
-**Node Figma :** `1902:22312` ("Project-Cards-Description")
+**Node Figma :** `1902:22312` ("Project-Cards-Description", `Type=Default`) / `2040:19252` (`Type=CV`)
 **Fichiers :** `ProjectCardDescription.tsx`, `ProjectCardDescription.module.css`, `ProjectCardDescription.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/ProjectCardDescription.stories.tsx`
 
 ## API
 
+Union discriminée par `variant` :
+
 ```ts
-interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
-  children:  React.ReactNode; // requis — titre du projet (contenu principal, peut être multi-lignes)
+type ProjectCardDescriptionVariant = 'default' | 'cv';
+
+// variant 'default' (défaut) — Figma Type=Default
+{
+  variant?:  'default';
+  children:  React.ReactNode; // requis — titre du projet (peut être multi-lignes)
   project:   string;          // requis — nom du projet (ex: "Odaptos")
   year:      string;          // requis — année du projet (ex: "2024")
   category:  string;          // requis — catégorie/rôle (ex: "Product Design")
 }
+
+// variant 'cv' — Figma Type=CV : titre seul, centré
+{
+  variant:   'cv';
+  children:  React.ReactNode; // requis — titre (ex: "CV")
+}
 ```
+
+**Types exportés :** `ProjectCardDescriptionProps`, `ProjectCardDescriptionVariant`
+**data-component :** `ds-br-project-card-description`
+**data-attributes :** `data-variant`
 
 ## Tokens CSS utilisés
 
@@ -40,6 +56,10 @@ interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElemen
 - **Écart signalé vs Figma** (validé par Damien) : le texte n'est lié à aucune variable de couleur Figma (`color/text/*`) — mappé sur `--color-neutral-900` (le noir pur du Figma ne correspond à aucun token existant)
 - **Écart signalé vs Figma** (validé par Damien) : les poids de police Figma (`Light` pour les labels, `Medium` variable ~571 pour le titre) n'ont pas d'équivalent exact dans `--typography-font-weight-*` — mappés sur `regular` (400) et `medium` (500)
 
+- **Variante `cv`** (ajoutée pour la carte CV de `ProjectBentoCard`) : titre seul, centré horizontalement et verticalement, **hauteur fixe 120px** comme dans Figma (aucun token de sizing à cette valeur — même logique que les dimensions de `ProjectBentoCard`)
+- **Écart à arbitrer avec Damien** : dans le nouveau composant Figma `ProjectBentoCard` (`2032:20121`), les instances `Type=Default` ont une hauteur fixe de 120px ; le composant code garde sa hauteur automatique validée précédemment (≈96px pour un titre sur 1 ligne, ≈114px sur 2 lignes)
+- **Storybook** : les props étant une union discriminée, la story utilise un type d'args plat + un `render` explicite (Storybook ne sait pas typer des args sur une union)
+
 ## Tests
 
-7 tests — 7 passants
+10 tests — 10 passants

@@ -10,6 +10,23 @@
   background-color: var(--color-background-projects-body);
 }
 
+/* Variante Figma `Type=CV` (node 2040:19252) : titre seul, centré
+   verticalement et horizontalement dans une hauteur fixe de 120px (pas de
+   token de sizing à cette valeur — même logique que les dimensions de
+   ProjectBentoCard). */
+.variant-cv {
+  justify-content: center;
+  height: 120px;
+}
+
+.variant-cv .titleWrapper {
+  align-items: center;
+}
+
+.variant-cv .title {
+  text-align: center;
+}
+
 .header {
   display: flex;
   align-items: flex-start;

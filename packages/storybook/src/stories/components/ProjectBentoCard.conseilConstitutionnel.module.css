@@ -1,33 +1,39 @@
 /* token-audit-ignore */
 /*
  * Contenu illustratif bespoke (mockup Figma composé à la main, cf. #1b1b1b
- * plus bas pour la couleur "Display bottom" du laptop) — voir scripts/token-audit.js.
+ * plus bas pour la couleur "Display bottom" du laptop) — voir scripts/token-audit.mjs.
  * Composition du visuel "Conseil constitutionnel" (mockup ordinateur portable +
- * mockup téléphone). Reproduit fidèlement le node Figma 1759:22826 (idle) /
- * 1759:22840 (survol) : ce n'est PAS un changement de contenu entre idle et
- * survol, mais les MÊMES éléments qui se repositionnent/redimensionnent —
- * l'ordinateur portable bouge à peine, le téléphone se déplace et grandit.
+ * mockup téléphone). Reproduit le node Figma 2032:20150 (idle) / 2032:20156
+ * (survol) : ce n'est PAS un changement de contenu entre idle et survol, mais
+ * les MÊMES éléments qui se repositionnent/redimensionnent — l'ordinateur
+ * portable entre dans le cadre, le téléphone se déplace à gauche et rétrécit.
  * Transition déclenchée par l'état :hover/:focus-within de la carte parente
  * (data-component="ds-br-project-bento-card"), pas par un état React local.
+ * Ombres portées : tokens Elevation 4 (valeurs Figma déformées par la mise à
+ * l'échelle des instances remplacées par les tokens, validé par Damien).
  */
 
 .laptop {
   position: absolute;
-  top: 142px;
-  left: 274.05px;
+  top: 94px;
+  left: 396.05px;
   width: 490.885px;
   height: 289px;
-  transition:
-    left 150ms ease-out,
-    top 150ms ease-out;
+  filter: drop-shadow(
+      var(--elevation-4-ambient-shadow-offset-x) var(--elevation-4-ambient-shadow-offset-y)
+        var(--elevation-4-ambient-shadow-blur) var(--elevation-4-ambient-shadow-color)
+    )
+    drop-shadow(
+      var(--elevation-4-key-shadow-offset-x) var(--elevation-4-key-shadow-offset-y)
+        var(--elevation-4-key-shadow-blur) var(--elevation-4-key-shadow-color)
+    );
+  transition: left 150ms ease-out;
 }
 
 :global([data-component='ds-br-project-bento-card']):hover .laptop,
 :global([data-component='ds-br-project-bento-card']):focus-within .laptop {
-  left: 266.55px;
-  top: 142.5px;
+  left: 266.05px;
 }
-
 .laptopShadowWrapper {
   position: absolute;
   bottom: -0.46%;
@@ -122,11 +128,19 @@
 
 .phone {
   position: absolute;
-  left: calc(50% + 107px);
-  top: calc(50% - 58.88px);
+  left: calc(50% + 79px);
+  top: calc(50% - 2.3px);
   transform: translate(-50%, -50%);
-  width: 206px;
-  height: 416.243px;
+  width: 262px;
+  height: 529.396px;
+  filter: drop-shadow(
+      var(--elevation-4-ambient-shadow-offset-x) var(--elevation-4-ambient-shadow-offset-y)
+        var(--elevation-4-ambient-shadow-blur) var(--elevation-4-ambient-shadow-color)
+    )
+    drop-shadow(
+      var(--elevation-4-key-shadow-offset-x) var(--elevation-4-key-shadow-offset-y)
+        var(--elevation-4-key-shadow-blur) var(--elevation-4-key-shadow-color)
+    );
   transition:
     left 150ms ease-out,
     top 150ms ease-out,
@@ -136,12 +150,11 @@
 
 :global([data-component='ds-br-project-bento-card']):hover .phone,
 :global([data-component='ds-br-project-bento-card']):focus-within .phone {
-  left: calc(50% - 149px);
-  top: calc(50% + 0.22px);
-  width: 216px;
-  height: 436.449px;
+  left: calc(50% - 156.5px);
+  top: calc(50% - 58.97px);
+  width: 197px;
+  height: 398.057px;
 }
-
 .phone img {
   position: absolute;
   inset: 0;

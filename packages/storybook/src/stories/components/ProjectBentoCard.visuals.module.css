@@ -1,0 +1,334 @@
+/* token-audit-ignore */
+/*
+ * Contenu illustratif bespoke des cartes bento (node Figma 2032:20121) —
+ * mockups et illustrations composés à la main dans Figma. Couleurs hors DS
+ * conservées telles quelles : #1b1b1b ("Display bottom" du MacBook, même
+ * valeur que MacbookMockup) et #000 / Helvetica 7.715px (libellés du radar
+ * iBP, illustration figée). Positions en px reprises du Figma, relatives à la
+ * façade de la carte. Les ombres portées utilisent les tokens d'élévation.
+ */
+
+/* ─── MacBook (instance "Macbook Pro") ───────────────────────────────────── */
+
+.macbook {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.macbook img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.shadowWrapper {
+  position: absolute;
+  top: 100%;
+  right: -1.35%;
+  bottom: -0.46%;
+  left: -1.35%;
+}
+
+.screenFrame {
+  position: absolute;
+  inset: 0 8.11% 2.98% 8.11%;
+}
+
+.body {
+  position: absolute;
+  inset: 94.72% 0 0 0;
+}
+
+.bottom {
+  position: absolute;
+  inset: 97.94% 0 0 0;
+  mix-blend-mode: multiply;
+}
+
+.bevelHardLight {
+  position: absolute;
+  inset: 94.72% 42.7% 3.44% 42.7%;
+  mix-blend-mode: hard-light;
+}
+
+.bevelMultiply {
+  position: absolute;
+  inset: 94.72% 42.7% 3.44% 42.7%;
+  mix-blend-mode: multiply;
+}
+
+.screen {
+  position: absolute;
+  inset: 5.05% 10% 10.09% 10%;
+  overflow: hidden;
+}
+
+.displayBottom {
+  position: absolute;
+  inset: 91.74% 8.11% 5.28% 8.11%;
+  background-color: #1b1b1b;
+}
+
+/* Écran vidéo pas encore fourni — même traitement que Conseil constitutionnel */
+.screenPlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-neutral-200);
+}
+
+/* Odaptos — node 2037:18946 */
+.odaptosMacbook {
+  top: 39px;
+  left: calc(50% + 52.5px);
+  width: 331px;
+  height: 195.022px;
+}
+
+.odaptosShadow {
+  position: absolute;
+  inset: -50% -0.13%;
+}
+
+/* BPCE — node 2074:20210 */
+.bpceMacbook {
+  top: 37px;
+  left: calc(50% + 46.5px);
+  width: 343px;
+  height: 200px;
+  filter: drop-shadow(
+      var(--elevation-4-ambient-shadow-offset-x) var(--elevation-4-ambient-shadow-offset-y)
+        var(--elevation-4-ambient-shadow-blur) var(--elevation-4-ambient-shadow-color)
+    )
+    drop-shadow(
+      var(--elevation-4-key-shadow-offset-x) var(--elevation-4-key-shadow-offset-y)
+        var(--elevation-4-key-shadow-blur) var(--elevation-4-key-shadow-color)
+    );
+}
+
+.bpceShadow {
+  position: absolute;
+  inset: -21.67% 0;
+}
+
+.macbook .bpceScreen {
+  top: 0.08%;
+  height: 450.11%;
+}
+
+/* ─── Survol vide (Odaptos, BPCE) — contenu à venir ──────────────────────── */
+
+.emptyHover {
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── iBP — radar (node 2074:20141) ──────────────────────────────────────── */
+
+.ibpRadar {
+  position: absolute;
+  inset: 0;
+}
+
+/* Structure Figma : forme dimensionnée > zone élargie (inset négatif = marge
+   du trait à l'export) > image 100%. */
+.ibpShape {
+  position: absolute;
+}
+
+.ibpShapeInset {
+  position: absolute;
+}
+
+.fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ibpGrid {
+  top: 64.29px;
+  left: 9.39px;
+  width: 148.134px;
+  height: 148.134px;
+}
+
+.ibpPolygon1 {
+  top: 108.53px;
+  left: 65.96px;
+  width: 52.721px;
+  height: 67.123px;
+}
+
+.ibpPolygon5 {
+  top: 45.78px;
+  left: -4.6px;
+  width: 88.052px;
+  height: 121.194px;
+}
+
+.ibpPolygon6 {
+  top: 45.78px;
+  left: -4.5px;
+  width: 88.052px;
+  height: 121.194px;
+}
+
+.ibpPolygon5 .ibpShapeInset,
+.ibpPolygon6 .ibpShapeInset {
+  inset: -1.49% -2.05% -1.49% -2.04%;
+}
+
+.ibpPolygon7 {
+  top: 45.78px;
+  left: 83.55px;
+  width: 88.052px;
+  height: 121.194px;
+}
+
+.ibpPolygon7 .ibpShapeInset {
+  inset: -1.49% -2.04% -1.49% -2.05%;
+}
+
+.ibpPolygon8 {
+  top: 166.97px;
+  left: -4.5px;
+  width: 176.105px;
+  height: 63.974px;
+}
+
+.ibpPolygon8 .ibpShapeInset {
+  inset: -2.81% -1.02% -2.96% -1.02%;
+}
+
+.ibpLabel {
+  position: absolute;
+  width: 77.153px;
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 7.715px;
+  line-height: normal;
+  color: #000;
+  word-break: break-word;
+}
+
+.ibpLabelCentralisation {
+  top: 18px;
+  left: 83.45px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.ibpLabelSystematisation {
+  top: 43.72px;
+  left: 150.83px;
+}
+
+.ibpLabelIndustrialisation {
+  top: 92.58px;
+  left: 183.75px;
+}
+
+.ibpLabelRationnalisation {
+  top: 160.99px;
+  left: 183.75px;
+}
+
+.ibpLabelUtilisation {
+  top: 160.48px;
+  left: -81.14px;
+  width: 65.837px;
+}
+
+.ibpLabelConnaissance {
+  top: 47.83px;
+  left: -60.05px;
+}
+
+.ibpLabelNotification {
+  top: 104.93px;
+  left: -16.85px;
+  transform: translateX(-100%);
+  text-align: right;
+}
+
+.ibpLabelDetection {
+  top: 218.6px;
+  left: -46.17px;
+  width: 70.467px;
+}
+
+.ibpLabelPriorisation {
+  top: 241.23px;
+  left: 83.97px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.ibpLabelAmelioration {
+  top: 219.63px;
+  left: 147.23px;
+}
+
+/* ─── iBP — survol (node 2074:20208), effet Figma "Drop Shadow/Elevation 3" ─ */
+
+.ibpHoverScreen {
+  position: absolute;
+  top: 12px;
+  left: 21px;
+  width: 227.556px;
+  height: 128px;
+  object-fit: cover;
+  box-shadow:
+    var(--elevation-3-ambient-shadow-offset-x) var(--elevation-3-ambient-shadow-offset-y)
+      var(--elevation-3-ambient-shadow-blur) var(--elevation-3-ambient-shadow-spread)
+      var(--elevation-4-ambient-shadow-color),
+    var(--elevation-3-key-shadow-offset-x) var(--elevation-3-key-shadow-offset-y)
+      var(--elevation-3-key-shadow-blur) var(--elevation-3-key-shadow-spread)
+      var(--elevation-3-key-shadow-color);
+}
+
+/* ─── CV (nodes 2040:19191 / 2040:19219) ─────────────────────────────────── */
+
+.cvIllustration {
+  position: absolute;
+  top: 56px;
+  left: 73px;
+  width: 128.8px;
+  height: 161px;
+}
+
+.cvIllustrationInset {
+  position: absolute;
+  inset: -1.24% -9.32% -13.66% -9.32%;
+  display: block;
+}
+
+.cvHoverWrapper {
+  position: absolute;
+  top: 16px;
+  left: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 177.718px;
+  height: 118.969px;
+}
+
+.cvHoverTransform {
+  flex: none;
+  transform: rotate(33.69deg) scaleY(0.92) skewX(-22.42deg);
+}
+
+.cvHoverIllustration {
+  position: relative;
+  width: 95.05px;
+  height: 118.813px;
+}
+
+.cvHoverIllustrationInset {
+  position: absolute;
+  inset: -1.68% -12.62% -18.52% -12.62%;
+  display: block;
+}

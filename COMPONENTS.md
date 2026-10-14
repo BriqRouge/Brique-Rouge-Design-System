@@ -35,7 +35,7 @@ Assemble des atomes en une unité fonctionnelle précise.
 | `AlertBanner` | Bandeau de notification (info/warning) | [specs/molecules/AlertBanner.md](specs/molecules/AlertBanner.md) |
 | `DropdownMenu` | Conteneur de menu déroulant | [specs/molecules/DropdownMenu.md](specs/molecules/DropdownMenu.md) |
 | `DropdownMenuButton` | Item de menu déroulant (logo + texte + icône) | [specs/molecules/DropdownMenuButton.md](specs/molecules/DropdownMenuButton.md) |
-| `ProjectCardDescription` | Bloc titre/année/catégorie d'un projet | [specs/molecules/ProjectCardDescription.md](specs/molecules/ProjectCardDescription.md) |
+| `ProjectCardDescription` | Bloc titre/année/catégorie d'un projet (variantes default / cv) | [specs/molecules/ProjectCardDescription.md](specs/molecules/ProjectCardDescription.md) |
 | `ProjectOverview` | En-tête de page projet (titre, description, rôle, contributions) | [specs/molecules/ProjectOverview.md](specs/molecules/ProjectOverview.md) |
 | `MetaInfoItem` | Item icône + texte (localisation, musique, lecture...) | [specs/molecules/MetaInfoItem.md](specs/molecules/MetaInfoItem.md) |
 
@@ -47,6 +47,6 @@ Compose au moins une molécule et/ou plusieurs atomes/organismes pour former une
 |---|---|---|
 | `DropdownMenuTrigger` | Trigger + menu déroulant complet (hover/focus/clavier) | [specs/organisms/DropdownMenuTrigger.md](specs/organisms/DropdownMenuTrigger.md) |
 | `TopNav` | Barre de navigation supérieure | [specs/organisms/TopNav.md](specs/organisms/TopNav.md) |
-| `ProjectBentoCard` | Carte projet de la grille bento (survol, agrandissement) | [specs/organisms/ProjectBentoCard.md](specs/organisms/ProjectBentoCard.md) |
+| `ProjectBentoCard` | Carte projet de la grille bento (façade décalée + plaque couleur au survol, agrandissement) | [specs/organisms/ProjectBentoCard.md](specs/organisms/ProjectBentoCard.md) |
 | `ProjectSectionDescription` | Section numérotée (titre, texte, puces, bandeau d'alerte optionnel) | [specs/organisms/ProjectSectionDescription.md](specs/organisms/ProjectSectionDescription.md) |
 | `ProjectSectionsDescription` | Carte conteneur empilant plusieurs sections avec séparateurs | [specs/organisms/ProjectSectionsDescription.md](specs/organisms/ProjectSectionsDescription.md) |

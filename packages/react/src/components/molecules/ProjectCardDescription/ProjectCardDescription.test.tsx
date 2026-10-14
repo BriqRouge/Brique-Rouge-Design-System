@@ -59,9 +59,34 @@ describe('ProjectCardDescription — rendu', () => {
     expect(container.querySelector('br')).toBeInTheDocument();
     expect(container.textContent).toContain('AI-SaaS');
   });
+
+  it('variant="default" par défaut (data-variant)', () => {
+    const { container } = render(
+      <ProjectCardDescription project="Odaptos" year="2024" category="Product Design">
+        Refonte de la plateforme AI-SaaS
+      </ProjectCardDescription>
+    );
+    expect(container.querySelector('[data-component="ds-br-project-card-description"]')).toHaveAttribute(
+      'data-variant',
+      'default'
+    );
+  });
+
+  it('variant="cv" : affiche uniquement le titre', () => {
+    const { container } = render(<ProjectCardDescription variant="cv">CV</ProjectCardDescription>);
+    const card = container.querySelector('[data-component="ds-br-project-card-description"]');
+    expect(card).toHaveAttribute('data-variant', 'cv');
+    expect(screen.getByText('CV')).toBeInTheDocument();
+    expect(card?.querySelectorAll('p')).toHaveLength(1);
+  });
 });
 
 describe('ProjectCardDescription — accessibilité', () => {
+  it('aucune violation axe (variant="cv")', async () => {
+    const { container } = render(<ProjectCardDescription variant="cv">CV</ProjectCardDescription>);
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
   it('aucune violation axe', async () => {
     const { container } = render(
       <ProjectCardDescription project="Odaptos" year="2024" category="Product Design">
