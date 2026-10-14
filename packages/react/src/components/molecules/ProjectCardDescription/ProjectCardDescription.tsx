@@ -1,9 +1,16 @@
 import { forwardRef } from 'react';
 import styles from './ProjectCardDescription.module.css';
 
-interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
+type ProjectCardDescriptionVariant = 'default' | 'cv';
+
+interface ProjectCardDescriptionBaseProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Titre du projet (contenu principal) */
   children: React.ReactNode;
+}
+
+interface ProjectCardDescriptionDefaultProps extends ProjectCardDescriptionBaseProps {
+  /** Variante Figma `Type=Default` — nom du projet, année, titre et catégorie */
+  variant?: 'default';
   /** Nom du projet affiché en haut à gauche (ex: "Odaptos") */
   project: string;
   /** Année du projet affichée en haut à droite (ex: "2024") */
@@ -12,22 +19,42 @@ interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElemen
   category: string;
 }
 
+interface ProjectCardDescriptionCvProps extends ProjectCardDescriptionBaseProps {
+  /** Variante Figma `Type=CV` — titre seul, centré */
+  variant: 'cv';
+  project?: never;
+  year?: never;
+  category?: never;
+}
+
+type ProjectCardDescriptionProps = ProjectCardDescriptionDefaultProps | ProjectCardDescriptionCvProps;
+
 const ProjectCardDescription = forwardRef<HTMLDivElement, ProjectCardDescriptionProps>(
-  ({ children, project, year, category, className, ...props }, ref) => {
-    const classes = [styles.card, className].filter(Boolean).join(' ');
+  ({ children, variant = 'default', project, year, category, className, ...props }, ref) => {
+    const classes = [styles.card, styles[`variant-${variant}`], className].filter(Boolean).join(' ');
 
     return (
-      <div ref={ref} data-component="ds-br-project-card-description" className={classes} {...props}>
-        <div className={styles.header}>
-          <p className={styles.project}>{project}</p>
-          <p className={styles.year}>{year}</p>
-        </div>
+      <div
+        ref={ref}
+        data-component="ds-br-project-card-description"
+        data-variant={variant}
+        className={classes}
+        {...props}
+      >
+        {variant === 'default' && (
+          <div className={styles.header}>
+            <p className={styles.project}>{project}</p>
+            <p className={styles.year}>{year}</p>
+          </div>
+        )}
         <div className={styles.titleWrapper}>
           <p className={styles.title}>{children}</p>
         </div>
-        <div className={styles.footer}>
-          <p className={styles.category}>{category}</p>
-        </div>
+        {variant === 'default' && (
+          <div className={styles.footer}>
+            <p className={styles.category}>{category}</p>
+          </div>
+        )}
       </div>
     );
   }
@@ -36,4 +63,4 @@ const ProjectCardDescription = forwardRef<HTMLDivElement, ProjectCardDescription
 ProjectCardDescription.displayName = 'ProjectCardDescription';
 
 export { ProjectCardDescription };
-export type { ProjectCardDescriptionProps };
+export type { ProjectCardDescriptionProps, ProjectCardDescriptionVariant };

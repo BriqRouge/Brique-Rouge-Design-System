@@ -26,7 +26,10 @@ export { TopNav } from './components/organisms/TopNav';
 export type { TopNavProps, TopNavProject } from './components/organisms/TopNav';
 
 export { ProjectCardDescription } from './components/molecules/ProjectCardDescription';
-export type { ProjectCardDescriptionProps } from './components/molecules/ProjectCardDescription';
+export type {
+  ProjectCardDescriptionProps,
+  ProjectCardDescriptionVariant,
+} from './components/molecules/ProjectCardDescription';
 
 export { ProjectBentoCard } from './components/organisms/ProjectBentoCard';
 export type {

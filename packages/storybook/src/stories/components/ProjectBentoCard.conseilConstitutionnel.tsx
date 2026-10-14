@@ -8,8 +8,8 @@ import bevelMultiplyAsset from './assets/project-bento-card/bevel-multiply.svg';
 import mobileScreenAsset from './assets/project-bento-card/cc-mobile-screen.png';
 
 /**
- * Visuel de la carte "Conseil constitutionnel" (node Figma 1759:22826 idle /
- * 1759:22840 survol) : mockup ordinateur portable + mockup téléphone.
+ * Visuel de la carte "Conseil constitutionnel" (node Figma 2032:20150 idle /
+ * 2032:20156 survol) : mockup ordinateur portable + mockup téléphone.
  * Les mêmes éléments se repositionnent/redimensionnent entre idle et survol
  * (voir ProjectBentoCard.conseilConstitutionnel.module.css) — à passer en
  * children de <ProjectBentoCard shape="rectangle" expandOnHover />.

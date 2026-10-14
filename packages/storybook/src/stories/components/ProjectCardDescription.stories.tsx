@@ -1,10 +1,30 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ProjectCardDescription } from '@brique-rouge/react';
+import type { ProjectCardDescriptionVariant } from '@brique-rouge/react';
+
+// Les props du composant sont une union discriminée par `variant` (project,
+// year et category n'existent qu'en variante 'default') : Storybook ne sait
+// pas typer des args sur une union, d'où ce type plat + un render explicite.
+interface ProjectCardDescriptionStoryArgs {
+  variant?: ProjectCardDescriptionVariant;
+  children: React.ReactNode;
+  project?: string;
+  year?: string;
+  category?: string;
+}
 
 const meta = {
   title: 'Molécules/ProjectCardDescription',
   component: ProjectCardDescription,
   tags: ['autodocs'],
+  render: ({ variant, children, project = '', year = '', category = '' }) =>
+    variant === 'cv' ? (
+      <ProjectCardDescription variant="cv">{children}</ProjectCardDescription>
+    ) : (
+      <ProjectCardDescription project={project} year={year} category={category}>
+        {children}
+      </ProjectCardDescription>
+    ),
   // Largeur 100% (responsive) — le composant s'adapte à son conteneur (ex:
   // ProjectBentoCard au survol). Le wrapper ci-dessous fixe 276px pour
   // reproduire l'usage autonome par défaut vu dans le Figma source.
@@ -17,6 +37,11 @@ const meta = {
     },
   },
   argTypes: {
+    variant: {
+      description: "Variante Figma — 'default' (projet, année, titre, catégorie) ou 'cv' (titre seul, centré)",
+      control: 'select',
+      options: ['default', 'cv'],
+    },
     children: {
       description: 'Titre du projet (contenu principal)',
       control: 'text',
@@ -34,7 +59,7 @@ const meta = {
       control: 'text',
     },
   },
-} satisfies Meta<typeof ProjectCardDescription>;
+} satisfies Meta<ProjectCardDescriptionStoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -52,6 +77,20 @@ export const Default: Story = {
         AI-SaaS
       </>
     ),
+  },
+};
+
+export const VarianteCV: Story = {
+  name: 'Variante CV',
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/NZtxQVYKRqeaGcC7hT5pjw?node-id=2040-19252',
+    },
+  },
+  args: {
+    variant: 'cv',
+    children: 'CV',
   },
 };
 

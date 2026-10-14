@@ -22,4 +22,5 @@
 --border-radius-button: 999px;
 --border-radius-tag: 4px;
 --border-radius-dropdown-menu-button: 8px;
+--border-radius-bento-section: 12px;
 ```

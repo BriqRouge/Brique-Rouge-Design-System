@@ -106,6 +106,25 @@ describe('ProjectBentoCard — rendu', () => {
     );
   });
 
+  it('rend la plaque de fond (masquée aux lecteurs d’écran) et la façade qui porte le contenu', () => {
+    const { container } = render(<ProjectBentoCard project="ibp">Contenu</ProjectBentoCard>);
+    const card = container.querySelector('[data-component="ds-br-project-bento-card"]');
+    const [surfaceBg, surfaceFront] = Array.from(card?.children ?? []);
+    expect(card?.children).toHaveLength(2);
+    expect(surfaceBg).toHaveAttribute('aria-hidden', 'true');
+    expect(surfaceBg).toBeEmptyDOMElement();
+    expect(surfaceFront).toHaveTextContent('Contenu');
+  });
+
+  it('accepte une description en variante CV', () => {
+    render(
+      <ProjectBentoCard project="cv" description={<ProjectCardDescription variant="cv">CV</ProjectCardDescription>}>
+        Contenu
+      </ProjectBentoCard>
+    );
+    expect(screen.getByText('CV')).toBeInTheDocument();
+  });
+
   it('ajoute une className supplémentaire', () => {
     const { container } = render(
       <ProjectBentoCard project="odaptos" className="custom">

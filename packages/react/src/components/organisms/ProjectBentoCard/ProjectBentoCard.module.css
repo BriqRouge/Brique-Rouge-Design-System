@@ -1,19 +1,18 @@
+/*
+ * Structure Figma (node 2032:20121) : deux plaques superposées de même taille.
+ * - .surfaceBg    : couleur du projet, invisible au repos
+ * - .surfaceFront : fond clair + bordure, porte le contenu
+ * Au survol/focus, la façade se décale de +8px à droite / -8px en haut et
+ * révèle la plaque de fond (option validée par Damien : la façade garde sa
+ * taille, l'emprise visuelle passe à 284×284).
+ */
+
 .card {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 276px;
   height: 276px;
-  overflow: hidden;
   box-sizing: border-box;
-  border: 1px solid var(--color-border-bento-cards-idle);
-  border-radius: var(--border-radius-lg);
-  background-color: var(--color-neutral-50);
-  transition:
-    width 150ms ease-out,
-    background-color 150ms ease-out,
-    border-color 150ms ease-out;
+  transition: width 150ms ease-out;
 }
 
 .card[data-shape='rectangle'] {
@@ -23,7 +22,6 @@
 .card:hover,
 .card:focus-within {
   z-index: 1;
-  border-color: var(--color-border-bento-cards-hovered);
 }
 
 .expandOnHover:hover,
@@ -31,39 +29,86 @@
   width: 576px;
 }
 
-.card[data-project='odaptos']:hover,
-.card[data-project='odaptos']:focus-within {
+/* ─── Plaque de fond ─────────────────────────────────────────────────────── */
+
+.surfaceBg {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--border-radius-bento-section);
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.card:hover .surfaceBg,
+.card:focus-within .surfaceBg {
+  opacity: 1;
+}
+
+.card[data-project='odaptos'] .surfaceBg {
   background-color: var(--color-background-projects-odaptos);
 }
 
-.card[data-project='bpce']:hover,
-.card[data-project='bpce']:focus-within {
+.card[data-project='bpce'] .surfaceBg {
   background-color: var(--color-background-projects-bpce);
 }
 
-.card[data-project='ibp']:hover,
-.card[data-project='ibp']:focus-within {
+.card[data-project='ibp'] .surfaceBg {
   background-color: var(--color-background-projects-ibp);
 }
 
-.card[data-project='conseil-constitutionnel']:hover,
-.card[data-project='conseil-constitutionnel']:focus-within {
+.card[data-project='conseil-constitutionnel'] .surfaceBg {
   background-color: var(--color-background-projects-conseil-constitutionnel);
 }
 
-.card[data-project='cv']:hover,
-.card[data-project='cv']:focus-within {
+.card[data-project='cv'] .surfaceBg {
   background-color: var(--color-background-projects-cv);
+}
+
+/* ─── Façade ─────────────────────────────────────────────────────────────── */
+
+.surfaceFront {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-bento-cards-idle);
+  border-radius: var(--border-radius-bento-section);
+  background-color: var(--color-background-homepage);
+  transition:
+    transform 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.card:hover .surfaceFront,
+.card:focus-within .surfaceFront {
+  transform: translate(var(--spacing-x2), calc(-1 * var(--spacing-x2)));
+}
+
+.card[data-project='odaptos']:is(:hover, :focus-within) .surfaceFront {
+  border-color: var(--color-background-projects-odaptos);
+}
+
+.card[data-project='bpce']:is(:hover, :focus-within) .surfaceFront {
+  border-color: var(--color-background-projects-bpce);
+}
+
+.card[data-project='ibp']:is(:hover, :focus-within) .surfaceFront {
+  border-color: var(--color-background-projects-ibp);
+}
+
+.card[data-project='conseil-constitutionnel']:is(:hover, :focus-within) .surfaceFront {
+  border-color: var(--color-background-projects-conseil-constitutionnel);
+}
+
+.card[data-project='cv']:is(:hover, :focus-within) .surfaceFront {
+  border-color: var(--color-background-projects-cv);
 }
 
 /* ─── Contenu visuel ──────────────────────────────────────────────────────── */
 
 .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
 }
 
 .hasHoverVisual .content {
@@ -80,9 +125,6 @@
 .hoverContent {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   opacity: 0;
   pointer-events: none;
   transition: opacity 150ms ease-out;
@@ -94,7 +136,7 @@
   pointer-events: auto;
 }
 
-/* ─── Description révélée au survol/focus ────────────────────────────────── */
+/* ─── Description révélée au survol/focus, en bas de la façade ───────────── */
 
 .description {
   position: absolute;
@@ -118,6 +160,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .card,
+  .surfaceBg,
+  .surfaceFront,
   .content,
   .hoverContent,
   .description {

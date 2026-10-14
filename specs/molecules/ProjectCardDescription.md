@@ -2,20 +2,36 @@
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/ProjectCardDescription/`
-**Node Figma :** `1902:22312` ("Project-Cards-Description")
+**Node Figma :** `1902:22312` ("Project-Cards-Description", `Type=Default`) / `2040:19252` (`Type=CV`)
 **Fichiers :** `ProjectCardDescription.tsx`, `ProjectCardDescription.module.css`, `ProjectCardDescription.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/ProjectCardDescription.stories.tsx`
 
 ## API
 
+Union discriminée par `variant` :
+
 ```ts
-interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
-  children:  React.ReactNode; // requis — titre du projet (contenu principal, peut être multi-lignes)
+type ProjectCardDescriptionVariant = 'default' | 'cv';
+
+// variant 'default' (défaut) — Figma Type=Default
+{
+  variant?:  'default';
+  children:  React.ReactNode; // requis — titre du projet (peut être multi-lignes)
   project:   string;          // requis — nom du projet (ex: "Odaptos")
   year:      string;          // requis — année du projet (ex: "2024")
   category:  string;          // requis — catégorie/rôle (ex: "Product Design")
 }
+
+// variant 'cv' — Figma Type=CV : titre seul, centré
+{
+  variant:   'cv';
+  children:  React.ReactNode; // requis — titre (ex: "CV")
+}
 ```
+
+**Types exportés :** `ProjectCardDescriptionProps`, `ProjectCardDescriptionVariant`
+**data-component :** `ds-br-project-card-description`
+**data-attributes :** `data-variant`
 
 ## Tokens CSS utilisés
 
@@ -34,12 +50,14 @@ interface ProjectCardDescriptionProps extends React.HTMLAttributes<HTMLDivElemen
 ## Règles d'usage
 
 - **Largeur 100% (responsive)** — le composant remplit son conteneur (le consommateur définit la largeur, 276px par défaut dans les stories via un wrapper). Corrigé d'une largeur fixe 276px initiale : le panneau révélé par `ProjectBentoCard` au survol doit occuper toute la largeur de la carte, y compris lorsqu'elle s'agrandit à 576px — vérifié dans le JSX Figma (`left-[-1px] right-[-1px]`, jamais une largeur figée)
-- **Hauteur automatique** (pas 120px fixe) — le titre du Figma source s'affiche volontairement sur 2 lignes, une hauteur figée tronquerait la catégorie dès que le titre dépasse 1 ligne
-- **Hauteur visuelle ≈120px, conforme au Figma** : `line-height: 1` sur project/year/category (repli universel, ~130px) + `text-box-trim: trim-both` / `text-box-edge: cap alphabetic` en amélioration progressive sur les 4 textes (~114px dans les navigateurs compatibles, Chrome 130+). **Ne jamais reprendre les valeurs `line-height` littérales du JSX généré par Figma (24px, 18px) sans vérifier qu'elles ne sont pas elles-mêmes compressées par `text-box-trim` côté Figma** — sinon le composant rend significativement plus grand que prévu
+- **Hauteur fixe 120px** (validé par Damien, aligné sur les instances du composant Figma `ProjectBentoCard` `2032:20121`) — remplace la hauteur automatique précédente. Le titre occupe l'espace restant entre l'en-tête et la catégorie (`flex: 1 0 0`). Contenu prévu pour tenir dans 120px : un titre sur 1–2 lignes et une catégorie sur 1 ligne. Une catégorie qui passe à la ligne dans une largeur de 276px (ex : "Discovery | Product Design | Design System") déborde légèrement — dans `ProjectBentoCard`, la description Odaptos ne s'affiche qu'une fois la carte agrandie à 576px, où elle tient sur une ligne
+- **Hauteur des textes** : `line-height: 1` sur project/year/category (repli universel, ~130px) + `text-box-trim: trim-both` / `text-box-edge: cap alphabetic` en amélioration progressive sur les 4 textes (rognage des interlignes pour coller au rendu Figma, Chrome 130+). **Ne jamais reprendre les valeurs `line-height` littérales du JSX généré par Figma (24px, 18px) sans vérifier qu'elles ne sont pas elles-mêmes compressées par `text-box-trim` côté Figma** — sinon le composant rend significativement plus grand que prévu
 - `children` = titre du projet ; supporte un retour à la ligne manuel (`<br />`) ou un wrap naturel
 - **Écart signalé vs Figma** (validé par Damien) : le texte n'est lié à aucune variable de couleur Figma (`color/text/*`) — mappé sur `--color-neutral-900` (le noir pur du Figma ne correspond à aucun token existant)
 - **Écart signalé vs Figma** (validé par Damien) : les poids de police Figma (`Light` pour les labels, `Medium` variable ~571 pour le titre) n'ont pas d'équivalent exact dans `--typography-font-weight-*` — mappés sur `regular` (400) et `medium` (500)
+- **Variante `cv`** (ajoutée pour la carte CV de `ProjectBentoCard`) : titre seul, centré horizontalement et verticalement
+- **Storybook** : les props étant une union discriminée, la story utilise un type d'args plat + un `render` explicite (Storybook ne sait pas typer des args sur une union)
 
 ## Tests
 
-7 tests — 7 passants
+10 tests — 10 passants
