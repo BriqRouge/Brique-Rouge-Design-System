@@ -43,6 +43,7 @@
 | `typography.body.line-height` | `24px` |
 | `typography.heading.font-family` | `"ABC Favorit Pro Variable", sans-serif` |
 | `typography.heading.font-weight` | `700` |
+| `typography.heading.font-size` | `32px` |
 | `typography.subtitle.font-family` | `"ABC Favorit Pro Variable", sans-serif` |
 | `typography.subtitle.line-height` | `40px` |
 | `typography.subtitle.font-weight` | `500` |
@@ -54,3 +55,4 @@
 | `typography.button.md.font-family` | `"ABC Favorit Pro Variable", sans-serif` |
 | `typography.button.md.font-size` | `16px` |
 | `typography.button.sm.font-size` | `12px` |
+| `typography.button.sm.font-family` | `"ABC Favorit Pro Variable", sans-serif` |
