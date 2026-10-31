@@ -99,10 +99,18 @@ StyleDictionary.registerTransform({
     const raw = token.original?.$value ?? token.$value;
     const num = Number(raw);
     const isOpacity = token.path.some((p) => p.toLowerCase().includes('opacity'));
-    // line-height : ratios bruts (tight, normal…) sauf l'échelle x… exprimée en px
-    const isPxScale = /^x\d/.test(token.path[token.path.length - 1]);
-    const isRaw = token.path.some((p) => ['font-weight', 'line-height'].includes(p.toLowerCase())) && !isPxScale;
-    return (isOpacity || isRaw) ? String(num) : `${num}px`;
+    // font-weight : toujours brut.
+    // line-height : brut uniquement pour les ratios nommés (tight, normal, loose) ;
+    // tout le reste est en px — l'échelle x… (primitive) comme les tokens
+    // sémantiques (ex: typography/body/line-height), qui pointent vers cette
+    // échelle dans Figma.
+    const LINE_HEIGHT_RATIOS = ['tight', 'normal', 'loose'];
+    const lastSegment = token.path[token.path.length - 1].toLowerCase();
+    const isFontWeight = token.path.some((p) => p.toLowerCase() === 'font-weight');
+    const isLineHeightRatio =
+      token.path.some((p) => p.toLowerCase() === 'line-height') &&
+      LINE_HEIGHT_RATIOS.includes(lastSegment);
+    return (isOpacity || isFontWeight || isLineHeightRatio) ? String(num) : `${num}px`;
   },
 });
 
