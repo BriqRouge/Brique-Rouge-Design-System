@@ -40,11 +40,11 @@
 |---|---|
 | `typography.body.font-family` | `"ABC Favorit Pro Variable", sans-serif` |
 | `typography.body.font-size` | `16px` |
-| `typography.body.line-height` | `1.5` |
+| `typography.body.line-height` | `24px` |
 | `typography.heading.font-family` | `"ABC Favorit Pro Variable", sans-serif` |
 | `typography.heading.font-weight` | `700` |
 | `typography.subtitle.font-family` | `"ABC Favorit Pro Variable", sans-serif` |
-| `typography.subtitle.line-height` | `1.75` |
+| `typography.subtitle.line-height` | `40px` |
 | `typography.subtitle.font-weight` | `500` |
 | `typography.label.font-weight` | `500` |
 | `typography.dropdown-menu-button.font-family` | `"ABC Favorit Pro Variable", sans-serif` |

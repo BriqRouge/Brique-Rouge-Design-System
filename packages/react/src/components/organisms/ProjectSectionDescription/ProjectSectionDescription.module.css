@@ -29,7 +29,7 @@
   font-family: var(--typography-subtitle-font-family);
   font-size: var(--typography-font-size-3xl);
   font-weight: var(--typography-subtitle-font-weight);
-  line-height: var(--typography-line-height-x10);
+  line-height: var(--typography-subtitle-line-height);
   color: var(--color-neutral-900);
   margin: 0;
 }
@@ -67,7 +67,7 @@
   font-family: var(--typography-body-font-family);
   font-size: var(--typography-body-font-size);
   font-weight: var(--typography-font-weight-regular);
-  line-height: var(--typography-line-height-x6);
+  line-height: var(--typography-body-line-height);
   color: var(--color-neutral-600);
 }
 
