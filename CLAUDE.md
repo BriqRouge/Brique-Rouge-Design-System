@@ -83,15 +83,18 @@ design-system/
 Figma Variables — fichier `NZtxQVYKRqeaGcC7hT5pjw`
 
 ### Collections Figma
-- Primitives
-- Semantic Numbers
-- Semantic Colors (light / dark)
-- Typography
+- `primitive` (1 mode)
+- `semantic` (1 mode) — alias vers les primitives
+
+### Synchronisation Figma → code
+`tokens.json` est **généré** depuis Figma par le skill `/sync-tokens`
+(`.claude/skills/sync-tokens/`) — ne pas l'éditer à la main. Toute correction de
+nom ou de valeur se fait dans Figma, puis on relance la synchro.
 
 ### Build (Style Dictionary v4)
 - `usesDtcg: true`
 - Transformers custom : `color/figma-hex`, `number/px-or-opacity`
-- Format Figma JSON propriétaire : `$value` est un objet `{hex, alpha, components}` — toujours lire via `token.original.$value`
+- Format de `tokens.json` : `$value` résolu — couleur `#rrggbb` (ou `#rrggbbaa` si transparence), nombre, ou texte ; toujours lire via `token.original.$value`
 - Sorties : `primitive.css` (tokens bruts — couleurs, spacing, sizing, border-radius, elevation, typography), `semantic.css` (tokens sémantiques composants — boutons, dropdown, etc.), `index.css` (importe les deux), `tokens.json`
 
 ### Nomenclature

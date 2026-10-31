@@ -44,9 +44,9 @@
 }
 
 .company-bpce:hover:not(:disabled) {
-  background-color: var(--color-maroon-flush-marroon-flush_100);
-  border-color: var(--color-maroon-flush-marroon-flush_300);
-  color: var(--color-maroon-flush-marroon-flush_900);
+  background-color: var(--color-maroon-flush-100);
+  border-color: var(--color-maroon-flush-300);
+  color: var(--color-maroon-flush-900);
 }
 
 .company-ibp:hover:not(:disabled) {
