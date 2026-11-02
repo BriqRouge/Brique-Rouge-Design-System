@@ -1,8 +1,16 @@
+---
+component: DropdownMenuButton
+tier: molecule
+figma:
+  node: "370:19497"
+  name: DropdownMenuButton
+  type: component-set
+---
 # DropdownMenuButton
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/DropdownMenuButton/`
-**Node Figma :** `370:19497` ("DropdownMenuButton" — 14 variantes)
+**Figma :** 14 variantes
 **Commit :** `63a6751`
 **Fichiers :** `DropdownMenuButton.tsx`, `DropdownMenuButton.module.css`, `DropdownMenuButton.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/DropdownMenuButton.stories.tsx`

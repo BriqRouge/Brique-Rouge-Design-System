@@ -1,8 +1,15 @@
+---
+component: AlertBanner
+tier: molecule
+figma:
+  node: "755:21871"
+  name: "Notifications / Alert Banners"
+  type: component-set
+---
 # AlertBanner
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/AlertBanner/`
-**Node Figma :** `755:21871` ("Notifications / Alert Banners")
 **Fichiers :** `AlertBanner.tsx`, `AlertBanner.module.css`, `AlertBanner.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/AlertBanner.stories.tsx`
 

@@ -1,8 +1,16 @@
+---
+component: MetaInfoItem
+tier: molecule
+figma:
+  node: "797:19440"
+  name: Meta_Info Button
+  type: component-set
+---
 # MetaInfoItem
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/MetaInfoItem/`
-**Node Figma :** `837:19518` ("Meta_Info Button" — instance réelle sur la page d'accueil) + `797:19440` (bibliothèque "Design system", variantes `Interests` × `State=Idle|Hovered`)
+**Figma :** variantes `Interests` × `State` ; instance réelle sur la page d'accueil : `837:19518`
 
 ## API
 

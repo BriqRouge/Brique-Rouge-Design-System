@@ -1,0 +1,25 @@
+{
+  "$comment": "Paramètres propres à ce projet. Pour réutiliser le template : ne modifier que ce fichier (voir README, section « Configurer le template »).",
+  "project": {
+    "name": "Brique Rouge",
+    "language": "fr"
+  },
+  "governance": {
+    "designOwner": "Damien Ramzi",
+    "designOwnerRole": "Senior Product Designer",
+    "$comment": "La personne qui valide les décisions de design : les skills Claude Code s'arrêtent et lui demandent avant toute modification."
+  },
+  "figma": {
+    "fileKey": "NZtxQVYKRqeaGcC7hT5pjw",
+    "designSystemPageId": "1:2",
+    "iconNamePattern": "^(Shape|Media|User|System|Environment|Menu|Communication|Warning|Navigation|Edit|Calendar|Interface|File|Arrow) /",
+    "$comment": "fileKey : dans l'URL figma.com/design/<fileKey>/… · designSystemPageId : page qui contient les composants du DS · iconNamePattern : composants d'icônes à ignorer dans l'inventaire"
+  },
+  "specs": {
+    "componentTiers": {
+      "atom": "atoms",
+      "molecule": "molecules",
+      "organism": "organisms"
+    }
+  }
+}

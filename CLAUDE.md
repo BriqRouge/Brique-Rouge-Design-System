@@ -60,7 +60,11 @@ design-system/
 │   ├── organisms/       # Fiche par composant organisme
 │   └── patterns/        # Règles de composition (typo, couleur, spacing, motion…)
 ├── scripts/
-│   └── token-audit.mjs  # CI — détecte les couleurs hardcodées
+│   ├── token-audit.mjs  # CI — détecte les couleurs hardcodées
+│   ├── check-specs.mjs  # CI — cohérence composants React ↔ fiches specs (en-tête YAML)
+│   ├── figma-sync-tokens.mjs  # /sync-tokens — Figma Variables → tokens.json
+│   └── figma/           # Snippets Plugin API exécutés via use_figma
+├── ds.config.json       # Paramètres du projet : fichier Figma, page DS, responsable design
 ├── CLAUDE.md
 ├── COMPONENTS.md        # Index des composants → specs/
 ├── turbo.json
@@ -225,7 +229,19 @@ Avant d'implémenter, systématiquement :
    état jamais déclenché
 10. Créer ou mettre à jour specs/{tier}/{Composant}.md (API, tokens,
     règles d'usage) — c'est la fiche canonique, pas COMPONENTS.md ni
-    CLAUDE.md §9 (simples index qui pointent vers specs/)
+    CLAUDE.md §9 (simples index qui pointent vers specs/). La fiche
+    commence par un en-tête YAML obligatoire, vérifié en CI par
+    `node scripts/check-specs.mjs` :
+    ```yaml
+    ---
+    component: Tag              # = nom du fichier et du dossier React
+    tier: atom                  # atom | molecule | organism (= dossier)
+    figma:
+      node: "184:18522"         # composant ou set de la BIBLIOTHÈQUE, jamais une instance
+      name: Tag                 # nom du calque Figma
+      type: component-set       # component-set | component | frame
+    ---
+    ```
 11. Ajouter une ligne dans COMPONENTS.md (index) pointant vers cette
     fiche
 12. Si de nouveaux tokens ont été ajoutés à tokens.json : relancer
@@ -347,7 +363,8 @@ src/stories/
 `get_design_context` avec `fileKey` + `nodeId` explicites
 
 ### Clé de fichier
-`NZtxQVYKRqeaGcC7hT5pjw`
+`NZtxQVYKRqeaGcC7hT5pjw` — paramètre `figma.fileKey` de `ds.config.json`, lu par les
+skills et scripts (ne pas recopier la clé en dur ailleurs)
 
 ### Variables
 `get_variable_defs` pour accéder aux tokens Figma

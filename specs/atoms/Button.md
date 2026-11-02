@@ -1,8 +1,15 @@
+---
+component: Button
+tier: atom
+figma:
+  node: "1506:20751"
+  name: Button
+  type: component-set
+---
 # Button
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/atoms/Button/`
-**Node Figma :** `1506:20751` (composant "Button" — source de vérité pour tous les boutons du DS)
 **Fichiers :** `Button.tsx`, `Button.module.css`, `Button.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/Button.stories.tsx`
 
