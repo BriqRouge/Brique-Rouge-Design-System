@@ -251,12 +251,17 @@ Avant d'implémenter, systématiquement :
 13. Push GitHub
 ```
 
-### Synchroniser un composant existant avec Figma
-Pour reporter une modification Figma sur un composant **existant**, utiliser le
-skill `/sync-component <Nom>` (`.claude/skills/sync-component/`). Il applique
-l'étape 0 et l'ordre ci-dessus, avec un point d'arrêt obligatoire : rapport
-d'écarts Figma vs code présenté à Damien **avant** toute modification. Si des
-Variables Figma ont changé, lancer `/sync-tokens` d'abord.
+### Synchroniser avec Figma
+- **`/sync-ds`** (`.claude/skills/sync-ds/`) — commande globale : détecte tout ce
+  qui a changé dans Figma depuis la dernière synchro (empreintes comparées à
+  `scripts/figma/components-snapshot.json`), synchronise les tokens puis les seuls
+  composants modifiés. Rapport consolidé validé par Damien, une PR, un commit par
+  composant.
+- **`/sync-component <Nom>`** (`.claude/skills/sync-component/`) — un composant
+  **existant** précis. Applique l'étape 0 et l'ordre ci-dessus.
+- Les deux ont un point d'arrêt obligatoire : rapport d'écarts Figma vs code
+  présenté à Damien **avant** toute modification. Les Variables se synchronisent
+  avec `/sync-tokens` (appelé automatiquement par `/sync-ds`).
 
 ### Conventions Figma des composants (décidées le 2026-11-02)
 - Valeurs de variantes Figma = valeurs des props React, en minuscules / kebab-case
@@ -404,8 +409,10 @@ Ces décisions sont prises et ne se remettent pas en question sauf demande expli
 3. ~~**GitHub Actions** CI/CD~~ ✅ **Fait** (`ci.yml` + `storybook.yml`)
 4. ~~**Sync tokens Figma → doc**~~ ✅ **Fait** (`generate-specs.mjs` régénère `specs/foundations/` + `specs/tokens/` à chaque build, vérifié en CI)
 5. **Automatisation progressive du workflow** — synchro Figma → code en 3 niveaux :
-   - Niveau 1 ✅ skills `/sync-tokens` (Variables) et `/sync-component` (composants)
-   - Niveau 2 — détection de drift (empreinte des composants Figma, cron GitHub Action → issue)
+   - Niveau 1 ✅ skills `/sync-tokens` (Variables), `/sync-component` (un composant) et
+     `/sync-ds` (global : détection par empreintes + synchro de tout ce qui a changé)
+   - Niveau 2 — détection de drift automatique : la détection de `/sync-ds` lancée chaque nuit
+     (cron GitHub Action, API REST Figma) → issue listant les composants modifiés
    - Niveau 3 (optionnel) — PR draft automatiques sur drift détecté
 
 ---
