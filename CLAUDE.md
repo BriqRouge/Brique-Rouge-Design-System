@@ -235,6 +235,13 @@ Avant d'implémenter, systématiquement :
 13. Push GitHub
 ```
 
+### Synchroniser un composant existant avec Figma
+Pour reporter une modification Figma sur un composant **existant**, utiliser le
+skill `/sync-component <Nom>` (`.claude/skills/sync-component/`). Il applique
+l'étape 0 et l'ordre ci-dessus, avec un point d'arrêt obligatoire : rapport
+d'écarts Figma vs code présenté à Damien **avant** toute modification. Si des
+Variables Figma ont changé, lancer `/sync-tokens` d'abord.
+
 ### IDs Figma — format
 - URLs Figma : format tiret (`18-765`)
 - Appels MCP : format deux-points (`18:765`)
@@ -371,7 +378,10 @@ Ces décisions sont prises et ne se remettent pas en question sauf demande expli
 2. ~~**Code Connect** — mapping Figma ↔ React~~ ✅ **Fait** (`figma.config.json` configuré, scripts figma en place)
 3. ~~**GitHub Actions** CI/CD~~ ✅ **Fait** (`ci.yml` + `storybook.yml`)
 4. ~~**Sync tokens Figma → doc**~~ ✅ **Fait** (`generate-specs.mjs` régénère `specs/foundations/` + `specs/tokens/` à chaque build, vérifié en CI)
-5. **Automatisation progressive du workflow** — à définir selon les besoins réels (ex : previews PR Storybook, déclenchement Code Connect automatique)
+5. **Automatisation progressive du workflow** — synchro Figma → code en 3 niveaux :
+   - Niveau 1 ✅ skills `/sync-tokens` (Variables) et `/sync-component` (composants)
+   - Niveau 2 — détection de drift (empreinte des composants Figma, cron GitHub Action → issue)
+   - Niveau 3 (optionnel) — PR draft automatiques sur drift détecté
 
 ---
 
