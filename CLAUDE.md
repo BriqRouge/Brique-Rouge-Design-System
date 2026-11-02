@@ -281,6 +281,9 @@ Avant d'implémenter, systématiquement :
   `caption`, `eyebrow`, `label/*` — décidé le 2026-11-02), lui-même lié aux variables.
   Un texte sans style est un écart signalé, jamais restylé d'office. Table rôle →
   tokens CSS : `specs/patterns/typography.md`
+- Appliquer un style de texte remplace **toutes** les propriétés du texte (rognage,
+  casse, soulignement compris) : vérifier ces propriétés et les dimensions avant/après,
+  voir `specs/patterns/typography.md`
 - Variables Figma : scope typé (jamais `ALL_SCOPES`) et code syntax WEB `var(--…)`
   égale au nom de la variable CSS générée
 - Vérification déterministe : `node scripts/figma-sync-ds.mjs lint` (aussi chaque nuit)

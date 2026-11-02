@@ -260,6 +260,17 @@ export function usedTextFills(n) {
   return used;
 }
 
+// Un texte à plusieurs styles (ex. titre Medium + Regular) porte le style de
+// chaque segment dans `styleOverrideTable[k].inheritTextStyleId` ; `styles.text`
+// ne couvre que les caractères restés sur le style de base.
+export function hasTextStyle(n) {
+  const cso = n.characterStyleOverrides ?? [];
+  const sot = n.styleOverrideTable ?? {};
+  const base = Boolean(n.styles?.text);
+  if (!base && (cso.length < (n.characters ?? '').length || cso.includes(0))) return false;
+  return [...new Set(cso)].every((k) => k === 0 || base || Boolean(sot[k]?.inheritTextStyleId));
+}
+
 export function lintNodes(registry, nodes, fonts) {
   const errors = [];
   const warnings = [];
@@ -280,7 +291,7 @@ export function lintNodes(registry, nodes, fonts) {
         const b = n.boundVariables ?? {};
         if (!b.fontSize || !b.fontWeight) errors.push(`${where} : taille ou graisse non liée à une variable`);
         if (usedTextFills(n).some((f) => f.type === 'SOLID' && f.visible !== false && !f.boundVariables?.color)) errors.push(`${where} : couleur non liée à une variable`);
-        if (!n.styles?.text) warnings.push(`${where} : sans style de texte`);
+        if (!hasTextStyle(n)) warnings.push(`${where} : sans style de texte`);
       }
       if (n.type === 'INSTANCE') return;
       for (const c of n.children ?? []) walk(c, `${path}/${c.name}`);

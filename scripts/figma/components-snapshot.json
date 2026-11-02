@@ -3,11 +3,11 @@
   "components": {
     "AlertBanner": {
       "node": "755:21871",
-      "hash": "31f9ccd1",
+      "hash": "29f12a15",
       "props": "644b7a27",
       "variants": {
-        "Type=info": "5d140145",
-        "Type=warning": "ace8fe54"
+        "Type=info": "29549753",
+        "Type=warning": "c5e7c45a"
       },
       "deps": [
         "Button"
@@ -15,51 +15,54 @@
     },
     "Button": {
       "node": "1506:20751",
-      "hash": "08393fe8",
-      "props": "7791fc3e",
+      "hash": "4f7f6e67",
+      "props": "6aa28756",
       "variants": {
-        "Variant=primary, Color-scheme=error, State=focus": "72a99774",
-        "Variant=primary, Color-scheme=error, State=hovered": "1233c50c",
-        "Variant=primary, Color-scheme=error, State=idle": "f05d5932",
-        "Variant=primary, Color-scheme=info, State=focus": "39344a5d",
-        "Variant=primary, Color-scheme=info, State=hovered": "2aa9df3d",
-        "Variant=primary, Color-scheme=info, State=idle": "ba0fb7ef",
-        "Variant=primary, Color-scheme=neutral, State=focus": "7651d3be",
-        "Variant=primary, Color-scheme=neutral, State=hovered": "95f5c512",
-        "Variant=primary, Color-scheme=neutral, State=idle": "accc1050",
-        "Variant=primary, Color-scheme=success, State=focus": "82147fa9",
-        "Variant=primary, Color-scheme=success, State=hovered": "9d8e97ec",
-        "Variant=primary, Color-scheme=success, State=idle": "7d3b0e47",
-        "Variant=primary, Color-scheme=warning, State=focus": "3035697b",
-        "Variant=primary, Color-scheme=warning, State=hovered": "83d0afa7",
-        "Variant=primary, Color-scheme=warning, State=idle": "3f855139",
-        "Variant=secondary, Color-scheme=error, State=focus": "f44ca361",
-        "Variant=secondary, Color-scheme=error, State=hovered": "88a1ece4",
-        "Variant=secondary, Color-scheme=error, State=idle": "3ce772a0",
-        "Variant=secondary, Color-scheme=info, State=focus": "613ce0de",
-        "Variant=secondary, Color-scheme=info, State=hovered": "a385d289",
-        "Variant=secondary, Color-scheme=info, State=idle": "75423030",
-        "Variant=secondary, Color-scheme=neutral, State=focus": "755fd557",
-        "Variant=secondary, Color-scheme=neutral, State=hovered": "8ea0f82b",
-        "Variant=secondary, Color-scheme=neutral, State=idle": "75f6995a",
-        "Variant=secondary, Color-scheme=success, State=focus": "738b467c",
-        "Variant=secondary, Color-scheme=success, State=hovered": "989c29f4",
-        "Variant=secondary, Color-scheme=success, State=idle": "dd1a91e1",
-        "Variant=secondary, Color-scheme=warning, State=focus": "34632ee2",
-        "Variant=secondary, Color-scheme=warning, State=hovered": "5684c8ab",
-        "Variant=secondary, Color-scheme=warning, State=idle": "8ad5057e",
-        "Variant=tertiary, Color-scheme=neutral, State=focus": "7710a014",
-        "Variant=tertiary, Color-scheme=neutral, State=hovered": "9f9e77c1",
-        "Variant=tertiary, Color-scheme=neutral, State=idle": "8f2a50ab"
+        "Variant=primary, Color-scheme=error, State=focus": "acc6900f",
+        "Variant=primary, Color-scheme=error, State=hovered": "60d36729",
+        "Variant=primary, Color-scheme=error, State=idle": "71964b41",
+        "Variant=primary, Color-scheme=info, State=focus": "a4c8cd56",
+        "Variant=primary, Color-scheme=info, State=hovered": "8915506e",
+        "Variant=primary, Color-scheme=info, State=idle": "39af9db4",
+        "Variant=primary, Color-scheme=neutral, State=disabled": "a865fdc4",
+        "Variant=primary, Color-scheme=neutral, State=focus": "fde45e41",
+        "Variant=primary, Color-scheme=neutral, State=hovered": "a2592397",
+        "Variant=primary, Color-scheme=neutral, State=idle": "b0d0c0df",
+        "Variant=primary, Color-scheme=success, State=focus": "ae335b70",
+        "Variant=primary, Color-scheme=success, State=hovered": "287dbe01",
+        "Variant=primary, Color-scheme=success, State=idle": "6b07a76e",
+        "Variant=primary, Color-scheme=warning, State=focus": "9a5b7540",
+        "Variant=primary, Color-scheme=warning, State=hovered": "2b2c372a",
+        "Variant=primary, Color-scheme=warning, State=idle": "10ec4ef2",
+        "Variant=secondary, Color-scheme=error, State=focus": "ae8eb91c",
+        "Variant=secondary, Color-scheme=error, State=hovered": "47a7be45",
+        "Variant=secondary, Color-scheme=error, State=idle": "1bb8070f",
+        "Variant=secondary, Color-scheme=info, State=focus": "c7a9afd7",
+        "Variant=secondary, Color-scheme=info, State=hovered": "844c12f6",
+        "Variant=secondary, Color-scheme=info, State=idle": "9c9341e5",
+        "Variant=secondary, Color-scheme=neutral, State=disabled": "d792b64c",
+        "Variant=secondary, Color-scheme=neutral, State=focus": "e9ae3d20",
+        "Variant=secondary, Color-scheme=neutral, State=hovered": "a95a6502",
+        "Variant=secondary, Color-scheme=neutral, State=idle": "8dccec0f",
+        "Variant=secondary, Color-scheme=success, State=focus": "4f5fb541",
+        "Variant=secondary, Color-scheme=success, State=hovered": "4faf02c5",
+        "Variant=secondary, Color-scheme=success, State=idle": "49db69d0",
+        "Variant=secondary, Color-scheme=warning, State=focus": "222e8a65",
+        "Variant=secondary, Color-scheme=warning, State=hovered": "609aa19a",
+        "Variant=secondary, Color-scheme=warning, State=idle": "202ed1cb",
+        "Variant=tertiary, Color-scheme=neutral, State=disabled": "54945c7b",
+        "Variant=tertiary, Color-scheme=neutral, State=focus": "69e0ea89",
+        "Variant=tertiary, Color-scheme=neutral, State=hovered": "fdeb6a13",
+        "Variant=tertiary, Color-scheme=neutral, State=idle": "bdc97b1b"
       },
       "deps": []
     },
     "DropdownMenu": {
       "node": "375:19690",
-      "hash": "f2a239c0",
+      "hash": "18b9aa3b",
       "props": "918c8c57",
       "variants": {
-        "DropdownMenu": "8bf26b1c"
+        "DropdownMenu": "1b94d2b9"
       },
       "deps": [
         "DropdownMenuButton",
@@ -68,23 +71,23 @@
     },
     "DropdownMenuButton": {
       "node": "370:19497",
-      "hash": "a7c29922",
+      "hash": "99772b11",
       "props": "ede9662d",
       "variants": {
-        "Company=bpce, State=hovered, Type=activated": "7dea60e1",
-        "Company=bpce, State=idle, Type=activated": "a53378f4",
-        "Company=conseil-constitutionnel, State=hovered, Type=deactivated": "1da19ed0",
-        "Company=conseil-constitutionnel, State=idle, Type=deactivated": "5c4199b4",
-        "Company=ibp, State=hovered, Type=activated": "290e1ff3",
-        "Company=ibp, State=idle, Type=activated": "7630149d",
-        "Company=none, State=hovered, Type=activated": "b4eab030",
-        "Company=none, State=hovered, Type=deactivated": "aed7d220",
-        "Company=none, State=idle, Type=activated": "29862224",
-        "Company=none, State=idle, Type=deactivated": "7ee7d173",
-        "Company=odaptos, State=hovered, Type=activated": "455086cf",
-        "Company=odaptos, State=idle, Type=activated": "c52a5b12",
-        "Company=vinci, State=hovered, Type=deactivated": "f5508781",
-        "Company=vinci, State=idle, Type=deactivated": "493d4cd4"
+        "Company=bpce, State=hovered, Type=activated": "6df36c92",
+        "Company=bpce, State=idle, Type=activated": "e05b5679",
+        "Company=conseil-constitutionnel, State=hovered, Type=deactivated": "8b72f385",
+        "Company=conseil-constitutionnel, State=idle, Type=deactivated": "6e56f5fb",
+        "Company=ibp, State=hovered, Type=activated": "bbdc9a78",
+        "Company=ibp, State=idle, Type=activated": "c8c4bd22",
+        "Company=none, State=hovered, Type=activated": "97dd6ef7",
+        "Company=none, State=hovered, Type=deactivated": "fdbb77c5",
+        "Company=none, State=idle, Type=activated": "d3bbebe3",
+        "Company=none, State=idle, Type=deactivated": "b492fec4",
+        "Company=odaptos, State=hovered, Type=activated": "06458ba8",
+        "Company=odaptos, State=idle, Type=activated": "b2c86dcd",
+        "Company=vinci, State=hovered, Type=deactivated": "87a108d1",
+        "Company=vinci, State=idle, Type=deactivated": "4c7949af"
       },
       "deps": [
         "LogoCompanies"
@@ -92,11 +95,11 @@
     },
     "DropdownMenuTrigger": {
       "node": "379:18464",
-      "hash": "8e5fe4c6",
+      "hash": "6b7c7a2f",
       "props": "06e9b764",
       "variants": {
-        "State=closed": "280f21ad",
-        "State=open": "b54cc490"
+        "State=closed": "2a67473a",
+        "State=open": "a818b6a3"
       },
       "deps": [
         "DropdownMenu",
@@ -170,61 +173,61 @@
     },
     "MenuButton": {
       "node": "1345:21426",
-      "hash": "d9f5d37c",
+      "hash": "c7e78504",
       "props": "10f2fe7e",
       "variants": {
-        "Type=contained, State=disabled, Size=md, Color-scheme=default": "06692c52",
-        "Type=contained, State=disabled, Size=nm, Color-scheme=default": "d85478ac",
-        "Type=contained, State=disabled, Size=sm, Color-scheme=default": "700661ea",
-        "Type=contained, State=focus, Size=md, Color-scheme=default": "12bceb1f",
-        "Type=contained, State=focus, Size=nm, Color-scheme=default": "fc1155bd",
-        "Type=contained, State=focus, Size=sm, Color-scheme=default": "5121b493",
-        "Type=contained, State=hovered, Size=md, Color-scheme=default": "a8d3f04c",
-        "Type=contained, State=hovered, Size=nm, Color-scheme=default": "9f946a31",
-        "Type=contained, State=hovered, Size=sm, Color-scheme=default": "465cd87f",
-        "Type=contained, State=idle, Size=md, Color-scheme=default": "b8b78282",
-        "Type=contained, State=idle, Size=nm, Color-scheme=default": "f3f514d7",
-        "Type=contained, State=idle, Size=sm, Color-scheme=default": "809e5a7f",
-        "Type=outlined, State=disabled, Size=md, Color-scheme=dark": "281fed7e",
-        "Type=outlined, State=disabled, Size=md, Color-scheme=light": "e197b104",
-        "Type=outlined, State=disabled, Size=nm, Color-scheme=dark": "74d95237",
-        "Type=outlined, State=disabled, Size=nm, Color-scheme=light": "8c844792",
-        "Type=outlined, State=disabled, Size=sm, Color-scheme=dark": "de9a5c75",
-        "Type=outlined, State=disabled, Size=sm, Color-scheme=light": "747a3502",
-        "Type=outlined, State=focus, Size=md, Color-scheme=dark": "6ff45317",
-        "Type=outlined, State=focus, Size=md, Color-scheme=light": "2c364bd7",
-        "Type=outlined, State=focus, Size=nm, Color-scheme=dark": "928b59f5",
-        "Type=outlined, State=focus, Size=nm, Color-scheme=light": "7c8f74bd",
-        "Type=outlined, State=focus, Size=sm, Color-scheme=dark": "9d605f07",
-        "Type=outlined, State=focus, Size=sm, Color-scheme=light": "3a2f6c61",
-        "Type=outlined, State=hovered, Size=md, Color-scheme=dark": "c74c1bda",
-        "Type=outlined, State=hovered, Size=md, Color-scheme=light": "d14984a2",
-        "Type=outlined, State=hovered, Size=nm, Color-scheme=dark": "1cf1f8c1",
-        "Type=outlined, State=hovered, Size=nm, Color-scheme=light": "38fbe98d",
-        "Type=outlined, State=hovered, Size=sm, Color-scheme=dark": "c932e3e7",
-        "Type=outlined, State=hovered, Size=sm, Color-scheme=light": "04a840ed",
-        "Type=outlined, State=idle, Size=md, Color-scheme=dark": "24f194af",
-        "Type=outlined, State=idle, Size=md, Color-scheme=light": "bdeab6c1",
-        "Type=outlined, State=idle, Size=nm, Color-scheme=dark": "ca719182",
-        "Type=outlined, State=idle, Size=nm, Color-scheme=light": "0b4eca6c",
-        "Type=outlined, State=idle, Size=sm, Color-scheme=dark": "b7fee5be",
-        "Type=outlined, State=idle, Size=sm, Color-scheme=light": "0a54536c"
+        "Type=contained, State=disabled, Size=md, Color-scheme=default": "2faa9110",
+        "Type=contained, State=disabled, Size=nm, Color-scheme=default": "5b8df715",
+        "Type=contained, State=disabled, Size=sm, Color-scheme=default": "865fcb9f",
+        "Type=contained, State=focus, Size=md, Color-scheme=default": "ac57063d",
+        "Type=contained, State=focus, Size=nm, Color-scheme=default": "e762973a",
+        "Type=contained, State=focus, Size=sm, Color-scheme=default": "113a1c6c",
+        "Type=contained, State=hovered, Size=md, Color-scheme=default": "5546ddc8",
+        "Type=contained, State=hovered, Size=nm, Color-scheme=default": "80f14064",
+        "Type=contained, State=hovered, Size=sm, Color-scheme=default": "d1ec628e",
+        "Type=contained, State=idle, Size=md, Color-scheme=default": "9d3e7b2e",
+        "Type=contained, State=idle, Size=nm, Color-scheme=default": "46804e32",
+        "Type=contained, State=idle, Size=sm, Color-scheme=default": "33e0c1f2",
+        "Type=outlined, State=disabled, Size=md, Color-scheme=dark": "f9fd1cf8",
+        "Type=outlined, State=disabled, Size=md, Color-scheme=light": "82a71036",
+        "Type=outlined, State=disabled, Size=nm, Color-scheme=dark": "f07e6de6",
+        "Type=outlined, State=disabled, Size=nm, Color-scheme=light": "cc2a01dd",
+        "Type=outlined, State=disabled, Size=sm, Color-scheme=dark": "9fc324ec",
+        "Type=outlined, State=disabled, Size=sm, Color-scheme=light": "67363035",
+        "Type=outlined, State=focus, Size=md, Color-scheme=dark": "2669bce1",
+        "Type=outlined, State=focus, Size=md, Color-scheme=light": "b3dcb0d1",
+        "Type=outlined, State=focus, Size=nm, Color-scheme=dark": "ed83ba24",
+        "Type=outlined, State=focus, Size=nm, Color-scheme=light": "2a4528e8",
+        "Type=outlined, State=focus, Size=sm, Color-scheme=dark": "f94cc5be",
+        "Type=outlined, State=focus, Size=sm, Color-scheme=light": "7864858c",
+        "Type=outlined, State=hovered, Size=md, Color-scheme=dark": "41afc4b6",
+        "Type=outlined, State=hovered, Size=md, Color-scheme=light": "529f2456",
+        "Type=outlined, State=hovered, Size=nm, Color-scheme=dark": "065fdc9e",
+        "Type=outlined, State=hovered, Size=nm, Color-scheme=light": "56ab5562",
+        "Type=outlined, State=hovered, Size=sm, Color-scheme=dark": "9f86fbf4",
+        "Type=outlined, State=hovered, Size=sm, Color-scheme=light": "d4d71942",
+        "Type=outlined, State=idle, Size=md, Color-scheme=dark": "777c2b75",
+        "Type=outlined, State=idle, Size=md, Color-scheme=light": "ad7b553f",
+        "Type=outlined, State=idle, Size=nm, Color-scheme=dark": "a447738f",
+        "Type=outlined, State=idle, Size=nm, Color-scheme=light": "f20e2a63",
+        "Type=outlined, State=idle, Size=sm, Color-scheme=dark": "1a363ea1",
+        "Type=outlined, State=idle, Size=sm, Color-scheme=light": "000a7011"
       },
       "deps": []
     },
     "MetaInfoItem": {
       "node": "797:19440",
-      "hash": "0aec0ee5",
+      "hash": "0a3f894d",
       "props": "762c4a51",
       "variants": {
-        "Interests=lecture, State=hovered": "8ac5f14f",
-        "Interests=lecture, State=idle": "1d284883",
-        "Interests=location, State=hovered": "375b5fc1",
-        "Interests=location, State=idle": "d2c6a5e2",
-        "Interests=music, State=hovered": "a793556c",
-        "Interests=music, State=idle": "0eba074b",
-        "Interests=video-game, State=hovered": "3fc851c2",
-        "Interests=video-game, State=idle": "0fdf6c56"
+        "Interests=lecture, State=hovered": "66201dde",
+        "Interests=lecture, State=idle": "4f2c14ec",
+        "Interests=location, State=hovered": "922b111e",
+        "Interests=location, State=idle": "0dce9231",
+        "Interests=music, State=hovered": "793dfa13",
+        "Interests=music, State=idle": "ea651aae",
+        "Interests=video-game, State=hovered": "cff5e513",
+        "Interests=video-game, State=idle": "5d866065"
       },
       "deps": [
         "LogoCompanies"
@@ -232,14 +235,14 @@
     },
     "ProjectBentoCard": {
       "node": "2032:20121",
-      "hash": "30fb1882",
+      "hash": "3d7d5c6b",
       "props": "32b0f90c",
       "variants": {
-        "State=hovered, Project=bpce": "8b806631",
-        "State=hovered, Project=conseil-constitutionnel": "df09a62b",
-        "State=hovered, Project=cv": "d8b40ce6",
-        "State=hovered, Project=ibp": "835ef693",
-        "State=hovered, Project=odaptos": "9908b13e",
+        "State=hovered, Project=bpce": "18fbb372",
+        "State=hovered, Project=conseil-constitutionnel": "8ab7f7f2",
+        "State=hovered, Project=cv": "94f5405f",
+        "State=hovered, Project=ibp": "6ce96f50",
+        "State=hovered, Project=odaptos": "fc47b31d",
         "State=idle, Project=bpce": "c7a116de",
         "State=idle, Project=conseil-constitutionnel": "832ddb99",
         "State=idle, Project=cv": "2037444f",
@@ -253,29 +256,29 @@
     },
     "ProjectCardDescription": {
       "node": "2040:19251",
-      "hash": "fd7c06ca",
+      "hash": "3299f1fd",
       "props": "1eba9e74",
       "variants": {
-        "Type=cv": "f0254172",
-        "Type=default": "33fb6949"
+        "Type=cv": "44cae271",
+        "Type=default": "469c5fca"
       },
       "deps": []
     },
     "ProjectOverview": {
       "node": "2248:55550",
-      "hash": "11126935",
+      "hash": "935222d7",
       "props": null,
       "variants": {
-        "Overview Projet": "1f099c88"
+        "Overview Projet": "1218d87a"
       },
       "deps": []
     },
     "ProjectSectionDescription": {
       "node": "2248:28967",
-      "hash": "1ceb2551",
+      "hash": "96b8c492",
       "props": null,
       "variants": {
-        "Cards / Project_Section_Description": "937decc5"
+        "Cards / Project_Section_Description": "37562430"
       },
       "deps": [
         "AlertBanner",
@@ -284,10 +287,10 @@
     },
     "ProjectSectionsDescription": {
       "node": "744:20765",
-      "hash": "412a8322",
+      "hash": "f6e41388",
       "props": "13a1a408",
       "variants": {
-        "Cards / Project_Sections_Descritpion": "1c95431b"
+        "Cards / Project_Sections_Descritpion": "d8d55413"
       },
       "deps": [
         "AlertBanner",
@@ -297,31 +300,31 @@
     },
     "Tag": {
       "node": "184:18522",
-      "hash": "f0603b43",
+      "hash": "90a4c17c",
       "props": "1d6ea4f0",
       "variants": {
-        "Size=lg, Style=contained": "a5bd65aa",
-        "Size=lg, Style=outlined": "a1992388",
-        "Size=md, Style=contained": "76e40664",
-        "Size=md, Style=outlined": "c036d7f0",
-        "Size=nm, Style=contained": "543e7a7c",
-        "Size=nm, Style=outlined": "5a89b40e",
-        "Size=sm, Style=contained": "056cd510",
-        "Size=sm, Style=outlined": "6999cece"
+        "Size=lg, Style=contained": "43f0e6bb",
+        "Size=lg, Style=outlined": "bb9ab141",
+        "Size=md, Style=contained": "0eb2945a",
+        "Size=md, Style=outlined": "9c7a53cc",
+        "Size=nm, Style=contained": "bfa12bc3",
+        "Size=nm, Style=outlined": "99a1ad75",
+        "Size=sm, Style=contained": "dc46f5f0",
+        "Size=sm, Style=outlined": "237e6a90"
       },
       "deps": []
     },
     "TopNav": {
       "node": "1702:20362",
-      "hash": "5f5e5dae",
+      "hash": "7611aeee",
       "props": "af5fbc7d",
       "variants": {
-        "Type=bpce": "30aa9875",
-        "Type=conseil-constitutionnel": "7d8e2da6",
+        "Type=bpce": "88212a7d",
+        "Type=conseil-constitutionnel": "cc8a7677",
         "Type=homepage": "2e5393a7",
-        "Type=ibp": "e11abe87",
-        "Type=odaptos": "748a0eea",
-        "Type=opco-atlas": "c2db55b3"
+        "Type=ibp": "98bcbdf5",
+        "Type=odaptos": "26ae78e7",
+        "Type=opco-atlas": "bd4c83e2"
       },
       "deps": [
         "DropdownMenu",

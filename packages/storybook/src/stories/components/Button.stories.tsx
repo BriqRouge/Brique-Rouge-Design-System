@@ -137,6 +137,7 @@ export const Disabled: Story = {
       <Button disabled variant="primary">Primary désactivé</Button>
       <Button disabled variant="secondary">Secondary désactivé</Button>
       <Button disabled variant="tertiary">Tertiary désactivé</Button>
+      <Button disabled variant="secondary" leftIcon={<DownloadIcon />}>Avec icône</Button>
     </div>
   ),
 };
