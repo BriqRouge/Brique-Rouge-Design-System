@@ -1,0 +1,57 @@
+# Détection nocturne des changements de composants Figma (niveau 2).
+# Compare Figma (API REST, lecture seule) au snapshot scripts/figma/components-snapshot.json.
+# Changement détecté → une issue « Drift Figma » (label figma-drift) créée ou mise à jour.
+# Plus rien à synchroniser → l'issue ouverte est fermée.
+# Prérequis : secret FIGMA_TOKEN (token personnel Figma, scope file_content:read).
+# Les Figma Variables ne sont pas couvertes (API REST réservée au plan Enterprise) :
+# elles se vérifient avec /sync-tokens.
+name: Figma drift
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  detect:
+    name: Détection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Comparer Figma au snapshot
+        id: detect
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+        run: |
+          set +e
+          node scripts/figma-sync-ds.mjs detect --report drift.md
+          code=$?
+          set -e
+          if [ "$code" = "1" ]; then exit 1; fi
+          echo "changed=$([ "$code" = "3" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - name: Créer ou mettre à jour l'issue
+        if: steps.detect.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create figma-drift --color D93F0B --description "Composants Figma modifiés depuis la dernière synchro" --force
+          issue=$(gh issue list --label figma-drift --state open --json number -q '.[0].number')
+          if [ -z "$issue" ]; then
+            gh issue create --title "Drift Figma — composants à synchroniser" --label figma-drift --body-file drift.md
+          else
+            gh issue edit "$issue" --body-file drift.md
+          fi
+      - name: Fermer l'issue si tout est synchronisé
+        if: steps.detect.outputs.changed == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          issue=$(gh issue list --label figma-drift --state open --json number -q '.[0].number')
+          if [ -n "$issue" ]; then gh issue close "$issue" --comment "Figma et le snapshot sont de nouveau alignés."; fi

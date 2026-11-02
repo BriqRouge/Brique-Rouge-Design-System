@@ -63,6 +63,7 @@ design-system/
 │   ├── token-audit.mjs  # CI — détecte les couleurs hardcodées
 │   ├── check-specs.mjs  # CI — cohérence composants React ↔ fiches specs (en-tête YAML)
 │   ├── figma-sync-tokens.mjs  # /sync-tokens — Figma Variables → tokens.json
+│   ├── figma-sync-ds.mjs  # /sync-ds + CI nocturne — détection des composants modifiés (REST)
 │   └── figma/           # Snippets Plugin API exécutés via use_figma
 ├── ds.config.json       # Paramètres du projet : fichier Figma, page DS, responsable design
 ├── CLAUDE.md
@@ -251,12 +252,21 @@ Avant d'implémenter, systématiquement :
 13. Push GitHub
 ```
 
-### Synchroniser un composant existant avec Figma
-Pour reporter une modification Figma sur un composant **existant**, utiliser le
-skill `/sync-component <Nom>` (`.claude/skills/sync-component/`). Il applique
-l'étape 0 et l'ordre ci-dessus, avec un point d'arrêt obligatoire : rapport
-d'écarts Figma vs code présenté à Damien **avant** toute modification. Si des
-Variables Figma ont changé, lancer `/sync-tokens` d'abord.
+### Synchroniser avec Figma
+- **`/sync-ds`** (`.claude/skills/sync-ds/`) — commande globale : détecte les
+  composants modifiés dans Figma depuis la dernière synchro (API REST Figma,
+  empreintes comparées à `scripts/figma/components-snapshot.json`), vérifie les
+  Variables via `/sync-tokens`, puis synchronise tout ce qui a changé. Rapport
+  consolidé validé par Damien, une PR, un commit par composant.
+- **`/sync-component <Nom>`** (`.claude/skills/sync-component/`) — un composant
+  **existant** précis. Applique l'étape 0 et l'ordre ci-dessus.
+- Les deux ont un point d'arrêt obligatoire : rapport d'écarts Figma vs code
+  présenté à Damien **avant** toute modification.
+- **Détection nocturne** (`.github/workflows/figma-drift.yml`) : la même détection
+  chaque nuit ; un changement ouvre ou met à jour l'issue « Drift Figma »
+  (label `figma-drift`). Token Figma : `FIGMA_TOKEN` dans `.env` en local (voir
+  `.env.example`), secret GitHub `FIGMA_TOKEN` en CI — lecture seule, jamais
+  committé.
 
 ### Conventions Figma des composants (décidées le 2026-11-02)
 - Valeurs de variantes Figma = valeurs des props React, en minuscules / kebab-case
@@ -404,8 +414,11 @@ Ces décisions sont prises et ne se remettent pas en question sauf demande expli
 3. ~~**GitHub Actions** CI/CD~~ ✅ **Fait** (`ci.yml` + `storybook.yml`)
 4. ~~**Sync tokens Figma → doc**~~ ✅ **Fait** (`generate-specs.mjs` régénère `specs/foundations/` + `specs/tokens/` à chaque build, vérifié en CI)
 5. **Automatisation progressive du workflow** — synchro Figma → code en 3 niveaux :
-   - Niveau 1 ✅ skills `/sync-tokens` (Variables) et `/sync-component` (composants)
-   - Niveau 2 — détection de drift (empreinte des composants Figma, cron GitHub Action → issue)
+   - Niveau 1 ✅ skills `/sync-tokens` (Variables), `/sync-component` (un composant) et
+     `/sync-ds` (global : détection par empreintes + synchro de tout ce qui a changé)
+   - Niveau 2 ✅ détection nocturne des composants (`figma-drift.yml`, API REST Figma)
+     → issue « Drift Figma ». Variables non couvertes (API REST Enterprise) :
+     vérifiées par `/sync-ds` via `/sync-tokens`
    - Niveau 3 (optionnel) — PR draft automatiques sur drift détecté
 
 ---

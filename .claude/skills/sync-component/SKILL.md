@@ -155,10 +155,20 @@ Puis, dans l'ordre :
 - `COMPONENTS.md` : uniquement si le résumé ou le node changent
 - `CLAUDE.md` « Composants existants » : uniquement si le niveau atomic du composant change (même PR)
 
-## Étape 7 — Contrôles
+## Étape 7 — Snapshot et contrôles
+
+Mettre à jour l'empreinte du composant, pour que `/sync-ds` et la détection
+nocturne ne le signalent plus comme modifié (lecture REST, `FIGMA_TOKEN` requis) :
+
+```bash
+node scripts/figma-sync-ds.mjs update --only <Nom>[,<Nom>…]
+```
+
+Puis :
 
 ```bash
 node scripts/token-audit.mjs
+node --test scripts/figma-sync-ds.test.mjs
 pnpm turbo run lint
 pnpm test
 ```
