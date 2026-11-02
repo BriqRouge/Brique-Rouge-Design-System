@@ -1,17 +1,17 @@
 ---
 name: sync-ds
-description: Synchronisation globale Figma → Design System en une commande — détecte tout ce qui a changé dans le fichier Figma NZtxQVYKRqeaGcC7hT5pjw (Variables et composants) depuis la dernière synchro, présente un rapport d'écarts consolidé et détaillé validé par Damien, puis met à jour tokens, composants, tests, stories et specs dans une seule PR (un commit par composant). Utiliser quand Damien demande /sync-ds, de tout synchroniser, ou de synchroniser plusieurs composants d'un coup.
+description: Synchronisation globale Figma → Design System en une commande — détecte tout ce qui a changé dans le fichier Figma (`figma.fileKey` de `ds.config.json`) (Variables et composants) depuis la dernière synchro, présente un rapport d'écarts consolidé et détaillé validé par la personne responsable du design, puis met à jour tokens, composants, tests, stories et specs dans une seule PR (un commit par composant). Utiliser quand la personne responsable du design demande /sync-ds, de tout synchroniser, ou de synchroniser plusieurs composants d'un coup.
 ---
 
 # /sync-ds — Figma → Design System, en une commande
 
-Damien travaille sur plusieurs composants dans Figma, puis lance `/sync-ds` une
+La personne responsable du design travaille sur plusieurs composants dans Figma, puis lance `/sync-ds` une
 seule fois. Le skill :
 
 1. **détecte** ce qui a changé depuis la dernière synchro (empreintes) ;
 2. **synchronise les tokens** d'abord si les Variables ont changé ;
 3. **analyse** en profondeur les seuls composants modifiés ;
-4. présente **un rapport consolidé très détaillé** → **STOP, validation de Damien** ;
+4. présente **un rapport consolidé très détaillé** → **STOP, validation de la personne responsable du design** ;
 5. implémente les écarts validés, **un commit par composant** ;
 6. met à jour le snapshot et ouvre **une seule PR**.
 
@@ -22,7 +22,11 @@ commencer, elles s'appliquent ici sans exception.
 
 ## Prérequis
 
-- MCP Figma connecté (`whoami` en cas d'erreur de droits)
+- `FIGMA_TOKEN` dans `.env` (voir `.env.example`) : token personnel Figma en
+  lecture seule (`file_content:read`). Ne jamais le lire, l'afficher ni le
+  demander dans la conversation.
+- MCP Figma connecté (`whoami` en cas d'erreur de droits) — pour l'analyse et les
+  Variables
 - Skills `figma-use` (avant `use_figma`) et `figma-design-to-code` (avant
   `get_design_context`) chargés
 - `main` à jour et propre : `git switch main && git pull`, puis
@@ -30,39 +34,48 @@ commencer, elles s'appliquent ici sans exception.
 
 ## Étape 1 — Détection
 
-```bash
-node scripts/figma-sync-ds.mjs prepare --out <scratchpad>/sync-ds/snippet.js
-```
-
-Le registre des composants est lu dans les fiches `specs/{atoms,molecules,organisms}/`
-(ligne `**Node Figma :**`, seuls les IDs entre backticks comptent). Une fiche sans
-node fait échouer la commande : la compléter d'abord.
-
-Passer le contenu du snippet **tel quel** comme `code` à `use_figma` (lecture
-seule, un seul appel). Recopier le résultat **à l'identique** (JSON sur une ligne)
-dans `<scratchpad>/sync-ds/export.json`, puis :
+### Composants
 
 ```bash
-node scripts/figma-sync-ds.mjs diff --from <scratchpad>/sync-ds/export.json
+node scripts/figma-sync-ds.mjs detect
 ```
+
+Le script lit Figma directement par l'API REST (fichier `figma.fileKey` de
+`ds.config.json`) : aucune donnée n'est recopiée à la main. Le registre des
+composants vient des en-têtes YAML des fiches `specs/` (`figma.node`).
 
 | Code | Signification | Action |
 |---|---|---|
-| `0` | Rien n'a changé dans Figma | Le dire à Damien. Fin, pas de PR |
-| `1` | Export refusé (empreinte invalide = recopie altérée) ou registre invalide | Recopier à nouveau / corriger la fiche, relancer |
-| `3` | Changements détectés | Étape 2 |
+| `0` | Aucun composant modifié | Passer aux Variables |
+| `1` | Token absent ou refusé, Figma injoignable, fiche invalide | Corriger (message explicite), relancer |
+| `3` | Changements détectés | Noter la liste, passer aux Variables |
 
 Lecture du rapport de détection :
-- **Tokens modifiés** → étape 2, sinon passer à l'étape 3
 - **Composants à analyser**, déjà triés atomes → molécules → organismes, avec les
-  variantes modifiées / ajoutées / supprimées
+  variantes modifiées / ajoutées / supprimées et les propriétés modifiées
+- Un **renommage** de variante apparaît comme une suppression + un ajout
 - **ⓘ « utilise X, aussi modifié »** : le changement vient peut-être d'un
   composant imbriqué (ex. `TopNav` qui contient `MenuButton`) — l'analyse le
   confirme ou non
-- **Introuvables** (node supprimé dans Figma) et **nouveaux dans Figma** (sans
-  fiche) : à reporter dans le rapport consolidé, jamais traités automatiquement
-- **Premier lancement** (pas de snapshot) : les 17 composants sont à analyser —
-  c'est l'audit complet de référence ; annoncer à Damien que ce sera long
+- **Introuvables** (node supprimé dans Figma) et **nouveaux dans Figma** (page
+  « Design system », sans fiche) : à reporter dans le rapport consolidé, jamais
+  traités automatiquement
+- **Premier lancement** (pas de snapshot) : tous les composants sont à analyser —
+  c'est l'audit complet de référence ; annoncer que ce sera long
+
+### Variables
+
+L'API REST des Variables est réservée au plan Figma Enterprise : elles passent par
+le plugin. Appliquer `.claude/skills/sync-tokens/SKILL.md` étapes 1 et 2 (export
+via `use_figma`), puis :
+
+```bash
+node scripts/figma-sync-tokens.mjs --check
+```
+
+`0 ajoutée(s), 0 supprimée(s), 0 valeur(s) modifiée(s)` → Variables inchangées.
+
+Rien de modifié (composants **et** Variables) → le dire. Fin, pas de PR.
 
 ## Étape 2 — Tokens (si les Variables ont changé)
 
@@ -106,7 +119,7 @@ du sm passe de 8 à 6px, lié à spacing/x1-5 »)
 |---|---|---|---|---|---|---|
 | 1 | Spacing | `spacing/x1-5` (6px) | `--spacing-x2` (8px) | padding sm | -2px de large | Aligner le code |
 
-**Incohérences Figma** (§6.1, signalées, non corrigées) : …
+**Incohérences Figma** (CLAUDE.md « Figma est la source de vérité » : signalées, non corrigées) : …
 **API React** : inchangée / prop modifiée → consommateurs impactés : `fichier:ligne`…
 **Fichiers modifiés** : `Tag.module.css`, `Tag.test.tsx`, `Tag.stories.tsx`, `specs/atoms/Tag.md`
 **Tests ajoutés / mis à jour** : …
@@ -116,7 +129,7 @@ du sm passe de 8 à 6px, lié à spacing/x1-5 »)
 
 ## Hors périmètre automatique
 - Introuvables : … → que faire ? (fiche à mettre à jour, composant à retirer ?)
-- Nouveaux dans Figma : `Badge` (184:18566) → à créer via le workflow §7 ?
+- Nouveaux dans Figma : `Badge` (184:18566) → à créer via le workflow CLAUDE.md « Workflow composants » ?
 
 ## Décisions à prendre
 1. Tag #1 — aligner le code sur 6px ? (recommandé : oui)
@@ -124,14 +137,14 @@ du sm passe de 8 à 6px, lié à spacing/x1-5 »)
 ```
 
 Règles du rapport :
-- **Chaque écart a un numéro global** (`Tag #1`, `Button #3`…) pour que Damien
+- **Chaque écart a un numéro global** (`Tag #1`, `Button #3`…) pour que la personne responsable du design
   puisse répondre « tout OK sauf Tag #2, reporter MenuButton ».
 - Toujours indiquer l'**impact rendu** réel (px, couleur avant → après) et les
   **consommateurs** touchés.
 - Appliquer les conventions établies sans les redemander ; ne poser que les
   vraies questions de design.
 
-**STOP — attendre la réponse de Damien.** Trois réponses possibles par
+**STOP — attendre la réponse de la personne responsable du design.** Trois réponses possibles par
 composant : **valider**, **refuser un écart** (reste signalé dans la fiche),
 **reporter le composant** (rien n'est fait, il réapparaîtra au prochain `/sync-ds`).
 
@@ -153,29 +166,32 @@ sans écart ne produit pas de commit.
 ## Étape 6 — Snapshot, contrôles, PR
 
 1. Snapshot — **sauf les composants reportés** :
-   - rien de reporté : `node scripts/figma-sync-ds.mjs update --from <export.json>`
-   - sinon : `... update --from <export.json> --only <validés et sans écart, séparés par des virgules>`
-     (tokens et nouveaux composants restent alors signalés au prochain lancement
-     tant qu'ils ne sont pas traités)
+   - rien de reporté : `node scripts/figma-sync-ds.mjs update`
+   - sinon : `node scripts/figma-sync-ds.mjs update --only <validés et sans écart, séparés par des virgules>`
+     (les nouveaux composants restent alors signalés au prochain lancement tant
+     qu'ils ne sont pas traités)
 
-   Si Figma a été modifié pendant la synchro, relancer l'étape 1 avant `update`.
-   Commit : `chore(sync-ds): met à jour le snapshot Figma`.
+   Le snapshot reflète Figma **au moment de `update`** : si Figma a été modifié
+   pendant la synchro, relancer `detect` avant pour ne rien absorber sans analyse.
+   Commit : `chore(sync-ds): met à jour le snapshot Figma`. Une fois mergé, la
+   détection nocturne ferme l'issue « Drift Figma ».
 2. Contrôles :
    ```bash
    node scripts/token-audit.mjs
-   node --test scripts/figma-sync-tokens.test.mjs scripts/figma-sync-ds.test.mjs
+   node scripts/check-specs.mjs
+   node --test scripts/figma-sync-tokens.test.mjs scripts/figma-sync-ds.test.mjs scripts/check-specs.test.mjs
    pnpm turbo run lint
    pnpm test
    ```
 3. PR unique `feat/sync-ds-<date>` → `main` : description = le rapport consolidé
    final (écarts appliqués, refusés, reportés, incohérences Figma), les mesures
-   et les contrôles. **Ne jamais merger** (CLAUDE.md §16).
+   et les contrôles. **Ne jamais merger** (CLAUDE.md « Workflow Git »).
 
 ## Ce que ce skill ne fait pas
 
-- Pas de création ni de suppression de composant : signalés, puis workflow §7 ou
-  décision de Damien.
-- Pas de correction de Figma : une incohérence est signalée (§6.1).
+- Pas de création ni de suppression de composant : signalés, puis workflow CLAUDE.md « Workflow composants » ou
+  décision de la personne responsable du design.
+- Pas de correction de Figma : une incohérence est signalée (CLAUDE.md « Figma est la source de vérité »).
 - Pas de modification avant le rapport validé : l'étape 4 est un point d'arrêt.
 - Limite connue de la détection : seuls les composants qui ont une fiche specs
   sont comparés finement ; les autres composants de la page « Design system »

@@ -157,11 +157,11 @@ Puis, dans l'ordre :
 
 ## Étape 7 — Snapshot et contrôles
 
-Mettre à jour l'empreinte du composant, pour que `/sync-ds` ne le signale plus
-comme modifié (étape 1 de `/sync-ds` : `prepare` → `use_figma` → export recopié) :
+Mettre à jour l'empreinte du composant, pour que `/sync-ds` et la détection
+nocturne ne le signalent plus comme modifié (lecture REST, `FIGMA_TOKEN` requis) :
 
 ```bash
-node scripts/figma-sync-ds.mjs update --from <export.json> --only <Nom>[,<Nom>…]
+node scripts/figma-sync-ds.mjs update --only <Nom>[,<Nom>…]
 ```
 
 Puis :

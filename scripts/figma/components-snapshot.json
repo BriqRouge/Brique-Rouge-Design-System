@@ -1,0 +1,378 @@
+{
+  "$comment": "Généré par scripts/figma-sync-ds.mjs update — ne pas éditer à la main.",
+  "components": {
+    "AlertBanner": {
+      "node": "755:21871",
+      "hash": "896a9ac5",
+      "props": "644b7a27",
+      "variants": {
+        "Type=info": "fe9caefc",
+        "Type=warning": "4b1e450f"
+      },
+      "deps": [
+        "Button"
+      ]
+    },
+    "Button": {
+      "node": "1506:20751",
+      "hash": "a4070ad4",
+      "props": "8a72371d",
+      "variants": {
+        "Type=primary": "9c377dac",
+        "Type=primary-error": "2d0f4e56",
+        "Type=primary-error-focus": "db34ac73",
+        "Type=primary-error-hover": "fd826484",
+        "Type=primary-focus": "22ca4839",
+        "Type=primary-hover": "dc218636",
+        "Type=primary-info": "b7edac35",
+        "Type=primary-info-focus": "c01e7c36",
+        "Type=primary-info-hover": "191ce089",
+        "Type=primary-success": "1378b7af",
+        "Type=primary-success-focus": "42beee4c",
+        "Type=primary-success-hover": "af5c01b6",
+        "Type=primary-warning": "5c6b4cbf",
+        "Type=primary-warning-focus": "40196a50",
+        "Type=primary-warning-hover": "a45046af",
+        "Type=secondary": "2e3227da",
+        "Type=secondary-error": "94bbfdba",
+        "Type=secondary-error-focus": "8b72bcbe",
+        "Type=secondary-error-hover": "e8803a84",
+        "Type=secondary-focus": "eae66a26",
+        "Type=secondary-hover": "ad6bcfdb",
+        "Type=secondary-info": "751e4728",
+        "Type=secondary-info-focus": "cfabf3e5",
+        "Type=secondary-info-hover": "2e3b5559",
+        "Type=secondary-success": "21b8175d",
+        "Type=secondary-success-focus": "79549753",
+        "Type=secondary-success-hover": "d14ddfba",
+        "Type=secondary-warning": "8ff6e640",
+        "Type=secondary-warning-focus": "87357cc3",
+        "Type=secondary-warning-hover": "d6bb4a17",
+        "Type=tertiary": "01670210",
+        "Type=tertiary-focus": "a037cca5",
+        "Type=tertiary-hover": "3ed3bed6"
+      },
+      "deps": []
+    },
+    "DropdownMenu": {
+      "node": "375:19690",
+      "hash": "f4f5ad0d",
+      "props": "918c8c57",
+      "variants": {
+        "DropdownMenu": "fea4c6a5"
+      },
+      "deps": [
+        "DropdownMenuButton",
+        "LogoCompanies"
+      ]
+    },
+    "DropdownMenuButton": {
+      "node": "370:19497",
+      "hash": "43bea0ab",
+      "props": "c03d3ae5",
+      "variants": {
+        "Company=bpce, State=hovered, Type=activated": "7cc5c550",
+        "Company=bpce, State=idle, Type=activated": "67039cc3",
+        "Company=conseil-constitutionnel, State=hovered, Type=deactivated": "8582f21b",
+        "Company=conseil-constitutionnel, State=idle, Type=deactivated": "56cde53d",
+        "Company=ibp, State=hovered, Type=activated": "68ce117a",
+        "Company=ibp, State=idle, Type=activated": "43247454",
+        "Company=no, State=hovered, Type=activated": "c3b8032e",
+        "Company=no, State=hovered, Type=deactivated": "89a2ea23",
+        "Company=no, State=idle, Type=activated": "1c27a26a",
+        "Company=no, State=idle, Type=deactivated": "1abbcce1",
+        "Company=odaptos, State=hovered, Type=activated": "cda71f8e",
+        "Company=odaptos, State=idle, Type=activated": "8d2888bf",
+        "Company=vinci, State=hovered, Type=deactivated": "31ffcc37",
+        "Company=vinci, State=idle, Type=deactivated": "ef259fa9"
+      },
+      "deps": [
+        "LogoCompanies"
+      ]
+    },
+    "DropdownMenuTrigger": {
+      "node": "379:18464",
+      "hash": "07ee6145",
+      "props": "17ea1915",
+      "variants": {
+        "State=closed": "bb5051f3",
+        "State=opened": "d7f4947d"
+      },
+      "deps": [
+        "DropdownMenu",
+        "DropdownMenuButton",
+        "LogoCompanies",
+        "MenuButton"
+      ]
+    },
+    "FrameLogo": {
+      "node": "370:19490",
+      "hash": "a15ea6ed",
+      "props": "ef4bdd69",
+      "variants": {
+        "type=logo-container": "047194a1"
+      },
+      "deps": []
+    },
+    "LogoCompanies": {
+      "node": "375:19574",
+      "hash": "5d5f1f1a",
+      "props": "e9f826e3",
+      "variants": {
+        "Company=bpce, Size=12": "3049ab4e",
+        "Company=bpce, Size=16": "c26f8acc",
+        "Company=bpce, Size=32": "cfbc26c6",
+        "Company=bpce, Size=8": "7e8ee923",
+        "Company=conseil-constitutionnel, Size=12": "72d62891",
+        "Company=conseil-constitutionnel, Size=16": "ebc1308d",
+        "Company=conseil-constitutionnel, Size=32": "33662d0d",
+        "Company=conseil-constitutionnel, Size=8": "2f18b9d2",
+        "Company=ibp, Size=12": "e9b6535e",
+        "Company=ibp, Size=16": "c94b7acc",
+        "Company=ibp, Size=32": "4811aef1",
+        "Company=ibp, Size=8": "7b5b0b3b",
+        "Company=odaptos, Size=12": "d43dfeaf",
+        "Company=odaptos, Size=16": "50b67e39",
+        "Company=odaptos, Size=32": "aef91c8b",
+        "Company=odaptos, Size=8": "e1285c94",
+        "Company=squared-icon, Size=12": "dec75d3c",
+        "Company=squared-icon, Size=16": "f69c0121",
+        "Company=squared-icon, Size=32": "481899a7",
+        "Company=squared-icon, Size=8": "65643942",
+        "Company=steam, Size=12": "6925a355",
+        "Company=steam, Size=16": "5324fce7",
+        "Company=steam, Size=32": "18853375",
+        "Company=steam, Size=8": "24f2cb56",
+        "Company=tidal, Size=12": "74520960",
+        "Company=tidal, Size=16": "b2da5972",
+        "Company=tidal, Size=32": "c6879ed0",
+        "Company=tidal, Size=8": "078732f5",
+        "Company=vinci, Size=12": "38054154",
+        "Company=vinci, Size=16": "b675e2d5",
+        "Company=vinci, Size=32": "928c7990",
+        "Company=vinci, Size=8": "ed1715f7"
+      },
+      "deps": []
+    },
+    "MacbookMockup": {
+      "node": "537:19720",
+      "hash": "d121790a",
+      "props": "806d8a5b",
+      "variants": {
+        "Style=fill, Model=13in-m1-pro": "90261939",
+        "Style=fill, Model=14-16in-m1-pro": "2e80c12f",
+        "Style=outline, Model=13in-m1-pro": "6a2c3977",
+        "Style=outline, Model=14-16in-m1-pro": "ec606cfd",
+        "Style=shaded, Model=13in-m1-pro": "dcb9ab06",
+        "Style=shaded, Model=14-16in-m1-pro": "e6135d0d"
+      },
+      "deps": []
+    },
+    "MenuButton": {
+      "node": "1345:21426",
+      "hash": "fc452463",
+      "props": "10f2fe7e",
+      "variants": {
+        "Type=contained, State=disabled, Size=md, Color-scheme=default": "6f74eb53",
+        "Type=contained, State=disabled, Size=nm, Color-scheme=default": "e1732396",
+        "Type=contained, State=disabled, Size=sm, Color-scheme=default": "dee36c47",
+        "Type=contained, State=focus, Size=md, Color-scheme=default": "b590d0f0",
+        "Type=contained, State=focus, Size=nm, Color-scheme=default": "f083397f",
+        "Type=contained, State=focus, Size=sm, Color-scheme=default": "24833efc",
+        "Type=contained, State=hovered, Size=md, Color-scheme=default": "7184243f",
+        "Type=contained, State=hovered, Size=nm, Color-scheme=default": "59698057",
+        "Type=contained, State=hovered, Size=sm, Color-scheme=default": "a40aaede",
+        "Type=contained, State=idle, Size=md, Color-scheme=default": "bcd7327d",
+        "Type=contained, State=idle, Size=nm, Color-scheme=default": "a47061d9",
+        "Type=contained, State=idle, Size=sm, Color-scheme=default": "c8528fd2",
+        "Type=outlined, State=disabled, Size=md, Color-scheme=dark": "5aeade25",
+        "Type=outlined, State=disabled, Size=md, Color-scheme=light": "bd181c1b",
+        "Type=outlined, State=disabled, Size=nm, Color-scheme=dark": "ddd4036d",
+        "Type=outlined, State=disabled, Size=nm, Color-scheme=light": "4ff82780",
+        "Type=outlined, State=disabled, Size=sm, Color-scheme=dark": "29216cb4",
+        "Type=outlined, State=disabled, Size=sm, Color-scheme=light": "6640fe6d",
+        "Type=outlined, State=focus, Size=md, Color-scheme=dark": "9b3553d6",
+        "Type=outlined, State=focus, Size=md, Color-scheme=light": "451353ea",
+        "Type=outlined, State=focus, Size=nm, Color-scheme=dark": "585a38cb",
+        "Type=outlined, State=focus, Size=nm, Color-scheme=light": "10f41f63",
+        "Type=outlined, State=focus, Size=sm, Color-scheme=dark": "c49f0596",
+        "Type=outlined, State=focus, Size=sm, Color-scheme=light": "5f40807c",
+        "Type=outlined, State=hovered, Size=md, Color-scheme=dark": "7b4c5c87",
+        "Type=outlined, State=hovered, Size=md, Color-scheme=light": "c21a3133",
+        "Type=outlined, State=hovered, Size=nm, Color-scheme=dark": "04dfcf67",
+        "Type=outlined, State=hovered, Size=nm, Color-scheme=light": "6648689f",
+        "Type=outlined, State=hovered, Size=sm, Color-scheme=dark": "ba9bbc8c",
+        "Type=outlined, State=hovered, Size=sm, Color-scheme=light": "f874fa72",
+        "Type=outlined, State=idle, Size=md, Color-scheme=dark": "f2d11358",
+        "Type=outlined, State=idle, Size=md, Color-scheme=light": "fb76de0c",
+        "Type=outlined, State=idle, Size=nm, Color-scheme=dark": "6055caba",
+        "Type=outlined, State=idle, Size=nm, Color-scheme=light": "9e4614f4",
+        "Type=outlined, State=idle, Size=sm, Color-scheme=dark": "94166349",
+        "Type=outlined, State=idle, Size=sm, Color-scheme=light": "cb7d6911"
+      },
+      "deps": []
+    },
+    "MetaInfoItem": {
+      "node": "797:19440",
+      "hash": "0aec0ee5",
+      "props": "762c4a51",
+      "variants": {
+        "Interests=lecture, State=hovered": "8ac5f14f",
+        "Interests=lecture, State=idle": "1d284883",
+        "Interests=location, State=hovered": "375b5fc1",
+        "Interests=location, State=idle": "d2c6a5e2",
+        "Interests=music, State=hovered": "a793556c",
+        "Interests=music, State=idle": "0eba074b",
+        "Interests=video-game, State=hovered": "3fc851c2",
+        "Interests=video-game, State=idle": "0fdf6c56"
+      },
+      "deps": [
+        "LogoCompanies"
+      ]
+    },
+    "ProjectBentoCard": {
+      "node": "2032:20121",
+      "hash": "d84406bd",
+      "props": "32b0f90c",
+      "variants": {
+        "State=hovered, Project=bpce": "2eae0f4f",
+        "State=hovered, Project=conseil-constitutionnel": "9110f8a3",
+        "State=hovered, Project=cv": "d8b40ce6",
+        "State=hovered, Project=ibp": "2ed316b5",
+        "State=hovered, Project=odaptos": "fa2c26c4",
+        "State=idle, Project=bpce": "c7a116de",
+        "State=idle, Project=conseil-constitutionnel": "832ddb99",
+        "State=idle, Project=cv": "2037444f",
+        "State=idle, Project=ibp": "5937d04d",
+        "State=idle, Project=odaptos": "f2c5f16c"
+      },
+      "deps": [
+        "MacbookMockup",
+        "ProjectCardDescription"
+      ]
+    },
+    "ProjectCardDescription": {
+      "node": "2040:19251",
+      "hash": "d239ec80",
+      "props": "1eba9e74",
+      "variants": {
+        "Type=cv": "f0254172",
+        "Type=default": "a0c9272b"
+      },
+      "deps": []
+    },
+    "ProjectOverview": {
+      "node": "837:19534",
+      "hash": "5a35dafc",
+      "props": null,
+      "variants": {
+        "Overview Projet": "d5b29243"
+      },
+      "deps": []
+    },
+    "ProjectSectionDescription": {
+      "node": "744:20765",
+      "hash": "ad51d121",
+      "props": "13a1a408",
+      "variants": {
+        "Cards / Project_Sections_Descritpion": "be8c0b43"
+      },
+      "deps": [
+        "AlertBanner",
+        "Button"
+      ]
+    },
+    "ProjectSectionsDescription": {
+      "node": "744:20765",
+      "hash": "ad51d121",
+      "props": "13a1a408",
+      "variants": {
+        "Cards / Project_Sections_Descritpion": "be8c0b43"
+      },
+      "deps": [
+        "AlertBanner",
+        "Button"
+      ]
+    },
+    "Tag": {
+      "node": "184:18522",
+      "hash": "f0603b43",
+      "props": "1d6ea4f0",
+      "variants": {
+        "Size=lg, Style=contained": "a5bd65aa",
+        "Size=lg, Style=outlined": "a1992388",
+        "Size=md, Style=contained": "76e40664",
+        "Size=md, Style=outlined": "c036d7f0",
+        "Size=nm, Style=contained": "543e7a7c",
+        "Size=nm, Style=outlined": "5a89b40e",
+        "Size=sm, Style=contained": "056cd510",
+        "Size=sm, Style=outlined": "6999cece"
+      },
+      "deps": []
+    },
+    "TopNav": {
+      "node": "1702:20362",
+      "hash": "d75b2c82",
+      "props": "af5fbc7d",
+      "variants": {
+        "Type=bpce": "d3ca58f8",
+        "Type=conseil-constitutionnel": "619bac8e",
+        "Type=homepage": "2e5393a7",
+        "Type=ibp": "e72c4999",
+        "Type=odaptos": "d2134b4c",
+        "Type=opco-atlas": "9c7f7c54"
+      },
+      "deps": [
+        "DropdownMenu",
+        "DropdownMenuButton",
+        "DropdownMenuTrigger",
+        "LogoCompanies",
+        "MenuButton"
+      ]
+    }
+  },
+  "inventory": {
+    "184:18522": "Tag",
+    "184:18566": "Badge",
+    "328:19711": "Icons/Animated",
+    "370:19490": "DropdownMenu_Logo_FrameLogo",
+    "370:19497": "DropdownMenuButton",
+    "375:19690": "DropdownMenu",
+    "375:19574": "Logo Companies",
+    "379:18464": "DropdownMenuTrigger",
+    "467:19340": "[Mobile]Home_page_record 1",
+    "467:19354": "[Mobile]Conseil_Constitutionnel_game 1",
+    "473:19360": "[Mobile]Conseil_Constitutionnel_game_cut 1",
+    "1761:22905": "CC-Desktop-Screen",
+    "486:19536": "Tooltip_Animation",
+    "486:19554": "Tooltip",
+    "486:19917": "Logo / logo_Odaptos_Animation 1",
+    "537:19843": "Conseil_Constitutionnel_Clip_Accueil 1",
+    "537:19720": "Macbook Pro",
+    "561:20119": "Logo Perso",
+    "584:19581": "Iphone 14",
+    "584:19609": "Screen (to update)",
+    "584:19809": "Logo / Odaptos_Logo_svg",
+    "593:20320": "Odaptos_DEMO_Final 1",
+    "631:28292": "Logo / bpce-car-lease",
+    "631:28301": "Mobilité-BPCE-Lease_Accueil",
+    "653:20516": "MyCarLease_Accueil_Pro 1",
+    "744:20718": "Icons/Squared",
+    "744:20765": "Cards / Project_Sections_Descritpion",
+    "755:21871": "Notifications / Alert Banners",
+    "777:19413": "Icons/Squared/cons/Tidal",
+    "779:19736": "Icons/Steam",
+    "797:19440": "Meta_Info Button",
+    "883:21983": "Logo / Banque_Populaire_Informatique_Logo",
+    "1001:19890": "Logo / OPCO Atlas - Logo",
+    "1345:21426": "MenuButton",
+    "1506:20751": "Button",
+    "1702:20362": "TopNav",
+    "1762:22935": "CC-Mobile-Screen",
+    "1759:22825": "[DEPRECATED]Projects-Bento-Cards",
+    "2032:20121": "Projects-Bento-Cards",
+    "2049:20632": "Bento-box",
+    "2040:19251": "Project-Cards-Description",
+    "2131:21897": "Animation-bullet-brique"
+  }
+}

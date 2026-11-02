@@ -3,129 +3,162 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import { fnv1a, parseRegistry, buildSnippet, readExport, diffSnapshot, updateSnapshot, formatReport } from './figma-sync-ds.mjs';
+import { fnv1a, normalize, buildRegistry, buildPayload, diffSnapshot, updateSnapshot, formatReport, hasChanges, readToken } from './figma-sync-ds.mjs';
 
-const spec = (node) => `# X\n\n**Package :** \`@brique-rouge/react\`\n${node ? `**Node Figma :** ${node}\n` : ''}`;
 const REGISTRY = {
-  Tag: { tier: 'atoms', ids: ['184:18522'] },
-  Button: { tier: 'atoms', ids: ['1506:20751'] },
-  TopNav: { tier: 'organisms', ids: ['1702:20362'] },
-  MetaInfoItem: { tier: 'molecules', ids: ['837:19518', '797:19440'] },
+  Tag: { tier: 'atom', node: '184:18522' },
+  Button: { tier: 'atom', node: '1506:20751' },
+  TopNav: { tier: 'organism', node: '1702:20362' },
+  MetaInfoItem: { tier: 'molecule', node: '797:19440' },
 };
 
-const comp = (nodes, variants, deps = []) => {
-  const keys = Object.keys(variants).sort();
-  return { nodes, hash: fnv1a(keys.map((k) => k + '=' + variants[k]).join('|')), variants, deps };
-};
-const payload = (overrides = {}) => ({
-  tokens: { count: 2, hash: 'aaaa0000' },
-  components: {
-    Tag: comp(['184:18522'], { 'Size=sm': '11111111', 'Size=nm': '22222222' }),
-    Button: comp(['1506:20751'], { 'Type=primary': '33333333' }),
-    TopNav: comp(['1702:20362'], { 'Type=homepage': '44444444' }, ['Button']),
-    MetaInfoItem: comp(['797:19440'], { 'State=idle': '55555555' }),
+// ─── Réponses REST simulées ──────────────────────────────────────────────────
+const box = (x, y, width = 40, height = 20) => ({ x, y, width, height });
+const variant = (id, name, x, padding = 8, extra = {}) => ({
+  id, name, type: 'COMPONENT', absoluteBoundingBox: box(x, 0), absoluteRenderBounds: box(x, 0),
+  paddingLeft: padding, children: [{ id: `${id}0`, name: 'Label', type: 'TEXT', characters: 'Tag', absoluteBoundingBox: box(x + padding, 2) }], ...extra,
+});
+const restNodes = () => ({
+  '184:18522': {
+    document: { id: '184:18522', type: 'COMPONENT_SET', name: 'Tag', componentPropertyDefinitions: { Size: { type: 'VARIANT', defaultValue: 'sm', variantOptions: ['sm', 'nm'] } },
+      absoluteBoundingBox: box(0, 0, 200, 40), children: [variant('1:1', 'Size=sm', 0), variant('1:2', 'Size=nm', 100, 12)] },
+    components: {},
   },
-  missing: [],
-  inventory: { '184:18522': 'Tag', '1506:20751': 'Button', '1702:20362': 'TopNav', '797:19440': 'Meta', '184:18566': 'Badge' },
-  ...overrides,
+  '1506:20751': {
+    document: { id: '1506:20751', type: 'COMPONENT_SET', name: 'Button', componentPropertyDefinitions: {}, absoluteBoundingBox: box(0, 0), children: [variant('2:1', 'Type=primary', 0)] },
+    components: {},
+  },
+  '1702:20362': {
+    document: { id: '1702:20362', type: 'COMPONENT', name: 'TopNav', absoluteBoundingBox: box(500, 500),
+      children: [{ id: 'I9', type: 'INSTANCE', name: 'Button', componentId: '2:1', overrides: [{ id: 'I9' }], absoluteBoundingBox: box(510, 500) }] },
+    components: { '2:1': { name: 'Type=primary', componentSetId: '1506:20751' } },
+  },
+  '797:19440': null,
 });
-const exportOf = (p) => JSON.stringify({ checksum: fnv1a(JSON.stringify(p)), payload: p });
+const PAGE = { children: [
+  { id: '184:18522', type: 'COMPONENT_SET', name: 'Tag' },
+  { id: '184:18566', type: 'COMPONENT_SET', name: 'Badge' },
+  { id: '86:1', type: 'COMPONENT_SET', name: 'Arrow / Chevron' },
+  { id: '9:9', type: 'FRAME', name: 'Notes' },
+] };
+const ICONS = '^(Arrow|Interface) /';
+const payloadOf = (nodes = restNodes(), page = PAGE) => buildPayload(REGISTRY, nodes, page, ICONS);
 
-test('registre : node(s) lus dans la ligne « Node Figma », tier selon le dossier', () => {
-  const { registry, errors } = parseRegistry({
-    atoms: { 'Tag.md': spec('`184:18522` ("Tag")') },
-    molecules: { 'MetaInfoItem.md': spec('`837:19518` (instance) + `797:19440` (bibliothèque)') },
-    organisms: {},
-  });
-  assert.deepEqual(errors, []);
-  assert.deepEqual(registry.Tag, { tier: 'atoms', ids: ['184:18522'] });
-  assert.deepEqual(registry.MetaInfoItem.ids, ['837:19518', '797:19440']);
+test('normalisation : position relative, identifiants et rendu dérivé ignorés', () => {
+  const a = normalize(variant('1:1', 'Size=sm', 0), { x: 0, y: 0 });
+  const b = normalize(variant('7:7', 'Size=sm', 300), { x: 300, y: 0 });
+  assert.deepEqual(a, b);
+  assert.ok(!('id' in a) && !('absoluteRenderBounds' in a));
+  assert.deepEqual(a.box, [0, 0, 40, 20]);
 });
 
-test('registre : une fiche sans node Figma est une erreur', () => {
-  const { errors } = parseRegistry({ atoms: { 'Foo.md': spec(null) }, molecules: {}, organisms: {} });
-  assert.equal(errors.length, 1);
+test('registre : lu dans les en-têtes YAML, fiche invalide signalée', () => {
+  const { registry, errors } = buildRegistry([
+    { path: 'specs/atoms/Tag.md', file: 'Tag.md', folderTier: 'atom', data: { figma: { node: '184:18522' } } },
+    { path: 'specs/atoms/Foo.md', file: 'Foo.md', folderTier: 'atom', data: null },
+  ]);
+  assert.deepEqual(registry, { Tag: { tier: 'atom', node: '184:18522' } });
   assert.match(errors[0], /Foo\.md/);
 });
 
-test('snippet : le registre remplace le marqueur du modèle réel', () => {
-  const template = readFileSync(join(import.meta.dirname, 'figma/snapshot-components.js'), 'utf8');
-  const snippet = buildSnippet(template, REGISTRY);
-  assert.ok(!snippet.includes('/*__REGISTRY__*/'));
-  assert.ok(snippet.includes('"Tag":{"ids":["184:18522"]}'));
-  assert.ok(!snippet.includes('"tier"'));
+test('payload : variantes, dépendances, introuvables et inventaire hors icônes', () => {
+  const p = payloadOf();
+  assert.deepEqual(Object.keys(p.components.Tag.variants), ['Size=nm', 'Size=sm']);
+  assert.deepEqual(p.components.TopNav.deps, ['Button']);
+  assert.deepEqual(p.missing, ['MetaInfoItem']);
+  assert.deepEqual(p.inventory, { '184:18522': 'Tag', '184:18566': 'Badge' });
 });
 
-test('export : une recopie altérée est refusée', () => {
-  const text = exportOf(payload()).replace('11111111', '11111112');
-  assert.match(readExport(text).errors[0], /empreinte invalide/);
-});
-
-test('export : un export intact est accepté', () => {
-  const { payload: p, errors } = readExport(exportOf(payload()));
-  assert.deepEqual(errors, []);
-  assert.equal(Object.keys(p.components).length, 4);
+test('payload : déplacer un composant sur le canvas ne change pas son empreinte', () => {
+  const moved = restNodes();
+  const set = moved['184:18522'].document;
+  set.absoluteBoundingBox = box(1000, 1000, 200, 40);
+  set.children = [variant('1:1', 'Size=sm', 1000), variant('1:2', 'Size=nm', 1100, 12)];
+  assert.equal(payloadOf(moved).components.Tag.hash, payloadOf().components.Tag.hash);
 });
 
 test('premier lancement : tout est à analyser, dans l\'ordre atomes → molécules → organismes', () => {
-  const diff = diffSnapshot(null, payload(), REGISTRY);
+  const diff = diffSnapshot(null, payloadOf(), REGISTRY);
   assert.equal(diff.firstRun, true);
-  assert.deepEqual(diff.changed.map((c) => c.name), ['Button', 'Tag', 'MetaInfoItem', 'TopNav']);
+  assert.deepEqual(diff.changed.map((c) => c.name), ['Button', 'Tag', 'TopNav']);
   assert.deepEqual(diff.newInFigma, []);
+  assert.ok(hasChanges(diff));
 });
 
 test('aucun changement : rien à analyser', () => {
-  const snap = updateSnapshot(null, payload(), null);
-  const diff = diffSnapshot(snap, payload(), REGISTRY);
+  const snap = updateSnapshot(null, payloadOf(), null);
+  const diff = diffSnapshot(snap, payloadOf(), REGISTRY);
   assert.equal(diff.changed.length, 0);
-  assert.equal(diff.tokensChanged, false);
-  assert.equal(diff.unchanged.length, 4);
+  assert.deepEqual(diff.unchanged, ['Button', 'Tag', 'TopNav']);
+  assert.deepEqual(diff.missing, ['MetaInfoItem']);
 });
 
 test('variante modifiée, ajoutée, supprimée + dépendance modifiée signalée', () => {
-  const snap = updateSnapshot(null, payload(), null);
-  const next = payload();
-  next.components.Tag = comp(['184:18522'], { 'Size=sm': '99999999', 'Size=lg': '66666666' });
-  next.components.Button = comp(['1506:20751'], { 'Type=primary': '77777777' });
-  next.components.TopNav = comp(['1702:20362'], { 'Type=homepage': '88888888' }, ['Button']);
-  const diff = diffSnapshot(snap, next, REGISTRY);
+  const snap = updateSnapshot(null, payloadOf(), null);
+  const next = restNodes();
+  next['184:18522'].document.children = [variant('1:1', 'Size=sm', 0, 6), variant('1:3', 'Size=lg', 100)];
+  next['1506:20751'].document.children = [variant('2:1', 'Type=primary', 0, 10)];
+  const diff = diffSnapshot(snap, payloadOf(next), REGISTRY);
   const tag = diff.changed.find((c) => c.name === 'Tag');
   assert.deepEqual(tag.variantsChanged, ['Size=sm']);
   assert.deepEqual(tag.variantsAdded, ['Size=lg']);
   assert.deepEqual(tag.variantsRemoved, ['Size=nm']);
+  // le rendu de l'instance n'a pas changé dans la réponse simulée : TopNav inchangé
+  assert.ok(diff.unchanged.includes('TopNav'));
+  assert.match(formatReport(diff), /renommage de variante/);
+});
+
+test('instance surchargée dans un organisme : changement détecté, dépendance signalée', () => {
+  const snap = updateSnapshot(null, payloadOf(), null);
+  const next = restNodes();
+  next['1506:20751'].document.children = [variant('2:1', 'Type=primary', 0, 10)];
+  next['1702:20362'].document.children[0].fills = [{ type: 'SOLID', color: { r: 1, g: 0, b: 0, a: 1 } }];
+  const diff = diffSnapshot(snap, payloadOf(next), REGISTRY);
   assert.deepEqual(diff.changed.find((c) => c.name === 'TopNav').changedDeps, ['Button']);
   assert.match(formatReport(diff), /utilise Button, aussi modifié/);
 });
 
-test('tokens modifiés, composant introuvable et nouveau composant Figma signalés', () => {
-  const snap = updateSnapshot(null, payload(), null);
-  const next = payload({ tokens: { count: 3, hash: 'bbbb0000' }, missing: ['TopNav'] });
-  delete next.components.TopNav;
-  next.inventory = { ...next.inventory, '2200:1': 'Accordion' };
-  const diff = diffSnapshot(snap, next, REGISTRY);
-  assert.equal(diff.tokensChanged, true);
-  assert.deepEqual(diff.missing, ['TopNav']);
-  assert.deepEqual(diff.newInFigma, [{ id: '2200:1', name: 'Accordion' }]);
+test('propriétés du composant modifiées signalées', () => {
+  const snap = updateSnapshot(null, payloadOf(), null);
+  const next = restNodes();
+  next['184:18522'].document.componentPropertyDefinitions.Size.defaultValue = 'nm';
+  const tag = diffSnapshot(snap, payloadOf(next), REGISTRY).changed.find((c) => c.name === 'Tag');
+  assert.equal(tag.propsChanged, true);
+  assert.deepEqual(tag.variantsChanged, []);
 });
 
-test('mise à jour partielle : seuls les composants listés changent, tokens et inventaire conservés', () => {
-  const snap = updateSnapshot(null, payload(), null);
-  const next = payload({ tokens: { count: 3, hash: 'bbbb0000' } });
-  next.components.Tag = comp(['184:18522'], { 'Size=sm': '99999999' });
-  next.components.Button = comp(['1506:20751'], { 'Type=primary': '77777777' });
-  next.inventory = { ...next.inventory, '2200:1': 'Accordion' };
-  const updated = updateSnapshot(snap, next, ['Tag']);
-  assert.equal(updated.components.Tag.hash, next.components.Tag.hash);
+test('nouveau composant sur la page Design system signalé', () => {
+  const snap = updateSnapshot(null, payloadOf(), null);
+  const page = { children: [...PAGE.children, { id: '2200:1', type: 'COMPONENT', name: 'Accordion' }] };
+  assert.deepEqual(diffSnapshot(snap, payloadOf(restNodes(), page), REGISTRY).newInFigma, [{ id: '2200:1', name: 'Accordion' }]);
+});
+
+test('mise à jour partielle : seuls les composants listés changent, inventaire conservé', () => {
+  const snap = updateSnapshot(null, payloadOf(), null);
+  const next = restNodes();
+  next['184:18522'].document.children = [variant('1:1', 'Size=sm', 0, 6)];
+  next['1506:20751'].document.children = [variant('2:1', 'Type=primary', 0, 10)];
+  const page = { children: [...PAGE.children, { id: '2200:1', type: 'COMPONENT', name: 'Accordion' }] };
+  const p = payloadOf(next, page);
+  const updated = updateSnapshot(snap, p, ['Tag']);
+  assert.equal(updated.components.Tag.hash, p.components.Tag.hash);
   assert.equal(updated.components.Button.hash, snap.components.Button.hash);
-  assert.equal(updated.tokens.hash, 'aaaa0000');
   assert.ok(!('2200:1' in updated.inventory));
-  const diff = diffSnapshot(updated, next, REGISTRY);
-  assert.deepEqual(diff.changed.map((c) => c.name), ['Button']);
-  assert.equal(diff.tokensChanged, true);
+  assert.deepEqual(diffSnapshot(updated, p, REGISTRY).changed.map((c) => c.name), ['Button']);
 });
 
-test('mise à jour partielle : un composant absent de l\'export est refusé', () => {
-  assert.throws(() => updateSnapshot(null, payload(), ['Inconnu']), /Inconnu/);
+test('mise à jour partielle : un composant inconnu est refusé', () => {
+  assert.throws(() => updateSnapshot(null, payloadOf(), ['Inconnu']), /Inconnu/);
+});
+
+test('token : variable d\'environnement prioritaire, sinon .env', () => {
+  assert.equal(readToken({ FIGMA_TOKEN: 'abc' }, 'FIGMA_TOKEN=def'), 'abc');
+  assert.equal(readToken({}, '# x\nFIGMA_TOKEN=def\r\n'), 'def');
+  assert.equal(readToken({}, 'FIGMA_TOKEN=\n'), null);
+  assert.equal(readToken({}, null), null);
+});
+
+test('empreinte FNV-1a stable', () => {
+  assert.equal(fnv1a(''), '811c9dc5');
+  assert.equal(fnv1a('a'), 'e40c292c');
 });

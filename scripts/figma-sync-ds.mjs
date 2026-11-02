@@ -1,42 +1,47 @@
 #!/usr/bin/env node
 // scripts/figma-sync-ds.mjs
 //
-// Détection des changements Figma pour le skill /sync-ds. Sans dépendance.
+// Détection des changements de composants Figma pour le skill /sync-ds et la
+// CI nocturne. Sans dépendance.
 //
 // Principe : on garde dans le repo l'empreinte de chaque composant Figma tel
 // qu'il était lors de la dernière synchro (scripts/figma/components-snapshot.json).
-// Un export frais, produit par scripts/figma/snapshot-components.js via
-// `use_figma`, est comparé à ce snapshot : seuls les composants dont
-// l'empreinte a changé sont à analyser. Le script ne décide rien — il liste.
+// Le script lit Figma directement par l'API REST (lecture seule), recalcule les
+// empreintes et les compare au snapshot : seuls les composants dont l'empreinte
+// a changé sont à analyser. Il ne décide rien — il liste.
+//
+// Les Figma Variables ne sont PAS couvertes : leur API REST est réservée au plan
+// Enterprise. Elles se vérifient avec /sync-tokens (`figma-sync-tokens.mjs --check`).
+//
+// Configuration :
+//   ds.config.json           figma.fileKey, figma.designSystemPageId, figma.iconNamePattern
+//   specs/**/*.md            registre des composants (en-tête YAML, figma.node)
+//   FIGMA_TOKEN              variable d'environnement, ou ligne FIGMA_TOKEN=… du
+//                            fichier .env à la racine (jamais committé).
+//                            Token personnel Figma, scope file_content:read.
 //
 // Usage :
-//   node scripts/figma-sync-ds.mjs prepare [--out <fichier>]
-//       Écrit le snippet use_figma prêt à l'emploi (registre des composants lu
-//       dans specs/{atoms,molecules,organisms}/*.md, ligne « **Node Figma :** »).
-//       Défaut : $TMPDIR/figma-sync-ds/snippet.js
-//   node scripts/figma-sync-ds.mjs diff --from <export.json>
-//       Vérifie l'export et affiche le rapport de détection.
-//   node scripts/figma-sync-ds.mjs update --from <export.json> [--only A,B]
+//   node scripts/figma-sync-ds.mjs detect [--report <fichier.md>]
+//       Affiche le rapport de détection (et l'écrit en Markdown si --report).
+//   node scripts/figma-sync-ds.mjs update [--only A,B]
 //       Met à jour le snapshot (tous les composants, ou seulement ceux listés).
 //
 // Codes de sortie :
-//   0  rien à synchroniser (diff) / snapshot écrit (update)
-//   1  erreur — export refusé, registre invalide, rien n'a été écrit
-//   3  changements détectés (diff)
+//   0  rien n'a changé (detect) / snapshot écrit (update)
+//   1  erreur — token absent, Figma injoignable, registre invalide ; rien n'est écrit
+//   3  changements détectés (detect)
 
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'fs';
-import { dirname, join } from 'path';
-import { tmpdir } from 'os';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 import { pathToFileURL } from 'url';
+import { loadConfig, readComponentSpecs } from './lib/specs.mjs';
 
 const repoRoot = join(import.meta.dirname, '..');
-const SPECS_DIR = join(repoRoot, 'specs');
-const TEMPLATE_PATH = join(repoRoot, 'scripts/figma/snapshot-components.js');
 export const SNAPSHOT_PATH = join(repoRoot, 'scripts/figma/components-snapshot.json');
-export const TIERS = ['atoms', 'molecules', 'organisms'];
-const REGISTRY_MARKER = '/*__REGISTRY__*/ {}';
+export const TIERS = ['atom', 'molecule', 'organism'];
+const API = 'https://api.figma.com/v1';
 
-// ─── Empreinte — identique à celle du snippet Figma ──────────────────────────
+// ─── Empreinte ───────────────────────────────────────────────────────────────
 export function fnv1a(str) {
   let h = 0x811c9dc5;
   for (let i = 0; i < str.length; i++) {
@@ -46,53 +51,100 @@ export function fnv1a(str) {
   return h.toString(16).padStart(8, '0');
 }
 
-// ─── Registre : composant → tier + node(s) Figma, depuis les fiches specs ────
-// `files` : { atoms: { 'Tag.md': string, … }, molecules: {…}, organisms: {…} }
-export function parseRegistry(files) {
+// Champs REST sans valeur de design : identifiants de calques (changent si un
+// calque est recréé à l'identique), rendu dérivé, liste technique des surcharges
+// (les valeurs surchargées, elles, sont dans le node).
+const IGNORED = new Set(['id', 'absoluteRenderBounds', 'overrides']);
+const round = (n) => Math.round(n * 100) / 100;
+
+// Copie normalisée d'un node REST : clés triées, nombres arrondis, position
+// relative à `origin` (la place du composant sur le canvas n'est pas du design).
+export function normalize(node, origin) {
+  if (Array.isArray(node)) return node.map((x) => normalize(x, origin));
+  if (typeof node === 'number') return round(node);
+  if (!node || typeof node !== 'object') return node;
+  const out = {};
+  for (const k of Object.keys(node).sort()) {
+    if (IGNORED.has(k)) continue;
+    const v = node[k];
+    if (k === 'absoluteBoundingBox' && v) {
+      out.box = [round(v.x - origin.x), round(v.y - origin.y), round(v.width), round(v.height)];
+    } else {
+      out[k] = normalize(v, origin);
+    }
+  }
+  return out;
+}
+
+const hashNode = (node) => fnv1a(JSON.stringify(normalize(node, node.absoluteBoundingBox ?? { x: 0, y: 0 })));
+
+function collectInstances(node, acc = []) {
+  if (node.type === 'INSTANCE' && node.componentId) acc.push(node.componentId);
+  for (const c of node.children ?? []) collectInstances(c, acc);
+  return acc;
+}
+
+// ─── Registre : composant → niveau + node Figma, depuis les en-têtes YAML ────
+export function buildRegistry(specs) {
   const registry = {};
   const errors = [];
-  for (const tier of TIERS) {
-    for (const [file, content] of Object.entries(files[tier] ?? {})) {
-      const name = file.replace(/\.md$/, '');
-      const line = content.split(/\r?\n/).find((l) => l.startsWith('**Node Figma :**'));
-      const ids = line ? [...line.matchAll(/`(\d+:\d+)`/g)].map((m) => m[1]) : [];
-      if (ids.length === 0) errors.push(`${tier}/${file} : aucune ligne « **Node Figma :** » avec un node \`1234:5678\``);
-      else registry[name] = { tier, ids };
-    }
+  for (const s of specs) {
+    if (s.error || !s.data?.figma?.node) { errors.push(`${s.path} : en-tête YAML invalide — lancer node scripts/check-specs.mjs`); continue; }
+    registry[s.file.replace(/\.md$/, '')] = { tier: s.folderTier, node: s.data.figma.node };
   }
   return { registry, errors };
 }
 
-export function buildSnippet(template, registry) {
-  if (!template.includes(REGISTRY_MARKER)) throw new Error('marqueur __REGISTRY__ absent du modèle');
-  const compact = Object.fromEntries(Object.entries(registry).map(([n, r]) => [n, { ids: r.ids }]));
-  return template.replace(REGISTRY_MARKER, JSON.stringify(compact));
+// ─── Empreintes à partir des réponses REST ───────────────────────────────────
+// `nodes` : réponse de GET /files/:key/nodes (champ `nodes`) pour les nodes du registre
+// `page`  : document de la page « Design system » (depth=1)
+export function buildPayload(registry, nodes, page, iconPattern) {
+  // componentId → id du set (ou du composant seul), pour retrouver les dépendances
+  const ownerOf = new Map();
+  for (const entry of Object.values(nodes)) {
+    for (const [id, c] of Object.entries(entry?.components ?? {})) ownerOf.set(id, c.componentSetId ?? id);
+  }
+  const nameOf = new Map(Object.entries(registry).map(([name, r]) => [r.node, name]));
+
+  const components = {};
+  const missing = [];
+  for (const name of Object.keys(registry).sort()) {
+    const doc = nodes[registry[name].node]?.document;
+    if (!doc) { missing.push(name); continue; }
+    const variants = {};
+    let props = null;
+    if (doc.type === 'COMPONENT_SET') {
+      props = fnv1a(JSON.stringify(normalize(doc.componentPropertyDefinitions ?? {}, { x: 0, y: 0 })));
+      for (const v of doc.children ?? []) if (v.type === 'COMPONENT') variants[v.name] = hashNode(v);
+    } else {
+      if (doc.componentPropertyDefinitions) props = fnv1a(JSON.stringify(normalize(doc.componentPropertyDefinitions, { x: 0, y: 0 })));
+      variants[doc.name] = hashNode(doc);
+    }
+    const deps = collectInstances(doc)
+      .map((id) => nameOf.get(ownerOf.get(id) ?? id))
+      .filter((d) => d && d !== name);
+    const keys = Object.keys(variants).sort();
+    components[name] = {
+      node: registry[name].node,
+      hash: fnv1a((props ?? '') + '|' + keys.map((k) => k + '=' + variants[k]).join('|')),
+      props,
+      variants: Object.fromEntries(keys.map((k) => [k, variants[k]])),
+      deps: [...new Set(deps)].sort(),
+    };
+  }
+
+  const icon = new RegExp(iconPattern);
+  const inventory = {};
+  for (const n of page?.children ?? []) {
+    if ((n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && !icon.test(n.name)) inventory[n.id] = n.name;
+  }
+  return { components, missing, inventory };
 }
 
-// ─── Lecture et vérification de l'export ─────────────────────────────────────
-export function readExport(text) {
-  let data;
-  try {
-    data = JSON.parse(text);
-  } catch (e) {
-    return { errors: [`export illisible (JSON) : ${e.message}`] };
-  }
-  const { checksum, payload } = data ?? {};
-  if (!payload || typeof checksum !== 'string') return { errors: ['export incomplet : `checksum` et `payload` attendus'] };
-  const actual = fnv1a(JSON.stringify(payload));
-  if (actual !== checksum) {
-    return { errors: [`empreinte invalide (attendue ${checksum}, obtenue ${actual}) : l'export a été altéré pendant la recopie — réexporter`] };
-  }
-  for (const key of ['tokens', 'components', 'missing', 'inventory']) {
-    if (!(key in payload)) return { errors: [`export incomplet : \`payload.${key}\` absent`] };
-  }
-  return { payload, errors: [] };
-}
-
-// ─── Comparaison export ↔ snapshot ───────────────────────────────────────────
+// ─── Comparaison payload ↔ snapshot ──────────────────────────────────────────
 // `snapshot` : null au premier lancement.
 export function diffSnapshot(snapshot, payload, registry) {
-  const tierOf = (name) => registry[name]?.tier ?? 'organisms';
+  const tierOf = (name) => registry[name]?.tier ?? 'organism';
   const byTier = (a, b) => TIERS.indexOf(tierOf(a.name)) - TIERS.indexOf(tierOf(b.name)) || a.name.localeCompare(b.name);
   const firstRun = !snapshot;
   const prev = snapshot?.components ?? {};
@@ -101,56 +153,48 @@ export function diffSnapshot(snapshot, payload, registry) {
   const unchanged = [];
   for (const [name, cur] of Object.entries(payload.components)) {
     const old = prev[name];
-    if (old && old.hash === cur.hash && old.nodes.join() === cur.nodes.join()) { unchanged.push(name); continue; }
+    if (old && old.hash === cur.hash && old.node === cur.node) { unchanged.push(name); continue; }
     const oldV = old?.variants ?? {};
-    const entry = {
+    changed.push({
       name,
       tier: tierOf(name),
       reason: firstRun ? 'premier lancement' : !old ? 'absent du snapshot' : 'empreinte modifiée',
-      variantsChanged: Object.keys(cur.variants).filter((v) => v in oldV && oldV[v] !== cur.variants[v]).sort(),
-      variantsAdded: old ? Object.keys(cur.variants).filter((v) => !(v in oldV)).sort() : [],
-      variantsRemoved: Object.keys(oldV).filter((v) => !(v in cur.variants)).sort(),
-      propsChanged: !!old && old.variants && Object.keys(cur.variants).every((v) => oldV[v] === cur.variants[v]) && Object.keys(oldV).length === Object.keys(cur.variants).length,
-      nodesChanged: !!old && old.nodes.join() !== cur.nodes.join(),
+      variantsChanged: Object.keys(cur.variants).filter((v) => v in oldV && oldV[v] !== cur.variants[v]),
+      variantsAdded: old ? Object.keys(cur.variants).filter((v) => !(v in oldV)) : [],
+      variantsRemoved: Object.keys(oldV).filter((v) => !(v in cur.variants)),
+      propsChanged: !!old && old.props !== cur.props,
+      nodeChanged: !!old && old.node !== cur.node,
       deps: cur.deps,
-    };
-    changed.push(entry);
+    });
   }
   const changedNames = new Set(changed.map((c) => c.name));
   // Au premier lancement tout est « modifié » : l'indication n'apporterait rien.
   for (const c of changed) c.changedDeps = firstRun ? [] : c.deps.filter((d) => changedNames.has(d));
   changed.sort(byTier);
 
-  const registryNodes = new Set(Object.values(payload.components).flatMap((c) => c.nodes));
+  const registryNodes = new Set(Object.values(registry).map((r) => r.node));
   const knownInventory = snapshot?.inventory ?? payload.inventory;
   const newInFigma = Object.entries(payload.inventory)
     .filter(([id]) => !(id in knownInventory) && !registryNodes.has(id))
     .map(([id, name]) => ({ id, name }));
 
-  return {
-    firstRun,
-    tokensChanged: firstRun ? null : snapshot.tokens.hash !== payload.tokens.hash,
-    changed,
-    unchanged: unchanged.sort(),
-    missing: [...payload.missing].sort(),
-    newInFigma,
-  };
+  return { firstRun, changed, unchanged: unchanged.sort(), missing: [...payload.missing].sort(), newInFigma };
 }
+
+export const hasChanges = (diff) => diff.firstRun || diff.changed.length > 0 || diff.missing.length > 0 || diff.newInFigma.length > 0;
 
 export function formatReport(diff) {
   const lines = [];
-  lines.push(diff.firstRun
-    ? '⚠️  Premier lancement : aucun snapshot — tous les composants sont à analyser.'
-    : `Tokens : ${diff.tokensChanged ? '⚠️  Figma Variables modifiées → lancer /sync-tokens d\'abord' : 'aucun changement'}`);
-  lines.push('');
+  if (diff.firstRun) lines.push('⚠️  Premier lancement : aucun snapshot — tous les composants sont à analyser.', '');
   lines.push(`Composants à analyser (${diff.changed.length}) — ordre de traitement :`);
   for (const c of diff.changed) {
     lines.push(`  [${c.tier}] ${c.name} — ${c.reason}`);
-    if (c.propsChanged) lines.push('      propriétés du composant modifiées (variantes inchangées)');
-    if (c.nodesChanged) lines.push('      node(s) Figma de la fiche modifié(s)');
+    if (c.propsChanged) lines.push('      propriétés du composant modifiées (ajout, renommage ou valeur par défaut)');
+    if (c.nodeChanged) lines.push('      node Figma de la fiche modifié');
     if (c.variantsChanged.length) lines.push(`      variantes modifiées : ${c.variantsChanged.join(' · ')}`);
     if (c.variantsAdded.length) lines.push(`      variantes ajoutées : ${c.variantsAdded.join(' · ')}`);
     if (c.variantsRemoved.length) lines.push(`      variantes supprimées : ${c.variantsRemoved.join(' · ')}`);
+    if (c.variantsAdded.length && c.variantsRemoved.length) lines.push('      ⓘ un renommage de variante apparaît comme une suppression + un ajout');
     if (c.changedDeps.length) lines.push(`      ⓘ utilise ${c.changedDeps.join(', ')}, aussi modifié(s) — le changement peut venir de là`);
   }
   if (diff.missing.length) lines.push('', `❌ Introuvables dans Figma (node supprimé ?) : ${diff.missing.join(', ')}`);
@@ -159,100 +203,116 @@ export function formatReport(diff) {
     for (const n of diff.newInFigma) lines.push(`  ${n.name} (${n.id})`);
   }
   lines.push('', `Inchangés (${diff.unchanged.length}) : ${diff.unchanged.join(', ') || '—'}`);
+  lines.push('', 'Figma Variables : non couvertes ici — vérifier avec /sync-tokens.');
   return lines.join('\n');
 }
 
 // ─── Mise à jour du snapshot ─────────────────────────────────────────────────
 // `only` : liste de composants à mettre à jour, ou null pour tout.
 export function updateSnapshot(snapshot, payload, only) {
-  // Mise à jour partielle : tokens et inventaire restent ceux du snapshot, pour
-  // qu'un changement de Variables ou un nouveau composant non traité continue
-  // d'être signalé au prochain /sync-ds.
+  // Mise à jour partielle : l'inventaire reste celui du snapshot, pour qu'un
+  // nouveau composant non traité continue d'être signalé au prochain /sync-ds.
   const partial = !!only && !!snapshot;
-  const next = {
-    tokens: partial ? snapshot.tokens : payload.tokens,
-    components: { ...(snapshot?.components ?? {}) },
-    inventory: partial ? snapshot.inventory : payload.inventory,
-  };
   const names = only ?? Object.keys(payload.components);
   const unknown = names.filter((n) => !(n in payload.components));
-  if (unknown.length) throw new Error(`composant(s) absent(s) de l'export : ${unknown.join(', ')}`);
-  for (const n of names) next.components[n] = payload.components[n];
+  if (unknown.length) throw new Error(`composant(s) absent(s) de Figma ou du registre : ${unknown.join(', ')}`);
+  const components = { ...(snapshot?.components ?? {}) };
+  for (const n of names) components[n] = payload.components[n];
   // Une fiche supprimée ne doit pas laisser d'entrée orpheline
-  if (!only) for (const n of Object.keys(next.components)) if (!(n in payload.components)) delete next.components[n];
-  next.components = Object.fromEntries(Object.keys(next.components).sort().map((k) => [k, next.components[k]]));
-  return next;
+  if (!only) for (const n of Object.keys(components)) if (!(n in payload.components)) delete components[n];
+  return {
+    $comment: 'Généré par scripts/figma-sync-ds.mjs update — ne pas éditer à la main.',
+    components: Object.fromEntries(Object.keys(components).sort().map((k) => [k, components[k]])),
+    inventory: partial ? snapshot.inventory : payload.inventory,
+  };
+}
+
+// ─── Accès Figma (REST, lecture seule) ───────────────────────────────────────
+export function readToken(env, dotenvText) {
+  if (env.FIGMA_TOKEN) return env.FIGMA_TOKEN.trim();
+  const m = dotenvText?.match(/^FIGMA_TOKEN=(\S+)\s*$/m);
+  return m ? m[1] : null;
+}
+
+async function figmaGet(path, token) {
+  for (let attempt = 1; ; attempt++) {
+    const res = await fetch(API + path, { headers: { 'X-Figma-Token': token } });
+    if (res.ok) return res.json();
+    if (res.status === 429 && attempt < 4) {
+      const wait = Number(res.headers.get('retry-after')) || 10 * attempt;
+      await new Promise((r) => setTimeout(r, wait * 1000));
+      continue;
+    }
+    const hint = res.status === 403 ? ' — token invalide, expiré ou sans le scope file_content:read' : '';
+    throw new Error(`Figma ${res.status} sur ${path.split('?')[0]}${hint}`);
+  }
+}
+
+export async function fetchPayload(config, registry, token) {
+  const { fileKey, designSystemPageId, iconNamePattern } = config.figma;
+  const ids = [...new Set(Object.values(registry).map((r) => r.node))];
+  const [{ nodes }, pageRes] = await Promise.all([
+    figmaGet(`/files/${fileKey}/nodes?ids=${encodeURIComponent(ids.join(','))}`, token),
+    figmaGet(`/files/${fileKey}/nodes?ids=${encodeURIComponent(designSystemPageId)}&depth=1`, token),
+  ]);
+  return buildPayload(registry, nodes, pageRes.nodes[designSystemPageId]?.document, iconNamePattern);
 }
 
 // ─── CLI ─────────────────────────────────────────────────────────────────────
-function readSpecs() {
-  const files = {};
-  for (const tier of TIERS) {
-    const dir = join(SPECS_DIR, tier);
-    files[tier] = Object.fromEntries(
-      readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => [f, readFileSync(join(dir, f), 'utf8')]),
-    );
-  }
-  return files;
-}
-
 function arg(args, name) {
   const i = args.indexOf(name);
   return i >= 0 ? args[i + 1] : undefined;
 }
 
-function main(argv) {
+async function main(argv) {
   const [command, ...args] = argv;
-  const { registry, errors } = parseRegistry(readSpecs());
+  if (command !== 'detect' && command !== 'update') {
+    console.error('Usage : figma-sync-ds.mjs detect [--report f.md] | update [--only A,B]');
+    return 1;
+  }
+  const config = loadConfig(repoRoot);
+  const { registry, errors } = buildRegistry(readComponentSpecs(repoRoot, config.specs.componentTiers));
   if (errors.length) {
     console.error('❌ Registre invalide :\n  ' + errors.join('\n  '));
     return 1;
   }
-
-  if (command === 'prepare') {
-    const out = arg(args, '--out') ?? join(tmpdir(), 'figma-sync-ds', 'snippet.js');
-    mkdirSync(dirname(out), { recursive: true });
-    writeFileSync(out, buildSnippet(readFileSync(TEMPLATE_PATH, 'utf8'), registry));
-    console.log(`Snippet écrit : ${out} (${Object.keys(registry).length} composants)`);
-    return 0;
-  }
-
-  const from = arg(args, '--from');
-  if (!from || !existsSync(from)) {
-    console.error('❌ --from <export.json> requis (résultat de use_figma recopié tel quel)');
+  const dotenv = join(repoRoot, '.env');
+  const token = readToken(process.env, existsSync(dotenv) ? readFileSync(dotenv, 'utf8') : null);
+  if (!token) {
+    console.error('❌ FIGMA_TOKEN absent : le renseigner dans .env (voir .env.example) ou en variable d\'environnement.');
     return 1;
   }
-  const { payload, errors: exportErrors } = readExport(readFileSync(from, 'utf8'));
-  if (exportErrors.length) {
-    console.error('❌ Export refusé :\n  ' + exportErrors.join('\n  '));
+
+  let payload;
+  try {
+    payload = await fetchPayload(config, registry, token);
+  } catch (e) {
+    console.error(`❌ ${e.message}`);
     return 1;
   }
   const snapshot = existsSync(SNAPSHOT_PATH) ? JSON.parse(readFileSync(SNAPSHOT_PATH, 'utf8')) : null;
 
-  if (command === 'diff') {
+  if (command === 'detect') {
     const diff = diffSnapshot(snapshot, payload, registry);
-    console.log(formatReport(diff));
-    const anything = diff.firstRun || diff.tokensChanged || diff.changed.length || diff.missing.length || diff.newInFigma.length;
-    return anything ? 3 : 0;
+    const report = formatReport(diff);
+    console.log(report);
+    const out = arg(args, '--report');
+    if (out) writeFileSync(out, '```\n' + report + '\n```\n\nLancer `/sync-ds` dans Claude Code pour analyser et synchroniser.\n');
+    return hasChanges(diff) ? 3 : 0;
   }
 
-  if (command === 'update') {
-    const onlyArg = arg(args, '--only');
-    const only = onlyArg ? onlyArg.split(',').map((s) => s.trim()).filter(Boolean) : null;
-    try {
-      writeFileSync(SNAPSHOT_PATH, JSON.stringify(updateSnapshot(snapshot, payload, only), null, 2) + '\n');
-    } catch (e) {
-      console.error(`❌ ${e.message}`);
-      return 1;
-    }
-    console.log(`Snapshot mis à jour : ${only ? only.join(', ') : 'tous les composants + tokens'}`);
-    return 0;
+  const onlyArg = arg(args, '--only');
+  const only = onlyArg ? onlyArg.split(',').map((s) => s.trim()).filter(Boolean) : null;
+  try {
+    writeFileSync(SNAPSHOT_PATH, JSON.stringify(updateSnapshot(snapshot, payload, only), null, 2) + '\n');
+  } catch (e) {
+    console.error(`❌ ${e.message}`);
+    return 1;
   }
-
-  console.error('Usage : figma-sync-ds.mjs prepare [--out f] | diff --from f | update --from f [--only A,B]');
-  return 1;
+  console.log(`Snapshot mis à jour : ${only ? only.join(', ') : 'tous les composants + inventaire'}`);
+  return 0;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-  process.exitCode = main(process.argv.slice(2));
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  process.exitCode = await main(process.argv.slice(2));
 }
