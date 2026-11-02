@@ -2,6 +2,7 @@
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/atoms/FrameLogo/`
+**Node Figma :** `370:19490` ("DropdownMenu_Logo_FrameLogo")
 **Commit :** `49a78d7`
 **Fichiers :** `FrameLogo.tsx`, `FrameLogo.module.css`, `FrameLogo.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/FrameLogo.stories.tsx`

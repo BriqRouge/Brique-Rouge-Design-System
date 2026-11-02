@@ -2,6 +2,7 @@
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/organisms/TopNav/`
+**Node Figma :** `1702:20362` ("TopNav" — 6 variantes `Type=`)
 **Fichiers :** `TopNav.tsx`, `TopNav.module.css`, `TopNav.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/TopNav.stories.tsx`
 
