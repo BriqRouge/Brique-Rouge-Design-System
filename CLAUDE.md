@@ -159,6 +159,9 @@ nom ou de valeur se fait dans Figma, puis on relance la synchro.
 ### 6.6 Tokens dans Figma — zéro valeur arbitraire (non négociable)
 S'applique à **tout travail direct dans Figma via `use_figma`** (création de frames, screens, maquettes).
 
+- **Avant toute écriture en masse** (plusieurs composants, variables ou styles) : demander à la
+  personne responsable du design d'enregistrer une version nommée (File → Save to version
+  history, Ctrl+Alt+S) — `saveVersionHistoryAsync` n'est pas disponible via le MCP Figma
 - **Avant toute création de node**, inspecter les Figma Variables avec `getLocalVariableCollectionsAsync`
 - **Binder systématiquement** les variables aux propriétés : fills via `setBoundVariableForPaint`, spacing/sizing via `setBoundVariable`
 - **Jamais de valeur RGB hardcodée** si un token de couleur existe
@@ -274,6 +277,13 @@ Avant d'implémenter, systématiquement :
 - Défauts : le code fait référence ; les défauts Figma ne sont pas une décision de design
 - Textes Figma liés aux variables `typography/font-size/*` et `typography/font-weight/*`
   (Light/Book/Regular → 400, Medium → 500, Bold → 700) ; couleurs liées à `color/*`
+- Textes porteurs d'un **style de texte par rôle** (`display/*`, `heading/*`, `body/*`,
+  `caption`, `eyebrow`, `label/*` — décidé le 2026-11-02), lui-même lié aux variables.
+  Un texte sans style est un écart signalé, jamais restylé d'office. Table rôle →
+  tokens CSS : `specs/patterns/typography.md`
+- Variables Figma : scope typé (jamais `ALL_SCOPES`) et code syntax WEB `var(--…)`
+  égale au nom de la variable CSS générée
+- Vérification déterministe : `node scripts/figma-sync-ds.mjs lint` (aussi chaque nuit)
 - Détail et application : skill `/sync-component`
 
 ### IDs Figma — format

@@ -63,6 +63,15 @@ Lecture du rapport de détection :
 - **Premier lancement** (pas de snapshot) : tous les composants sont à analyser —
   c'est l'audit complet de référence ; annoncer que ce sera long
 
+### Conventions
+
+```bash
+node scripts/figma-sync-ds.mjs lint
+```
+
+Erreurs (variante hors kebab-case, texte non lié aux variables, couleur non liée)
+et avertissements (texte sans style) → section « Incohérences Figma » du rapport.
+
 ### Variables
 
 L'API REST des Variables est réservée au plan Figma Enterprise : elles passent par
@@ -103,6 +112,7 @@ Un seul message, structuré ainsi :
 
 ## Synthèse
 - Détection : N composants modifiés · tokens modifiés oui/non · X introuvables · Y nouveaux
+- Lint Figma : E erreurs · W avertissements
 - Résultat de l'analyse : A composants avec écarts, B sans écart (changement Figma
   sans impact code : texte d'exemple, position, surcharge identique…)
 - Décisions demandées : D (numérotées ci-dessous)

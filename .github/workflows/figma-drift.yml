@@ -36,6 +36,20 @@ jobs:
           set -e
           if [ "$code" = "1" ]; then exit 1; fi
           echo "changed=$([ "$code" = "3" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - name: Lint des conventions Figma
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+        run: |
+          set +e
+          node scripts/figma-sync-ds.mjs lint > lint.txt
+          code=$?
+          set -e
+          cat lint.txt
+          if [ "$code" = "1" ]; then exit 1; fi
+          if [ "$code" = "3" ]; then
+            echo "::warning::Conventions Figma non respectées — voir le rapport de lint"
+            { echo; echo '### Lint des conventions Figma'; echo '```'; cat lint.txt; echo '```'; } >> drift.md
+          fi
       - name: Créer ou mettre à jour l'issue
         if: steps.detect.outputs.changed == 'true'
         env:
