@@ -10,7 +10,7 @@ figma:
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/atoms/Button/`
-**Figma :** `Variant=primary|secondary|tertiary` × `Color-scheme=neutral|info|warning|success|error` × `State=idle|hovered|focus` — 33 variantes (`tertiary` en `neutral` seul), alignées sur les props `variant` / `colorScheme` (restructuration du 2026-11-02, ex-`Type=primary-error-hover`). Incohérence Figma signalée : pas d'état `disabled` dans Figma, alors que le code le gère (`:disabled`)
+**Figma :** `Variant=primary|secondary|tertiary` × `Color-scheme=neutral|info|warning|success|error` × `State=idle|hovered|focus|disabled` — 36 variantes (`tertiary` en `neutral` seul ; `disabled` en `neutral` seul, pour les 3 variants), alignées sur les props `variant` / `colorScheme` / `disabled` (restructuration du 2026-11-02, ex-`Type=primary-error-hover`)
 **Fichiers :** `Button.tsx`, `Button.module.css`, `Button.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/Button.stories.tsx`
 
@@ -54,6 +54,7 @@ interface ButtonProps {
 | `--color-text-button-secondary` / `-hover` | `#262626` / `#fafafa` | Texte secondary neutre (idle / hover) |
 | `--color-text-button-tertiary` / `-hover` / `-focus` | `#262626` / `#404040` / `#3453dc` | Texte tertiary selon l'état |
 | `--color-icon-button-info` / `warning` | `#3453dc` / `#e1742e` | Icône + texte secondary info/warning (idle) |
+| `--color-background-button-disabled` / `--color-border-button-disabled` / `--color-text-button-disabled` | `#f5f5f5` / `#d4d4d4` / `#d4d4d4` | État disabled (neutre, tous variants) |
 | `--border-radius-button` | `999px` | Border-radius (pill) |
 | `--spacing-component-sm` | `8px` | Gap + padding vertical |
 | `--sizing-x3` | `12px` | Padding horizontal |
@@ -66,7 +67,7 @@ interface ButtonProps {
 - `tertiary` : lien souligné, sans fond ni bordure — **toujours neutre**, `colorScheme` est ignoré
 - `colorScheme` (`info`/`warning`/`success`/`error`) s'applique à `primary` et `secondary`, jamais à `tertiary`
 - Taille unique (40px de hauteur) — pas de variant `size` comme sur `MenuButton`
-- État disabled : réutilise les tokens neutres génériques (`--color-background-button-disabled` etc.) — le Figma source ne définit pas d'état disabled dédié par schéma de couleur
+- État disabled : un seul rendu neutre quel que soit `colorScheme` (`State=disabled` existe en `Color-scheme=neutral` uniquement dans Figma) — fond `--color-background-button-disabled`, bordure 2px `--color-border-button-disabled`, texte `--color-text-button-disabled` ; icônes liées à `color/icon/button/disabled` dans Figma — en code elles héritent de la couleur du texte (même valeur `#d4d4d4`, `--color-icon-button-disabled` disponible) ; `tertiary` disabled reste sans fond ni bordure
 - Toujours fournir `aria-label` si le bouton ne contient que des icônes — passer `children={null}`
 - **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur = 40px) via la classe `iconOnly`, qui force `width` (le `min-width` seul ne suffisait pas : la bordure de 2px faisait dépasser la largeur naturelle du contenu au-delà du `min-width`, donnant un bouton ovale de ~43px de large)
 - Ne pas confondre avec `MenuButton` : composant distinct, plus ancien, utilisé notamment par `TopNav` (bouton retour, trigger de dropdown) — les deux composants coexistent intentionnellement, périmètres différents

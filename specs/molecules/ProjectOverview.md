@@ -10,7 +10,7 @@ figma:
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/ProjectOverview/`
-**Figma :** composant « Overview Projet » sur la page Design system, créé le 2026-11-02 à partir du cadre de la page Portfolio (`837:19534`), identique sur les 4 pages projet (Odaptos, BPCE, iBP, OPCO Atlas) — ces pages utilisent encore des cadres copiés, à remplacer par des instances
+**Figma :** composant « Overview Projet » sur la page Design system, créé le 2026-11-02 à partir du cadre de la page Portfolio (`837:19534`), utilisé en instance sur toutes les pages projet de la page Portfolio (Odaptos, BPCE, iBP, OPCO Atlas, Conseil Constitutionnel — 20 instances, cadres copiés remplacés le 2026-11-02 après vérification des dimensions et des textes). Titre : styles `label/3xl-medium-trim` + `label/3xl-trim` (rognage à la hauteur des capitales)
 
 ## API
 

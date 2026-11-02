@@ -160,6 +160,7 @@
 | `color.icon.button.primary` | `#fafafa` |
 | `color.icon.button.error` | `#e22020` |
 | `color.icon.button.success` | `#32c126` |
+| `color.icon.button.disabled` | `#d4d4d4` |
 | `color.icon.notification.info` | `#3453dc` |
 | `color.icon.notification.warning` | `#e1742e` |
 | `color.icon.notification.info-close` | `#263282` |

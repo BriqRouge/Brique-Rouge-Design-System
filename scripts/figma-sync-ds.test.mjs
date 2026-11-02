@@ -3,7 +3,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fnv1a, normalize, buildRegistry, buildPayload, diffSnapshot, updateSnapshot, formatReport, hasChanges, readToken, lintNodes, usedTextFills } from './figma-sync-ds.mjs';
+import { fnv1a, normalize, buildRegistry, buildPayload, diffSnapshot, updateSnapshot, formatReport, hasChanges, readToken, lintNodes, usedTextFills, hasTextStyle } from './figma-sync-ds.mjs';
 
 const REGISTRY = {
   Tag: { tier: 'atom', node: '184:18522' },
@@ -203,6 +203,14 @@ test('lint : texte multi-segments — seules les couleurs réellement utilisées
   assert.deepEqual(lintOf([segmented]).errors, []);
   const partial = { ...segmented, characterStyleOverrides: [1] }; // 2e caractère sur le style de base
   assert.equal(lintOf([partial]).errors.length, 1);
+});
+
+test('lint : texte multi-styles — style porté par chaque segment', () => {
+  const styled = text({ characters: 'ab', styles: {}, characterStyleOverrides: [1, 2], styleOverrideTable: { 1: { inheritTextStyleId: '1:3' }, 2: { inheritTextStyleId: '1:4' } } });
+  assert.equal(hasTextStyle(styled), true);
+  assert.deepEqual(lintOf([styled]).warnings, []);
+  assert.equal(hasTextStyle({ ...styled, styleOverrideTable: { 1: { inheritTextStyleId: '1:3' }, 2: {} } }), false);
+  assert.equal(hasTextStyle({ ...styled, characterStyleOverrides: [1] }), false); // 2e caractère sans style
 });
 
 test('rapport : toutes les variantes modifiées → résumé au lieu de la liste', () => {

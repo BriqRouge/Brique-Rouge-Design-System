@@ -44,25 +44,54 @@ Chaque texte d'un composant porte un style de texte Figma par rôle, lié aux
 variables. En CSS, utiliser les tokens de la même ligne : ne jamais recomposer un
 rôle avec d'autres valeurs.
 
-| Style Figma | Taille | Graisse | Interligne | Espacement | Usage |
-|---|---|---|---|---|---|
-| `display/lg` | `--typography-font-size-5xl` | `--typography-font-weight-bold` | `--typography-line-height-x14` | `-0.02em` | Titre principal d'une page projet |
-| `heading/xl` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `--typography-line-height-x10` | — | Titre de section |
-| `heading/lg` | `--typography-font-size-2xl` | `--typography-font-weight-regular` | `--typography-line-height-x8` | — | Sous-titre, accroche |
-| `heading/md` | `--typography-font-size-xl` | `--typography-font-weight-medium` | `normal` | — | Titre compact (navigation) |
-| `body/md` | `--typography-font-size-base` | `--typography-font-weight-regular` | `--typography-line-height-x6` | — | Corps de texte |
-| `body/md-medium` | `--typography-font-size-base` | `--typography-font-weight-medium` | `--typography-line-height-x6` | — | Corps appuyé |
-| `body/md-bold` | `--typography-font-size-base` | `--typography-font-weight-bold` | `--typography-line-height-x6` | — | Corps fort (titre de notification) |
-| `body/sm` | `--typography-font-size-sm` | `--typography-font-weight-regular` | `--typography-line-height-x5-5` | — | Texte secondaire |
-| `caption` | `--typography-font-size-xs` | `--typography-font-weight-regular` | `--typography-line-height-x5` | — | Légende, métadonnée, horodatage |
-| `eyebrow` | `--typography-font-size-base` | `--typography-font-weight-medium` | `--typography-line-height-x6` | `0.15em` | Surtitre espacé |
-| `label/md` | `--typography-button-md-font-size` | `--typography-font-weight-regular` | `normal` | — | Libellé de contrôle md |
-| `label/md-medium` | `--typography-dropdown-menu-button-font-size` | `--typography-font-weight-medium` | `normal` | — | Libellé appuyé (DropdownMenuButton) |
-| `label/nm` | `--typography-button-nm-font-size` | `--typography-font-weight-regular` | `normal` | — | Libellé de contrôle nm |
-| `label/sm` | `--typography-button-sm-font-size` | `--typography-font-weight-regular` | `normal` | — | Libellé de contrôle sm |
+| Style Figma | Taille | Graisse | Interligne | Espacement | Rendu | Usage |
+|---|---|---|---|---|---|---|
+| `display/lg` | `--typography-font-size-5xl` | `--typography-font-weight-bold` | `--typography-line-height-x14` | `-0.02em` | — | Titre principal d'une page projet |
+| `heading/xl` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `--typography-line-height-x10` | — | — | Titre de section |
+| `heading/lg` | `--typography-font-size-2xl` | `--typography-font-weight-regular` | `--typography-line-height-x8` | — | — | Sous-titre, accroche |
+| `heading/md` | `--typography-font-size-xl` | `--typography-font-weight-medium` | `normal` | — | — | Titre compact (navigation) |
+| `heading/md-regular` | `--typography-font-size-xl` | `--typography-font-weight-regular` | `normal` | — | — | Titre compact, graisse normale (sous-titre TopNav) |
+| `body/md` | `--typography-font-size-base` | `--typography-font-weight-regular` | `--typography-line-height-x6` | — | — | Corps de texte |
+| `body/md-trim` | `--typography-font-size-base` | `--typography-font-weight-regular` | `--typography-line-height-x6` | — | rognage | Corps rogné (ProjectOverview, ProjectCardDescription) |
+| `body/md-medium` | `--typography-font-size-base` | `--typography-font-weight-medium` | `--typography-line-height-x6` | — | — | Corps appuyé |
+| `body/md-medium-tight` | `--typography-font-size-base` | `--typography-font-weight-medium` | `--typography-line-height-x4-5` | — | rognage | Corps appuyé serré (titre ProjectCardDescription) |
+| `body/md-bold` | `--typography-font-size-base` | `--typography-font-weight-bold` | `--typography-line-height-x6` | — | — | Corps fort (titre de notification) |
+| `body/sm` | `--typography-font-size-sm` | `--typography-font-weight-regular` | `--typography-line-height-x5-5` | — | — | Texte secondaire |
+| `body/sm-loose` | `--typography-font-size-sm` | `--typography-font-weight-regular` | `--typography-line-height-x6` | — | rognage | Texte secondaire aéré (ProjectCardDescription) |
+| `caption` | `--typography-font-size-xs` | `--typography-font-weight-regular` | `--typography-line-height-x5` | — | — | Légende, métadonnée, horodatage |
+| `eyebrow` | `--typography-font-size-base` | `--typography-font-weight-medium` | `--typography-line-height-x6` | `0.15em` | capitales | Surtitre espacé |
+| `label/md` | `--typography-button-md-font-size` | `--typography-font-weight-regular` | `normal` | — | rognage | Libellé de contrôle md (Button, MenuButton) |
+| `label/md-underline` | `--typography-button-md-font-size` | `--typography-font-weight-regular` | `normal` | — | rognage, souligné | Libellé souligné (Button tertiary) |
+| `label/md-medium` | `--typography-dropdown-menu-button-font-size` | `--typography-font-weight-medium` | `normal` | — | rognage | Libellé appuyé (DropdownMenuButton, y compris disabled) |
+| `label/nm` | `--typography-button-nm-font-size` | `--typography-font-weight-regular` | `normal` | — | rognage | Libellé de contrôle nm |
+| `label/sm` | `--typography-button-sm-font-size` | `--typography-font-weight-regular` | `normal` | — | rognage | Libellé de contrôle sm |
+| `label/xs` | `--typography-font-size-xs` | `--typography-font-weight-regular` | `normal` | — | — | Texte d'une ligne 12px (MetaInfoItem) |
+| `label/xs-medium` | `--typography-font-size-xs` | `--typography-font-weight-medium` | `normal` | — | — | Texte d'une ligne appuyé 12px (Tag sm) |
+| `label/base-medium` | `--typography-font-size-base` | `--typography-font-weight-medium` | `normal` | — | — | Texte d'une ligne appuyé 16px (Tag nm) |
+| `label/2xl-medium` | `--typography-font-size-2xl` | `--typography-font-weight-medium` | `normal` | — | — | Texte d'une ligne appuyé 24px (Tag md) |
+| `label/3xl-medium` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `normal` | — | — | Texte d'une ligne appuyé 32px (Tag lg) |
+| `label/3xl` | `--typography-font-size-3xl` | `--typography-font-weight-regular` | `normal` | — | — | Texte d'une ligne 32px (sans usage connu à ce jour) |
+| `label/3xl-medium-trim` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `normal` | — | rognage | Titre ProjectOverview (partie appuyée) |
+| `label/3xl-trim` | `--typography-font-size-3xl` | `--typography-font-weight-regular` | `normal` | — | rognage | Titre ProjectOverview (accroche) |
 
-Textes encore sans style (écarts signalés, à décider) : liste à jour via
-`node scripts/figma-sync-ds.mjs lint`.
+Colonne **Rendu** — propriétés que le style porte en plus de la taille et de la
+graisse, à reproduire en CSS :
+
+| Figma | CSS |
+|---|---|
+| rognage (`leadingTrim: CAP_HEIGHT`) | `text-box-trim: trim-both; text-box-edge: cap alphabetic;` (avec repli `line-height: 1`, voir `ProjectCardDescription`) |
+| capitales (`textCase: UPPER`) | `text-transform: uppercase` |
+| souligné (`textDecoration: UNDERLINE`) | `text-decoration: underline` |
+
+**Appliquer un style de texte dans Figma remplace toutes les propriétés du texte**,
+rognage, casse et soulignement compris. Avant d'appliquer un style à un texte
+existant, vérifier que ces trois propriétés sont identiques, sinon choisir (ou
+créer) la variante de style qui les porte (`-trim`, `-underline`…), puis contrôler
+la largeur et la hauteur du texte avant/après. Un texte combinant plusieurs styles
+(ex. titre Medium + Regular) porte un style par segment.
+
+Tous les textes des composants portent un style depuis le 2026-11-02. Un texte
+sans style est signalé (avertissement) par `node scripts/figma-sync-ds.mjs lint`.
 
 ---
 
