@@ -1,6 +1,6 @@
 ---
 name: sync-tokens
-description: Synchronise les Figma Variables (fichier NZtxQVYKRqeaGcC7hT5pjw) vers packages/tokens/tokens.json, vérifie le build et ouvre une PR. Utiliser quand Damien demande /sync-tokens, de synchroniser ou mettre à jour les tokens depuis Figma.
+description: Synchronise les Figma Variables (fichier `figma.fileKey` de `ds.config.json`) vers packages/tokens/tokens.json, vérifie le build et ouvre une PR. Utiliser quand la personne responsable du design demande /sync-tokens, de synchroniser ou mettre à jour les tokens depuis Figma.
 ---
 
 # /sync-tokens — Figma Variables → tokens.json
@@ -23,7 +23,7 @@ déterministe et testé (`scripts/figma-sync-tokens.mjs`).
 ### 1. Exporter les variables depuis Figma
 
 Lire `scripts/figma/export-variables.js` et passer son contenu **tel quel** comme `code`
-à `use_figma` (`fileKey: NZtxQVYKRqeaGcC7hT5pjw`). Lecture seule.
+à `use_figma` (`fileKey` : `figma.fileKey` de `ds.config.json`). Lecture seule.
 
 Le résultat contient `manifest` et `chunks` (morceaux de 60 variables, chacun avec une
 empreinte calculée dans Figma).
@@ -49,20 +49,20 @@ node scripts/figma-sync-tokens.mjs --from <dossier>
 | Code | Signification | Action |
 |---|---|---|
 | `0` | `tokens.json` régénéré | Étape 4 |
-| `1` | Export refusé, rien écrit | Lire les erreurs. **Empreinte** → recopier à nouveau ce morceau. **Nom hors convention, valeur non résolue, collection non déclarée, multi-modes** → s'arrêter et présenter la liste à Damien : la correction se fait dans Figma |
+| `1` | Export refusé, rien écrit | Lire les erreurs. **Empreinte** → recopier à nouveau ce morceau. **Nom hors convention, valeur non résolue, collection non déclarée, multi-modes** → s'arrêter et présenter la liste à la personne responsable du design : la correction se fait dans Figma |
 | `2` | `tokens.json` écrit, mais des variables CSS supprimées sont encore utilisées | Voir ci-dessous |
 
 **Cas `2`** — pour chaque usage listé :
 - si le rapport montre un renommage à valeur identique (même valeur supprimée et
   ajoutée), mettre à jour la référence dans le CSS et le signaler dans la PR ;
 - sinon (token réellement supprimé, ou valeur différente) : **s'arrêter et demander
-  à Damien**. Ne jamais recréer un token supprimé côté code.
+  à la personne responsable du design**. Ne jamais recréer un token supprimé côté code.
 
 Relancer avec `--check` jusqu'à obtenir le code `0` et « 0 ajoutée(s), 0 supprimée(s) ».
 
 ### 4. Présenter le diff design avant de committer
 
-Montrer à Damien le rapport du script (ajouts, suppressions, valeurs modifiées).
+Montrer à la personne responsable du design le rapport du script (ajouts, suppressions, valeurs modifiées).
 **Toute valeur modifiée change le rendu** : la lister explicitement.
 
 ### 5. Build et contrôles
@@ -84,7 +84,7 @@ avant l'étape 3) : chaque ligne qui change doit correspondre au rapport de l'é
 - Fichiers attendus : `packages/tokens/tokens.json`, `specs/foundations/*`,
   `specs/tokens/*`, et les éventuelles références CSS mises à jour
 - Description : le rapport du script + les vérifications de l'étape 5
-- Ne jamais merger : la validation est humaine (CLAUDE.md §16)
+- Ne jamais merger : la validation est humaine (CLAUDE.md « Workflow Git »)
 
 ## Ce que ce skill ne fait pas
 

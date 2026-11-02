@@ -1,8 +1,16 @@
+---
+component: ProjectOverview
+tier: molecule
+figma:
+  node: "837:19534"
+  name: Overview Projet
+  type: frame
+---
 # ProjectOverview
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/ProjectOverview/`
-**Node Figma :** `837:19534` ("Overview Projet") — vérifié identique sur les 4 pages projet (Odaptos, BPCE, iBP, OPCO Atlas)
+**Figma :** cadre de page, pas un composant Figma — vérifié identique sur les 4 pages projet (Odaptos, BPCE, iBP, OPCO Atlas)
 
 ## API
 

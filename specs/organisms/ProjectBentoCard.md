@@ -1,8 +1,16 @@
+---
+component: ProjectBentoCard
+tier: organism
+figma:
+  node: "2032:20121"
+  name: Projects-Bento-Cards
+  type: component-set
+---
 # ProjectBentoCard
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/organisms/ProjectBentoCard/`
-**Node Figma :** `2032:20121` ("Card") — remplace l'ancien node `1759:22825` ("Projects-Bento-Cards")
+**Figma :** remplace l'ancien node 1759:22825, désormais [DEPRECATED]
 **Variantes Figma :** `State=Idle|Hover` × `Project=Odaptos|BPCE|Ibp|CV|Conseil Constitutionnel`
 **Fichiers :** `ProjectBentoCard.tsx`, `ProjectBentoCard.module.css`, `ProjectBentoCard.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/ProjectBentoCard.stories.tsx`

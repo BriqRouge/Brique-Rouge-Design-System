@@ -1,7 +1,7 @@
 // scripts/figma/export-variables.js
 //
 // Snippet Figma Plugin API — exécuté tel quel via l'outil MCP `use_figma`
-// (fichier NZtxQVYKRqeaGcC7hT5pjw) par le skill /sync-tokens. Lecture seule.
+// (fichier `figma.fileKey` de `ds.config.json`) par le skill /sync-tokens. Lecture seule.
 // Ce n'est PAS un module Node : `await` et `return` de premier niveau sont
 // fournis par l'environnement d'exécution de use_figma.
 //

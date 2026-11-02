@@ -1,8 +1,16 @@
+---
+component: ProjectSectionDescription
+tier: organism
+figma:
+  node: "744:20765"
+  name: "Cards / Project_Sections_Descritpion"
+  type: component
+---
 # ProjectSectionDescription
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/organisms/ProjectSectionDescription/`
-**Node Figma :** `744:20765` ("Cards / Project_Sections_Descritpion" — section individuelle, typo Figma corrigée dans le nom du composant)
+**Figma :** section individuelle — même node que `ProjectSectionsDescription` (typo Figma corrigée dans le nom du composant)
 
 ## API
 

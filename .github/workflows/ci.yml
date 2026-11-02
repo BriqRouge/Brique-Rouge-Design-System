@@ -24,8 +24,10 @@ jobs:
       - run: pnpm turbo run lint
       - name: Token audit (couleurs hardcodées)
         run: node scripts/token-audit.mjs
-      - name: Tests du script de synchro Figma → tokens
-        run: node --test scripts/figma-sync-tokens.test.mjs
+      - name: Cohérence composants ↔ fiches specs
+        run: node scripts/check-specs.mjs
+      - name: Tests des scripts (synchro Figma, fiches specs)
+        run: node --test scripts/figma-sync-tokens.test.mjs scripts/check-specs.test.mjs
 
   test:
     name: Test

@@ -1,8 +1,16 @@
+---
+component: ProjectCardDescription
+tier: molecule
+figma:
+  node: "2040:19251"
+  name: Project-Cards-Description
+  type: component-set
+---
 # ProjectCardDescription
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/ProjectCardDescription/`
-**Node Figma :** `1902:22312` ("Project-Cards-Description", `Type=Default`) / `2040:19252` (`Type=CV`)
+**Figma :** variantes `Type=default` (`1902:22312`) et `Type=cv` (`2040:19252`)
 **Fichiers :** `ProjectCardDescription.tsx`, `ProjectCardDescription.module.css`, `ProjectCardDescription.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/ProjectCardDescription.stories.tsx`
 

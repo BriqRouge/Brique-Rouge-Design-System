@@ -13,8 +13,13 @@ coverage/
 # Claude Code — settings locaux
 .claude/settings.local.json
 
-# Exports Figma Variables (fichiers sources non versionnés)
-tokens.json
+# Anciens exports Figma Variables (non versionnés). packages/tokens/tokens.json,
+# lui, est généré par /sync-tokens et DOIT être versionné : ne pas l'ignorer.
 packages/tokens/design-tokens.tokens.json
 packages/tokens/primitive.json
 packages/tokens/semantic.json
+
+# Secrets locaux (token Figma pour l'API REST — voir .env.example)
+.env
+.env.*
+!.env.example

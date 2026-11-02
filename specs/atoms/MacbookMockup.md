@@ -1,8 +1,16 @@
+---
+component: MacbookMockup
+tier: atom
+figma:
+  node: "537:19720"
+  name: Macbook Pro
+  type: component-set
+---
 # MacbookMockup
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/atoms/MacbookMockup/`
-**Node Figma :** `837:19547` ("Macbook Pro") — composant Figma réutilisé plusieurs fois (pages projet Odaptos, BPCE ; déjà recréé à la main pour `ProjectBentoCard.conseilConstitutionnel` avant extraction)
+**Figma :** composant réutilisé sur les pages projet Odaptos et BPCE (ex. instance `837:19547`) ; déjà recréé à la main pour `ProjectBentoCard.conseilConstitutionnel` avant extraction
 
 ## API
 

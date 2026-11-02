@@ -1,8 +1,15 @@
+---
+component: Tag
+tier: atom
+figma:
+  node: "184:18522"
+  name: Tag
+  type: component-set
+---
 # Tag
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/atoms/Tag/`
-**Node Figma :** `184:18522` ("Tag")
 
 ## API
 

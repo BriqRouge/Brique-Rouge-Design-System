@@ -1,0 +1,16 @@
+# Fins de ligne normalisées en LF dans le dépôt, quel que soit le système.
+# Évite les diffs parasites sous Windows et garde stables les fichiers générés
+# (specs/foundations, specs/tokens) comparés par la CI.
+* text=auto eol=lf
+
+# Binaires
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.otf binary
+*.ttf binary

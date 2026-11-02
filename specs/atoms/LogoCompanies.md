@@ -1,8 +1,16 @@
+---
+component: LogoCompanies
+tier: atom
+figma:
+  node: "375:19574"
+  name: Logo Companies
+  type: component-set
+---
 # LogoCompanies
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/atoms/LogoCompanies/`
-**Node Figma :** `375:19574` ("Logo Companies" — `Company` × `Size`, 32 variantes)
+**Figma :** `Company` × `Size`, 32 variantes
 **Fichiers :** `LogoCompanies.tsx`, `LogoCompanies.module.css`, `LogoCompanies.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/LogoCompanies.stories.tsx`
 
