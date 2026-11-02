@@ -196,6 +196,10 @@
   border-color: transparent;
 }
 
+.button:disabled .icon {
+  color: var(--color-icon-button-disabled);
+}
+
 /* ─── Focus visible ──────────────────────────────────────────────────────────── */
 /* Corrigé après audit : Figma ne montre pas un anneau extérieur (outline) mais
    une bordure intégrée de 2px sur le bouton lui-même, fond inchangé par

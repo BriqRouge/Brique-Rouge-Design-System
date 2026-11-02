@@ -70,7 +70,6 @@ rôle avec d'autres valeurs.
 | `label/base-medium` | `--typography-font-size-base` | `--typography-font-weight-medium` | `normal` | — | — | Texte d'une ligne appuyé 16px (Tag nm) |
 | `label/2xl-medium` | `--typography-font-size-2xl` | `--typography-font-weight-medium` | `normal` | — | — | Texte d'une ligne appuyé 24px (Tag md) |
 | `label/3xl-medium` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `normal` | — | — | Texte d'une ligne appuyé 32px (Tag lg) |
-| `label/3xl` | `--typography-font-size-3xl` | `--typography-font-weight-regular` | `normal` | — | — | Texte d'une ligne 32px (sans usage connu à ce jour) |
 | `label/3xl-medium-trim` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `normal` | — | rognage | Titre ProjectOverview (partie appuyée) |
 | `label/3xl-trim` | `--typography-font-size-3xl` | `--typography-font-weight-regular` | `normal` | — | rognage | Titre ProjectOverview (accroche) |
 
