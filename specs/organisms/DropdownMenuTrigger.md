@@ -2,6 +2,7 @@
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/organisms/DropdownMenuTrigger/`
+**Node Figma :** `379:18464` ("DropdownMenuTrigger" — `State=Opened|Closed`)
 **Commit :** `1d457c9`
 **Fichiers :** `DropdownMenuTrigger.tsx`, `DropdownMenuTrigger.module.css`, `DropdownMenuTrigger.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/DropdownMenuTrigger.stories.tsx`

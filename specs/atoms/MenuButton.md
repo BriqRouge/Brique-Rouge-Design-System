@@ -2,6 +2,7 @@
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/atoms/MenuButton/`
+**Node Figma :** `1345:21426` ("MenuButton" — 36 variantes, même node que `MenuButton.figma.tsx`)
 **Commit :** `7745697`
 **Fichiers :** `MenuButton.tsx`, `MenuButton.module.css`, `MenuButton.test.tsx`, `MenuButton.figma.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/MenuButton.stories.tsx`

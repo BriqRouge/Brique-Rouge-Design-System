@@ -49,7 +49,7 @@ initialement), il s'avère que ce composant est un **vrai lien externe interacti
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-neutral-800` | `#262626` | Icône et texte |
-| `--color-neutral-300` | `#d4d4d4` | Surbrillance au survol (voir écart Figma ci-dessous) |
+| `--color-neutral-300` | `#d4d4d4` | Surbrillance au survol |
 | `--typography-font-family-sans` | — | Texte |
 | `--typography-font-size-xs` | `12px` | Texte |
 | `--typography-font-weight-regular` | `400` | Texte |
@@ -66,8 +66,8 @@ un SVG dessiné à la main (planète, livre/livre ouvert) et 2 passent
 
 - Utilisé en grille 2×N sur la page d'accueil (section "Meta Info" sous l'intro) — le layout
   de grille est de la responsabilité de la page, pas du composant lui-même
-- **Écart signalé vs Figma** : la couleur de la surbrillance (`#d9d9d9`) ne correspond à aucun
-  token exact — `--color-neutral-300` (`#d4d4d4`) est la valeur existante la plus proche
+- **Surbrillance** : `--color-neutral-300` — Figma aligné le 2026-11-02 (l'ancien `#d9d9d9` non lié,
+  sans token exact, a été remplacé par la variable `color/neutral/300` ; texte lié à `color/neutral/800`)
 - Vérifié en conditions réelles (Playwright, mesure `getComputedStyle` avant/après survol,
   pas seulement une capture d'écran) : opacité et largeur de la surbrillance, crossfade de
   l'icône — tout corrigé après un premier signalement où l'état hover n'avait pas été vérifié

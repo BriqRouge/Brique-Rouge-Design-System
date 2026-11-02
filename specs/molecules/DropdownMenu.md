@@ -2,6 +2,7 @@
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/DropdownMenu/`
+**Node Figma :** `375:19690` ("DropdownMenu")
 **Commit :** `36b8093`
 **Fichiers :** `DropdownMenu.tsx`, `DropdownMenu.module.css`, `DropdownMenu.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/DropdownMenu.stories.tsx`

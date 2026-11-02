@@ -23,7 +23,7 @@ const meta = {
       options: ['sm', 'nm', 'md', 'lg'],
     },
     variant: {
-      description: "Style visuel — ⚠️ 'outlined' a un contraste texte/icône insuffisant tel que défini dans Figma (voir specs/atoms/Tag.md)",
+      description: 'Style visuel — contained (fond neutre) ou outlined (bordure seule)',
       control: 'select',
       options: ['contained', 'outlined'],
     },
@@ -73,20 +73,13 @@ export const AvecIcones: Story = {
 };
 
 export const Outlined: Story = {
-  name: "Outlined (⚠️ contraste insuffisant, voir specs/)",
+  name: 'Outlined',
   args: {
     children: 'Tag',
     variant: 'outlined',
     leftIcon: true,
     rightIcon: true,
   },
-  decorators: [
-    (Story) => (
-      <div style={{ padding: '24px', background: 'var(--color-neutral-500)' }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export const Playground: Story = {

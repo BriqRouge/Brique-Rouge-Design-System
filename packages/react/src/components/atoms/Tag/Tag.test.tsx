@@ -66,7 +66,7 @@ describe('Tag — accessibilité', () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('outlined : aucune violation axe (structure/markup, pas le contraste — voir specs/)', async () => {
+  it('outlined, avec icônes : aucune violation axe', async () => {
     const { container } = render(
       <Tag variant="outlined" leftIcon rightIcon>
         Tag
