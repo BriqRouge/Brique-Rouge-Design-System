@@ -242,6 +242,14 @@ l'étape 0 et l'ordre ci-dessus, avec un point d'arrêt obligatoire : rapport
 d'écarts Figma vs code présenté à Damien **avant** toute modification. Si des
 Variables Figma ont changé, lancer `/sync-tokens` d'abord.
 
+### Conventions Figma des composants (décidées le 2026-11-02)
+- Valeurs de variantes Figma = valeurs des props React, en minuscules / kebab-case
+  (`State=idle|hovered`, `Company=conseil-constitutionnel`)
+- Défauts : le code fait référence ; les défauts Figma ne sont pas une décision de design
+- Textes Figma liés aux variables `typography/font-size/*` et `typography/font-weight/*`
+  (Light/Book/Regular → 400, Medium → 500, Bold → 700) ; couleurs liées à `color/*`
+- Détail et application : skill `/sync-component`
+
 ### IDs Figma — format
 - URLs Figma : format tiret (`18-765`)
 - Appels MCP : format deux-points (`18:765`)

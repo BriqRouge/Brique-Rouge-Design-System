@@ -27,7 +27,7 @@ Accepte `alertBanner` en slot optionnel — typiquement rempli avec `<AlertBanne
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-neutral-400` | `#a1a1a1` | Numéro de section (voir écart Figma ci-dessous) |
+| `--color-neutral-400` | `#a1a1a1` | Numéro de section |
 | `--color-neutral-900` | `#171717` | Titre de section |
 | `--color-neutral-800` | `#262626` | Texte d'introduction |
 | `--color-neutral-600` | `#525252` | Texte des puces |
@@ -36,7 +36,7 @@ Accepte `alertBanner` en slot optionnel — typiquement rempli avec `<AlertBanne
 | `--typography-subtitle-font-family`/`-font-weight` | — | Titre de section, texte d'introduction |
 | `--typography-body-font-family` | — | Texte des puces |
 | `--typography-font-size-base`/`-3xl`/`-2xl` | `16px`/`32px`/`24px` | Numéro, titre, texte d'introduction |
-| `--typography-font-weight-medium`/`-regular` | `500`/`400` | Numéro (medium), reste (regular — voir écart Figma) |
+| `--typography-font-weight-medium`/`-regular` | `500`/`400` | Numéro (medium), reste (regular) |
 | `--spacing-x6`/`-x4`/`-x14` | `24px`/`16px`/`56px` | Gaps et indentation |
 | `--sizing-x6` | `24px` | Taille de l'icône des puces |
 
@@ -45,8 +45,8 @@ Accepte `alertBanner` en slot optionnel — typiquement rempli avec `<AlertBanne
 - Icône des puces dessinée à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `AlertBanner`/`TopNav` — pas d'asset Figma exporté
 - `bulletPoints` : tableau de chaînes simples (le Figma source ne montre que du texte brut dans les puces, pas de mise en forme riche)
 - `alertBanner` : rendu tel quel si fourni, rien autrement — pas de fond/bordure par défaut ajouté par ce composant (le style vient entièrement de l'`<AlertBanner>` fourni)
-- **Écart signalé vs Figma** : la couleur du numéro de section (`#a3a3a3`) ne correspond à aucun token exact — `--color-neutral-400` (`#a1a1a1`) est la valeur existante la plus proche, écart de 2 points par canal, cohérent avec le type de dérive Figma déjà rencontré (cf. `ProjectBentoCard`/`conseil-constitutionnel`)
-- **Écart signalé vs Figma** : poids de police "Book" (~333) du texte d'introduction et des puces sans équivalent exact dans `--typography-font-weight-*` — mappé sur `regular` (400), même convention que `ProjectCardDescription`
+- **Couleur du numéro de section** : `--color-neutral-400` — Figma aligné le 2026-11-02 (l'ancien `#a3a3a3` non lié, sans token exact, a été remplacé par la variable `color/neutral/400`)
+- **Graisse du texte d'introduction et des puces** : `regular` (400) — Figma aligné le 2026-11-02 (l'ancien style « Book » ~333 est désormais lié à `typography/font-weight/regular`)
 - **Écart signalé vs Figma** : le gap entre numéro et titre varie légèrement entre les deux sections du frame source (24px vs 26px) — standardisé à 24px (`--spacing-x6`), traité comme une dérive d'auteur Figma plutôt qu'une différence intentionnelle entre sections
 
 ## Tests

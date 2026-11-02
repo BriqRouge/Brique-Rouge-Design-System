@@ -38,7 +38,7 @@ type ProjectCardDescriptionVariant = 'default' | 'cv';
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-background-projects-body` | `#e5e5e5` | Fond de la carte |
-| `--color-neutral-900` | `#171717` | Couleur de tout le texte (voir écart Figma ci-dessous) |
+| `--color-neutral-900` | `#171717` | Couleur de tout le texte |
 | `--typography-font-family-sans` | `ABC Favorit Pro Variable` | Police (tous les textes) |
 | `--typography-font-size-base` | `16px` | Taille du nom du projet et du titre |
 | `--typography-font-size-sm` | `14px` | Taille de l'année et de la catégorie |
@@ -53,8 +53,8 @@ type ProjectCardDescriptionVariant = 'default' | 'cv';
 - **Hauteur fixe 120px** (validé par Damien, aligné sur les instances du composant Figma `ProjectBentoCard` `2032:20121`) — remplace la hauteur automatique précédente. Le titre occupe l'espace restant entre l'en-tête et la catégorie (`flex: 1 0 0`). Contenu prévu pour tenir dans 120px : un titre sur 1–2 lignes et une catégorie sur 1 ligne. Une catégorie qui passe à la ligne dans une largeur de 276px (ex : "Discovery | Product Design | Design System") déborde légèrement — dans `ProjectBentoCard`, la description Odaptos ne s'affiche qu'une fois la carte agrandie à 576px, où elle tient sur une ligne
 - **Hauteur des textes** : `line-height: 1` sur project/year/category (repli universel, ~130px) + `text-box-trim: trim-both` / `text-box-edge: cap alphabetic` en amélioration progressive sur les 4 textes (rognage des interlignes pour coller au rendu Figma, Chrome 130+). **Ne jamais reprendre les valeurs `line-height` littérales du JSX généré par Figma (24px, 18px) sans vérifier qu'elles ne sont pas elles-mêmes compressées par `text-box-trim` côté Figma** — sinon le composant rend significativement plus grand que prévu
 - `children` = titre du projet ; supporte un retour à la ligne manuel (`<br />`) ou un wrap naturel
-- **Écart signalé vs Figma** (validé par Damien) : le texte n'est lié à aucune variable de couleur Figma (`color/text/*`) — mappé sur `--color-neutral-900` (le noir pur du Figma ne correspond à aucun token existant)
-- **Écart signalé vs Figma** (validé par Damien) : les poids de police Figma (`Light` pour les labels, `Medium` variable ~571 pour le titre) n'ont pas d'équivalent exact dans `--typography-font-weight-*` — mappés sur `regular` (400) et `medium` (500)
+- **Couleur du texte** : `--color-neutral-900` (décision de Damien) — Figma aligné le 2026-11-02 : le noir pur non lié a été remplacé par la variable `color/neutral/900`
+- **Graisses** : `regular` (400) pour les labels, `medium` (500) pour le titre (décision de Damien) — Figma aligné le 2026-11-02 : les styles `Light` et `Medium` (~571) de la police variable sont désormais liés aux variables `typography/font-weight/*`
 - **Variante `cv`** (ajoutée pour la carte CV de `ProjectBentoCard`) : titre seul, centré horizontalement et verticalement
 - **Storybook** : les props étant une union discriminée, la story utilise un type d'args plat + un `render` explicite (Storybook ne sait pas typer des args sur une union)
 

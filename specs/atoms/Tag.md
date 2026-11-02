@@ -40,8 +40,10 @@ interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
 
 - **Icônes fixes, pas des slots arbitraires** : contrairement à `Button`/`MenuButton` (où `leftIcon`/`rightIcon` acceptent n'importe quel `ReactNode`), les icônes de `Tag` sont **fixes** (indicateur rond à gauche, croix de fermeture à droite) et seulement togglées par booléen — fidèle à la structure du Figma source, qui ne montre jamais d'icône différente
 - Icônes dessinées à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `AlertBanner`/`TopNav`
-- **Normalisation de nommage** : le Figma source nomme la plus petite taille `Smallsm` en `contained` mais `sm` en `outlined`, et la plus grande `lg` en `contained` mais `l` en `outlined` — incohérence de nommage des variantes côté Figma (même dimensions des deux côtés), normalisé en `sm`/`nm`/`md`/`lg` partout dans l'API
-- **⚠️ Écart signalé vs Figma — contraste insuffisant (non corrigé, implémenté tel quel à la demande de Damien)** : le style `outlined` utilise une couleur de texte/icône très claire (`--color-neutral-200` pour sm/nm/md, `--color-neutral-100` pour lg) — sur un fond clair réel (`--color-neutral-50` utilisé partout ailleurs dans le DS), ce texte serait quasiment invisible et échouerait largement WCAG AA. Probable erreur d'auteur Figma (texte clair resté après un changement contained→outlined). **À corriger côté Figma si Damien confirme que c'est une erreur**, avant tout usage réel du style outlined en production
+- **Nommage des tailles** : `sm`/`nm`/`md`/`lg` dans Figma comme dans l'API (Figma harmonisé le 2026-11-02 — anciennement `Smallsm` et `l` selon le style)
+- **Style `outlined`** : bordure `--color-neutral-200`, texte et icônes `--color-neutral-900` — contraste conforme WCAG AA sur fond clair. Décision de Damien (2026-11-02), appliquée dans Figma et dans le code ; remplace l'ancien texte `neutral-200`/`neutral-100` quasi invisible
+- **Graisse** : `--typography-font-weight-medium` (500), liée à la variable `typography/font-weight/medium` dans Figma (anciennement style « Medium » de la police variable, ~571)
+- **Valeurs par défaut** : celles du code font référence (`size='nm'`, icônes masquées) ; les défauts Figma (première variante, icônes affichées) ne sont pas une décision de design
 - Pas d'interaction gérée (ni `onClick` sur l'icône de fermeture, ni état hover/focus) — le Figma source ne spécifie aucun comportement, seulement l'apparence visuelle
 
 ## Tests

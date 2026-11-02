@@ -28,6 +28,27 @@ s'applique pas : suivre §7 directement.
   `/sync-tokens` et merger sa PR avant. Ce skill ne crée ni ne modifie jamais un
   token.
 
+## Conventions établies (décisions de Damien, 2026-11-02)
+
+À appliquer sans redemander. Tout écart à ces conventions dans Figma est une
+**incohérence Figma** à signaler (étape 4), pas un changement d'API à reporter.
+
+- **Valeurs de variantes = valeurs des props du code**, en minuscules / kebab-case
+  (`Size=sm|nm|md|lg`, `State=idle|hovered|focus|disabled`,
+  `Company=conseil-constitutionnel`…). Les noms de propriétés gardent leur casse
+  (`Size`, `State`, `Type`).
+- **Valeurs par défaut** : le code fait référence. Les défauts Figma (première
+  variante du set, booléens à `true`) sont une information, jamais un écart.
+- **Typographie** : taille et graisse des textes liées aux variables
+  `typography/font-size/*` et `typography/font-weight/*`. Les styles de la police
+  variable correspondent à : Light / Book / Regular → `regular` (400),
+  Medium (~571) → `medium` (500), Bold → `bold` (700). Une taille liée à une
+  variable `spacing/*` est une incohérence.
+- **Couleurs** : toute couleur de texte, de fond ou de bordure est liée à une
+  variable `color/*`. Une couleur non liée sans token exact est une incohérence.
+- **Contenu illustratif** (mockups, logos texte, captures d'écran recomposées,
+  polices hors DS comme GT Ultra Median ou Helvetica) : hors périmètre, ignoré.
+
 ## Étape 1 — Résoudre la cible
 
 Pour chaque `<Nom>` :
