@@ -4,9 +4,14 @@ import { Meta } from '@storybook/blocks';
 
 # Étape 3 — Configurer le CI/CD
 
-Le CI/CD automatise deux choses :
-- **Les tests** — vérifiés à chaque push sur GitHub
-- **Le déploiement** — Storybook mis à jour automatiquement en ligne
+Le CI/CD automatise trois choses :
+- **Les vérifications** à chaque PR : tests, lint, couleurs codées en dur,
+  cohérence composants ↔ fiches specs, specs des tokens à jour
+- **Le déploiement** : Storybook mis à jour en ligne à chaque merge sur `main`
+- **La détection nocturne** : chaque nuit, la CI compare Figma au code et ouvre
+  une issue si des composants ont changé (voir **Étape 5**)
+
+Tous les workflows utilisent la version de Node indiquée dans `.nvmrc`.
 
 Tout est déjà configuré dans le code. Tu as juste quelques actions
 à faire dans l'interface GitHub.
@@ -23,14 +28,35 @@ Tout est déjà configuré dans le code. Tu as juste quelques actions
 
 1. Va sur ton repo GitHub
 2. Clique sur l'onglet **Actions**
-3. Tu dois voir deux workflows :
+3. Tu dois voir trois workflows :
    - `CI` — tests et lint
    - `Deploy Storybook` — déploiement
+   - `Figma drift` — détection nocturne des changements Figma
 
 Si tu vois un message "Workflows aren't being run on this fork",
 clique sur **"I understand my workflows, go ahead and enable them"**.
 
-## 3. Activer la protection de branche
+## 3. Donner à la CI un accès Figma en lecture seule
+
+La détection nocturne lit ton fichier Figma par l'API REST. Elle a besoin d'un
+token personnel Figma.
+
+1. Dans Figma : **Settings → Security → Personal access tokens → Generate new token**
+2. Scopes : **File content → Read-only** (et **File versions → Read-only**, utile
+   pour comparer avec une version passée). Rien en écriture.
+3. En local, copie `.env.example` en `.env` et colle le token après `FIGMA_TOKEN=`.
+   Le fichier `.env` est ignoré par git.
+4. Sur GitHub : **Settings → Secrets and variables → Actions → New repository
+   secret**, nom `FIGMA_TOKEN`, valeur : le token.
+
+> Ne colle jamais ce token dans un chat, un commit ou une issue.
+> Depuis le terminal, tu peux le transmettre à GitHub sans l'afficher :
+
+```bash
+sed -n 's/^FIGMA_TOKEN=\(\S\+\).*/\1/p' .env | tr -d '\r\n' | gh secret set FIGMA_TOKEN
+```
+
+## 4. Activer la protection de branche
 
 1. Va dans **Settings → Branches**
 2. Clique sur **"Add branch protection rule"**
@@ -41,7 +67,7 @@ clique sur **"I understand my workflows, go ahead and enable them"**.
    - ✅ Do not allow bypassing the above settings
 5. Clique sur **Create**
 
-## 4. Déclencher le premier déploiement
+## 5. Déclencher le premier déploiement
 
 La branche `main` étant protégée, on ne pousse jamais directement dessus.
 Le déploiement se déclenche quand une PR est mergée dans `main` :
@@ -59,7 +85,7 @@ git push origin chore/activation-ci-cd
 
 Puis va dans l'onglet **Actions** pour suivre le déploiement en temps réel.
 
-## 5. Trouver l'URL de ton Storybook en ligne
+## 6. Trouver l'URL de ton Storybook en ligne
 
 Une fois le déploiement terminé, ton Storybook est accessible à :
 

@@ -365,13 +365,13 @@ pnpm --filter @brique-rouge/storybook dev
 ### Structure des stories
 ```
 src/stories/
-├── getting-started/     ← MDX — pages Démarrage (Bienvenue, Étape 1–4)
+├── getting-started/     ← MDX — pages Démarrage (Bienvenue, Étapes 0–5 : guide de mise en place depuis zéro)
 ├── tokens/              ← MDX — pages Fondations (Couleurs, Typographie, Espacements, Dimensions)
 └── components/          ← TSX  — stories des composants React
 ```
 
 ### Conventions stories
-- Titre : `Composants/NomComposant`
+- Titre : `Atomes|Molécules|Organismes/NomComposant` selon le niveau (voir §7)
 - `tags: ['autodocs']`
 - Documentation en **français**
 - Stories obligatoires : Default, Variants, Tailles, État Disabled, Playground

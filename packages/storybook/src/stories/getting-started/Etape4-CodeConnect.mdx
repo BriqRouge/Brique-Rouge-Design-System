@@ -23,7 +23,7 @@ pnpm add -g @figma/code-connect
 
 ## Structure d'un fichier Code Connect
 
-Chaque composant a un fichier `[NomComposant].figma.tsx` :
+Chaque composant a un fichier `[NomComposant].figma.tsx` (exemple réel : `packages/react/src/components/atoms/MenuButton/MenuButton.figma.tsx`) :
 
 ```tsx
 import figma from "@figma/code-connect";
@@ -31,7 +31,7 @@ import { [NomComposant] } from "./[NomComposant]";
 
 figma.connect(
   [NomComposant],
-  "https://www.figma.com/file/[CLÉ_FIGMA]?node-id=[NODE_ID]",
+  "https://www.figma.com/design/[CLÉ_FIGMA]?node-id=[NODE_ID]",
   {
     props: {
       // Mapping entre les propriétés Figma et les props React
@@ -75,3 +75,4 @@ pnpm figma connect publish
 
 ✅ Dans Figma, sélectionne un composant et ouvre le panneau Dev.
 Tu vois le code React ? Code Connect est en place.
+Continue avec **Étape 5 — Synchroniser Figma**.

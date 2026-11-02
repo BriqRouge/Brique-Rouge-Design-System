@@ -11,38 +11,53 @@ Tu utilises **deux outils Claude distincts** :
 - **Claude AI** (claude.ai) — pour lire Figma et définir l'API du composant
 - **Claude Code** (terminal) — pour implémenter les fichiers
 
+Cette page couvre la **création** d'un composant. Pour mettre à jour un
+composant existant après un changement dans Figma, utilise `/sync-component`
+ou `/sync-ds` (voir **Étape 5**).
+
 ## 1. Préparer le composant dans Figma
 
-Avant de demander à Claude de lire un composant, il doit être finalisé dans Figma :
-- Tous les variants définis
-- Tous les états représentés (default, hover, focus, disabled, error…)
-- Les variables Figma branchées sur les éléments
+Avant de demander à Claude de lire un composant, il doit être finalisé dans Figma
+et respecter les conventions de l'**Étape 0** :
+- Tous les variants définis, valeurs en kebab-case
+- Tous les états représentés (idle, hovered, focus, disabled, error…)
+- Les variables Figma branchées sur les éléments, les textes portant un style
 
 ### Trouver le Node ID
 
 1. Dans Figma, sélectionne le **Component Set** de ton composant
    (le composant parent qui contient tous les variants)
 2. Regarde l'URL dans ton navigateur :
-   `https://www.figma.com/file/XXXX/...?node-id=18-797`
+   `https://www.figma.com/design/XXXX/...?node-id=18-797`
 3. Copie la valeur après `node-id=` : `18-797`
 4. Remplace le tiret par deux-points : `18:797` — c'est ton Node ID
 
-## 2. Lire le composant avec Claude AI
+## 2. Analyser le composant
 
-Ouvre **claude.ai** et utilise ce prompt :
+L'analyse peut se faire dans **Claude Code**, qui a accès à Figma par le MCP,
+ou dans **claude.ai** si tu préfères réfléchir à l'API à part. Dans les deux
+cas, utilise ce prompt :
 
 ```
 Lis le composant Figma avec le node ID [NODE_ID] dans le fichier [CLÉ_FIGMA].
-Pour ce composant :
+Analyse le Component Set complet, pas une seule instance :
 
-- Identifie tous les variants et leurs valeurs
-- Identifie tous les états (default, hover, focus, disabled, error…)
+- Liste toutes les variantes et leurs valeurs
+- Lis chaque état (idle, hovered, focus, disabled, error…), pas seulement le défaut
+- Vérifie l'existence d'animations (get_motion_context) et confirme leur absence
 - Identifie les tailles si applicable
-- Identifie les tokens utilisés (couleurs, espacements, typographie)
-- Propose une API React propre et cohérente qui reflète fidèlement la structure Figma
+- Identifie les tokens utilisés et vérifie-les dans packages/tokens/build/css/
+- Identifie les composants du DS déjà utilisés dans sa structure
+- Propose une API React propre qui reflète fidèlement la structure Figma
+- Signale toute incohérence dans Figma, sans la corriger
 
 Ne génère pas de code pour l'instant — je veux d'abord valider l'API.
 ```
+
+> **Pourquoi tous les états ?** Une capture ou une instance ne montre qu'un état.
+> Chez Brique Rouge, l'état survolé de `MetaInfoItem` (un vrai lien, avec une
+> icône qui change) n'a été découvert qu'après coup, parce que seule l'instance
+> au repos avait été lue.
 
 > **Où trouver la clé Figma ?**
 > Dans l'URL de ton fichier : `https://www.figma.com/file/[CLÉ_FIGMA]/nom-du-fichier`
@@ -120,6 +135,26 @@ Après validation, documente le composant à deux endroits :
 - **`COMPONENTS.md`** — l'index, avec une ligne qui pointe vers cette fiche
 
 Ces fichiers sont lus par Claude Code pour les futures générations.
+
+La fiche commence par un **en-tête obligatoire**. C'est lui qui inscrit le
+composant au registre de synchronisation (**Étape 5**) :
+
+```yaml
+---
+component: Tag              # = nom du dossier React
+tier: atom                  # atom | molecule | organism
+figma:
+  node: "184:18522"         # Component Set de la page DS, jamais une instance
+  name: Tag                 # nom du calque Figma
+  type: component-set       # component-set | component | frame
+---
+```
+
+La CI vérifie la cohérence entre composants React et fiches :
+
+```bash
+node scripts/check-specs.mjs
+```
 
 ```
 Le composant [NomComposant] vient d'être validé.

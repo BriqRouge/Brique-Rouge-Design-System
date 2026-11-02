@@ -2,32 +2,61 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Démarrage/Bienvenue" />
 
-# Bienvenue dans ton Design System
+# Bienvenue
 
-Tu as réussi l'installation — Storybook tourne sur ton ordinateur.
-À partir d'ici, tout se passe dans ce guide.
+Ce Storybook documente **Brique Rouge**, un Design System « AI-ready » :
+Figma en est la source de vérité, et Claude Code le synchronise avec le
+code sans report manuel ni oubli.
 
-## Ce que tu vas construire
+Il sert aussi de **guide pour construire le tien depuis zéro**. Brique Rouge
+y sert d'exemple concret à chaque étape.
 
-- Tes tokens Figma transformés en variables CSS utilisables dans le code
-- Des composants React accessibles, testés et documentés
-- Une documentation Storybook déployée en ligne automatiquement
-- Une connexion directe entre Figma et le code via Code Connect
+## Deux couches à ne pas confondre
 
-## Comment utiliser ce guide
+| Couche | Ce que c'est | Réutilisable tel quel ? |
+|---|---|---|
+| **La méthode** | Monorepo, build des tokens, scripts de synchronisation et de vérification, skills Claude Code, CI, conventions Figma | Oui : c'est la structure que tu gardes |
+| **Les choix Brique Rouge** | Couleurs, typographie, composants, specs | Non : tu les remplaces par les tiens |
 
-Le guide est organisé en 4 étapes dans le menu à gauche.
-Suis-les dans l'ordre — chaque étape suppose que la précédente est faite.
+Ce guide décrit la méthode. Les sections **Fondations**, **Atomes**,
+**Molécules** et **Organismes** montrent les choix Brique Rouge.
 
-- **Étape 1 — Tokens Figma** — Reporter tes variables Figma dans tokens.json et générer les variables CSS
-- **Étape 2 — Premier composant** — Créer un composant avec Claude AI
-- **Étape 3 — CI-CD** — Automatiser les tests et le déploiement
-- **Étape 4 — Code Connect** — Relier Figma et le code
+## Le principe en une phrase
 
-## Ce template a été conçu par
+Tu conçois dans Figma ; Claude Code lit Figma, te présente les écarts avec le
+code, **attend ta validation**, puis met à jour le code, les tests, la
+documentation, et ouvre une PR. Des scripts déterministes vérifient le travail,
+et une CI le contrôle à chaque PR et chaque nuit.
 
-**Romain Richard**, Lead System Designer —
-avec la conviction qu'un bon Design System se construit
-avec méthode, pas avec des raccourcis.
+## Les étapes
 
-👉 Commence par **Étape 1 — Tokens Figma** dans le menu à gauche.
+Suis-les dans l'ordre : chaque étape suppose que la précédente est faite.
+
+- **Étape 0 — Préparer Figma** : organiser ton fichier pour qu'il soit lisible par la machine
+- **Étape 1 — Tokens Figma** : transformer tes Variables en variables CSS
+- **Étape 2 — Premier composant** : passer d'un composant Figma à un composant React testé et documenté
+- **Étape 3 — CI-CD** : automatiser les vérifications et le déploiement
+- **Étape 4 — Code Connect** : afficher le code React dans le panneau Dev de Figma
+- **Étape 5 — Synchroniser Figma** : tenir le code à jour quand Figma change
+
+Avant l'étape 0, installe le projet et renseigne ses paramètres : voir le
+`README` du dépôt, section « Configurer le template ».
+
+## Qui fait quoi
+
+| Rôle | Responsabilité |
+|---|---|
+| **Personne responsable du design** (`governance.designOwner` dans `ds.config.json`) | Conçoit dans Figma, prend toutes les décisions de design, valide chaque rapport d'écarts et chaque PR |
+| **Claude Code** | Lit Figma, compare avec le code, propose, puis exécute ce qui est validé |
+| **Scripts et CI** | Vérifient ce que l'humain et Claude produisent, sans rien décider |
+
+Claude Code ne corrige jamais le design de lui-même. Ce qui lui paraît
+incohérent dans Figma, il le signale ; la décision reste humaine.
+
+## Crédits
+
+Brique Rouge est conçu par **Damien Ramzi**, Senior Product Designer, à partir
+du *Design System Starter* de **Romain Richard**, Lead System Designer.
+Licence MIT.
+
+👉 Commence par **Étape 0 — Préparer Figma** dans le menu à gauche.
