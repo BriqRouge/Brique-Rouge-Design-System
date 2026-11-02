@@ -5,83 +5,99 @@ import { Meta } from '@storybook/blocks';
 # Étape 1 — Intégrer tes tokens Figma
 
 Les tokens sont les valeurs fondamentales de ton Design System :
-couleurs, typographie, espacements, rayons de bordure.
+couleurs, typographie, espacements, rayons de bordure, élévations.
 
-Cette étape transforme tes variables Figma en variables CSS
-utilisables dans tous tes composants.
+Cette étape transforme tes Variables Figma en variables CSS utilisables dans
+tous tes composants. **Tu ne recopies rien à la main** : la commande
+`/sync-tokens` lit Figma et régénère tout.
 
 ## Comment ça marche
 
 ```
-Figma Variables  →  packages/tokens/tokens.json  →  Style Dictionary  →  variables CSS
-(source de vérité)   (reporté à la main)            (build)               (build/css/)
+Figma Variables  →  /sync-tokens  →  packages/tokens/tokens.json  →  Style Dictionary  →  variables CSS
+(source de vérité)  (Claude Code)    (généré, jamais édité)          (build)              (build/css/)
 ```
 
-Figma reste la source de vérité. Il n'y a pas d'export automatique :
-chaque changement fait dans Figma est **reporté à la main** dans
-`packages/tokens/tokens.json`, puis le build génère les fichiers CSS.
+`tokens.json` est un fichier **généré**. Pour corriger un nom ou une valeur, on
+corrige dans Figma, puis on relance la synchronisation.
 
-## 1. Modifier la variable dans Figma
+## Prérequis
 
-Dans le panneau **Variables** de Figma, crée, renomme ou modifie la variable.
-Respecte la nomenclature existante (échelle numérique : `x4`, `x6`, `x3-5`…).
+- Le **MCP Figma** connecté à Claude Code, avec un siège Figma *Full* ou *Dev*
+  sur le fichier
+- Ton fichier préparé selon l'**Étape 0** (noms, collections, un seul mode)
+- Une branche à jour : `git checkout main && git pull`
 
-## 2. Reporter le changement dans tokens.json
+## 1. Lancer la synchronisation
 
-Ouvre `packages/tokens/tokens.json` et applique exactement le même changement,
-au même emplacement. Chaque token a une valeur (`$value`) et un type (`$type`) :
-
-```json
-{
-  "primitive": {
-    "typography": {
-      "line-height": {
-        "x6": {
-          "$value": 24,
-          "$type": "number"
-        }
-      }
-    }
-  }
-}
-```
-
-Le fichier contient deux groupes racine :
-
-- **`primitive`** — tokens bruts (couleurs, spacing, sizing, border-radius,
-  elevation, typographie) → `build/css/primitive.css`
-- **`semantic`** — tokens sémantiques (boutons, textes, notifications…)
-  → `build/css/semantic.css`
-
-Le nom de la variable CSS reprend le chemin du token, sans le groupe racine :
+Dans Claude Code, à la racine du projet :
 
 ```
-primitive › typography › line-height › x6   →   --typography-line-height-x6
+/sync-tokens
 ```
 
-Ce lien entre groupe racine et fichier CSS est défini dans
-`packages/tokens/mapping.config.js` (clé `figmaCollection`). Tu n'as à le
-modifier que si tu ajoutes un nouveau groupe racine.
+Claude Code exécute un script d'export **en lecture seule** dans Figma, recopie
+l'export sur disque, puis le script `scripts/figma-sync-tokens.mjs` le vérifie
+et régénère `tokens.json`.
 
-## 3. Lancer le build des tokens
+Le script **refuse plutôt que de corriger**. Il s'arrête si :
+
+- un morceau de l'export a été altéré pendant la recopie (empreinte différente) ;
+- un nom sort de la convention (minuscules, chiffres, tirets, `/`) ;
+- un alias est cassé, ou une collection est inconnue ou a plusieurs modes ;
+- une variable CSS supprimée est encore utilisée dans le code.
+
+Dans ces cas, Claude Code te présente la liste : la correction se fait dans Figma.
+
+## 2. Lire le rapport
+
+Avant de committer, Claude Code te montre ce qui change :
+
+```
+✅ Export vérifié : 327 variables (primitive, semantic)
+   1 ajoutée(s), 0 supprimée(s), 0 valeur(s) modifiée(s)
+   + semantic/color/icon/button/disabled = #d4d4d4
+```
+
+**Toute valeur modifiée change le rendu** de tous les composants qui l'utilisent :
+c'est ce que tu valides.
+
+## 3. Le build
+
+Claude Code lance ensuite le build :
 
 ```bash
 pnpm --filter @brique-rouge/tokens build
 ```
 
-Le build convertit automatiquement les valeurs :
+Le nom de la variable CSS reprend le chemin du token, sans la collection :
 
-- **Couleur** → hex, tel que saisi (`#3453dc`, ou `#0000000f` avec opacité)
+```
+primitive › typography › line-height › x6   →   --typography-line-height-x6
+```
+
+Le build convertit les valeurs :
+
+- **Couleur** → hex (`#3453dc`, ou `#0000000f` avec opacité)
 - **Nombre** → en `px` (`24` → `24px`)
 - **Nombre sous `opacity`, `font-weight` ou un ratio de `line-height`**
   (`tight`, `normal`…) → sans unité (`500`, `1.5`)
 - **`font-family`** → nom entre guillemets + police de secours
   (`"GT Ultra", serif`)
 
-Le build régénère aussi la documentation `specs/foundations/` et `specs/tokens/`.
-Ajoute ces fichiers à ton commit : la CI vérifie qu'ils sont à jour.
+Chaque collection Figma produit son fichier : `primitive` →
+`build/css/primitive.css`, `semantic` → `build/css/semantic.css`. Ce lien est
+déclaré dans `packages/tokens/mapping.config.js`.
 
-## 4. Vérifier dans Storybook
+Le build régénère aussi la documentation lisible par les LLM, `specs/foundations/`
+et `specs/tokens/`. La CI vérifie qu'elle est à jour.
+
+## 4. La PR
+
+Claude Code ouvre une PR avec `tokens.json`, les specs régénérées et le rapport.
+Il ne la merge jamais : c'est toi qui valides.
+
+## 5. Vérifier dans Storybook
 
 Navigue dans **Fondations** dans le menu à gauche.
 

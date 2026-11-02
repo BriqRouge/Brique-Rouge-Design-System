@@ -1,0 +1,107 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Démarrage/Étape 0 — Préparer Figma" />
+
+# Étape 0 — Préparer ton fichier Figma
+
+Figma est la source de vérité, et c'est une machine qui le lit. Elle ne devine
+rien : un nom mal formé, une couleur saisie à la main ou un composant hors de sa
+page ne seront pas synchronisés correctement. Cette étape rend ton fichier
+lisible par les outils.
+
+Ton fichier peut être complet ou partiel : on part de ce qui existe et on le
+fait grandir étape par étape.
+
+## 1. Une page pour le Design System
+
+Regroupe tous les composants du DS sur **une seule page** (chez Brique Rouge :
+« Design system »). Les maquettes et les écrans vivent sur d'autres pages.
+
+Note l'identifiant de cette page : sélectionne-la, il apparaît dans l'URL
+(`node-id=1-2` → `1:2`). Il ira dans `figma.designSystemPageId` de
+`ds.config.json`.
+
+## 2. Les Variables (tokens)
+
+Crée tes tokens comme **Variables Figma**, dans deux collections :
+
+| Collection | Contenu | Exemple |
+|---|---|---|
+| `primitive` | Valeurs brutes | `color/neutral/800` = `#262626` |
+| `semantic` | Rôles, en alias des primitives | `color/text/button/primary` → `color/neutral/50` |
+
+Règles vérifiées par `/sync-tokens`, qui refuse l'export si l'une n'est pas
+respectée :
+
+- **Noms** en minuscules, chiffres et tirets, segments séparés par `/` :
+  `spacing/x3-5`, jamais `Spacing/X 3.5`
+- **Un seul mode** par collection : les thèmes (clair/sombre) ne sont pas
+  encore gérés
+- **Alias valides** : chaque token sémantique pointe vers une variable existante
+- Toute nouvelle collection doit être déclarée dans
+  `packages/tokens/mapping.config.js`
+
+Recommandé pour un fichier « AI-ready » :
+
+- **Scopes typés** : une couleur de fond n'est proposée que pour les fonds, un
+  espacement que pour les espacements. Jamais « All scopes ».
+- **Code syntax WEB** égale au nom CSS généré :
+  `color/text/button/primary` → `var(--color-text-button-primary)`. Le nom CSS
+  reprend le chemin sans la collection. Figma Dev Mode affiche alors le vrai
+  token à copier.
+
+Nomenclature Brique Rouge : échelle numérique (`spacing/x4` = 16px, `x3-5` =
+14px), jamais de tailles en t-shirt (`sm`, `md`) pour les primitives.
+
+## 3. Les styles de texte
+
+Chaque texte d'un composant porte un **style de texte par rôle** (`heading/xl`,
+`body/md`, `label/md`…), lui-même lié aux variables de taille et de graisse.
+Ainsi, le rôle d'un texte est explicite et le code le reproduit à l'identique.
+
+> **Attention** : appliquer un style de texte dans Figma remplace **toutes**
+> les propriétés du texte, y compris le rognage (*leading trim*), la casse et
+> le soulignement. Vérifie-les avant d'appliquer un style, sinon crée la variante
+> du style qui les porte. Voir `specs/patterns/typography.md`.
+
+## 4. Les composants
+
+- Un composant à plusieurs variantes est un **Component Set** dont les propriétés
+  correspondent aux props React.
+- **Valeurs de variantes en minuscules / kebab-case**, identiques aux valeurs
+  des props : `State=idle|hovered|focus|disabled`, `Variant=primary`.
+- **Tous les états** sont représentés : idle, hovered, focus, disabled, error…
+  Un état absent de Figma est un état que personne n'a conçu.
+- **Couleurs liées** à une variable `color/*`, **tailles et graisses de texte**
+  liées aux variables `typography/*`. Aucune valeur saisie à la main si un token
+  existe.
+- Les icônes peuvent rester des composants simples. Leur nom suit un motif
+  (`Arrow / …`, `Interface / …`) déclaré dans `figma.iconNamePattern` pour que
+  l'inventaire les ignore.
+
+## 5. Vérifier automatiquement
+
+Une fois l'Étape 3 faite (token Figma en place), une commande vérifie ces
+conventions sur tous les composants enregistrés :
+
+```bash
+node scripts/figma-sync-ds.mjs lint
+```
+
+| Résultat | Signification |
+|---|---|
+| ❌ erreur | Variante hors kebab-case, texte dont la taille, la graisse ou la couleur n'est pas liée à une variable |
+| ⚠️ avertissement | Texte sans style de texte : écart toléré, à décider |
+
+Le lint ne corrige rien : les corrections se font dans Figma, par toi.
+
+## 6. Enregistrer une version
+
+Avant toute modification en masse, que ce soit par toi ou par Claude Code,
+enregistre une version nommée dans Figma : **File → Save to version history**
+(`Ctrl+Alt+S` / `Cmd+Option+S`). C'est ton point de restauration. Claude Code te
+le demandera systématiquement : l'API ne lui permet pas de le faire lui-même.
+
+✅ Ton fichier a une page DS, des Variables nommées proprement, des styles de
+texte et des composants aux variantes en kebab-case ?
+Continue avec **Étape 1 — Tokens Figma**.

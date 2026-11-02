@@ -1,0 +1,96 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Démarrage/Étape 5 — Synchroniser Figma" />
+
+# Étape 5 — Synchroniser Figma et le code
+
+Ton DS vit : tu modifies une couleur, ajoutes un état, renommes une variante.
+Cette étape garantit que **rien de ce que tu changes dans Figma n'est oublié
+dans le code**, sans que tu aies à tenir une liste.
+
+## Trois outils, trois niveaux
+
+| Outil | Quand | Ce qu'il fait |
+|---|---|---|
+| **Détection nocturne** (CI `Figma drift`) | Chaque nuit, tout seul | Compare Figma au code et ouvre une issue « Drift Figma » si quelque chose a changé |
+| **`/sync-ds`** (Claude Code) | Quand tu veux tout synchroniser | Détecte, analyse, te présente un rapport, puis met à jour tout ce que tu valides dans une seule PR |
+| **`/sync-component <Nom>`** (Claude Code) | Pour un composant précis | Même travail, limité à un composant existant |
+
+`/sync-tokens` (Étape 1) reste disponible seul pour les Variables ; `/sync-ds`
+l'appelle de lui-même quand il le faut.
+
+## Comment la détection sait ce qui a changé
+
+Le dépôt garde une **empreinte** de chaque composant Figma tel qu'il était lors
+de la dernière synchronisation (`scripts/figma/components-snapshot.json`). Le
+script relit Figma par l'API REST, en lecture seule, recalcule les empreintes et
+les compare. Seuls les composants dont l'empreinte a changé sont à analyser.
+
+```bash
+node scripts/figma-sync-ds.mjs detect
+```
+
+```
+Composants à analyser (2) — ordre de traitement :
+  [atom] Button — empreinte modifiée
+      variantes ajoutées : Variant=primary, Color-scheme=neutral, State=disabled · …
+  [molecule] AlertBanner — empreinte modifiée
+      ⓘ utilise Button, aussi modifié(s) — le changement peut venir de là
+
+Inchangés (15) : …
+```
+
+Le registre des composants suivis, ce sont les fiches `specs/` et leur en-tête
+YAML (Étape 2). Un composant présent sur la page DS de Figma mais sans fiche est
+signalé comme **nouveau dans Figma**.
+
+> **Limite** : l'API REST des Variables Figma est réservée au plan Enterprise.
+> La détection nocturne ne couvre donc que les composants ; les Variables sont
+> vérifiées par `/sync-ds`, qui passe par le MCP Figma.
+
+## Le déroulé de `/sync-ds`
+
+1. **Détection** des composants modifiés, et vérification des Variables.
+2. **Tokens d'abord**, si les Variables ont changé (via `/sync-tokens`).
+3. **Analyse complète** de chaque composant modifié : toutes les variantes, tous
+   les états, comparés au code.
+4. **Rapport consolidé**, puis **arrêt** : chaque écart a un numéro (`Button #1`,
+   `Tag #3`…) et une recommandation. Rien n'est modifié tant que tu n'as pas
+   répondu.
+5. **Implémentation** des écarts validés : code, tests, story, fiche specs, un
+   commit par composant.
+6. **Mise à jour du snapshot** (sauf composants reportés), contrôles, et **une
+   seule PR**, que tu merges toi-même.
+
+Ce que tu décides au point 4 :
+
+- **Aligner le code** sur Figma : cas courant.
+- **Reporter** : l'écart reste signalé à la prochaine synchronisation.
+- **C'est Figma qui se trompe** : tu corriges dans Figma, puis tu relances.
+
+## La détection nocturne
+
+Le workflow `.github/workflows/figma-drift.yml` lance la même détection chaque
+nuit (05:00 UTC), ou à la demande depuis l'onglet **Actions → Figma drift → Run
+workflow**.
+
+- Changement détecté → une issue **« Drift Figma — composants à synchroniser »**
+  (label `figma-drift`) est créée ou mise à jour avec le rapport.
+- Plus rien à synchroniser → l'issue est fermée automatiquement.
+- Le **lint des conventions** (Étape 0) tourne aussi : ses écarts sont ajoutés à
+  l'issue.
+
+Quand l'issue apparaît, lance `/sync-ds` dans Claude Code.
+
+## Bonnes habitudes
+
+- **Enregistre une version Figma** avant une modification importante : c'est ton
+  point de restauration.
+- **Synchronise souvent** : un petit rapport se valide en cinq minutes, un gros
+  en une heure.
+- **Ne modifie jamais `tokens.json` ni le snapshot à la main** : ils sont générés.
+- **Lis la section « Décisions à prendre »** du rapport : c'est là que le design
+  se décide, pas dans le code.
+
+✅ Juste après le merge d'une PR `/sync-ds`, `node scripts/figma-sync-ds.mjs detect`
+affiche « Composants à analyser (0) » ? Ton DS est synchronisé.

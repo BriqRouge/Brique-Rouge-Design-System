@@ -1,4 +1,4 @@
-﻿# DÃ©ploiement Storybook sur GitHub Pages Ã  chaque push sur main
+# Déploiement Storybook sur GitHub Pages à chaque push sur main
 name: Deploy Storybook
 
 on:
