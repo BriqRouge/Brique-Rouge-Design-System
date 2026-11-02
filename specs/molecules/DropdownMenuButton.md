@@ -10,7 +10,7 @@ figma:
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/DropdownMenuButton/`
-**Figma :** 14 variantes
+**Figma :** 14 variantes — `Company=none` ↔ prop `company` absente (renommé depuis `Company=no` le 2026-11-02)
 **Commit :** `63a6751`
 **Fichiers :** `DropdownMenuButton.tsx`, `DropdownMenuButton.module.css`, `DropdownMenuButton.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/DropdownMenuButton.stories.tsx`

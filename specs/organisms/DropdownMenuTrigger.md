@@ -10,6 +10,7 @@ figma:
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/organisms/DropdownMenuTrigger/`
+**Figma :** `State=closed|open` ↔ `data-state="closed|open"` (renommé depuis `State=opened` le 2026-11-02)
 **Commit :** `1d457c9`
 **Fichiers :** `DropdownMenuTrigger.tsx`, `DropdownMenuTrigger.module.css`, `DropdownMenuTrigger.test.tsx`, `index.ts`
 **Story :** `packages/storybook/src/stories/components/DropdownMenuTrigger.stories.tsx`
