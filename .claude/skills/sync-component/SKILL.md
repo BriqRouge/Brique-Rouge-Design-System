@@ -46,7 +46,10 @@ s'applique pas : suivre CLAUDE.md « Workflow composants » directement.
   `typography/font-size/*` et `typography/font-weight/*`. Les styles de la police
   variable correspondent à : Light / Book / Regular → `regular` (400),
   Medium (~571) → `medium` (500), Bold → `bold` (700). Une taille liée à une
-  variable `spacing/*` est une incohérence.
+  variable `spacing/*` est une incohérence. Chaque texte porte un **style de texte
+  par rôle** (`display/*`, `heading/*`, `body/*`, `caption`, `eyebrow`, `label/*`) ;
+  le code utilise les tokens CSS correspondants (`specs/patterns/typography.md`).
+  Un texte sans style est un écart à signaler, pas à corriger d'office.
 - **Couleurs** : toute couleur de texte, de fond ou de bordure est liée à une
   variable `color/*`. Une couleur non liée sans token exact est une incohérence.
 - **Contenu illustratif** (mockups, logos texte, captures d'écran recomposées,
@@ -70,6 +73,15 @@ Plusieurs composants demandés → les traiter **de bas en haut** (atomes, puis
 molécules, puis organismes) : un organisme se compare à des molécules déjà à jour.
 
 ## Étape 2 — Analyse Figma complète (lecture seule)
+
+Commencer par le lint déterministe des conventions (lecture REST, `FIGMA_TOKEN`) :
+
+```bash
+node scripts/figma-sync-ds.mjs lint
+```
+
+Ses erreurs et avertissements concernant le composant entrent dans le rapport
+(étape 4, « Incohérences Figma »).
 
 `create_session` (`fileKey` : `figma.fileKey` de `ds.config.json`), puis pour chaque node :
 

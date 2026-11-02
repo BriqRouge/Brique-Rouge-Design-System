@@ -3,7 +3,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fnv1a, normalize, buildRegistry, buildPayload, diffSnapshot, updateSnapshot, formatReport, hasChanges, readToken } from './figma-sync-ds.mjs';
+import { fnv1a, normalize, buildRegistry, buildPayload, diffSnapshot, updateSnapshot, formatReport, hasChanges, readToken, lintNodes, usedTextFills } from './figma-sync-ds.mjs';
 
 const REGISTRY = {
   Tag: { tier: 'atom', node: '184:18522' },
@@ -161,4 +161,53 @@ test('token : variable d\'environnement prioritaire, sinon .env', () => {
 test('empreinte FNV-1a stable', () => {
   assert.equal(fnv1a(''), '811c9dc5');
   assert.equal(fnv1a('a'), 'e40c292c');
+});
+
+// ─── Lint des conventions Figma ──────────────────────────────────────────────
+const FONTS = ['ABC Favorit Pro Variable'];
+const bound = { type: 'VARIABLE_ALIAS', id: 'VariableID:1:1' };
+const solid = (b) => ({ type: 'SOLID', color: { r: 0, g: 0, b: 0, a: 1 }, ...(b ? { boundVariables: { color: bound } } : {}) });
+const text = (extra = {}) => ({
+  type: 'TEXT', name: 'Label', characters: 'Tag', style: { fontFamily: FONTS[0] },
+  boundVariables: { fontSize: [bound], fontWeight: [bound] }, fills: [solid(true)], styles: { text: '1:2' }, ...extra,
+});
+const lintOf = (children, setName = 'Size=sm') => lintNodes(
+  { Tag: { tier: 'atom', node: '1:1' } },
+  { '1:1': { document: { type: 'COMPONENT_SET', name: 'Tag', children: [{ type: 'COMPONENT', name: setName, children }] } } },
+  FONTS,
+);
+
+test('lint : composant conforme → ni erreur ni avertissement', () => {
+  assert.deepEqual(lintOf([text()]), { errors: [], warnings: [] });
+});
+
+test('lint : variante hors kebab-case, taille non liée, couleur non liée', () => {
+  const { errors } = lintOf([text({ boundVariables: { fontWeight: [bound] }, fills: [solid(false)] })], 'Size=Small, State=idle');
+  assert.equal(errors.length, 3);
+  assert.match(errors[0], /« Small » hors kebab-case/);
+});
+
+test('lint : sans style de texte → avertissement ; police illustrative et instance ignorées', () => {
+  const { errors, warnings } = lintOf([
+    text({ styles: {} }),
+    text({ style: { fontFamily: 'Helvetica' }, fills: [solid(false)], boundVariables: {} }),
+    { type: 'INSTANCE', name: 'Icon', children: [text({ fills: [solid(false)] })] },
+  ]);
+  assert.deepEqual(errors, []);
+  assert.equal(warnings.length, 1);
+});
+
+test('lint : texte multi-segments — seules les couleurs réellement utilisées comptent', () => {
+  const segmented = text({ characters: 'ab', fills: [solid(false)], characterStyleOverrides: [1, 2], styleOverrideTable: { 1: { fills: [solid(true)] }, 2: { fills: [solid(true)] } } });
+  assert.equal(usedTextFills(segmented).length, 2);
+  assert.deepEqual(lintOf([segmented]).errors, []);
+  const partial = { ...segmented, characterStyleOverrides: [1] }; // 2e caractère sur le style de base
+  assert.equal(lintOf([partial]).errors.length, 1);
+});
+
+test('rapport : toutes les variantes modifiées → résumé au lieu de la liste', () => {
+  const snap = updateSnapshot(null, payloadOf(), null);
+  const next = restNodes();
+  next['184:18522'].document.children = [variant('1:1', 'Size=sm', 0, 6), variant('1:2', 'Size=nm', 100, 14)];
+  assert.match(formatReport(diffSnapshot(snap, payloadOf(next), REGISTRY)), /toutes \(2\)/);
 });

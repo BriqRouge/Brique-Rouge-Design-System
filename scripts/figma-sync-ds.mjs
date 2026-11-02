@@ -25,11 +25,14 @@
 //       Affiche le rapport de détection (et l'écrit en Markdown si --report).
 //   node scripts/figma-sync-ds.mjs update [--only A,B]
 //       Met à jour le snapshot (tous les composants, ou seulement ceux listés).
+//   node scripts/figma-sync-ds.mjs lint
+//       Vérifie dans Figma les conventions décidées (CLAUDE.md « Conventions
+//       Figma des composants ») — voir lintNodes().
 //
 // Codes de sortie :
-//   0  rien n'a changé (detect) / snapshot écrit (update)
+//   0  rien n'a changé (detect) / snapshot écrit (update) / aucune erreur (lint)
 //   1  erreur — token absent, Figma injoignable, registre invalide ; rien n'est écrit
-//   3  changements détectés (detect)
+//   3  changements détectés (detect) / conventions non respectées (lint)
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
@@ -159,6 +162,7 @@ export function diffSnapshot(snapshot, payload, registry) {
       name,
       tier: tierOf(name),
       reason: firstRun ? 'premier lancement' : !old ? 'absent du snapshot' : 'empreinte modifiée',
+      variantCount: Object.keys(cur.variants).length,
       variantsChanged: Object.keys(cur.variants).filter((v) => v in oldV && oldV[v] !== cur.variants[v]),
       variantsAdded: old ? Object.keys(cur.variants).filter((v) => !(v in oldV)) : [],
       variantsRemoved: Object.keys(oldV).filter((v) => !(v in cur.variants)),
@@ -191,7 +195,10 @@ export function formatReport(diff) {
     lines.push(`  [${c.tier}] ${c.name} — ${c.reason}`);
     if (c.propsChanged) lines.push('      propriétés du composant modifiées (ajout, renommage ou valeur par défaut)');
     if (c.nodeChanged) lines.push('      node Figma de la fiche modifié');
-    if (c.variantsChanged.length) lines.push(`      variantes modifiées : ${c.variantsChanged.join(' · ')}`);
+    if (c.variantsChanged.length) {
+      const all = c.variantsChanged.length === c.variantCount && c.variantCount > 1;
+      lines.push(`      variantes modifiées : ${all ? `toutes (${c.variantCount}) — changement commun, ex. sous-composant ou style partagé` : c.variantsChanged.join(' · ')}`);
+    }
     if (c.variantsAdded.length) lines.push(`      variantes ajoutées : ${c.variantsAdded.join(' · ')}`);
     if (c.variantsRemoved.length) lines.push(`      variantes supprimées : ${c.variantsRemoved.join(' · ')}`);
     if (c.variantsAdded.length && c.variantsRemoved.length) lines.push('      ⓘ un renommage de variante apparaît comme une suppression + un ajout');
@@ -227,6 +234,73 @@ export function updateSnapshot(snapshot, payload, only) {
   };
 }
 
+// ─── Lint des conventions Figma ──────────────────────────────────────────────
+// Erreurs (convention cassée) :
+//   - valeur de variante hors minuscules / kebab-case
+//   - texte du DS dont la taille ou la graisse n'est pas liée à une variable
+//   - couleur de texte non liée à une variable color/*
+// Avertissements (écart toléré, à décider) :
+//   - texte du DS sans style de texte
+// Ignorés : textes dans une police hors `textFontFamilies` (contenu illustratif)
+// et contenu des instances imbriquées (vérifié dans leur composant source).
+const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+// Remplissages réellement affichés par un texte : un texte à plusieurs segments
+// porte ses couleurs dans `styleOverrideTable` ; le style de base ne compte que
+// si au moins un caractère l'utilise.
+export function usedTextFills(n) {
+  const cso = n.characterStyleOverrides ?? [];
+  const sot = n.styleOverrideTable ?? {};
+  const used = [];
+  if (cso.length < (n.characters ?? '').length || cso.includes(0)) used.push(...(n.fills ?? []));
+  for (const k of new Set(cso)) {
+    if (k === 0) continue;
+    used.push(...(sot[k]?.fills ?? n.fills ?? []));
+  }
+  return used;
+}
+
+export function lintNodes(registry, nodes, fonts) {
+  const errors = [];
+  const warnings = [];
+  for (const name of Object.keys(registry).sort()) {
+    const doc = nodes[registry[name].node]?.document;
+    if (!doc) continue;
+    if (doc.type === 'COMPONENT_SET') {
+      for (const v of doc.children ?? []) {
+        for (const pair of v.name.split(',').map((s) => s.trim())) {
+          const value = pair.split('=')[1];
+          if (value !== undefined && !KEBAB.test(value)) errors.push(`${name} : variante « ${v.name} » — valeur « ${value} » hors kebab-case`);
+        }
+      }
+    }
+    const walk = (n, path) => {
+      if (n.type === 'TEXT' && fonts.includes(n.style?.fontFamily)) {
+        const where = `${name} › ${path} « ${(n.characters ?? '').slice(0, 30)} »`;
+        const b = n.boundVariables ?? {};
+        if (!b.fontSize || !b.fontWeight) errors.push(`${where} : taille ou graisse non liée à une variable`);
+        if (usedTextFills(n).some((f) => f.type === 'SOLID' && f.visible !== false && !f.boundVariables?.color)) errors.push(`${where} : couleur non liée à une variable`);
+        if (!n.styles?.text) warnings.push(`${where} : sans style de texte`);
+      }
+      if (n.type === 'INSTANCE') return;
+      for (const c of n.children ?? []) walk(c, `${path}/${c.name}`);
+    };
+    walk(doc, doc.name);
+  }
+  return { errors, warnings };
+}
+
+export function formatLint({ errors, warnings }) {
+  const lines = [];
+  lines.push(errors.length ? `❌ ${errors.length} convention(s) non respectée(s) :` : '✅ Conventions Figma respectées.');
+  for (const e of errors) lines.push(`  ${e}`);
+  if (warnings.length) {
+    lines.push('', `⚠️  ${warnings.length} avertissement(s) :`);
+    for (const w of warnings) lines.push(`  ${w}`);
+  }
+  return lines.join('\n');
+}
+
 // ─── Accès Figma (REST, lecture seule) ───────────────────────────────────────
 export function readToken(env, dotenvText) {
   if (env.FIGMA_TOKEN) return env.FIGMA_TOKEN.trim();
@@ -248,11 +322,15 @@ async function figmaGet(path, token) {
   }
 }
 
+async function fetchRegistryNodes(config, registry, token) {
+  const ids = [...new Set(Object.values(registry).map((r) => r.node))];
+  return (await figmaGet(`/files/${config.figma.fileKey}/nodes?ids=${encodeURIComponent(ids.join(','))}`, token)).nodes;
+}
+
 export async function fetchPayload(config, registry, token) {
   const { fileKey, designSystemPageId, iconNamePattern } = config.figma;
-  const ids = [...new Set(Object.values(registry).map((r) => r.node))];
-  const [{ nodes }, pageRes] = await Promise.all([
-    figmaGet(`/files/${fileKey}/nodes?ids=${encodeURIComponent(ids.join(','))}`, token),
+  const [nodes, pageRes] = await Promise.all([
+    fetchRegistryNodes(config, registry, token),
     figmaGet(`/files/${fileKey}/nodes?ids=${encodeURIComponent(designSystemPageId)}&depth=1`, token),
   ]);
   return buildPayload(registry, nodes, pageRes.nodes[designSystemPageId]?.document, iconNamePattern);
@@ -266,8 +344,8 @@ function arg(args, name) {
 
 async function main(argv) {
   const [command, ...args] = argv;
-  if (command !== 'detect' && command !== 'update') {
-    console.error('Usage : figma-sync-ds.mjs detect [--report f.md] | update [--only A,B]');
+  if (!['detect', 'update', 'lint'].includes(command)) {
+    console.error('Usage : figma-sync-ds.mjs detect [--report f.md] | update [--only A,B] | lint');
     return 1;
   }
   const config = loadConfig(repoRoot);
@@ -281,6 +359,19 @@ async function main(argv) {
   if (!token) {
     console.error('❌ FIGMA_TOKEN absent : le renseigner dans .env (voir .env.example) ou en variable d\'environnement.');
     return 1;
+  }
+
+  if (command === 'lint') {
+    let nodes;
+    try {
+      nodes = await fetchRegistryNodes(config, registry, token);
+    } catch (e) {
+      console.error(`❌ ${e.message}`);
+      return 1;
+    }
+    const result = lintNodes(registry, nodes, config.figma.textFontFamilies ?? []);
+    console.log(formatLint(result));
+    return result.errors.length ? 3 : 0;
   }
 
   let payload;

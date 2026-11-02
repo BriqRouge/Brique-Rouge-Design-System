@@ -13,7 +13,8 @@
     "fileKey": "NZtxQVYKRqeaGcC7hT5pjw",
     "designSystemPageId": "1:2",
     "iconNamePattern": "^(Shape|Media|User|System|Environment|Menu|Communication|Warning|Navigation|Edit|Calendar|Interface|File|Arrow) /",
-    "$comment": "fileKey : dans l'URL figma.com/design/<fileKey>/… · designSystemPageId : page qui contient les composants du DS · iconNamePattern : composants d'icônes à ignorer dans l'inventaire"
+    "textFontFamilies": ["ABC Favorit Pro Variable"],
+    "$comment": "fileKey : dans l'URL figma.com/design/<fileKey>/… · designSystemPageId : page qui contient les composants du DS · iconNamePattern : composants d'icônes à ignorer dans l'inventaire · textFontFamilies : polices du DS — tout texte dans une autre police est du contenu illustratif, ignoré par le lint"
   },
   "specs": {
     "componentTiers": {
