@@ -10,7 +10,7 @@ figma:
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/organisms/ProjectSectionsDescription/`
-**Figma :** carte conteneur — même node que `ProjectSectionDescription` (typo Figma corrigée dans le nom du composant)
+**Figma :** carte conteneur (nom Figma avec la typo « Descritpion », corrigée dans le code) — empile des instances de « Cards / Project_Section_Description » (`2248:28967`, `ProjectSectionDescription`)
 
 ## API
 

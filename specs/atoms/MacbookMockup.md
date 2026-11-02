@@ -11,6 +11,7 @@ figma:
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/atoms/MacbookMockup/`
 **Figma :** composant réutilisé sur les pages projet Odaptos et BPCE (ex. instance `837:19547`) ; déjà recréé à la main pour `ProjectBentoCard.conseilConstitutionnel` avant extraction
+**Écart Figma ↔ code (assumé, décidé le 2026-11-02) :** Figma propose 6 variantes `Style=fill|outline|shaded` × `Model=13in-m1-pro|14-16in-m1-pro` ; le code ne reproduit que `Style=shaded, Model=14-16in-m1-pro` (celle des pages projet) et n'expose aucune prop. Ajouter `style` / `model` seulement quand un écran en aura besoin
 
 ## API
 

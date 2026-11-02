@@ -2,15 +2,15 @@
 component: ProjectOverview
 tier: molecule
 figma:
-  node: "837:19534"
+  node: "2248:55550"
   name: Overview Projet
-  type: frame
+  type: component
 ---
 # ProjectOverview
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/ProjectOverview/`
-**Figma :** cadre de page, pas un composant Figma — vérifié identique sur les 4 pages projet (Odaptos, BPCE, iBP, OPCO Atlas)
+**Figma :** composant « Overview Projet » sur la page Design system, créé le 2026-11-02 à partir du cadre de la page Portfolio (`837:19534`), identique sur les 4 pages projet (Odaptos, BPCE, iBP, OPCO Atlas) — ces pages utilisent encore des cadres copiés, à remplacer par des instances
 
 ## API
 

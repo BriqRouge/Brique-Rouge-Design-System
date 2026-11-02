@@ -2,15 +2,15 @@
 component: ProjectSectionDescription
 tier: organism
 figma:
-  node: "744:20765"
-  name: "Cards / Project_Sections_Descritpion"
+  node: "2248:28967"
+  name: "Cards / Project_Section_Description"
   type: component
 ---
 # ProjectSectionDescription
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/organisms/ProjectSectionDescription/`
-**Figma :** section individuelle — même node que `ProjectSectionsDescription` (typo Figma corrigée dans le nom du composant)
+**Figma :** section individuelle — composant enfant créé le 2026-11-02 à partir de « Section 1 » ; le parent `ProjectSectionsDescription` (`744:20765`) en empile des instances
 
 ## API
 
