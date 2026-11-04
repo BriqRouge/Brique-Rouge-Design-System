@@ -33,7 +33,7 @@ Réutilise `ProjectSectionDescription` (organisme) — chaque section est fourni
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-neutral-50` | `#fafafa` | Fond de la carte |
-| `--color-neutral-900` | `#171717` | Titre de la carte |
+| `--color-text-primary` | `#171717` | Titre de la carte |
 | `--color-neutral-200` | `#e5e5e5` | Début du dégradé du séparateur |
 | `--color-deep-sea-600` | `#3453dc` | Barre d'accent longue |
 | `--color-deep-sea-200` | `#c4d5f9` | Barre d'accent courte |

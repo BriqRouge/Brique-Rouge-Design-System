@@ -64,12 +64,12 @@
 /* ─── Styles ───────────────────────────────────────────────────────────── */
 
 .variant-contained {
-  background-color: var(--color-neutral-200);
-  color: var(--color-neutral-900);
+  background-color: var(--color-background-surface-raised);
+  color: var(--color-text-primary);
 }
 
 .variant-outlined {
   background-color: transparent;
-  border: 1px solid var(--color-neutral-200);
-  color: var(--color-neutral-900);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
 }

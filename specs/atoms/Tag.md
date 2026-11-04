@@ -34,8 +34,9 @@ interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-neutral-200` | `#e5e5e5` | Fond (contained) / bordure (outlined) |
-| `--color-neutral-900` | `#171717` | Texte/icône (contained) |
+| `--color-background-surface-raised` | `#e5e5e5` | Fond (contained) |
+| `--color-border-subtle` | `#e5e5e5` | Bordure (outlined) |
+| `--color-text-primary` | `#171717` | Texte/icône (contained) |
 | `--border-radius-tag` | `4px` | Border-radius |
 | `--spacing-x1`/`-x2` | `4px`/`8px` | Gap, padding |
 | `--spacing-x3`/`-x4`/`-x6`/`-x8` | `12px`/`16px`/`24px`/`32px` | Taille des icônes par taille de tag |

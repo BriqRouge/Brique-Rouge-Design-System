@@ -35,10 +35,10 @@ Accepte `alertBanner` en slot optionnel — typiquement rempli avec `<AlertBanne
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-neutral-400` | `#a1a1a1` | Numéro de section |
-| `--color-neutral-900` | `#171717` | Titre de section |
-| `--color-neutral-800` | `#262626` | Texte d'introduction |
-| `--color-neutral-600` | `#525252` | Texte des puces |
+| `--color-text-muted` | `#a1a1a1` | Numéro de section |
+| `--color-text-primary` | `#171717` | Titre de section |
+| `--color-text-strong` | `#262626` | Texte d'introduction |
+| `--color-text-body` | `#525252` | Texte des puces |
 | `--color-deep-sea-600` | `#3453dc` | Icône des puces |
 | `--typography-font-family-sans` | — | Numéro de section |
 | `--typography-subtitle-font-family`/`-font-weight` | — | Titre de section, texte d'introduction |

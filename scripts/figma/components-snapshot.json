@@ -266,10 +266,10 @@
     },
     "ProjectOverview": {
       "node": "2248:55550",
-      "hash": "935222d7",
+      "hash": "fe689e60",
       "props": null,
       "variants": {
-        "Overview Projet": "1218d87a"
+        "Overview Projet": "c77281cb"
       },
       "deps": []
     },
@@ -316,12 +316,12 @@
     },
     "TopNav": {
       "node": "1702:20362",
-      "hash": "0f7ce3b2",
+      "hash": "1e9d6c16",
       "props": "af5fbc7d",
       "variants": {
         "Type=bpce": "ba16131c",
         "Type=conseil-constitutionnel": "eea269f8",
-        "Type=homepage": "bc1cf911",
+        "Type=homepage": "983b811b",
         "Type=ibp": "84f9e7a4",
         "Type=odaptos": "43ef5c20",
         "Type=opco-atlas": "a46ffd79"

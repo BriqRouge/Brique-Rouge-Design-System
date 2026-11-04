@@ -21,8 +21,8 @@
 
 /* Hover — couleur neutre (défaut sans company) */
 .dropdownMenuButton:hover:not(:disabled) {
-  background-color: var(--color-neutral-200);
-  border-color: var(--color-neutral-300);
+  background-color: var(--color-background-surface-raised);
+  border-color: var(--color-border-default);
 }
 
 .dropdownMenuButton:focus-visible {
@@ -65,7 +65,7 @@
   width: var(--sizing-x6);
   height: var(--sizing-x6);
   border-radius: var(--border-radius-sm);
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-background-surface);
   box-shadow:
     var(--elevation-1-key-shadow-offset-x)
     var(--elevation-1-key-shadow-offset-y)

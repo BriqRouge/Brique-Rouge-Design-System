@@ -29,7 +29,7 @@
   font-size: var(--typography-font-size-5xl);
   line-height: var(--typography-line-height-x14);
   letter-spacing: -0.96px;
-  color: var(--color-neutral-900);
+  color: var(--color-text-primary);
   margin: 0;
 }
 

@@ -56,7 +56,8 @@ initialement), il s'avère que ce composant est un **vrai lien externe interacti
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-neutral-800` | `#262626` | Icône et texte |
+| `--color-neutral-800` | `#262626` | Icône |
+| `--color-text-strong` | `#262626` | Texte |
 | `--color-neutral-300` | `#d4d4d4` | Surbrillance au survol |
 | `--typography-font-family-sans` | — | Texte |
 | `--typography-font-size-xs` | `12px` | Texte |

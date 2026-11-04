@@ -21,7 +21,7 @@
   text-transform: uppercase;
   /* Écart signalé vs Figma (#a3a3a3) : aucun token ne correspond exactement,
      --color-neutral-400 (#a1a1a1) est la valeur la plus proche existante. */
-  color: var(--color-neutral-400);
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -30,7 +30,7 @@
   font-size: var(--typography-font-size-3xl);
   font-weight: var(--typography-subtitle-font-weight);
   line-height: var(--typography-subtitle-line-height);
-  color: var(--color-neutral-900);
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -44,7 +44,7 @@
      même convention que ProjectCardDescription. */
   font-weight: var(--typography-font-weight-regular);
   line-height: var(--typography-line-height-x8);
-  color: var(--color-neutral-800);
+  color: var(--color-text-strong);
   margin: 0;
 }
 
@@ -68,7 +68,7 @@
   font-size: var(--typography-body-font-size);
   font-weight: var(--typography-font-weight-regular);
   line-height: var(--typography-body-line-height);
-  color: var(--color-neutral-600);
+  color: var(--color-text-body);
 }
 
 .bulletIcon {
