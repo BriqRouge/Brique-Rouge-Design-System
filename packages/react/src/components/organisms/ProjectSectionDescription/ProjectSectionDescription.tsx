@@ -1,13 +1,13 @@
-import { forwardRef } from 'react';
+import { forwardRef, Children } from 'react';
 import styles from './ProjectSectionDescription.module.css';
 
 interface ProjectSectionDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Numéro de la section affiché avant le titre (ex: "01") */
-  number: string;
-  /** Titre de la section (ex: "Problème") */
-  title: string;
-  /** Texte d'introduction de la section */
-  children: React.ReactNode;
+  /** Numéro de la section affiché avant le titre (ex: "01") — absent avec `title` : pas d'en-tête (booléen Figma `Header`) */
+  number?: string;
+  /** Titre de la section (ex: "Problème") — absent : pas de titre (booléen Figma `Subtitle`) */
+  title?: string;
+  /** Texte d'introduction de la section — absent : pas d'accroche (booléen Figma `Lead Text`) */
+  children?: React.ReactNode;
   /** Liste à puces optionnelle sous le texte d'introduction */
   bulletPoints?: string[];
   /** Bandeau révélé en bas de la section — typiquement un <AlertBanner /> */
@@ -30,14 +30,17 @@ function SquaredIcon() {
 const ProjectSectionDescription = forwardRef<HTMLDivElement, ProjectSectionDescriptionProps>(
   ({ number, title, children, bulletPoints, alertBanner, className, ...props }, ref) => {
     const classes = [styles.section, className].filter(Boolean).join(' ');
+    const hasLeadText = Children.toArray(children).length > 0;
 
     return (
       <div ref={ref} data-component="ds-br-project-section-description" className={classes} {...props}>
-        <div className={styles.header}>
-          <span className={styles.number}>{number}</span>
-          <h3 className={styles.title}>{title}</h3>
-        </div>
-        <p className={styles.leadText}>{children}</p>
+        {(number || title) && (
+          <div className={styles.header}>
+            {number && <span className={styles.number}>{number}</span>}
+            {title && <h3 className={styles.title}>{title}</h3>}
+          </div>
+        )}
+        {hasLeadText && <p className={styles.leadText}>{children}</p>}
         {bulletPoints && bulletPoints.length > 0 && (
           <ul className={styles.bulletList}>
             {bulletPoints.map((point, index) => (
