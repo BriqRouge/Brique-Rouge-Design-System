@@ -46,7 +46,7 @@ type ProjectCardDescriptionVariant = 'default' | 'cv';
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-background-projects-body` | `#e5e5e5` | Fond de la carte |
-| `--color-neutral-900` | `#171717` | Couleur de tout le texte |
+| `--color-text-primary` | `#171717` | Couleur de tout le texte |
 | `--typography-font-family-sans` | `ABC Favorit Pro Variable` | Police (tous les textes) |
 | `--typography-font-size-base` | `16px` | Taille du nom du projet et du titre |
 | `--typography-font-size-sm` | `14px` | Taille de l'année et de la catégorie |

@@ -30,8 +30,8 @@ interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-neutral-100` | — | Fond |
-| `--color-neutral-300` | — | Bordure 0.5px solid |
+| `--color-background-surface` | — | Fond |
+| `--color-border-default` | — | Bordure 0.5px solid |
 | `--border-radius-lg` | — | Border-radius |
 
 ## Règles d'usage

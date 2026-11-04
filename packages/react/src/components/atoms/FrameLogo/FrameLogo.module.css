@@ -13,7 +13,7 @@
     var(--elevation-1-ambient-shadow-blur)
     var(--elevation-1-ambient-shadow-spread)
     var(--elevation-1-ambient-shadow-color);
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-background-surface);
   overflow: hidden;
   flex-shrink: 0;
 }

@@ -23,12 +23,12 @@
   font-size: var(--typography-font-size-3xl);
   font-weight: var(--typography-font-weight-medium);
   line-height: normal;
-  color: var(--color-neutral-900);
+  color: var(--color-text-primary);
 }
 
 .tagline {
   font-weight: var(--typography-font-weight-regular);
-  color: var(--color-neutral-600);
+  color: var(--color-text-body);
 }
 
 .descriptionColumn {
@@ -46,7 +46,7 @@
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-regular);
   line-height: var(--typography-line-height-x6);
-  color: var(--color-neutral-700);
+  color: var(--color-text-secondary);
 }
 
 .text p {
@@ -64,5 +64,5 @@
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-regular);
   line-height: var(--typography-line-height-x6);
-  color: var(--color-neutral-500);
+  color: var(--color-text-tertiary);
 }

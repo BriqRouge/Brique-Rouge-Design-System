@@ -91,7 +91,7 @@
   font-size: var(--typography-font-size-xs);
   font-weight: var(--typography-font-weight-regular);
   line-height: normal;
-  color: var(--color-neutral-800);
+  color: var(--color-text-strong);
   white-space: nowrap;
 }
 

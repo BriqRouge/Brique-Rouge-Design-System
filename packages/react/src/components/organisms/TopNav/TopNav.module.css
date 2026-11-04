@@ -115,7 +115,7 @@
   font-family: var(--typography-font-family-display-median);
   font-size: var(--typography-font-size-2xl);
   line-height: var(--typography-line-height-x10);
-  color: var(--color-neutral-600);
+  color: var(--color-text-body);
   white-space: nowrap;
 }
 

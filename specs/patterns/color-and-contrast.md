@@ -16,6 +16,34 @@ Toutes les couleurs passent par les tokens `@brique-rouge/tokens`. Jamais de val
 
 En cas de doute sur les tokens disponibles : vérifier dans `packages/tokens/build/css/`.
 
+### Socle sémantique générique (décidé le 2026-11-04)
+
+Rôles génériques à utiliser **avant** toute primitive. Ces variables reprennent à
+l'identique les niveaux de gris déjà employés : leur création n'a entraîné aucun
+changement visuel. Pour consolider ensuite (par exemple réduire le nombre de niveaux), il
+suffit de changer l'alias dans Figma. Contraste mesuré sur `background/page` (#fafafa).
+
+| Token CSS | Alias | Rôle | Contraste |
+|---|---|---|---|
+| `--color-text-primary` | neutral/900 | Titres, texte principal | 17.2:1 |
+| `--color-text-strong` | neutral/800 | Texte d'introduction, libellés | 14.5:1 |
+| `--color-text-secondary` | neutral/700 | Texte courant de description | 9.9:1 |
+| `--color-text-body` | neutral/600 | Paragraphes, puces, accroches | 7.5:1 |
+| `--color-text-tertiary` | neutral/500 | Métadonnées (rôle, contributions) | 4.5:1 — limite AA ; **uniquement sur `background/page`** (4.35:1 sur `surface`, sous AA) |
+| `--color-text-muted` | neutral/500 | Numéros de section | 4.5:1 (passé de neutral/400, 2.5:1, le 2026-11-04 pour atteindre AA) ; même règle que `tertiary` : pas sur `surface` |
+| `--color-text-accent` | deep-sea/600 | Texte mis en valeur | 5.9:1 |
+| `--color-background-page` | neutral/50 | Fond de page | — |
+| `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |
+| `--color-background-surface-raised` | neutral/200 | Surfaces surélevées, survol neutre | — |
+| `--color-border-default` | neutral/300 | Bordures de conteneur | — |
+| `--color-border-subtle` | neutral/200 | Bordures discrètes | — |
+| `--color-border-focus` | deep-sea/600 | Indicateur de focus | — |
+
+Les primitives restent légitimes pour les **couleurs de marque des projets**, comme les
+variantes entreprise de `DropdownMenuButton` ; préférer alors `background/projects/*` et
+`text/nav-bar/*` quand ils existent. Elles restent aussi légitimes pour les icônes et le
+contenu illustratif.
+
 ---
 
 ## Accessibilité WCAG AA — non négociable

@@ -54,7 +54,7 @@ interface TopNavProps {
 | `--typography-font-size-xl` | `20px` | Taille du titre/sous-titre |
 | `--typography-font-family-display-median`, `--typography-font-size-2xl`, `--typography-line-height-x10` | `"GT Ultra Median"`, `24px`, `40px` | Logo-texte homepage |
 | `--typography-font-weight-light`, `--typography-font-weight-black` | `300`, `900` | « Damien » / « Ramzi » |
-| `--color-neutral-600` | `#525252` | Couleur du logo-texte (primitive liée dans Figma, faute de token sémantique) |
+| `--color-text-body` | `#525252` | Couleur du logo-texte |
 | `--sizing-x12` | `48px` | Largeur du logo animé |
 | `--spacing-component-md` | `16px` | Écart logo / logo-texte, padding droit homepage |
 

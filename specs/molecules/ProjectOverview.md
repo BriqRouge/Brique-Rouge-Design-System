@@ -31,10 +31,10 @@ interface ProjectOverviewProps extends React.HTMLAttributes<HTMLDivElement> {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-neutral-900` | `#171717` | Titre du projet |
-| `--color-neutral-600` | `#525252` | Accroche (après le tiret) |
-| `--color-neutral-700` | `#404040` | Texte de description |
-| `--color-neutral-500` | `#737373` | Rôle et contributions |
+| `--color-text-primary` | `#171717` | Titre du projet |
+| `--color-text-body` | `#525252` | Accroche (après le tiret) |
+| `--color-text-secondary` | `#404040` | Texte de description |
+| `--color-text-tertiary` | `#737373` | Rôle et contributions |
 | `--typography-font-family-sans` | — | Tous les textes |
 | `--typography-font-size-3xl`/`-base` | `32px`/`16px` | Titre / reste |
 | `--typography-font-weight-medium`/`-regular` | `500`/`400` | Titre / reste |

@@ -126,6 +126,9 @@
 | `color.border.menu-button.disabled` | `#d4d4d4` |
 | `color.border.bento-cards.idle` | `#e5e5e5` |
 | `color.border.bento-cards.hovered` | `#3453dc` |
+| `color.border.default` | `#d4d4d4` |
+| `color.border.subtle` | `#e5e5e5` |
+| `color.border.focus` | `#3453dc` |
 | `color.text.button.disabled` | `#d4d4d4` |
 | `color.text.button.primary` | `#fafafa` |
 | `color.text.button.primary-hover` | `#fafafa` |
@@ -148,10 +151,13 @@
 | `color.text.menu-button.outline-black` | `#171717` |
 | `color.text.menu-button.disabled` | `#d4d4d4` |
 | `color.text.menu-button.focus` | `#3453dc` |
-| `color.text.labor` | `#525252` |
-| `color.text.display` | `#404040` |
-| `color.text.small` | `#262626` |
-| `color.text.sub` | `#a1a1a1` |
+| `color.text.primary` | `#171717` |
+| `color.text.strong` | `#262626` |
+| `color.text.secondary` | `#404040` |
+| `color.text.body` | `#525252` |
+| `color.text.tertiary` | `#737373` |
+| `color.text.muted` | `#737373` |
+| `color.text.accent` | `#3453dc` |
 | `color.icon.button.info` | `#3453dc` |
 | `color.icon.button.warning` | `#e1742e` |
 | `color.icon.button.primary-hover` | `#fafafa` |
@@ -173,7 +179,6 @@
 | `color.icon.menu-button.outline-black` | `#171717` |
 | `color.icon.menu-button.disabled` | `#d4d4d4` |
 | `color.background.button.disabled` | `#f5f5f5` |
-| `color.background.homepage` | `#fafafa` |
 | `color.background.projects.odaptos` | `#3453dc` |
 | `color.background.projects.bpce` | `#9b75ab` |
 | `color.background.projects.ibp` | `#949ae5` |
@@ -187,6 +192,9 @@
 | `color.background.project-page.bpce` | `#92bfb1` |
 | `color.background.project-page.ibp` | `#f4ac45` |
 | `color.background.project-page.opco-atlas` | `#457eac` |
+| `color.background.page` | `#fafafa` |
+| `color.background.surface` | `#f5f5f5` |
+| `color.background.surface-raised` | `#e5e5e5` |
 | `color.button.primary` | `#262626` |
 | `color.button.primary-hover` | `#404040` |
 | `color.button.secondary-hover` | `#262626` |

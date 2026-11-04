@@ -29,7 +29,7 @@ interface FrameLogoProps extends React.HTMLAttributes<HTMLDivElement> {
 |-------|--------|-------|
 | `--sizing-x6` | `24px` | Largeur et hauteur du conteneur |
 | `--border-radius-sm` | `4px` | Arrondi du conteneur |
-| `--color-neutral-100` | `#f5f5f5` | Fond fallback si image absente |
+| `--color-background-surface` | `#f5f5f5` | Fond fallback si image absente |
 | `--elevation-1-key-shadow-*` | — | Ombre portée (key layer) |
 | `--elevation-1-ambient-shadow-*` | — | Ombre portée (ambient layer) |
 

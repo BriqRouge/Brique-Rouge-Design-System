@@ -43,7 +43,7 @@
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-regular);
   line-height: 1; /* repli — navigateurs sans text-box-trim */
-  color: var(--color-neutral-900);
+  color: var(--color-text-primary);
   white-space: nowrap;
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
@@ -55,7 +55,7 @@
   font-size: var(--typography-font-size-sm);
   font-weight: var(--typography-font-weight-regular);
   line-height: 1; /* repli — navigateurs sans text-box-trim */
-  color: var(--color-neutral-900);
+  color: var(--color-text-primary);
   white-space: nowrap;
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
@@ -77,7 +77,7 @@
   font-size: var(--typography-font-size-base);
   font-weight: var(--typography-font-weight-medium);
   line-height: var(--typography-line-height-x4-5); /* repli — navigateurs sans text-box-trim */
-  color: var(--color-neutral-900);
+  color: var(--color-text-primary);
   word-break: break-word;
   white-space: pre-wrap;
   text-box-trim: trim-both;
@@ -99,7 +99,7 @@
   font-size: var(--typography-font-size-sm);
   font-weight: var(--typography-font-weight-regular);
   line-height: 1; /* repli — navigateurs sans text-box-trim */
-  color: var(--color-neutral-900);
+  color: var(--color-text-primary);
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
