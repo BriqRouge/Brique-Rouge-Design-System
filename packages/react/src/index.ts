@@ -64,3 +64,6 @@ export type { LinkProps, LinkSize, LinkTheme } from './components/atoms/Link';
 
 export { MetaInfoItem } from './components/molecules/MetaInfoItem';
 export type { MetaInfoItemProps } from './components/molecules/MetaInfoItem';
+
+export { BulletBrique } from './components/molecules/BulletBrique';
+export type { BulletBriqueProps } from './components/molecules/BulletBrique';

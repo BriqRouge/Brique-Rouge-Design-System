@@ -72,6 +72,10 @@ rôle avec d'autres valeurs.
 | `label/3xl-medium` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `normal` | — | — | Texte d'une ligne appuyé 32px (Tag lg) |
 | `label/3xl-medium-trim` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `normal` | — | rognage | Titre ProjectOverview (partie appuyée) |
 | `label/3xl-trim` | `--typography-font-size-3xl` | `--typography-font-weight-regular` | `normal` | — | rognage | Titre ProjectOverview (accroche) |
+| `label/2xl-trim` | `--typography-font-size-2xl` | `--typography-font-weight-regular` | `normal` | — | rognage | Intitulé d'une ligne 24px (BulletBrique) |
+| `label/sm-medium-underline` | `--typography-font-size-sm` | `--typography-font-weight-medium` | `normal` | — | souligné | Lien sm (Link) |
+| `label/base-medium-underline` | `--typography-font-size-base` | `--typography-font-weight-medium` | `normal` | — | souligné | Lien md (Link) |
+| `label/2xl-medium-underline` | `--typography-font-size-2xl` | `--typography-font-weight-medium` | `normal` | — | souligné | Lien lg (Link) |
 
 Colonne **Rendu** — propriétés que le style porte en plus de la taille et de la
 graisse, à reproduire en CSS :

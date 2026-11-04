@@ -1,0 +1,160 @@
+/*
+ * Structure Figma (node 2131:21897, « Animation-bullet-brique ») :
+ * - State=closed : brique + intitulé (style label/2xl-trim, text/primary)
+ * - State=opened : + 6 Badge md (Smart Animate 300ms linéaire)
+ * La brique lévite en boucle (4993ms) : la brique monte de 6,667px pendant
+ * que son ombre rétrécit (×0,82) et s'estompe (0,22 → 0,10).
+ * Valeurs d'animation extraites de get_motion_context — pas de token motion
+ * dans le DS.
+ */
+
+.bulletBrique {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Déclencheur (brique + intitulé) ──────────────────────────────────── */
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x2);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text-primary);
+  font-family: var(--typography-font-family-sans);
+  font-size: var(--typography-font-size-2xl);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: normal;
+  text-align: left;
+  cursor: pointer;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Cadre Figma 32×37 : brique (28,44×21,33 en 1,78/7,11) et ombre
+   (26,67×14,22 en 2,67/20,44), grille de pixels de 8/9 px */
+.brique {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--sizing-x8);
+  height: 37px;
+}
+
+.shadow,
+.brick {
+  position: absolute;
+  display: block;
+}
+
+.shadow {
+  left: 2.667px;
+  top: 20.444px;
+  width: 26.667px;
+  height: 14.222px;
+  opacity: 0.22;
+  transform-origin: 50% 50%;
+  animation: brique-shadow 4993ms infinite;
+}
+
+.brick {
+  left: 1.778px;
+  top: 7.111px;
+  width: 28.444px;
+  height: 21.333px;
+  animation: brique-levitation 4993ms infinite;
+}
+
+/* Courbe Figma : montée sur 32 % du cycle, descente sur le reste,
+   chaque segment en ease-in-out sinusoïdal */
+@keyframes brique-levitation {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  32% {
+    transform: translateY(-6.667px);
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes brique-shadow {
+  0% {
+    transform: scale(1);
+    opacity: 0.22;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  32% {
+    transform: scale(0.82);
+    opacity: 0.1;
+    animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.22;
+  }
+}
+
+.label {
+  min-width: 0;
+}
+
+/* ─── Mots-clés (Badge) ────────────────────────────────────────────────── */
+
+/* Smart Animate Figma : 300ms linéaire. La hauteur s'anime via
+   grid-template-rows (0fr → 1fr) — exception documentée à la règle
+   « n'animer que transform/opacity », la section doit réellement s'ouvrir */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    grid-template-rows 300ms linear,
+    opacity 300ms linear,
+    visibility 300ms linear;
+}
+
+.is-expanded .panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Seul enfant de la grille : se réduit à 0 sans emporter le padding de la liste */
+.panelInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-x2);
+  margin: 0;
+  /* Badges alignés sur l'intitulé : largeur de la brique + gap */
+  padding: var(--spacing-x2) 0 0 calc(var(--sizing-x8) + var(--spacing-x2));
+  list-style: none;
+}
+
+.keywords > li {
+  display: flex;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shadow,
+  .brick {
+    animation: none;
+  }
+
+  .panel {
+    transition-duration: 1ms;
+  }
+}

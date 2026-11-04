@@ -40,6 +40,7 @@ Assemble des atomes en une unité fonctionnelle précise.
 | `ProjectCardDescription` | Bloc titre/année/catégorie d'un projet (variantes default / cv) | [specs/molecules/ProjectCardDescription.md](specs/molecules/ProjectCardDescription.md) |
 | `ProjectOverview` | En-tête de page projet (titre, description, rôle, contributions) | [specs/molecules/ProjectOverview.md](specs/molecules/ProjectOverview.md) |
 | `MetaInfoItem` | Item icône + texte (localisation, musique, lecture...) | [specs/molecules/MetaInfoItem.md](specs/molecules/MetaInfoItem.md) |
+| `BulletBrique` | Puce brique en lévitation + intitulé, révèle des mots-clés (Badge) au survol, focus ou clic | [specs/molecules/BulletBrique.md](specs/molecules/BulletBrique.md) |
 
 ## Organismes
 
