@@ -1,21 +1,23 @@
 import { forwardRef } from 'react';
 import { MenuButton } from '../../atoms/MenuButton';
 import { DropdownMenuTrigger } from '../DropdownMenuTrigger';
+import brick1 from '../../../assets/brand/brick-1.svg';
+import brick2 from '../../../assets/brand/brick-2.svg';
+import brick3 from '../../../assets/brand/brick-3.svg';
+import brick4 from '../../../assets/brand/brick-4.svg';
 import styles from './TopNav.module.css';
 
 type TopNavProject = 'odaptos' | 'bpce' | 'ibp' | 'opco-atlas' | 'conseil-constitutionnel';
 
-interface TopNavCommonProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title'> {
-  /** Contenu du menu déroulant "Sélection projets" — typiquement des <DropdownMenuButton /> */
-  children: React.ReactNode;
-  /** Callback au clic sur le bouton retour (absent en état homepage) */
-  onBackClick?: () => void;
-}
+type TopNavCommonProps = Omit<React.HTMLAttributes<HTMLElement>, 'title' | 'children'>;
 
 interface TopNavHomepageProps extends TopNavCommonProps {
   project?: undefined;
   title?: undefined;
   subtitle?: undefined;
+  /** Pas de menu en homepage (Figma Type=homepage : logo seul) */
+  children?: undefined;
+  onBackClick?: undefined;
 }
 
 interface TopNavProjectPageProps extends TopNavCommonProps {
@@ -25,6 +27,10 @@ interface TopNavProjectPageProps extends TopNavCommonProps {
   title: string;
   /** Sous-titre du projet (ex: "L'IA au service de la recherche utilisateur.") */
   subtitle?: string;
+  /** Contenu du menu déroulant "Sélection projets" — typiquement des <DropdownMenuButton /> */
+  children: React.ReactNode;
+  /** Callback au clic sur le bouton retour */
+  onBackClick?: () => void;
 }
 
 type TopNavProps = TopNavHomepageProps | TopNavProjectPageProps;
@@ -63,30 +69,42 @@ const TopNav = forwardRef<HTMLElement, TopNavProps>(
 
     return (
       <nav ref={ref} data-component="ds-br-top-nav" className={classes} aria-label="Navigation" {...props}>
-        <div className={styles.pill} data-project={project}>
-          {project && (
-            <div className={styles.projectGroup}>
-              <MenuButton
-                variant="outlined"
-                colorScheme="light"
-                size="md"
-                leftIcon={<ArrowLeftIcon />}
-                onClick={onBackClick}
-              >
-                Accueil
-              </MenuButton>
-              <p className={styles.titleBlock}>
-                <span className={styles.title}>{title}</span>
-                {subtitle && <span className={styles.subtitle}>{` — ${subtitle}`}</span>}
-              </p>
+        {project ? (
+          <div className={styles.pill} data-project={project}>
+            <MenuButton
+              variant="outlined"
+              colorScheme="light"
+              size="md"
+              leftIcon={<ArrowLeftIcon />}
+              onClick={onBackClick}
+            >
+              Accueil
+            </MenuButton>
+            <p className={styles.titleBlock}>
+              <span className={styles.title}>{title}</span>
+              {subtitle && <span className={styles.subtitle}>{` — ${subtitle}`}</span>}
+            </p>
+            <div className={styles.trigger}>
+              <DropdownMenuTrigger triggerLabel="Sélection projets" triggerSize="md" triggerLeftIcon={<ProjectsMenuIcon />}>
+                {children}
+              </DropdownMenuTrigger>
             </div>
-          )}
-          <div className={styles.trigger}>
-            <DropdownMenuTrigger triggerLabel="Sélection projets" triggerSize="md" triggerLeftIcon={<ProjectsMenuIcon />}>
-              {children}
-            </DropdownMenuTrigger>
           </div>
-        </div>
+        ) : (
+          <div className={styles.brand}>
+            {/* Logo animé : 4 briques (Figma Animation-Logo 2104:28062), décoratif */}
+            <span className={styles.logoMark} aria-hidden="true">
+              <img src={brick1} alt="" className={`${styles.brick} ${styles.brick1}`} />
+              <img src={brick2} alt="" className={`${styles.brick} ${styles.brick2}`} />
+              <img src={brick3} alt="" className={`${styles.brick} ${styles.brick3}`} />
+              <img src={brick4} alt="" className={`${styles.brick} ${styles.brick4}`} />
+            </span>
+            <p className={styles.wordmark}>
+              <span className={styles.wordmarkLight}>Damien</span>
+              <span className={styles.wordmarkBold}>Ramzi</span>
+            </p>
+          </div>
+        )}
       </nav>
     );
   }
