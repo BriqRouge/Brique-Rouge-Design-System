@@ -1,2 +1,6 @@
 packages:
   - 'packages/*'
+allowBuilds:
+  '@bundled-es-modules/glob': false
+  esbuild: true
+  style-dictionary: false
