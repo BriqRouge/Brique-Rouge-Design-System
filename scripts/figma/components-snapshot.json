@@ -15,15 +15,15 @@
     },
     "Badge": {
       "node": "184:18566",
-      "hash": "65ad7246",
-      "props": "db968f73",
+      "hash": "f0f18af1",
+      "props": "230f022c",
       "variants": {
-        "Size=l, Style=outlined": "84efe92f",
-        "Size=lg, Style=contained": "ac705568",
-        "Size=md, Style=contained": "84144973",
-        "Size=md, Style=outlined": "f22f2335",
-        "Size=s, Style=outlined": "52a56e10",
-        "Size=sm, Style=contained": "5faedc14"
+        "Size=lg, Style=contained": "f5943cbe",
+        "Size=lg, Style=outlined": "348d9f44",
+        "Size=md, Style=contained": "d6302ddc",
+        "Size=md, Style=outlined": "c167171c",
+        "Size=sm, Style=contained": "96387c5c",
+        "Size=sm, Style=outlined": "cd0d4569"
       },
       "deps": []
     },

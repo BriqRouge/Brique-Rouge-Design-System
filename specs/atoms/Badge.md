@@ -35,9 +35,9 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 | Figma | Code |
 |---|---|
-| `Size=sm` (contained) / `Size=s` (outlined) | `size="sm"` |
+| `Size=sm` | `size="sm"` |
 | `Size=md` | `size="md"` |
-| `Size=lg` (contained) / `Size=l` (outlined) | `size="lg"` |
+| `Size=lg` | `size="lg"` |
 | `Style=contained\|outlined` | `variant` |
 | `Left Icon` / `Right Icon` | `leftIcon` / `rightIcon` |
 
@@ -54,6 +54,8 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 | `--typography-font-size-xs`/`-base`/`-2xl` | `12px`/`16px`/`24px` | Taille de police sm/md/lg |
 | `--typography-font-weight-medium` | `500` | Toutes tailles |
 
+Styles de texte Figma : `label/xs-medium` (sm), `label/base-medium` (md), `label/2xl-medium` (lg).
+
 Les couleurs reprennent les variables liées dans Figma (primitives `color/neutral/*`).
 
 ## Règles d'usage
@@ -64,11 +66,13 @@ Les couleurs reprennent les variables liées dans Figma (primitives `color/neutr
 - Pas d'interaction : la croix est décorative, aucun `onClick` (Figma ne spécifie aucun comportement)
 - **Valeurs par défaut** : celles du code font référence (`size='md'`, taille utilisée par la bullet brique ; icônes masquées)
 
-## Incohérences Figma signalées (2026-11-04, non corrigées)
+## Corrections Figma (2026-11-04, demandées par Damien)
 
-- Valeurs de taille différentes selon le style : `sm|md|lg` en contained, `s|md|l` en outlined. Le code normalise en `sm|md|lg`
-- Tailles de police liées aux variables `spacing/x3|x4|x6` au lieu de `typography/font-size/*`. Le code utilise les tokens typo de même valeur (décision de Damien)
-- Aucun style de texte sur le libellé
+- Variantes outlined renommées `Size=s|l` → `Size=sm|lg`
+- Libellé : styles `label/xs-medium`, `label/base-medium`, `label/2xl-medium` appliqués ; les tailles de police sont désormais liées à `typography/font-size/*` (au lieu de `spacing/x3|x4|x6`). Dimensions et couleurs inchangées
+
+## Écart restant
+
 - Hauteur `sm` de 16px avec padding de 8px : le code réduit le padding vertical à 4px, comme `Tag`
 
 ## Tests
