@@ -46,14 +46,14 @@ export const AvecItemsDesactives: Story = {
       <DropdownMenuButton company="odaptos" activated>
         Odaptos
       </DropdownMenuButton>
-      <DropdownMenuButton company="ibp" disabled>
-        Showcase à venir
+      <DropdownMenuButton company="ibp" disabled hoverLabel="Showcase à venir">
+        iBP
       </DropdownMenuButton>
-      <DropdownMenuButton company="conseil-constitutionnel" disabled>
-        Showcase à venir
+      <DropdownMenuButton company="conseil-constitutionnel" disabled hoverLabel="Showcase à venir">
+        Conseil Cons.
       </DropdownMenuButton>
-      <DropdownMenuButton company="vinci" disabled>
-        Showcase à venir
+      <DropdownMenuButton company="vinci" disabled hoverLabel="Showcase à venir">
+        Vinci
       </DropdownMenuButton>
     </DropdownMenu>
   ),
@@ -78,9 +78,9 @@ export const Playground: Story = {
       <DropdownMenuButton company="odaptos">Odaptos</DropdownMenuButton>
       <DropdownMenuButton company="bpce">BPCE</DropdownMenuButton>
       <DropdownMenuButton company="ibp">iBP</DropdownMenuButton>
-      <DropdownMenuButton company="vinci" disabled>Showcase à venir</DropdownMenuButton>
-      <DropdownMenuButton company="conseil-constitutionnel" disabled>
-        Showcase à venir
+      <DropdownMenuButton company="vinci" disabled hoverLabel="Showcase à venir">Vinci</DropdownMenuButton>
+      <DropdownMenuButton company="conseil-constitutionnel" disabled hoverLabel="Showcase à venir">
+        Conseil Cons.
       </DropdownMenuButton>
     </DropdownMenu>
   ),

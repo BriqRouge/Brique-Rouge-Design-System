@@ -180,3 +180,41 @@ describe('DropdownMenuButton — accessibilité', () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 });
+
+describe('DropdownMenuButton — hoverLabel', () => {
+  it("n'affiche pas de libellé de survol par défaut", () => {
+    render(<DropdownMenuButton company="vinci">Vinci</DropdownMenuButton>);
+    expect(screen.queryByText('Showcase à venir')).not.toBeInTheDocument();
+  });
+
+  it("rend le libellé de survol, masqué aux lecteurs d'écran", () => {
+    const { container } = render(
+      <DropdownMenuButton company="vinci" disabled hoverLabel="Showcase à venir">
+        Vinci
+      </DropdownMenuButton>
+    );
+    const hover = Array.from(container.querySelectorAll('[aria-hidden="true"]')).find(
+      (el) => el.textContent === 'Showcase à venir'
+    );
+    expect(hover).toBeDefined();
+  });
+
+  it('annonce children puis hoverLabel dans le nom accessible', () => {
+    render(
+      <DropdownMenuButton company="vinci" disabled hoverLabel="Showcase à venir">
+        Vinci
+      </DropdownMenuButton>
+    );
+    const button = screen.getByRole('button');
+    expect(button).toHaveAccessibleName(/^Vinci Vinci\s*, Showcase à venir$/);
+  });
+
+  it('état disabled + hoverLabel : aucune violation axe', async () => {
+    const { container } = render(
+      <DropdownMenuButton company="conseil-constitutionnel" disabled hoverLabel="Showcase à venir">
+        Conseil Cons.
+      </DropdownMenuButton>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+});

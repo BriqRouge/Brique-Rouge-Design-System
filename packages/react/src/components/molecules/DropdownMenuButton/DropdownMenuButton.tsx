@@ -15,6 +15,11 @@ interface DropdownMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonE
   rightIcon?: boolean;
   /** Indique si cet item est l'item actif (sélectionné) */
   activated?: boolean;
+  /**
+   * Libellé affiché au survol à la place de children (ex : « Showcase à venir »).
+   * Toujours annoncé aux lecteurs d'écran à la suite de children.
+   */
+  hoverLabel?: string;
 }
 
 const DropdownMenuButton = forwardRef<HTMLButtonElement, DropdownMenuButtonProps>(
@@ -26,6 +31,7 @@ const DropdownMenuButton = forwardRef<HTMLButtonElement, DropdownMenuButtonProps
       alt = '',
       rightIcon = false,
       activated = false,
+      hoverLabel,
       disabled,
       className,
       ...props
@@ -36,6 +42,7 @@ const DropdownMenuButton = forwardRef<HTMLButtonElement, DropdownMenuButtonProps
       styles.dropdownMenuButton,
       company && styles[`company-${company}`],
       activated && styles['is-activated'],
+      hoverLabel && styles['has-hover-label'],
       className,
     ]
       .filter(Boolean)
@@ -59,7 +66,15 @@ const DropdownMenuButton = forwardRef<HTMLButtonElement, DropdownMenuButtonProps
             <img src={src} alt={alt} className={styles.logoImage} />
           ) : null}
         </div>
-        <span className={styles.label}>{children}</span>
+        <span className={styles.label}>
+          {children}
+          {hoverLabel && <span className={styles.srOnly}>, {hoverLabel}</span>}
+        </span>
+        {hoverLabel && (
+          <span className={styles.hoverLabel} aria-hidden="true">
+            {hoverLabel}
+          </span>
+        )}
         {rightIcon && (
           <span className={styles.rightIcon} aria-hidden="true">
             <svg
