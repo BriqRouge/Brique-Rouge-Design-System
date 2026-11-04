@@ -38,6 +38,9 @@ export type {
   ProjectBentoCardShape,
 } from './components/organisms/ProjectBentoCard';
 
+export { BentoBox } from './components/organisms/BentoBox';
+export type { BentoBoxProps } from './components/organisms/BentoBox';
+
 export { ProjectSectionDescription } from './components/organisms/ProjectSectionDescription';
 export type { ProjectSectionDescriptionProps } from './components/organisms/ProjectSectionDescription';
 

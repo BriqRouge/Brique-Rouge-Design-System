@@ -48,5 +48,6 @@ Compose au moins une molécule et/ou plusieurs atomes/organismes pour former une
 | `DropdownMenuTrigger` | Trigger + menu déroulant complet (hover/focus/clavier) | [specs/organisms/DropdownMenuTrigger.md](specs/organisms/DropdownMenuTrigger.md) |
 | `TopNav` | Barre de navigation supérieure | [specs/organisms/TopNav.md](specs/organisms/TopNav.md) |
 | `ProjectBentoCard` | Carte projet de la grille bento (façade décalée + plaque couleur au survol, agrandissement) | [specs/organisms/ProjectBentoCard.md](specs/organisms/ProjectBentoCard.md) |
+| `BentoBox` | Grille bento des 5 cartes projet (2 colonnes × 3 lignes) | [specs/organisms/BentoBox.md](specs/organisms/BentoBox.md) |
 | `ProjectSectionDescription` | Section numérotée (titre, texte, puces, bandeau d'alerte optionnel) | [specs/organisms/ProjectSectionDescription.md](specs/organisms/ProjectSectionDescription.md) |
 | `ProjectSectionsDescription` | Carte conteneur empilant plusieurs sections avec séparateurs | [specs/organisms/ProjectSectionsDescription.md](specs/organisms/ProjectSectionsDescription.md) |
