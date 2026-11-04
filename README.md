@@ -37,7 +37,7 @@ Claude Code + MCP Figma
 |---|---|---|
 | [Node.js](https://nodejs.org) | 24 (voir `.nvmrc`) | `node --version` |
 | [Git](https://git-scm.com) | récent | `git --version` |
-| pnpm | 8 (fixé par `packageManager`) | `pnpm --version` |
+| pnpm | 12 (fixé par `packageManager`) | `pnpm --version` |
 | [Claude Code](https://claude.com/claude-code) + MCP Figma | — | pour la synchronisation et la création de composants |
 
 Pour obtenir la bonne version de pnpm sans l'installer à la main :
@@ -45,6 +45,11 @@ Pour obtenir la bonne version de pnpm sans l'installer à la main :
 ```bash
 corepack enable
 ```
+
+pnpm n'exécute les scripts d'installation des dépendances que pour les
+paquets autorisés dans `allowBuilds` (`pnpm-workspace.yaml`). Si une nouvelle
+dépendance en demande un, `pnpm install` s'arrête : approuve-la ou refuse-la
+avec `pnpm approve-builds`.
 
 > **C'est quoi le terminal ?** Une fenêtre où l'on tape des commandes.
 > Sur Mac : **Terminal** (Applications → Utilitaires). Sur Windows : **Git Bash**,
