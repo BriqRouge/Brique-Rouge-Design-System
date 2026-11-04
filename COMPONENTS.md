@@ -26,6 +26,7 @@ Claude Code lit ce fichier avant toute implémentation, puis ouvre le fichier
 | `MacbookMockup` | Mockup d'ordinateur portable pour capture d'écran | [specs/atoms/MacbookMockup.md](specs/atoms/MacbookMockup.md) |
 | `Badge` | Pastille de mot-clé en pilule (3 tailles × 2 styles, outlined pour fond sombre) | [specs/atoms/Badge.md](specs/atoms/Badge.md) |
 | `Tag` | Badge icône + texte + fermeture (4 tailles × 2 styles) | [specs/atoms/Tag.md](specs/atoms/Tag.md) |
+| `Link` | Lien texte souligné, icônes optionnelles (3 tailles × thème clair/sombre) | [specs/atoms/Link.md](specs/atoms/Link.md) |
 
 ## Molécules
 

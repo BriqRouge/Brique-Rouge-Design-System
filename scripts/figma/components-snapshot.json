@@ -143,6 +143,38 @@
       },
       "deps": []
     },
+    "Link": {
+      "node": "2326:37384",
+      "hash": "a0aa3a77",
+      "props": "0b553f5e",
+      "variants": {
+        "Size=lg, State=disabled, Theme=dark": "378be114",
+        "Size=lg, State=disabled, Theme=light": "b4b0956c",
+        "Size=lg, State=focus, Theme=dark": "1a7d1443",
+        "Size=lg, State=focus, Theme=light": "141f0369",
+        "Size=lg, State=hovered, Theme=dark": "f61bdcb9",
+        "Size=lg, State=hovered, Theme=light": "bb6920ff",
+        "Size=lg, State=idle, Theme=dark": "dc8e30a4",
+        "Size=lg, State=idle, Theme=light": "419835ae",
+        "Size=md, State=disabled, Theme=dark": "a30ce14c",
+        "Size=md, State=disabled, Theme=light": "8680aea4",
+        "Size=md, State=focus, Theme=dark": "eadd4dd3",
+        "Size=md, State=focus, Theme=light": "d7191dc5",
+        "Size=md, State=hovered, Theme=dark": "26b3c3a1",
+        "Size=md, State=hovered, Theme=light": "12c62247",
+        "Size=md, State=idle, Theme=dark": "2cd058d0",
+        "Size=md, State=idle, Theme=light": "561aa826",
+        "Size=sm, State=disabled, Theme=dark": "77f35696",
+        "Size=sm, State=disabled, Theme=light": "c6f548fe",
+        "Size=sm, State=focus, Theme=dark": "89762c4d",
+        "Size=sm, State=focus, Theme=light": "e99131f7",
+        "Size=sm, State=hovered, Theme=dark": "434b9113",
+        "Size=sm, State=hovered, Theme=light": "06ac7179",
+        "Size=sm, State=idle, Theme=dark": "6b7bb1c2",
+        "Size=sm, State=idle, Theme=light": "0bbc5840"
+      },
+      "deps": []
+    },
     "LogoCompanies": {
       "node": "375:19574",
       "hash": "5d5f1f1a",
