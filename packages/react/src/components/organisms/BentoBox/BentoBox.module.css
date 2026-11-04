@@ -1,0 +1,25 @@
+/*
+ * Structure Figma (node 2049:20632) : grille 2 colonnes × 3 lignes de
+ * cartes 276px, espacement 24px. Une carte shape="rectangle" (276×576)
+ * occupe deux lignes ; le placement automatique reproduit le Figma :
+ *
+ *   Odaptos | iBP
+ *   CC      | CV
+ *   CC      | BPCE
+ *
+ * Pistes fixes : une carte expandOnHover (276 → 576px) déborde par-dessus
+ * sa voisine sans la pousser (ProjectBentoCard passe en z-index 1 au survol).
+ */
+
+.bentoBox {
+  display: grid;
+  grid-template-columns: repeat(2, 276px);
+  grid-auto-rows: 276px;
+  gap: var(--spacing-x6);
+  justify-items: start;
+  align-items: start;
+}
+
+.bentoBox > [data-shape='rectangle'] {
+  grid-row: span 2;
+}
