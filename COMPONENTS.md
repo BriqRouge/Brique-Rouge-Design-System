@@ -25,6 +25,7 @@ Claude Code lit ce fichier avant toute implémentation, puis ouvre le fichier
 | `LogoCompanies` | Logo d'entreprise (8 variantes) | [specs/atoms/LogoCompanies.md](specs/atoms/LogoCompanies.md) |
 | `MacbookMockup` | Mockup d'ordinateur portable pour capture d'écran | [specs/atoms/MacbookMockup.md](specs/atoms/MacbookMockup.md) |
 | `Tag` | Badge icône + texte + fermeture (4 tailles × 2 styles) | [specs/atoms/Tag.md](specs/atoms/Tag.md) |
+| `Link` | Lien texte souligné, icônes optionnelles (3 tailles × thème clair/sombre) | [specs/atoms/Link.md](specs/atoms/Link.md) |
 
 ## Molécules
 

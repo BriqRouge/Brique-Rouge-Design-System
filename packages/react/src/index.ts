@@ -53,5 +53,8 @@ export type { MacbookMockupProps } from './components/atoms/MacbookMockup';
 export { Tag } from './components/atoms/Tag';
 export type { TagProps, TagSize, TagVariant } from './components/atoms/Tag';
 
+export { Link } from './components/atoms/Link';
+export type { LinkProps, LinkSize, LinkTheme } from './components/atoms/Link';
+
 export { MetaInfoItem } from './components/molecules/MetaInfoItem';
 export type { MetaInfoItemProps } from './components/molecules/MetaInfoItem';

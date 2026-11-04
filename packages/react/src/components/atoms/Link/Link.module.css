@@ -1,0 +1,95 @@
+/*
+ * Structure Figma (node 2326:37384) : Size=sm|md|lg × State=idle|hovered|
+ * focus|disabled × Theme=light|dark. Texte toujours souligné (WCAG 1.4.1),
+ * styles label/{sm,base,2xl}-medium-underline.
+ */
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-x2);
+  padding: var(--spacing-x1);
+  box-sizing: border-box;
+  font-family: var(--typography-font-family-sans);
+  font-weight: var(--typography-font-weight-medium);
+  line-height: normal;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Tailles ──────────────────────────────────────────────────────────── */
+
+.size-sm {
+  font-size: var(--typography-font-size-sm);
+}
+.size-sm .icon {
+  width: var(--sizing-x4);
+  height: var(--sizing-x4);
+}
+
+.size-md {
+  font-size: var(--typography-font-size-base);
+}
+.size-md .icon {
+  width: var(--sizing-x6);
+  height: var(--sizing-x6);
+}
+
+.size-lg {
+  font-size: var(--typography-font-size-2xl);
+}
+.size-lg .icon {
+  width: var(--sizing-x6);
+  height: var(--sizing-x6);
+}
+
+/* ─── Thèmes et états ──────────────────────────────────────────────────── */
+
+.theme-light {
+  color: var(--color-text-primary);
+}
+.theme-light:hover {
+  color: var(--color-text-muted);
+}
+
+.theme-dark {
+  color: var(--color-neutral-100);
+}
+.theme-dark:hover {
+  color: var(--color-neutral-300);
+}
+
+/* Figma State=focus : contour border/focus 2px à l'extérieur */
+.link:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 0;
+}
+
+/* Un <a> n'a pas de :disabled natif : l'état passe par aria-disabled
+   (exception à la convention « :disabled natif », signalée dans la fiche) */
+.link[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.theme-light[aria-disabled='true'] {
+  color: var(--color-text-muted);
+}
+.theme-dark[aria-disabled='true'] {
+  color: var(--color-neutral-300);
+}
