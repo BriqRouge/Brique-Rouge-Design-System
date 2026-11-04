@@ -16,7 +16,8 @@ figma:
 
 ```ts
 interface ProjectSectionsDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
-  title: string;              // requis — ex: "Design system"
+  title?: string;             // optionnel — ex: "Design system" ; absent : ni titre ni barre d'accent
+  divider?: boolean;          // optionnel, true par défaut — séparateur entre les sections
   children: React.ReactNode;  // requis — une ou plusieurs <ProjectSectionDescription />
 }
 ```
@@ -24,9 +25,18 @@ interface ProjectSectionsDescriptionProps extends React.HTMLAttributes<HTMLDivEl
 **Types exportés :** `ProjectSectionsDescriptionProps`
 **data-component :** `ds-br-project-sections-description`
 
+## Correspondance avec les booléens Figma (décidé le 2026-11-04)
+
+| Booléen Figma | Code |
+|---|---|
+| `Display Title` | pas de `title` → ni titre ni barre d'accent |
+| `-----Devider-----` | `divider={false}` → aucun séparateur |
+| `Section 1`, `Section 2` | sections passées en `children` (pas de limite de nombre côté code) |
+| Booléens des sections (exposés) | réglés sur chaque `<ProjectSectionDescription>` |
+
 ## Composition
 
-Réutilise `ProjectSectionDescription` (organisme) — chaque section est fournie par le consommateur via `children`, ce composant ne connaît pas leur contenu. Un séparateur (`data-divider`) est inséré automatiquement entre chaque section (N enfants → N-1 séparateurs) ; aucun séparateur si une seule section.
+Réutilise `ProjectSectionDescription` (organisme) — chaque section est fournie par le consommateur via `children`, ce composant ne connaît pas leur contenu. Un séparateur (`data-divider`) est inséré automatiquement entre chaque section (N enfants → N-1 séparateurs) ; aucun séparateur si une seule section ou si `divider={false}`. Passer les sections directement ou en tableau : un fragment `<>…</>` compte pour un seul enfant et ne reçoit donc aucun séparateur.
 
 ## Tokens CSS utilisés
 
@@ -52,4 +62,4 @@ Réutilise `ProjectSectionDescription` (organisme) — chaque section est fourni
 
 ## Tests
 
-8 tests — 8 passants
+11 tests — 11 passants
