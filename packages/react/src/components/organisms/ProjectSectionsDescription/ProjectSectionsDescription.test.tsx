@@ -84,6 +84,28 @@ describe('ProjectSectionsDescription — rendu', () => {
   });
 });
 
+describe('ProjectSectionsDescription — éléments optionnels (booléens Figma)', () => {
+  it("sans title : ni titre ni barre d'accent (Display Title)", () => {
+    const { container } = render(
+      <ProjectSectionsDescription>
+        <ProjectSectionDescription number="01">Texte</ProjectSectionDescription>
+      </ProjectSectionsDescription>
+    );
+    expect(container.querySelector('h2')).not.toBeInTheDocument();
+    expect(container.querySelector('[aria-hidden="true"] span')).not.toBeInTheDocument();
+  });
+
+  it('divider={false} : aucun séparateur entre les sections (Devider)', () => {
+    const { container } = render(
+      <ProjectSectionsDescription title="Design system" divider={false}>
+        <ProjectSectionDescription number="01">Texte 1</ProjectSectionDescription>
+        <ProjectSectionDescription number="02">Texte 2</ProjectSectionDescription>
+      </ProjectSectionsDescription>
+    );
+    expect(container.querySelectorAll('[data-divider]')).toHaveLength(0);
+  });
+});
+
 describe('ProjectSectionsDescription — accessibilité', () => {
   it('une section : aucune violation axe', async () => {
     const { container } = render(
@@ -105,6 +127,16 @@ describe('ProjectSectionsDescription — accessibilité', () => {
         <ProjectSectionDescription number="02" title="Objectif">
           Texte 2
         </ProjectSectionDescription>
+      </ProjectSectionsDescription>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('sans titre ni séparateur : aucune violation axe', async () => {
+    const { container } = render(
+      <ProjectSectionsDescription divider={false}>
+        <ProjectSectionDescription>Texte 1</ProjectSectionDescription>
+        <ProjectSectionDescription number="02" title="Objectif">Texte 2</ProjectSectionDescription>
       </ProjectSectionsDescription>
     );
     expect(await axe(container)).toHaveNoViolations();

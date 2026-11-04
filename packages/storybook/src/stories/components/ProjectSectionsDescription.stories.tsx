@@ -19,8 +19,13 @@ const meta = {
   },
   argTypes: {
     title: {
-      description: 'Titre de la carte',
+      description: "Titre de la carte — absent : ni titre ni barre d'accent (booléen Figma `Display Title`)",
       control: 'text',
+    },
+    divider: {
+      description: 'Séparateur entre les sections (booléen Figma `-----Devider-----`)',
+      control: 'boolean',
+      table: { defaultValue: { summary: 'true' } },
     },
     children: {
       description: 'Une ou plusieurs <ProjectSectionDescription /> — séparateur inséré automatiquement entre elles',
@@ -36,9 +41,10 @@ export const Default: Story = {
   name: 'Défaut',
   args: {
     title: 'Design system',
-    children: (
-      <>
+    // Tableau et non fragment : un fragment compte pour un seul enfant, sans séparateur
+    children: [
         <ProjectSectionDescription
+          key="01"
           number="01"
           title="Problème"
           bulletPoints={[
@@ -59,8 +65,9 @@ export const Default: Story = {
           Dans le contexte d&apos;une équipe réduite, le produit ne possédait pas encore de design
           system. L&apos;interface existante manquait de structure et ne répondait pas aux futurs
           besoins d&apos;évolution.
-        </ProjectSectionDescription>
+        </ProjectSectionDescription>,
         <ProjectSectionDescription
+          key="02"
           number="02"
           title="Objectif"
           bulletPoints={[
@@ -71,9 +78,8 @@ export const Default: Story = {
           Dans le contexte d&apos;une équipe réduite, le produit ne possédait pas encore de design
           system. L&apos;interface existante manquait de structure et ne répondait pas aux futurs
           besoins d&apos;évolution.
-        </ProjectSectionDescription>
-      </>
-    ),
+        </ProjectSectionDescription>,
+    ],
   },
 };
 
@@ -98,5 +104,18 @@ export const SansListeNiBandeau: Story = {
         Une section peut se limiter au numéro, au titre et au texte d&apos;introduction.
       </ProjectSectionDescription>
     ),
+  },
+};
+
+export const SansTitreNiSeparateur: Story = {
+  name: 'Sans titre ni séparateur',
+  args: {
+    divider: false,
+    children: [
+      <ProjectSectionDescription key="01">
+        Une carte peut se passer de titre et de séparateur, comme les cartes « citation » de la page Portfolio.
+      </ProjectSectionDescription>,
+      <ProjectSectionDescription key="02" number="02" title="Objectifs" bulletPoints={['Premier objectif.']} />,
+    ],
   },
 };

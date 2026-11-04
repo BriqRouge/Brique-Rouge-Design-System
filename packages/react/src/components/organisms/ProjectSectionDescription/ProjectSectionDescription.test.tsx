@@ -98,6 +98,39 @@ describe('ProjectSectionDescription — rendu', () => {
   });
 });
 
+describe('ProjectSectionDescription — éléments optionnels (booléens Figma)', () => {
+  it("sans title : affiche le numéro mais pas de titre (Subtitle)", () => {
+    const { container } = render(<ProjectSectionDescription number="01">Texte</ProjectSectionDescription>);
+    expect(screen.getByText('01')).toBeInTheDocument();
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument();
+    expect(container.querySelector('h3')).not.toBeInTheDocument();
+  });
+
+  it('sans number : affiche le titre mais pas de numéro', () => {
+    render(<ProjectSectionDescription title="Problème">Texte</ProjectSectionDescription>);
+    expect(screen.getByRole('heading', { name: 'Problème' })).toBeInTheDocument();
+    expect(screen.queryByText('01')).not.toBeInTheDocument();
+  });
+
+  it("sans number ni title : aucun en-tête n'est rendu (Header)", () => {
+    const { container } = render(<ProjectSectionDescription>Texte seul</ProjectSectionDescription>);
+    const section = container.querySelector('[data-component="ds-br-project-section-description"]');
+    expect(section?.children).toHaveLength(1);
+    expect(screen.getByText('Texte seul').tagName).toBe('P');
+  });
+
+  it("sans children : aucune accroche n'est rendue (Lead Text)", () => {
+    const { container } = render(<ProjectSectionDescription number="01" title="Problème" bulletPoints={['Point']} />);
+    expect(container.querySelector('p')).not.toBeInTheDocument();
+    expect(screen.getByRole('list')).toBeInTheDocument();
+  });
+
+  it('accepte plus de 4 puces (pas de limite côté code)', () => {
+    render(<ProjectSectionDescription bulletPoints={['1', '2', '3', '4', '5']} />);
+    expect(screen.getAllByRole('listitem')).toHaveLength(5);
+  });
+});
+
 describe('ProjectSectionDescription — accessibilité', () => {
   it('sans liste ni bandeau : aucune violation axe', async () => {
     const { container } = render(
@@ -118,6 +151,13 @@ describe('ProjectSectionDescription — accessibilité', () => {
       >
         Texte d&apos;introduction
       </ProjectSectionDescription>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('accroche seule, sans en-tête : aucune violation axe', async () => {
+    const { container } = render(
+      <ProjectSectionDescription>&quot;Une citation de terrain.&quot;</ProjectSectionDescription>
     );
     expect(await axe(container)).toHaveNoViolations();
   });

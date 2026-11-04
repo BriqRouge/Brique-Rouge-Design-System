@@ -16,9 +16,9 @@ figma:
 
 ```ts
 interface ProjectSectionDescriptionProps extends React.HTMLAttributes<HTMLDivElement> {
-  number: string;              // requis — ex: "01"
-  title: string;               // requis — ex: "Problème"
-  children: React.ReactNode;   // requis — texte d'introduction
+  number?: string;             // optionnel — ex: "01"
+  title?: string;              // optionnel — ex: "Problème"
+  children?: React.ReactNode;  // optionnel — texte d'introduction
   bulletPoints?: string[];     // optionnel — liste à puces
   alertBanner?: React.ReactNode; // optionnel — typiquement <AlertBanner />
 }
@@ -26,6 +26,20 @@ interface ProjectSectionDescriptionProps extends React.HTMLAttributes<HTMLDivEle
 
 **Types exportés :** `ProjectSectionDescriptionProps`
 **data-component :** `ds-br-project-section-description`
+
+## Correspondance avec les booléens Figma (décidé le 2026-11-04)
+
+Le composant Figma porte 9 booléens. Le code est piloté par le contenu : un élément absent n'est pas rendu.
+
+| Booléen Figma | Code |
+|---|---|
+| `Header` (numéro + titre) | ni `number` ni `title` → pas d'en-tête |
+| `Subtitle` (titre seul) | pas de `title` → numéro seul |
+| `Lead Text` | pas de `children` → pas d'accroche |
+| `Bullet points list`, `Bullet Point 1–4` | `bulletPoints` absent ou vide → pas de liste ; un élément par puce |
+| `Alert Banner` | `alertBanner` absent → pas de bandeau |
+
+Souplesse assumée (décision Damien, 2026-11-04) : le code accepte un titre sans numéro (impossible en Figma, faute de booléen sur le numéro) et plus de 4 puces.
 
 ## Composition
 
@@ -57,6 +71,8 @@ Accepte `alertBanner` en slot optionnel — typiquement rempli avec `<AlertBanne
 - **Graisse du texte d'introduction et des puces** : `regular` (400) — Figma aligné le 2026-11-02 (l'ancien style « Book » ~333 est désormais lié à `typography/font-weight/regular`)
 - **Écart signalé vs Figma** : le gap entre numéro et titre varie légèrement entre les deux sections du frame source (24px vs 26px) — standardisé à 24px (`--spacing-x6`), traité comme une dérive d'auteur Figma plutôt qu'une différence intentionnelle entre sections
 
+- **Sans titre** : la section n'a plus d'intitulé (`h3`) — acceptable pour une citation (cartes « citation » de la page Portfolio), à éviter pour une section de contenu
+
 ## Tests
 
-11 tests — 11 passants
+17 tests — 17 passants
