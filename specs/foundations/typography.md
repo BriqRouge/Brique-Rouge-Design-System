@@ -10,6 +10,7 @@
 |---|---|
 | `typography.font-family.sans` | `"ABC Favorit Pro Variable", sans-serif` |
 | `typography.font-family.display` | `"GT Ultra", serif` |
+| `typography.font-family.display-median` | `"GT Ultra Median", serif` |
 | `typography.font-size.xs` | `12px` |
 | `typography.font-size.sm` | `14px` |
 | `typography.font-size.base` | `16px` |
@@ -23,6 +24,8 @@
 | `typography.font-weight.medium` | `500` |
 | `typography.font-weight.semibold` | `600` |
 | `typography.font-weight.bold` | `700` |
+| `typography.font-weight.light` | `300` |
+| `typography.font-weight.black` | `900` |
 | `typography.line-height.tight` | `1.25` |
 | `typography.line-height.normal` | `1.5` |
 | `typography.line-height.loose` | `1.75` |
@@ -33,6 +36,7 @@
 | `typography.line-height.x8` | `32px` |
 | `typography.line-height.x10` | `40px` |
 | `typography.line-height.x14` | `56px` |
+| `typography.line-height.x7` | `28px` |
 
 ## Sémantiques
 

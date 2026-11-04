@@ -106,6 +106,9 @@
 --color-purple-mountain-800: #6d5079;
 --color-purple-mountain-900: #594162;
 --color-purple-mountain-950: #3c2843;
+--color-sage-400: #92bfb1;
+--color-marigold-400: #f4ac45;
+--color-steel-blue-500: #457eac;
 ```
 
 ## Sémantiques
@@ -179,6 +182,10 @@
 --color-background-projects-cv: #efde59;
 --color-background-notification-info: #f0f4fe;
 --color-background-notification-warning: #fdf7ef;
+--color-background-project-page-odaptos: #d4d4d4;
+--color-background-project-page-bpce: #92bfb1;
+--color-background-project-page-ibp: #f4ac45;
+--color-background-project-page-opco-atlas: #457eac;
 --color-button-primary: #262626;
 --color-button-primary-hover: #404040;
 --color-button-secondary-hover: #262626;

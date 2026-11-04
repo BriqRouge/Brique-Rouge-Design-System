@@ -92,6 +92,28 @@ la largeur et la hauteur du texte avant/après. Un texte combinant plusieurs sty
 Tous les textes des composants portent un style depuis le 2026-11-02. Un texte
 sans style est signalé (avertissement) par `node scripts/figma-sync-ds.mjs lint`.
 
+### Famille expressive (GT Ultra)
+
+Les styles ci-dessus utilisent tous Favorit (`--typography-font-family-sans`). La
+famille `expressive/*` (décidée le 2026-11-04) porte la police d'affichage GT Ultra :
+accroches, introductions, logo-texte, libellés de schémas. Elle n'est pas un niveau
+de titre de l'interface : ne pas l'utiliser pour les titres de section ni les
+libellés de contrôles.
+
+| Style Figma | Police | Taille | Graisse | Interligne | Rendu | Usage |
+|---|---|---|---|---|---|---|
+| `expressive/xl` | `--typography-font-family-display-median` | `--typography-font-size-5xl` | `--typography-font-weight-black` | `--typography-line-height-x14` | rognage | Titre d'accroche (hero) |
+| `expressive/lg` | `--typography-font-family-display-median` | `--typography-font-size-3xl` | `--typography-font-weight-black` | `--typography-line-height-x10` | rognage | Titre d'accroche secondaire |
+| `expressive/md` | `--typography-font-family-display-median` | `--typography-font-size-2xl` | `--typography-font-weight-black` | `--typography-line-height-x10` | — | Logo-texte, partie grasse (TopNav) |
+| `expressive/md-light` | `--typography-font-family-display-median` | `--typography-font-size-2xl` | `--typography-font-weight-light` | `--typography-line-height-x10` | — | Logo-texte, partie légère (TopNav) |
+| `expressive/lead` | `--typography-font-family-display` | `--typography-font-size-xl` | `--typography-font-weight-regular` | `--typography-line-height-x7` | rognage | Paragraphe d'introduction |
+| `expressive/lead-italic` | `--typography-font-family-display` | `--typography-font-size-xl` | `--typography-font-weight-regular` | `--typography-line-height-x7` | rognage, italique | Mise en valeur dans une introduction |
+| `expressive/label` | `--typography-font-family-display` | `--typography-font-size-base` | `--typography-font-weight-regular` | `--typography-line-height-x4-5` | rognage | Libellé de schéma |
+
+Italique (`fontName.style: Italic`) → `font-style: italic`. GT Ultra et GT Ultra
+Median sont deux familles distinctes : la graisse seule ne passe pas de l'une à
+l'autre.
+
 ---
 
 ## Directives
