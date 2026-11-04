@@ -316,12 +316,12 @@
     },
     "TopNav": {
       "node": "1702:20362",
-      "hash": "7611aeee",
+      "hash": "9697bf8d",
       "props": "af5fbc7d",
       "variants": {
         "Type=bpce": "88212a7d",
         "Type=conseil-constitutionnel": "cc8a7677",
-        "Type=homepage": "2e5393a7",
+        "Type=homepage": "7ca0a53b",
         "Type=ibp": "98bcbdf5",
         "Type=odaptos": "26ae78e7",
         "Type=opco-atlas": "bd4c83e2"

@@ -119,6 +119,7 @@ StyleDictionary.registerTransform({
 // la pile de secours n'existe que côté CSS. Défaut : sans-serif.
 const FONT_FALLBACKS = {
   'GT Ultra': 'serif',
+  'GT Ultra Median': 'serif',
 };
 
 StyleDictionary.registerTransform({

@@ -276,9 +276,11 @@ Avant d'implémenter, systématiquement :
   (`State=idle|hovered`, `Company=conseil-constitutionnel`)
 - Défauts : le code fait référence ; les défauts Figma ne sont pas une décision de design
 - Textes Figma liés aux variables `typography/font-size/*` et `typography/font-weight/*`
-  (Light/Book/Regular → 400, Medium → 500, Bold → 700) ; couleurs liées à `color/*`
+  (Favorit : Light/Book/Regular → 400, Medium → 500, Bold → 700 ; GT Ultra : Light → 300,
+  Black → 900) ; couleurs liées à `color/*`
 - Textes porteurs d'un **style de texte par rôle** (`display/*`, `heading/*`, `body/*`,
-  `caption`, `eyebrow`, `label/*` — décidé le 2026-11-02), lui-même lié aux variables.
+  `caption`, `eyebrow`, `label/*` — décidé le 2026-11-02 ; `expressive/*` pour la police
+  d'affichage GT Ultra — décidé le 2026-11-04), lui-même lié aux variables.
   Un texte sans style est un écart signalé, jamais restylé d'office. Table rôle →
   tokens CSS : `specs/patterns/typography.md`
 - Appliquer un style de texte remplace **toutes** les propriétés du texte (rognage,
