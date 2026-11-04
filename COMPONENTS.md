@@ -24,6 +24,7 @@ Claude Code lit ce fichier avant toute implémentation, puis ouvre le fichier
 | `FrameLogo` | Conteneur de logo avec ombre portée | [specs/atoms/FrameLogo.md](specs/atoms/FrameLogo.md) |
 | `LogoCompanies` | Logo d'entreprise (8 variantes) | [specs/atoms/LogoCompanies.md](specs/atoms/LogoCompanies.md) |
 | `MacbookMockup` | Mockup d'ordinateur portable pour capture d'écran | [specs/atoms/MacbookMockup.md](specs/atoms/MacbookMockup.md) |
+| `Badge` | Pastille de mot-clé en pilule (3 tailles × 2 styles, outlined pour fond sombre) | [specs/atoms/Badge.md](specs/atoms/Badge.md) |
 | `Tag` | Badge icône + texte + fermeture (4 tailles × 2 styles) | [specs/atoms/Tag.md](specs/atoms/Tag.md) |
 | `Link` | Lien texte souligné, icônes optionnelles (3 tailles × thème clair/sombre) | [specs/atoms/Link.md](specs/atoms/Link.md) |
 
@@ -49,5 +50,6 @@ Compose au moins une molécule et/ou plusieurs atomes/organismes pour former une
 | `DropdownMenuTrigger` | Trigger + menu déroulant complet (hover/focus/clavier) | [specs/organisms/DropdownMenuTrigger.md](specs/organisms/DropdownMenuTrigger.md) |
 | `TopNav` | Barre de navigation supérieure | [specs/organisms/TopNav.md](specs/organisms/TopNav.md) |
 | `ProjectBentoCard` | Carte projet de la grille bento (façade décalée + plaque couleur au survol, agrandissement) | [specs/organisms/ProjectBentoCard.md](specs/organisms/ProjectBentoCard.md) |
+| `BentoBox` | Grille bento des 5 cartes projet (2 colonnes × 3 lignes) | [specs/organisms/BentoBox.md](specs/organisms/BentoBox.md) |
 | `ProjectSectionDescription` | Section numérotée (titre, texte, puces, bandeau d'alerte optionnel) | [specs/organisms/ProjectSectionDescription.md](specs/organisms/ProjectSectionDescription.md) |
 | `ProjectSectionsDescription` | Carte conteneur empilant plusieurs sections avec séparateurs | [specs/organisms/ProjectSectionsDescription.md](specs/organisms/ProjectSectionsDescription.md) |

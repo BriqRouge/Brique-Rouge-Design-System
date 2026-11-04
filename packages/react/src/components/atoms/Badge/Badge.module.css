@@ -1,0 +1,68 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-x1);
+  border-radius: var(--border-radius-button);
+  box-sizing: border-box;
+  font-family: var(--typography-font-family-sans);
+  font-weight: var(--typography-font-weight-medium);
+  white-space: nowrap;
+}
+
+.label {
+  line-height: normal;
+}
+
+.icon {
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* ─── Tailles ──────────────────────────────────────────────────────────── */
+
+/* Figma : hauteur 16px avec padding 8px — padding vertical réduit à 4px,
+   comme Tag, pour que le contenu tienne dans la hauteur */
+.size-sm {
+  height: var(--spacing-x4);
+  padding: var(--spacing-x1) var(--spacing-x2);
+  font-size: var(--typography-font-size-xs);
+}
+.size-sm .icon {
+  width: var(--spacing-x3);
+  height: var(--spacing-x3);
+}
+
+.size-md {
+  height: var(--spacing-x6);
+  padding: var(--spacing-x2);
+  font-size: var(--typography-font-size-base);
+}
+.size-md .icon {
+  width: var(--spacing-x4);
+  height: var(--spacing-x4);
+}
+
+.size-lg {
+  height: var(--spacing-x8);
+  padding: var(--spacing-x2);
+  font-size: var(--typography-font-size-2xl);
+}
+.size-lg .icon {
+  width: var(--spacing-x6);
+  height: var(--spacing-x6);
+}
+
+/* ─── Styles (variables liées dans Figma : primitives neutral/*) ───────── */
+
+.variant-contained {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+}
+
+/* Pour fond sombre (décision Damien, 2026-11-04) */
+.variant-outlined {
+  background-color: transparent;
+  border: 1px solid var(--color-neutral-100);
+  color: var(--color-neutral-100);
+}

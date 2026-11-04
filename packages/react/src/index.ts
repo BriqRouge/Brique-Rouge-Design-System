@@ -38,6 +38,9 @@ export type {
   ProjectBentoCardShape,
 } from './components/organisms/ProjectBentoCard';
 
+export { BentoBox } from './components/organisms/BentoBox';
+export type { BentoBoxProps } from './components/organisms/BentoBox';
+
 export { ProjectSectionDescription } from './components/organisms/ProjectSectionDescription';
 export type { ProjectSectionDescriptionProps } from './components/organisms/ProjectSectionDescription';
 
@@ -49,6 +52,9 @@ export type { ProjectOverviewProps } from './components/molecules/ProjectOvervie
 
 export { MacbookMockup } from './components/atoms/MacbookMockup';
 export type { MacbookMockupProps } from './components/atoms/MacbookMockup';
+
+export { Badge } from './components/atoms/Badge';
+export type { BadgeProps, BadgeSize, BadgeVariant } from './components/atoms/Badge';
 
 export { Tag } from './components/atoms/Tag';
 export type { TagProps, TagSize, TagVariant } from './components/atoms/Tag';

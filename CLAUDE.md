@@ -324,9 +324,9 @@ liens.
 
 | Niveau | Composants |
 |---|---|
-| **Atomes** (`packages/react/src/components/atoms/`) | `Button`, `MenuButton`, `FrameLogo`, `LogoCompanies`, `MacbookMockup`, `Tag`, `Link` |
+| **Atomes** (`packages/react/src/components/atoms/`) | `Button`, `MenuButton`, `FrameLogo`, `LogoCompanies`, `MacbookMockup`, `Tag`, `Badge`, `Link` |
 | **Molécules** (`packages/react/src/components/molecules/`) | `AlertBanner`, `DropdownMenu`, `DropdownMenuButton`, `ProjectCardDescription`, `ProjectOverview`, `MetaInfoItem` |
-| **Organismes** (`packages/react/src/components/organisms/`) | `DropdownMenuTrigger`, `TopNav`, `ProjectBentoCard`, `ProjectSectionDescription`, `ProjectSectionsDescription` |
+| **Organismes** (`packages/react/src/components/organisms/`) | `DropdownMenuTrigger`, `TopNav`, `ProjectBentoCard`, `BentoBox`, `ProjectSectionDescription`, `ProjectSectionsDescription` |
 
 Classification : un **atome** est un élément indivisible. Une **molécule** assemble des
 atomes en une unité fonctionnelle précise (ex: `DropdownMenuButton` = logo + texte +

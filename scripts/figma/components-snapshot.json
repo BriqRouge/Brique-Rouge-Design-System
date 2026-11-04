@@ -13,6 +13,32 @@
         "Button"
       ]
     },
+    "Badge": {
+      "node": "184:18566",
+      "hash": "65ad7246",
+      "props": "db968f73",
+      "variants": {
+        "Size=l, Style=outlined": "84efe92f",
+        "Size=lg, Style=contained": "ac705568",
+        "Size=md, Style=contained": "84144973",
+        "Size=md, Style=outlined": "f22f2335",
+        "Size=s, Style=outlined": "52a56e10",
+        "Size=sm, Style=contained": "5faedc14"
+      },
+      "deps": []
+    },
+    "BentoBox": {
+      "node": "2049:20632",
+      "hash": "1e00ac25",
+      "props": null,
+      "variants": {
+        "Bento-box": "5870e415"
+      },
+      "deps": [
+        "MacbookMockup",
+        "ProjectBentoCard"
+      ]
+    },
     "Button": {
       "node": "1506:20751",
       "hash": "4f7f6e67",
