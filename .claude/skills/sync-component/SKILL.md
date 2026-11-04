@@ -44,16 +44,19 @@ s'applique pas : suivre CLAUDE.md « Workflow composants » directement.
   variante du set, booléens à `true`) sont une information, jamais un écart.
 - **Typographie** : taille et graisse des textes liées aux variables
   `typography/font-size/*` et `typography/font-weight/*`. Les styles de la police
-  variable correspondent à : Light / Book / Regular → `regular` (400),
-  Medium (~571) → `medium` (500), Bold → `bold` (700). Une taille liée à une
+  variable Favorit correspondent à : Light / Book / Regular → `regular` (400),
+  Medium (~571) → `medium` (500), Bold → `bold` (700) ; GT Ultra : Light →
+  `light` (300), Black → `black` (900). Une taille liée à une
   variable `spacing/*` est une incohérence. Chaque texte porte un **style de texte
-  par rôle** (`display/*`, `heading/*`, `body/*`, `caption`, `eyebrow`, `label/*`) ;
+  par rôle** (`display/*`, `heading/*`, `body/*`, `caption`, `eyebrow`, `label/*`,
+  et `expressive/*` pour GT Ultra / GT Ultra Median, polices du DS depuis le 2026-11-04) ;
   le code utilise les tokens CSS correspondants (`specs/patterns/typography.md`).
   Un texte sans style est un écart à signaler, pas à corriger d'office.
 - **Couleurs** : toute couleur de texte, de fond ou de bordure est liée à une
   variable `color/*`. Une couleur non liée sans token exact est une incohérence.
 - **Contenu illustratif** (mockups, logos texte, captures d'écran recomposées,
-  polices hors DS comme GT Ultra Median ou Helvetica) : hors périmètre, ignoré.
+  polices hors `figma.textFontFamilies` de `ds.config.json`, comme Helvetica) :
+  hors périmètre, ignoré.
 
 ## Étape 1 — Résoudre la cible
 

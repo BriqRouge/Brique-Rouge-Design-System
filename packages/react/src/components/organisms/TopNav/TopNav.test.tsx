@@ -7,19 +7,29 @@ import { TopNav } from './TopNav';
 const menu = <button role="menuitem">Item</button>;
 
 describe('TopNav — état homepage', () => {
-  it('rend le trigger "Sélection projets" sans bouton retour ni titre', () => {
-    render(<TopNav>{menu}</TopNav>);
-    expect(screen.getByRole('button', { name: 'Sélection projets' })).toBeInTheDocument();
+  it('rend le logo-texte, sans sélecteur, bouton retour ni titre', () => {
+    render(<TopNav />);
+    expect(screen.getByText('Damien')).toBeInTheDocument();
+    expect(screen.getByText('Ramzi')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Sélection projets' })).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Accueil' })).not.toBeInTheDocument();
   });
 
+  it("rend le logo animé (4 briques) masqué des technologies d'assistance", () => {
+    const { container } = render(<TopNav />);
+    const mark = container.querySelector('[aria-hidden="true"]');
+    expect(mark).toBeInTheDocument();
+    expect(mark?.querySelectorAll('img')).toHaveLength(4);
+    mark?.querySelectorAll('img').forEach((img) => expect(img).toHaveAttribute('alt', ''));
+  });
+
   it('expose data-component="ds-br-top-nav"', () => {
-    const { container } = render(<TopNav>{menu}</TopNav>);
+    const { container } = render(<TopNav />);
     expect(container.firstChild).toHaveAttribute('data-component', 'ds-br-top-nav');
   });
 
   it("n'a pas de data-project", () => {
-    const { container } = render(<TopNav>{menu}</TopNav>);
+    const { container } = render(<TopNav />);
     expect(container.querySelector('[data-project]')).not.toBeInTheDocument();
   });
 });
@@ -78,19 +88,19 @@ describe('TopNav — état page projet', () => {
 
 describe('TopNav — props communes', () => {
   it('ajoute une className supplémentaire', () => {
-    const { container } = render(<TopNav className="custom">{menu}</TopNav>);
+    const { container } = render(<TopNav className="custom" />);
     expect(container.firstChild).toHaveClass('custom');
   });
 
   it('transmet les props HTML au conteneur', () => {
-    const { container } = render(<TopNav data-testid="top-nav">{menu}</TopNav>);
+    const { container } = render(<TopNav data-testid="top-nav" />);
     expect(container.firstChild).toHaveAttribute('data-testid', 'top-nav');
   });
 });
 
 describe('TopNav — accessibilité axe', () => {
   it('état homepage : aucune violation axe', async () => {
-    const { container } = render(<TopNav>{menu}</TopNav>);
+    const { container } = render(<TopNav />);
     expect(await axe(container)).toHaveNoViolations();
   });
 

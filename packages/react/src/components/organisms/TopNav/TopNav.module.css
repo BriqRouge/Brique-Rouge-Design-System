@@ -8,34 +8,25 @@
   box-sizing: border-box;
 }
 
+/* Page projet : bouton retour, titre, sélecteur répartis (Figma space-between) */
 .pill {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-component-sm);
   width: 100%;
   min-height: 88px;
   border-radius: var(--border-radius-button);
   padding-right: var(--spacing-component-md);
-  box-sizing: border-box;
-}
-
-.pill[data-project] {
-  justify-content: space-between;
   padding-left: var(--spacing-component-lg);
+  box-sizing: border-box;
 }
 
 .trigger {
   flex-shrink: 0;
 }
 
-/* ─── Groupe bouton retour + titre ────────────────────────────────────────── */
-
-.projectGroup {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-component-sm);
-  min-width: 0;
-}
+/* ─── Titre ───────────────────────────────────────────────────────────────── */
 
 .titleBlock {
   margin: 0;
@@ -79,4 +70,212 @@
 .pill[data-project='conseil-constitutionnel'] {
   background-color: var(--color-background-projects-conseil-constitutionnel);
   --top-nav-text-color: var(--color-text-nav-bar-conseil-constitutionnel);
+}
+
+/* ─── Homepage : logo animé + logo-texte (Figma Type=homepage) ─────────────── */
+
+.brand {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-component-md);
+  width: 100%;
+  min-height: 88px;
+  padding-right: var(--spacing-component-md);
+  box-sizing: border-box;
+}
+
+.logoMark {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--sizing-x12);
+  aspect-ratio: 48 / 39.27;
+}
+
+/* Positions et tailles en % du cadre Animation-Logo (48 × 39,27) */
+.brick {
+  position: absolute;
+  display: block;
+  animation: 5s linear infinite;
+}
+
+.brick1 { left: 23.91%; top: 44.69%; width: 52.17%; height: 50.48%; animation-name: brick1; }
+.brick2 { left: 45.65%; top: 10.14%; width: 54.35%; height: 47.83%; animation-name: brick2; }
+.brick3 { left: 0; top: 39.37%; width: 54.35%; height: 47.83%; animation-name: brick3; }
+.brick4 { left: 23.91%; top: 4.83%; width: 52.17%; height: 47.83%; animation-name: brick4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .brick {
+    animation: none;
+  }
+}
+
+.wordmark {
+  flex: 1;
+  margin: 0;
+  font-family: var(--typography-font-family-display-median);
+  font-size: var(--typography-font-size-2xl);
+  line-height: var(--typography-line-height-x10);
+  color: var(--color-neutral-600);
+  white-space: nowrap;
+}
+
+/* expressive/md-light */
+.wordmarkLight {
+  font-weight: var(--typography-font-weight-light);
+}
+
+/* expressive/md */
+.wordmarkBold {
+  font-weight: var(--typography-font-weight-black);
+}
+
+/* Trajectoires générées depuis get_motion_context (Figma 2104:28062) : boucle de 5 s,
+   interpolation linéaire entre les points, comme dans Figma. */
+@keyframes brick1 {
+  0% { transform: translate(0px, 0px); }
+  6% { transform: translate(0px, 0px); }
+  8% { transform: translate(0px, 0.03px); }
+  10% { transform: translate(-0.02px, 0.15px); }
+  12% { transform: translate(-0.05px, 0.41px); }
+  14% { transform: translate(-0.1px, 0.89px); }
+  16% { transform: translate(-0.19px, 1.68px); }
+  18% { transform: translate(-0.29px, 2.6px); }
+  20% { transform: translate(-0.37px, 3.33px); }
+  22% { transform: translate(-0.43px, 3.85px); }
+  24% { transform: translate(-0.47px, 4.22px); }
+  26% { transform: translate(-0.5px, 4.5px); }
+  28% { transform: translate(-0.52px, 4.7px); }
+  30% { transform: translate(-0.54px, 4.85px); }
+  32% { transform: translate(-0.55px, 4.96px); }
+  34% { transform: translate(-0.56px, 5.04px); }
+  36% { transform: translate(-0.57px, 5.09px); }
+  38% { transform: translate(-0.57px, 5.11px); }
+  40% { transform: translate(-0.57px, 5.12px); }
+  64% { transform: translate(-0.57px, 5.12px); }
+  66% { transform: translate(-0.57px, 5.1px); }
+  68% { transform: translate(-0.56px, 5px); }
+  70% { transform: translate(-0.54px, 4.82px); }
+  72% { transform: translate(-0.5px, 4.49px); }
+  74% { transform: translate(-0.44px, 3.93px); }
+  76% { transform: translate(-0.34px, 3.06px); }
+  78% { transform: translate(-0.23px, 2.04px); }
+  80% { transform: translate(-0.14px, 1.25px); }
+  82% { transform: translate(-0.08px, 0.74px); }
+  84% { transform: translate(-0.05px, 0.42px); }
+  86% { transform: translate(-0.02px, 0.21px); }
+  88% { transform: translate(-0.01px, 0.08px); }
+  90% { transform: translate(0px, 0.02px); }
+  92% { transform: translate(0px, 0px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+@keyframes brick2 {
+  0% { transform: translate(0px, 0px); }
+  8% { transform: translate(0px, 0px); }
+  10% { transform: translate(0.05px, -0.02px); }
+  12% { transform: translate(0.2px, -0.07px); }
+  14% { transform: translate(0.5px, -0.17px); }
+  16% { transform: translate(1.06px, -0.35px); }
+  18% { transform: translate(1.92px, -0.64px); }
+  20% { transform: translate(2.81px, -0.94px); }
+  22% { transform: translate(3.48px, -1.16px); }
+  24% { transform: translate(3.96px, -1.32px); }
+  26% { transform: translate(4.3px, -1.43px); }
+  28% { transform: translate(4.55px, -1.52px); }
+  30% { transform: translate(4.74px, -1.58px); }
+  32% { transform: translate(4.88px, -1.63px); }
+  34% { transform: translate(4.98px, -1.66px); }
+  36% { transform: translate(5.05px, -1.68px); }
+  38% { transform: translate(5.1px, -1.7px); }
+  40% { transform: translate(5.12px, -1.71px); }
+  66% { transform: translate(5.12px, -1.71px); }
+  68% { transform: translate(5.08px, -1.69px); }
+  70% { transform: translate(4.96px, -1.65px); }
+  72% { transform: translate(4.72px, -1.57px); }
+  74% { transform: translate(4.32px, -1.44px); }
+  76% { transform: translate(3.63px, -1.21px); }
+  78% { transform: translate(2.62px, -0.87px); }
+  80% { transform: translate(1.64px, -0.55px); }
+  82% { transform: translate(0.98px, -0.33px); }
+  84% { transform: translate(0.56px, -0.19px); }
+  86% { transform: translate(0.29px, -0.1px); }
+  88% { transform: translate(0.13px, -0.04px); }
+  90% { transform: translate(0.04px, -0.01px); }
+  92% { transform: translate(0px, 0px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+@keyframes brick3 {
+  0% { transform: translate(0px, 0px); }
+  9% { transform: translate(0px, 0px); }
+  10% { transform: translate(-0.01px, 0px); }
+  12% { transform: translate(-0.09px, 0.04px); }
+  14% { transform: translate(-0.29px, 0.12px); }
+  16% { transform: translate(-0.68px, 0.27px); }
+  18% { transform: translate(-1.39px, 0.56px); }
+  20% { transform: translate(-2.39px, 0.96px); }
+  22% { transform: translate(-3.33px, 1.33px); }
+  24% { transform: translate(-4.02px, 1.61px); }
+  26% { transform: translate(-4.5px, 1.8px); }
+  28% { transform: translate(-4.86px, 1.94px); }
+  30% { transform: translate(-5.12px, 2.05px); }
+  32% { transform: translate(-5.31px, 2.12px); }
+  34% { transform: translate(-5.46px, 2.18px); }
+  36% { transform: translate(-5.56px, 2.22px); }
+  38% { transform: translate(-5.63px, 2.25px); }
+  40% { transform: translate(-5.67px, 2.27px); }
+  42% { transform: translate(-5.69px, 2.28px); }
+  67% { transform: translate(-5.69px, 2.28px); }
+  68% { transform: translate(-5.68px, 2.27px); }
+  70% { transform: translate(-5.61px, 2.24px); }
+  72% { transform: translate(-5.44px, 2.18px); }
+  74% { transform: translate(-5.12px, 2.05px); }
+  76% { transform: translate(-4.55px, 1.82px); }
+  78% { transform: translate(-3.61px, 1.44px); }
+  80% { transform: translate(-2.4px, 0.96px); }
+  82% { transform: translate(-1.44px, 0.58px); }
+  84% { transform: translate(-0.83px, 0.33px); }
+  86% { transform: translate(-0.45px, 0.18px); }
+  88% { transform: translate(-0.22px, 0.09px); }
+  90% { transform: translate(-0.08px, 0.03px); }
+  92% { transform: translate(-0.01px, 0.01px); }
+  93.5% { transform: translate(0px, 0px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+@keyframes brick4 {
+  0% { transform: translate(0px, 0px); }
+  10.5% { transform: translate(0px, 0px); }
+  12% { transform: translate(0px, -0.02px); }
+  14% { transform: translate(0.03px, -0.1px); }
+  16% { transform: translate(0.07px, -0.29px); }
+  18% { transform: translate(0.17px, -0.66px); }
+  20% { transform: translate(0.32px, -1.3px); }
+  22% { transform: translate(0.53px, -2.12px); }
+  24% { transform: translate(0.71px, -2.82px); }
+  26% { transform: translate(0.83px, -3.32px); }
+  28% { transform: translate(0.92px, -3.68px); }
+  30% { transform: translate(0.99px, -3.94px); }
+  32% { transform: translate(1.03px, -4.14px); }
+  34% { transform: translate(1.07px, -4.28px); }
+  36% { transform: translate(1.1px, -4.39px); }
+  38% { transform: translate(1.12px, -4.46px); }
+  40% { transform: translate(1.13px, -4.51px); }
+  42% { transform: translate(1.14px, -4.54px); }
+  44% { transform: translate(1.14px, -4.55px); }
+  68.5% { transform: translate(1.14px, -4.55px); }
+  70% { transform: translate(1.13px, -4.54px); }
+  72% { transform: translate(1.11px, -4.46px); }
+  74% { transform: translate(1.07px, -4.28px); }
+  76% { transform: translate(0.99px, -3.96px); }
+  78% { transform: translate(0.85px, -3.39px); }
+  80% { transform: translate(0.62px, -2.48px); }
+  82% { transform: translate(0.39px, -1.54px); }
+  84% { transform: translate(0.22px, -0.89px); }
+  86% { transform: translate(0.12px, -0.49px); }
+  88% { transform: translate(0.06px, -0.25px); }
+  90% { transform: translate(0.03px, -0.1px); }
+  92% { transform: translate(0.01px, -0.03px); }
+  94% { transform: translate(0px, 0px); }
+  100% { transform: translate(0px, 0px); }
 }

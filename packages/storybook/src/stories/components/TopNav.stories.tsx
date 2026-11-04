@@ -14,7 +14,7 @@ const meta = {
   },
   argTypes: {
     project: {
-      description: 'Projet affiché — détermine la couleur de fond. Absent = état homepage.',
+      description: 'Projet affiché — détermine la couleur de fond. Absent = état homepage (logo, sans menu).',
       control: 'select',
       options: [undefined, 'odaptos', 'bpce', 'ibp', 'opco-atlas', 'conseil-constitutionnel'],
     },
@@ -45,9 +45,14 @@ const items = (
 
 export const Homepage: Story = {
   name: 'Homepage (défaut)',
-  args: {
-    children: items,
+  parameters: {
+    docs: {
+      description: {
+        story: "Logo animé (4 briques, boucle de 5 s, figé si l'utilisateur réduit les animations) et logo-texte en GT Ultra Median (`expressive/md-light` + `expressive/md`). Pas de sélecteur de projets.",
+      },
+    },
   },
+  args: {},
 };
 
 export const PageProjet: Story = {
@@ -62,7 +67,7 @@ export const PageProjet: Story = {
 
 export const TousLesProjets: Story = {
   name: 'Tous les projets',
-  args: { children: items },
+  args: { project: 'odaptos', title: 'Odaptos', children: items },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <TopNav project="odaptos" title="Odaptos" subtitle="L'IA au service de la recherche utilisateur.">
