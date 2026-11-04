@@ -39,6 +39,18 @@
         "ProjectBentoCard"
       ]
     },
+    "BulletBrique": {
+      "node": "2131:21897",
+      "hash": "f211962d",
+      "props": "17ea1915",
+      "variants": {
+        "State=closed": "ac92f7ea",
+        "State=opened": "2a2dac8d"
+      },
+      "deps": [
+        "Badge"
+      ]
+    },
     "Button": {
       "node": "1506:20751",
       "hash": "4f7f6e67",

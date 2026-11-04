@@ -10,7 +10,7 @@ figma:
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/BulletBrique/`
-**Figma :** `State=bullet closed|bullet openned`. Survol (Smart Animate 300ms linéaire) : ouverture, révélation de 6 `Badge`. Utilisé 3 fois sur la page d'accueil du Portfolio
+**Figma :** `State=closed|opened`. Survol (Smart Animate 300ms linéaire) : ouverture, révélation de 6 `Badge`. Utilisé 3 fois sur la page d'accueil du Portfolio
 
 ## API
 
@@ -62,9 +62,9 @@ Le bouton porte `aria-expanded` et `aria-controls`. Fermée, la liste est en `vi
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-text-primary` | `#171717` | Intitulé (Figma : `#000000` non lié, voir incohérences) |
+| `--color-text-primary` | `#171717` | Intitulé (Figma : `color/text/primary`) |
 | `--color-border-focus` | `#3453dc` | Contour de focus |
-| `--typography-font-family-sans` | — | Intitulé (Figma : `typography/button/md/font-family`, même police) |
+| `--typography-font-family-sans` | — | Intitulé (style Figma `label/2xl-trim`) |
 | `--typography-font-size-2xl` | `24px` | Intitulé |
 | `--typography-font-weight-regular` | `400` | Intitulé |
 | `--spacing-x2` | `8px` | Gap brique/intitulé, espacement des badges, retrait du panneau |
@@ -74,13 +74,17 @@ Le bouton porte `aria-expanded` et `aria-controls`. Fermée, la liste est en `vi
 
 `assets/brand/brique-bullet.svg` (158 pixels) et `brique-bullet-shadow.svg` (16 pixels), générés depuis les vecteurs Figma (grille de 8/9 px). Pixel art aux couleurs propres à l'illustration, hors tokens (CLAUDE.md : contenu illustratif). Les briques de `TopNav` (`brick-1..4.svg`) sont un autre dessin, à une autre échelle.
 
-## Incohérences Figma signalées (2026-11-04, non corrigées)
+## Corrections Figma (2026-11-04, demandées par Damien)
 
-- Valeurs de variante `bullet closed` / `bullet openned` : ni kebab-case, ni orthographe (`openned`)
-- Intitulé sans style de texte, police liée à `typography/button/md/font-family`, couleur `#000000` non liée (code : `--color-text-primary`)
-- Le cadre de la brique (`brique-levitation 2`) a un fond blanc `#ffffff` non lié, non repris dans le code (il ferait apparaître un carré blanc sur le fond de page)
-- Le composant ouvert fait 116px de haut alors que les badges s'arrêtent à 102px. Le code suit le contenu (101px)
-- Les badges sont positionnés à la main (pas d'auto-layout) ; le code les dispose en flex-wrap avec gap 8px, mêmes positions à 1px près
+- Variantes renommées `bullet closed` / `bullet openned` → `closed` / `opened`
+- Intitulé : style `label/2xl-trim` créé et appliqué (regular 24px, rogné, dimensions inchangées 228×17), couleur liée à `color/text/primary` (était `#000000` non lié)
+- Fond blanc non lié du cadre de la brique retiré
+- Hauteur de la variante ouverte ramenée de 116 à 102px (bas des badges)
+- Les 3 instances du Portfolio vérifiées avant/après : textes identiques
+
+## Écart restant
+
+- Les badges sont positionnés à la main dans Figma (pas d'auto-layout) ; le code les dispose en flex-wrap avec gap 8px, mêmes positions à 1px près
 
 ## Tests
 

@@ -1,7 +1,7 @@
 /*
  * Structure Figma (node 2131:21897, « Animation-bullet-brique ») :
- * - State=bullet closed : brique + intitulé
- * - State=bullet openned : + 6 Badge md (Smart Animate 300ms linéaire)
+ * - State=closed : brique + intitulé (style label/2xl-trim, text/primary)
+ * - State=opened : + 6 Badge md (Smart Animate 300ms linéaire)
  * La brique lévite en boucle (4993ms) : la brique monte de 6,667px pendant
  * que son ombre rétrécit (×0,82) et s'estompe (0,22 → 0,10).
  * Valeurs d'animation extraites de get_motion_context — pas de token motion
