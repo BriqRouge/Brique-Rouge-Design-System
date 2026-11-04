@@ -27,6 +27,18 @@
       },
       "deps": []
     },
+    "BentoBox": {
+      "node": "2049:20632",
+      "hash": "1e00ac25",
+      "props": null,
+      "variants": {
+        "Bento-box": "5870e415"
+      },
+      "deps": [
+        "MacbookMockup",
+        "ProjectBentoCard"
+      ]
+    },
     "Button": {
       "node": "1506:20751",
       "hash": "4f7f6e67",
