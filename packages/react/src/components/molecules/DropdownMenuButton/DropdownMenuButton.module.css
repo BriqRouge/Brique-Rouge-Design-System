@@ -14,19 +14,22 @@
   font-family: var(--typography-dropdown-menu-button-font-family);
   font-size: var(--typography-dropdown-menu-button-font-size);
   font-weight: var(--typography-font-weight-medium);
-  color: var(--color-text-button-contained);
+  color: var(--color-text-menu-button-contained);
   text-align: left;
   box-sizing: border-box;
+  position: relative; /* ancre .srOnly */
 }
 
-/* Hover — couleur neutre (défaut sans company) */
-.dropdownMenuButton:hover:not(:disabled) {
+/* Hover — couleur neutre (sans company, et projets à venir : Figma montre
+   aussi le survol en Type=deactivated, opacité conservée) */
+.dropdownMenuButton:hover {
   background-color: var(--color-background-surface-raised);
   border-color: var(--color-border-default);
+  color: var(--color-text-muted);
 }
 
 .dropdownMenuButton:focus-visible {
-  outline: 2px solid var(--color-border-button-focus);
+  outline: 2px solid var(--color-border-focus);
   outline-offset: 2px;
 }
 
@@ -97,6 +100,38 @@
   text-overflow: ellipsis;
 }
 
+/* ─── Libellé de survol (hoverLabel) ───────────────────────────────────────── */
+
+.hoverLabel {
+  display: none;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.has-hover-label:hover .label {
+  display: none;
+}
+
+.has-hover-label:hover .hoverLabel {
+  display: block;
+}
+
+/* Masqué visuellement, lu par les lecteurs d'écran */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ─── Right icon ────────────────────────────────────────────────────────────── */
 
 .rightIcon {
@@ -106,5 +141,6 @@
   flex-shrink: 0;
   width: var(--sizing-x6);
   height: var(--sizing-x6);
-  color: var(--color-text-button-contained);
+  /* Suit la couleur du texte (repos et survol de marque) */
+  color: inherit;
 }

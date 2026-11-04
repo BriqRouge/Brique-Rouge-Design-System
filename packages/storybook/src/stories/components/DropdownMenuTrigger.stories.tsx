@@ -51,8 +51,8 @@ const items = (
     <DropdownMenuButton company="odaptos" activated>Odaptos</DropdownMenuButton>
     <DropdownMenuButton company="bpce">BPCE</DropdownMenuButton>
     <DropdownMenuButton company="ibp">iBP</DropdownMenuButton>
-    <DropdownMenuButton company="conseil-constitutionnel" disabled>Showcase à venir</DropdownMenuButton>
-    <DropdownMenuButton company="vinci" disabled>Showcase à venir</DropdownMenuButton>
+    <DropdownMenuButton company="conseil-constitutionnel" disabled hoverLabel="Showcase à venir">Conseil Cons.</DropdownMenuButton>
+    <DropdownMenuButton company="vinci" disabled hoverLabel="Showcase à venir">Vinci</DropdownMenuButton>
   </>
 );
 

@@ -42,6 +42,11 @@ const meta = {
       description: 'Item non disponible (projet à venir)',
       control: 'boolean',
     },
+    hoverLabel: {
+      description:
+        "Libellé affiché au survol à la place de children (ex : « Showcase à venir ») — toujours annoncé aux lecteurs d'écran",
+      control: 'text',
+    },
   },
 } satisfies Meta<typeof DropdownMenuButton>;
 
@@ -67,9 +72,10 @@ export const Activated: Story = {
 export const Disabled: Story = {
   name: 'Désactivé (projet à venir)',
   args: {
-    children: 'Showcase à venir',
+    children: 'Vinci',
     company: 'vinci',
     disabled: true,
+    hoverLabel: 'Showcase à venir',
   },
 };
 
@@ -81,10 +87,28 @@ export const CouleursDeMarque: Story = {
       <DropdownMenuButton company="odaptos">Odaptos</DropdownMenuButton>
       <DropdownMenuButton company="bpce">BPCE</DropdownMenuButton>
       <DropdownMenuButton company="ibp">iBP</DropdownMenuButton>
-      <DropdownMenuButton company="vinci" disabled>Showcase à venir</DropdownMenuButton>
-      <DropdownMenuButton company="conseil-constitutionnel" disabled>Showcase à venir</DropdownMenuButton>
+      <DropdownMenuButton company="vinci" disabled hoverLabel="Showcase à venir">Vinci</DropdownMenuButton>
+      <DropdownMenuButton company="conseil-constitutionnel" disabled hoverLabel="Showcase à venir">Conseil Cons.</DropdownMenuButton>
     </div>
   ),
+};
+
+export const SansCompagnie: Story = {
+  name: 'Sans compagnie (Company=none)',
+  args: { children: 'Company Name' },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      <DropdownMenuButton>Company Name</DropdownMenuButton>
+      <DropdownMenuButton disabled hoverLabel="Projet à venir">
+        Company Name
+      </DropdownMenuButton>
+    </div>
+  ),
+};
+
+export const AvecIcone: Story = {
+  name: 'Avec icône droite',
+  args: { children: 'iBP', company: 'ibp', rightIcon: true },
 };
 
 export const Playground: Story = {
