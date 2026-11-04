@@ -29,8 +29,8 @@ suffit de changer l'alias dans Figma. Contraste mesuré sur `background/page` (#
 | `--color-text-strong` | neutral/800 | Texte d'introduction, libellés | 14.5:1 |
 | `--color-text-secondary` | neutral/700 | Texte courant de description | 9.9:1 |
 | `--color-text-body` | neutral/600 | Paragraphes, puces, accroches | 7.5:1 |
-| `--color-text-tertiary` | neutral/500 | Métadonnées (rôle, contributions) | 4.5:1 — limite AA, 4.35:1 sur `surface` |
-| `--color-text-muted` | neutral/400 | Numéros de section | **2.5:1 — sous AA** : réservé au texte décoratif |
+| `--color-text-tertiary` | neutral/500 | Métadonnées (rôle, contributions) | 4.5:1 — limite AA ; **uniquement sur `background/page`** (4.35:1 sur `surface`, sous AA) |
+| `--color-text-muted` | neutral/500 | Numéros de section | 4.5:1 (passé de neutral/400, 2.5:1, le 2026-11-04 pour atteindre AA) ; même règle que `tertiary` : pas sur `surface` |
 | `--color-text-accent` | deep-sea/600 | Texte mis en valeur | 5.9:1 |
 | `--color-background-page` | neutral/50 | Fond de page | — |
 | `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |

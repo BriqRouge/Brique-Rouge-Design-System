@@ -73,7 +73,7 @@
   box-sizing: border-box;
   border: 1px solid var(--color-border-bento-cards-idle);
   border-radius: var(--border-radius-bento-section);
-  background-color: var(--color-background-homepage);
+  background-color: var(--color-background-page);
   transition:
     transform 150ms ease-out,
     border-color 150ms ease-out;

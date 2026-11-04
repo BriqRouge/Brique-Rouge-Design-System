@@ -19,8 +19,7 @@
   line-height: var(--typography-line-height-x6);
   letter-spacing: 2.4px;
   text-transform: uppercase;
-  /* Écart signalé vs Figma (#a3a3a3) : aucun token ne correspond exactement,
-     --color-neutral-400 (#a1a1a1) est la valeur la plus proche existante. */
+  /* text/muted = neutral/500 (#737373) depuis le 2026-11-04 : contraste AA (4.5:1) */
   color: var(--color-text-muted);
   margin: 0;
 }

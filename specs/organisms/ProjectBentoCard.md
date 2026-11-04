@@ -58,7 +58,7 @@ Réutilise `ProjectCardDescription` (molécule) comme panneau de description ré
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-border-bento-cards-idle` | `#e5e5e5` | Bordure de la façade au repos |
-| `--color-background-homepage` | `#fafafa` | Fond de la façade |
+| `--color-background-page` | `#fafafa` | Fond de la façade (`background/homepage`, doublon, fusionné le 2026-11-04) |
 | `--color-background-projects-odaptos` | `#3453dc` | Plaque de fond + bordure au survol, Odaptos |
 | `--color-background-projects-bpce` | `#9b75ab` | Plaque de fond + bordure au survol, BPCE |
 | `--color-background-projects-ibp` | `#949ae5` | Plaque de fond + bordure au survol, iBP |

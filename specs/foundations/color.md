@@ -156,7 +156,7 @@
 | `color.text.secondary` | `#404040` |
 | `color.text.body` | `#525252` |
 | `color.text.tertiary` | `#737373` |
-| `color.text.muted` | `#a1a1a1` |
+| `color.text.muted` | `#737373` |
 | `color.text.accent` | `#3453dc` |
 | `color.icon.button.info` | `#3453dc` |
 | `color.icon.button.warning` | `#e1742e` |
@@ -179,7 +179,6 @@
 | `color.icon.menu-button.outline-black` | `#171717` |
 | `color.icon.menu-button.disabled` | `#d4d4d4` |
 | `color.background.button.disabled` | `#f5f5f5` |
-| `color.background.homepage` | `#fafafa` |
 | `color.background.projects.odaptos` | `#3453dc` |
 | `color.background.projects.bpce` | `#9b75ab` |
 | `color.background.projects.ibp` | `#949ae5` |

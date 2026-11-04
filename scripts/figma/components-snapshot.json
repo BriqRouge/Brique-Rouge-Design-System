@@ -275,10 +275,10 @@
     },
     "ProjectSectionDescription": {
       "node": "2248:28967",
-      "hash": "cdccc5bf",
+      "hash": "b2950f6c",
       "props": "39180b45",
       "variants": {
-        "Cards / Project_Section_Description": "d6a0a7b8"
+        "Cards / Project_Section_Description": "a8658f5c"
       },
       "deps": [
         "AlertBanner",
@@ -287,10 +287,10 @@
     },
     "ProjectSectionsDescription": {
       "node": "744:20765",
-      "hash": "6ae1463a",
+      "hash": "15ef9c00",
       "props": "db072c1b",
       "variants": {
-        "Cards / Project_Sections_Descritpion": "a3ba6b94"
+        "Cards / Project_Sections_Descritpion": "9fa45c08"
       },
       "deps": [
         "AlertBanner",
