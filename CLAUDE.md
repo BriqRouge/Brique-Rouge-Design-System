@@ -324,7 +324,7 @@ liens.
 
 | Niveau | Composants |
 |---|---|
-| **Atomes** (`packages/react/src/components/atoms/`) | `Button`, `MenuButton`, `FrameLogo`, `LogoCompanies`, `MacbookMockup`, `Tag` |
+| **Atomes** (`packages/react/src/components/atoms/`) | `Button`, `MenuButton`, `FrameLogo`, `LogoCompanies`, `MacbookMockup`, `Tag`, `Badge` |
 | **Molécules** (`packages/react/src/components/molecules/`) | `AlertBanner`, `DropdownMenu`, `DropdownMenuButton`, `ProjectCardDescription`, `ProjectOverview`, `MetaInfoItem` |
 | **Organismes** (`packages/react/src/components/organisms/`) | `DropdownMenuTrigger`, `TopNav`, `ProjectBentoCard`, `ProjectSectionDescription`, `ProjectSectionsDescription` |
 
