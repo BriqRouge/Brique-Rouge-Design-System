@@ -364,6 +364,12 @@ pnpm --filter @brique-rouge/react test --reporter=verbose
 pnpm --filter @brique-rouge/storybook dev
 ```
 
+### Régression visuelle (Chromatic)
+`.github/workflows/chromatic.yml` publie chaque story sur Chromatic à chaque PR et sur
+`main`. Un écart visuel ne casse pas la CI : il se valide ou se refuse dans Chromatic
+(statut « UI Tests » de la PR) ; ce qui est mergé sur `main` devient la référence.
+Inactif tant que le secret GitHub `CHROMATIC_PROJECT_TOKEN` n'est pas configuré.
+
 ### Structure des stories
 ```
 src/stories/

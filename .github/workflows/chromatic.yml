@@ -1,0 +1,49 @@
+# Régression visuelle — Chromatic compare chaque story à sa référence validée.
+# Inactif tant que le secret CHROMATIC_PROJECT_TOKEN n'est pas configuré
+# (Settings → Secrets and variables → Actions). Voir CONTRIBUTING.md.
+name: Chromatic
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  chromatic:
+    name: Régression visuelle
+    runs-on: ubuntu-latest
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+    steps:
+      - name: Secret absent — étape ignorée
+        if: env.CHROMATIC_PROJECT_TOKEN == ''
+        run: echo "::notice::CHROMATIC_PROJECT_TOKEN non configuré — régression visuelle ignorée."
+      - uses: actions/checkout@v7
+        if: env.CHROMATIC_PROJECT_TOKEN != ''
+        with:
+          fetch-depth: 0 # Chromatic retrouve la référence via l'historique git
+      - uses: pnpm/action-setup@v6
+        if: env.CHROMATIC_PROJECT_TOKEN != ''
+      - uses: actions/setup-node@v7
+        if: env.CHROMATIC_PROJECT_TOKEN != ''
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - if: env.CHROMATIC_PROJECT_TOKEN != ''
+        run: pnpm install --frozen-lockfile
+      - if: env.CHROMATIC_PROJECT_TOKEN != ''
+        run: pnpm turbo run build --filter=@brique-rouge/tokens
+      - if: env.CHROMATIC_PROJECT_TOKEN != ''
+        run: pnpm turbo run build --filter=@brique-rouge/storybook
+      - name: Publier sur Chromatic
+        if: env.CHROMATIC_PROJECT_TOKEN != ''
+        # --exit-zero-on-changes : un écart visuel ne casse pas la CI ; il se
+        # valide ou se refuse dans Chromatic (statut « UI Tests » sur la PR).
+        # --auto-accept-changes sur main : ce qui est mergé devient la référence.
+        run: >
+          pnpm --filter @brique-rouge/storybook exec chromatic
+          --project-token="$CHROMATIC_PROJECT_TOKEN"
+          --storybook-build-dir=storybook-static
+          --exit-zero-on-changes
+          --auto-accept-changes=main

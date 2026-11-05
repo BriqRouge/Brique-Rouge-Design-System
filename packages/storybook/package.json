@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "storybook dev -p 6007",
     "build": "storybook build",
+    "chromatic": "chromatic --storybook-build-dir=storybook-static --exit-zero-on-changes",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@storybook/react": "^8.6.18",
     "@storybook/react-vite": "^8.6.18",
     "@types/react": "^18.3.0",
+    "chromatic": "^18.14.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "storybook": "^8.6.18",
