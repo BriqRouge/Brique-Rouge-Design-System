@@ -50,14 +50,15 @@ Réutilise `ProjectSectionDescription` (organisme) — chaque section est fourni
 | `--typography-heading-font-family`/`-font-weight` | — | Titre de la carte |
 | `--typography-font-size-5xl` | `48px` | Titre de la carte |
 | `--spacing-x16`/`-x4`/`-x6`/`-x2` | `64px`/`16px`/`24px`/`8px` | Gaps internes |
-| `--spacing-x10` | `40px` | Border-radius de la carte (token de spacing réutilisé en radius côté Figma, cf. `ProjectOverview`) |
+| `--border-radius-section-card` | `40px` | Border-radius de la carte (Figma : `border-radius/section-card`, depuis le 2026-11-05) |
+| `--spacing-layout-2xl` | `128px` | Padding horizontal de la carte |
 | `--border-radius-full` | `999px` | Barres d'accent et séparateur |
 
 ## Règles d'usage
 
 - Les sections passées en `children` sont typiquement des `<ProjectSectionDescription />`, mais le composant ne force rien structurellement — n'importe quel `ReactNode` reçoit un séparateur entre éléments
 - Séparateur en dégradé (`linear-gradient` vers transparent), pas une bordure pleine — reproduit fidèlement le style du Figma source
-- **Écart signalé vs Figma** : padding horizontal de la carte (128px) sans token correspondant — l'échelle spacing s'arrête à `--spacing-x20` (80px). Valeur littérale utilisée
+- Padding horizontal de la carte : `--spacing-layout-2xl` (128px), lié dans Figma depuis le 2026-11-05
 - **Correction après audit** : le border-radius de la carte (40px) a d'abord été signalé comme sans token, mais le Figma source référence en réalité `var(--spacing/x10, 40px)` pour cette valeur — un token de spacing réutilisé en border-radius, pas une vraie lacune de l'échelle
 
 ## Tests

@@ -3,7 +3,7 @@
   align-items: flex-start;
   gap: var(--spacing-x6);
   padding: var(--spacing-x8);
-  border-radius: var(--spacing-x10);
+  border-radius: var(--border-radius-section-card);
   box-sizing: border-box;
   width: 100%;
 }

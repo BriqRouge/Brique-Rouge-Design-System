@@ -90,6 +90,7 @@ StyleDictionary.registerTransform({
 
 // ─── Transformer : nombres → px ou valeur d'opacité brute ────────────────
 // Règle : si le chemin du token contient "opacity" → valeur brute (ex: 0.5)
+//         si le chemin contient "duration" → valeur en ms (ex: 150ms)
 //         sinon → valeur en px (ex: 16px)
 StyleDictionary.registerTransform({
   name: 'number/px-or-opacity',
@@ -110,6 +111,7 @@ StyleDictionary.registerTransform({
     const isLineHeightRatio =
       token.path.some((p) => p.toLowerCase() === 'line-height') &&
       LINE_HEIGHT_RATIOS.includes(lastSegment);
+    if (token.path.some((p) => p.toLowerCase() === 'duration')) return `${num}ms`;
     return (isOpacity || isFontWeight || isLineHeightRatio) ? String(num) : `${num}px`;
   },
 });

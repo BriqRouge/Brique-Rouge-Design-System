@@ -3,11 +3,11 @@
   "components": {
     "AlertBanner": {
       "node": "755:21871",
-      "hash": "29f12a15",
+      "hash": "e376ba67",
       "props": "644b7a27",
       "variants": {
-        "Type=info": "29549753",
-        "Type=warning": "c5e7c45a"
+        "Type=info": "d297f273",
+        "Type=warning": "564bd374"
       },
       "deps": [
         "Button"
@@ -15,24 +15,24 @@
     },
     "Badge": {
       "node": "184:18566",
-      "hash": "f0f18af1",
+      "hash": "9ddb5f32",
       "props": "230f022c",
       "variants": {
-        "Size=lg, Style=contained": "f5943cbe",
-        "Size=lg, Style=outlined": "348d9f44",
-        "Size=md, Style=contained": "d6302ddc",
-        "Size=md, Style=outlined": "c167171c",
-        "Size=sm, Style=contained": "96387c5c",
-        "Size=sm, Style=outlined": "cd0d4569"
+        "Size=lg, Style=contained": "3597088a",
+        "Size=lg, Style=outlined": "ef64995c",
+        "Size=md, Style=contained": "e666a91c",
+        "Size=md, Style=outlined": "3831acd0",
+        "Size=sm, Style=contained": "e820f340",
+        "Size=sm, Style=outlined": "95bc14c1"
       },
       "deps": []
     },
     "BentoBox": {
       "node": "2049:20632",
-      "hash": "1e00ac25",
+      "hash": "04c698f0",
       "props": null,
       "variants": {
-        "Bento-box": "5870e415"
+        "Bento-box": "1057b261"
       },
       "deps": [
         "MacbookMockup",
@@ -41,11 +41,11 @@
     },
     "BulletBrique": {
       "node": "2131:21897",
-      "hash": "f211962d",
+      "hash": "57a4ad78",
       "props": "17ea1915",
       "variants": {
-        "State=closed": "ac92f7ea",
-        "State=opened": "2a2dac8d"
+        "State=closed": "cb711b88",
+        "State=opened": "db81e51d"
       },
       "deps": [
         "Badge"
@@ -53,54 +53,54 @@
     },
     "Button": {
       "node": "1506:20751",
-      "hash": "4f7f6e67",
+      "hash": "f9b1b373",
       "props": "6aa28756",
       "variants": {
-        "Variant=primary, Color-scheme=error, State=focus": "acc6900f",
-        "Variant=primary, Color-scheme=error, State=hovered": "60d36729",
-        "Variant=primary, Color-scheme=error, State=idle": "71964b41",
-        "Variant=primary, Color-scheme=info, State=focus": "a4c8cd56",
-        "Variant=primary, Color-scheme=info, State=hovered": "8915506e",
-        "Variant=primary, Color-scheme=info, State=idle": "39af9db4",
-        "Variant=primary, Color-scheme=neutral, State=disabled": "a865fdc4",
-        "Variant=primary, Color-scheme=neutral, State=focus": "fde45e41",
-        "Variant=primary, Color-scheme=neutral, State=hovered": "a2592397",
-        "Variant=primary, Color-scheme=neutral, State=idle": "b0d0c0df",
-        "Variant=primary, Color-scheme=success, State=focus": "ae335b70",
-        "Variant=primary, Color-scheme=success, State=hovered": "287dbe01",
-        "Variant=primary, Color-scheme=success, State=idle": "6b07a76e",
-        "Variant=primary, Color-scheme=warning, State=focus": "9a5b7540",
-        "Variant=primary, Color-scheme=warning, State=hovered": "2b2c372a",
-        "Variant=primary, Color-scheme=warning, State=idle": "10ec4ef2",
-        "Variant=secondary, Color-scheme=error, State=focus": "ae8eb91c",
-        "Variant=secondary, Color-scheme=error, State=hovered": "47a7be45",
-        "Variant=secondary, Color-scheme=error, State=idle": "1bb8070f",
-        "Variant=secondary, Color-scheme=info, State=focus": "c7a9afd7",
-        "Variant=secondary, Color-scheme=info, State=hovered": "844c12f6",
-        "Variant=secondary, Color-scheme=info, State=idle": "9c9341e5",
-        "Variant=secondary, Color-scheme=neutral, State=disabled": "d792b64c",
-        "Variant=secondary, Color-scheme=neutral, State=focus": "e9ae3d20",
-        "Variant=secondary, Color-scheme=neutral, State=hovered": "a95a6502",
-        "Variant=secondary, Color-scheme=neutral, State=idle": "8dccec0f",
-        "Variant=secondary, Color-scheme=success, State=focus": "4f5fb541",
-        "Variant=secondary, Color-scheme=success, State=hovered": "4faf02c5",
-        "Variant=secondary, Color-scheme=success, State=idle": "49db69d0",
-        "Variant=secondary, Color-scheme=warning, State=focus": "222e8a65",
-        "Variant=secondary, Color-scheme=warning, State=hovered": "609aa19a",
-        "Variant=secondary, Color-scheme=warning, State=idle": "202ed1cb",
-        "Variant=tertiary, Color-scheme=neutral, State=disabled": "54945c7b",
-        "Variant=tertiary, Color-scheme=neutral, State=focus": "69e0ea89",
-        "Variant=tertiary, Color-scheme=neutral, State=hovered": "fdeb6a13",
-        "Variant=tertiary, Color-scheme=neutral, State=idle": "bdc97b1b"
+        "Variant=primary, Color-scheme=error, State=focus": "0405545b",
+        "Variant=primary, Color-scheme=error, State=hovered": "aefbeb75",
+        "Variant=primary, Color-scheme=error, State=idle": "440986bd",
+        "Variant=primary, Color-scheme=info, State=focus": "77d14b16",
+        "Variant=primary, Color-scheme=info, State=hovered": "83094b02",
+        "Variant=primary, Color-scheme=info, State=idle": "4efec474",
+        "Variant=primary, Color-scheme=neutral, State=disabled": "e44cae28",
+        "Variant=primary, Color-scheme=neutral, State=focus": "e14c2d85",
+        "Variant=primary, Color-scheme=neutral, State=hovered": "8d660493",
+        "Variant=primary, Color-scheme=neutral, State=idle": "562e7cb3",
+        "Variant=primary, Color-scheme=success, State=focus": "bc52008c",
+        "Variant=primary, Color-scheme=success, State=hovered": "780611b5",
+        "Variant=primary, Color-scheme=success, State=idle": "5a5619ea",
+        "Variant=primary, Color-scheme=warning, State=focus": "0524e654",
+        "Variant=primary, Color-scheme=warning, State=hovered": "998f8186",
+        "Variant=primary, Color-scheme=warning, State=idle": "1e042156",
+        "Variant=secondary, Color-scheme=error, State=focus": "be60a104",
+        "Variant=secondary, Color-scheme=error, State=hovered": "6f8cb7d9",
+        "Variant=secondary, Color-scheme=error, State=idle": "34ea5197",
+        "Variant=secondary, Color-scheme=info, State=focus": "45d317ef",
+        "Variant=secondary, Color-scheme=info, State=hovered": "f4e92932",
+        "Variant=secondary, Color-scheme=info, State=idle": "76e5bd5d",
+        "Variant=secondary, Color-scheme=neutral, State=disabled": "1e441338",
+        "Variant=secondary, Color-scheme=neutral, State=focus": "4d32c3f8",
+        "Variant=secondary, Color-scheme=neutral, State=hovered": "80e44bc6",
+        "Variant=secondary, Color-scheme=neutral, State=idle": "bda36427",
+        "Variant=secondary, Color-scheme=success, State=focus": "807e1089",
+        "Variant=secondary, Color-scheme=success, State=hovered": "e4e28bd1",
+        "Variant=secondary, Color-scheme=success, State=idle": "154260e8",
+        "Variant=secondary, Color-scheme=warning, State=focus": "0b43ebfd",
+        "Variant=secondary, Color-scheme=warning, State=hovered": "cbe8e21e",
+        "Variant=secondary, Color-scheme=warning, State=idle": "0b01ac93",
+        "Variant=tertiary, Color-scheme=neutral, State=disabled": "278ee233",
+        "Variant=tertiary, Color-scheme=neutral, State=focus": "9b0defe2",
+        "Variant=tertiary, Color-scheme=neutral, State=hovered": "6dac298b",
+        "Variant=tertiary, Color-scheme=neutral, State=idle": "de809283"
       },
       "deps": []
     },
     "DropdownMenu": {
       "node": "375:19690",
-      "hash": "d92a492b",
+      "hash": "cf06b87f",
       "props": "918c8c57",
       "variants": {
-        "DropdownMenu": "5ddba535"
+        "DropdownMenu": "99dc48a1"
       },
       "deps": [
         "DropdownMenuButton",
@@ -109,23 +109,23 @@
     },
     "DropdownMenuButton": {
       "node": "370:19497",
-      "hash": "5c298409",
+      "hash": "1e8b8b8d",
       "props": "ede9662d",
       "variants": {
-        "Company=bpce, State=hovered, Type=activated": "6df36c92",
-        "Company=bpce, State=idle, Type=activated": "e05b5679",
-        "Company=conseil-constitutionnel, State=hovered, Type=deactivated": "8b72f385",
-        "Company=conseil-constitutionnel, State=idle, Type=deactivated": "6e56f5fb",
-        "Company=ibp, State=hovered, Type=activated": "bbdc9a78",
-        "Company=ibp, State=idle, Type=activated": "c8c4bd22",
-        "Company=none, State=hovered, Type=activated": "d4a22f1b",
-        "Company=none, State=hovered, Type=deactivated": "92ceadb1",
-        "Company=none, State=idle, Type=activated": "d3bbebe3",
-        "Company=none, State=idle, Type=deactivated": "b3bde83c",
-        "Company=odaptos, State=hovered, Type=activated": "06458ba8",
-        "Company=odaptos, State=idle, Type=activated": "b2c86dcd",
-        "Company=vinci, State=hovered, Type=deactivated": "87a108d1",
-        "Company=vinci, State=idle, Type=deactivated": "4c7949af"
+        "Company=bpce, State=hovered, Type=activated": "93ce5366",
+        "Company=bpce, State=idle, Type=activated": "02c1aa19",
+        "Company=conseil-constitutionnel, State=hovered, Type=deactivated": "5ef882b9",
+        "Company=conseil-constitutionnel, State=idle, Type=deactivated": "c583639b",
+        "Company=ibp, State=hovered, Type=activated": "37c8d3cc",
+        "Company=ibp, State=idle, Type=activated": "81755642",
+        "Company=none, State=hovered, Type=activated": "740124b7",
+        "Company=none, State=hovered, Type=deactivated": "d8f04059",
+        "Company=none, State=idle, Type=activated": "f2379003",
+        "Company=none, State=idle, Type=deactivated": "e9fc5d5c",
+        "Company=odaptos, State=hovered, Type=activated": "034686dc",
+        "Company=odaptos, State=idle, Type=activated": "5caef9ad",
+        "Company=vinci, State=hovered, Type=deactivated": "319189eb",
+        "Company=vinci, State=idle, Type=deactivated": "8321eb0f"
       },
       "deps": [
         "LogoCompanies"
@@ -133,11 +133,11 @@
     },
     "DropdownMenuTrigger": {
       "node": "379:18464",
-      "hash": "19849eab",
+      "hash": "18d759e5",
       "props": "06e9b764",
       "variants": {
-        "State=closed": "d39aa326",
-        "State=open": "a818b6a3"
+        "State=closed": "c9c75f34",
+        "State=open": "2c0a3501"
       },
       "deps": [
         "DropdownMenu",
@@ -243,61 +243,61 @@
     },
     "MenuButton": {
       "node": "1345:21426",
-      "hash": "c7e78504",
+      "hash": "0443fbd4",
       "props": "10f2fe7e",
       "variants": {
-        "Type=contained, State=disabled, Size=md, Color-scheme=default": "2faa9110",
-        "Type=contained, State=disabled, Size=nm, Color-scheme=default": "5b8df715",
-        "Type=contained, State=disabled, Size=sm, Color-scheme=default": "865fcb9f",
-        "Type=contained, State=focus, Size=md, Color-scheme=default": "ac57063d",
-        "Type=contained, State=focus, Size=nm, Color-scheme=default": "e762973a",
-        "Type=contained, State=focus, Size=sm, Color-scheme=default": "113a1c6c",
-        "Type=contained, State=hovered, Size=md, Color-scheme=default": "5546ddc8",
-        "Type=contained, State=hovered, Size=nm, Color-scheme=default": "80f14064",
-        "Type=contained, State=hovered, Size=sm, Color-scheme=default": "d1ec628e",
-        "Type=contained, State=idle, Size=md, Color-scheme=default": "9d3e7b2e",
-        "Type=contained, State=idle, Size=nm, Color-scheme=default": "46804e32",
-        "Type=contained, State=idle, Size=sm, Color-scheme=default": "33e0c1f2",
-        "Type=outlined, State=disabled, Size=md, Color-scheme=dark": "f9fd1cf8",
-        "Type=outlined, State=disabled, Size=md, Color-scheme=light": "82a71036",
-        "Type=outlined, State=disabled, Size=nm, Color-scheme=dark": "f07e6de6",
-        "Type=outlined, State=disabled, Size=nm, Color-scheme=light": "cc2a01dd",
-        "Type=outlined, State=disabled, Size=sm, Color-scheme=dark": "9fc324ec",
-        "Type=outlined, State=disabled, Size=sm, Color-scheme=light": "67363035",
-        "Type=outlined, State=focus, Size=md, Color-scheme=dark": "2669bce1",
-        "Type=outlined, State=focus, Size=md, Color-scheme=light": "b3dcb0d1",
-        "Type=outlined, State=focus, Size=nm, Color-scheme=dark": "ed83ba24",
-        "Type=outlined, State=focus, Size=nm, Color-scheme=light": "2a4528e8",
-        "Type=outlined, State=focus, Size=sm, Color-scheme=dark": "f94cc5be",
-        "Type=outlined, State=focus, Size=sm, Color-scheme=light": "7864858c",
-        "Type=outlined, State=hovered, Size=md, Color-scheme=dark": "41afc4b6",
-        "Type=outlined, State=hovered, Size=md, Color-scheme=light": "529f2456",
-        "Type=outlined, State=hovered, Size=nm, Color-scheme=dark": "065fdc9e",
-        "Type=outlined, State=hovered, Size=nm, Color-scheme=light": "56ab5562",
-        "Type=outlined, State=hovered, Size=sm, Color-scheme=dark": "9f86fbf4",
-        "Type=outlined, State=hovered, Size=sm, Color-scheme=light": "d4d71942",
-        "Type=outlined, State=idle, Size=md, Color-scheme=dark": "777c2b75",
-        "Type=outlined, State=idle, Size=md, Color-scheme=light": "ad7b553f",
-        "Type=outlined, State=idle, Size=nm, Color-scheme=dark": "a447738f",
-        "Type=outlined, State=idle, Size=nm, Color-scheme=light": "f20e2a63",
-        "Type=outlined, State=idle, Size=sm, Color-scheme=dark": "1a363ea1",
-        "Type=outlined, State=idle, Size=sm, Color-scheme=light": "000a7011"
+        "Type=contained, State=disabled, Size=md, Color-scheme=default": "9d1d5778",
+        "Type=contained, State=disabled, Size=nm, Color-scheme=default": "72bb67bd",
+        "Type=contained, State=disabled, Size=sm, Color-scheme=default": "39e3911f",
+        "Type=contained, State=focus, Size=md, Color-scheme=default": "006e9895",
+        "Type=contained, State=focus, Size=nm, Color-scheme=default": "aa32a3f2",
+        "Type=contained, State=focus, Size=sm, Color-scheme=default": "89750bac",
+        "Type=contained, State=hovered, Size=md, Color-scheme=default": "18ef419f",
+        "Type=contained, State=hovered, Size=nm, Color-scheme=default": "f1d1c65c",
+        "Type=contained, State=hovered, Size=sm, Color-scheme=default": "c2ee9e4e",
+        "Type=contained, State=idle, Size=md, Color-scheme=default": "537973dd",
+        "Type=contained, State=idle, Size=nm, Color-scheme=default": "c9d7f52a",
+        "Type=contained, State=idle, Size=sm, Color-scheme=default": "bef48772",
+        "Type=outlined, State=disabled, Size=md, Color-scheme=dark": "2cd9f340",
+        "Type=outlined, State=disabled, Size=md, Color-scheme=light": "ad57586e",
+        "Type=outlined, State=disabled, Size=nm, Color-scheme=dark": "38b62cce",
+        "Type=outlined, State=disabled, Size=nm, Color-scheme=light": "7a18e655",
+        "Type=outlined, State=disabled, Size=sm, Color-scheme=dark": "2aadf66c",
+        "Type=outlined, State=disabled, Size=sm, Color-scheme=light": "1b4090b5",
+        "Type=outlined, State=focus, Size=md, Color-scheme=dark": "9d612659",
+        "Type=outlined, State=focus, Size=md, Color-scheme=light": "20484219",
+        "Type=outlined, State=focus, Size=nm, Color-scheme=dark": "ae6dfe5c",
+        "Type=outlined, State=focus, Size=nm, Color-scheme=light": "7fe3b1f0",
+        "Type=outlined, State=focus, Size=sm, Color-scheme=dark": "4bbca53e",
+        "Type=outlined, State=focus, Size=sm, Color-scheme=light": "6121a2cc",
+        "Type=outlined, State=hovered, Size=md, Color-scheme=dark": "a7d76c7f",
+        "Type=outlined, State=hovered, Size=md, Color-scheme=light": "2c3bba93",
+        "Type=outlined, State=hovered, Size=nm, Color-scheme=dark": "34e4a856",
+        "Type=outlined, State=hovered, Size=nm, Color-scheme=light": "52a247ca",
+        "Type=outlined, State=hovered, Size=sm, Color-scheme=dark": "cc93f674",
+        "Type=outlined, State=hovered, Size=sm, Color-scheme=light": "2a7f4702",
+        "Type=outlined, State=idle, Size=md, Color-scheme=dark": "c8f70a5e",
+        "Type=outlined, State=idle, Size=md, Color-scheme=light": "5db78852",
+        "Type=outlined, State=idle, Size=nm, Color-scheme=dark": "14c1c513",
+        "Type=outlined, State=idle, Size=nm, Color-scheme=light": "72573f1f",
+        "Type=outlined, State=idle, Size=sm, Color-scheme=dark": "cb2b35c5",
+        "Type=outlined, State=idle, Size=sm, Color-scheme=light": "128eb80d"
       },
       "deps": []
     },
     "MetaInfoItem": {
       "node": "797:19440",
-      "hash": "0a3f894d",
+      "hash": "bac5abde",
       "props": "762c4a51",
       "variants": {
-        "Interests=lecture, State=hovered": "66201dde",
-        "Interests=lecture, State=idle": "4f2c14ec",
-        "Interests=location, State=hovered": "922b111e",
-        "Interests=location, State=idle": "0dce9231",
-        "Interests=music, State=hovered": "793dfa13",
-        "Interests=music, State=idle": "ea651aae",
-        "Interests=video-game, State=hovered": "cff5e513",
-        "Interests=video-game, State=idle": "5d866065"
+        "Interests=lecture, State=hovered": "8e8954ea",
+        "Interests=lecture, State=idle": "b48049f0",
+        "Interests=location, State=hovered": "058c59e0",
+        "Interests=location, State=idle": "bfe600c3",
+        "Interests=music, State=hovered": "c83f5889",
+        "Interests=music, State=idle": "6511543c",
+        "Interests=video-game, State=hovered": "152d4087",
+        "Interests=video-game, State=idle": "86257281"
       },
       "deps": [
         "LogoCompanies"
@@ -305,14 +305,14 @@
     },
     "ProjectBentoCard": {
       "node": "2032:20121",
-      "hash": "3d7d5c6b",
+      "hash": "e9875ded",
       "props": "32b0f90c",
       "variants": {
-        "State=hovered, Project=bpce": "18fbb372",
-        "State=hovered, Project=conseil-constitutionnel": "8ab7f7f2",
-        "State=hovered, Project=cv": "94f5405f",
-        "State=hovered, Project=ibp": "6ce96f50",
-        "State=hovered, Project=odaptos": "fc47b31d",
+        "State=hovered, Project=bpce": "fea63586",
+        "State=hovered, Project=conseil-constitutionnel": "d86e0aca",
+        "State=hovered, Project=cv": "63f7849b",
+        "State=hovered, Project=ibp": "5c6dc410",
+        "State=hovered, Project=odaptos": "1a9f603d",
         "State=idle, Project=bpce": "c7a116de",
         "State=idle, Project=conseil-constitutionnel": "832ddb99",
         "State=idle, Project=cv": "2037444f",
@@ -326,29 +326,29 @@
     },
     "ProjectCardDescription": {
       "node": "2040:19251",
-      "hash": "3299f1fd",
+      "hash": "4526e009",
       "props": "1eba9e74",
       "variants": {
-        "Type=cv": "44cae271",
-        "Type=default": "469c5fca"
+        "Type=cv": "e99c705d",
+        "Type=default": "7421263e"
       },
       "deps": []
     },
     "ProjectOverview": {
       "node": "2248:55550",
-      "hash": "fe689e60",
+      "hash": "ed058e03",
       "props": null,
       "variants": {
-        "Overview Projet": "c77281cb"
+        "Overview Projet": "ee1acfeb"
       },
       "deps": []
     },
     "ProjectSectionDescription": {
       "node": "2248:28967",
-      "hash": "b2950f6c",
+      "hash": "15a323bc",
       "props": "39180b45",
       "variants": {
-        "Cards / Project_Section_Description": "a8658f5c"
+        "Cards / Project_Section_Description": "17898b5f"
       },
       "deps": [
         "AlertBanner",
@@ -357,10 +357,10 @@
     },
     "ProjectSectionsDescription": {
       "node": "744:20765",
-      "hash": "15ef9c00",
+      "hash": "6ca18f53",
       "props": "db072c1b",
       "variants": {
-        "Cards / Project_Sections_Descritpion": "9fa45c08"
+        "Cards / Project_Sections_Descritpion": "2737898a"
       },
       "deps": [
         "AlertBanner",
@@ -386,15 +386,15 @@
     },
     "TopNav": {
       "node": "1702:20362",
-      "hash": "37553406",
+      "hash": "e47517a3",
       "props": "af5fbc7d",
       "variants": {
-        "Type=bpce": "f4592f88",
-        "Type=conseil-constitutionnel": "60ba14d8",
-        "Type=homepage": "983b811b",
-        "Type=ibp": "d65a7504",
-        "Type=odaptos": "2040c7e0",
-        "Type=opco-atlas": "db595881"
+        "Type=bpce": "fe6e1dd4",
+        "Type=conseil-constitutionnel": "78f51b8e",
+        "Type=homepage": "b19d8f7b",
+        "Type=ibp": "75961536",
+        "Type=odaptos": "d7d9faa4",
+        "Type=opco-atlas": "41011809"
       },
       "deps": [
         "DropdownMenu",

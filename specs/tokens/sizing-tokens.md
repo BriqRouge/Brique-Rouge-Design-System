@@ -21,10 +21,12 @@
 --sizing-x16: 64px;
 --sizing-x18: 72px;
 --sizing-x20: 80px;
+--sizing-x174: 696px;
 ```
 
 ## Sémantiques
 
 ```css
 --sizing-button-nm: 40px;
+--sizing-container-content: 696px;
 ```

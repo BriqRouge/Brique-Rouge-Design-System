@@ -45,6 +45,7 @@ interface MenuButtonProps {
 - `--color-text-menu-button-contained|outline-white|outline-black|disabled`
 - `--color-icon-menu-button-contained|outline-white|outline-black|disabled` (namespace `menu-button` — **renommé côté Figma** pour distinguer du composant `Button`, qui garde le namespace générique `button`)
 - `--border-radius-button`
+- `--motion-duration-fast` / `--motion-easing-standard` (transitions de survol, 150ms ease-out)
 - `--typography-button-sm-font-size` (12px, partage le `font-family` de `nm`), `--typography-button-nm-font-family`/`-font-size` (14px), `--typography-button-md-font-family`/`-font-size` (16px)
 
 **Padding :** sm/nm → 8px vertical / 12px horizontal (`--sizing-x3`), md → 8px vertical / 14px horizontal (`--spacing-x3-5`)
