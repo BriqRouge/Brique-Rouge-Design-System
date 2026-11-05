@@ -459,7 +459,7 @@ Le branch `main` est protégé. Toute modification passe obligatoirement par une
 Workflow à suivre pour chaque tâche :
 
 1. Créer une branche : `feat/component-button` (convention `feat/component-[name]` ou `feat/screens-[name]`)
-2. Committer les fichiers sur cette branche
+2. Committer les fichiers sur cette branche — avec un changeset (`pnpm changeset`) si la PR modifie `@brique-rouge/tokens` ou `@brique-rouge/react` (niveaux patch/minor/major : `CONTRIBUTING.md`)
 3. Push la branche : `git push origin feat/component-button`
 4. Ouvrir une PR sur GitHub vers `main`
 5. Attendre que les 2 status checks CI passent (Tests + Lint)
