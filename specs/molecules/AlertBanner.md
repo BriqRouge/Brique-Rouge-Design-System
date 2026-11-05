@@ -36,6 +36,7 @@ interface AlertBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
+| `--motion-duration-fast` / `--motion-easing-standard` | `150ms` / `ease-out` | Transitions de survol |
 | `--color-background-notification-info` | `#f0f4fe` | Fond, type info |
 | `--color-background-notification-warning` | `#fdf7ef` | Fond, type warning |
 | `--color-border-notification-info` | `#6c95ee` | Bordure, type info |

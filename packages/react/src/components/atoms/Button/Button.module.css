@@ -19,9 +19,9 @@
   text-decoration: none;
   box-sizing: border-box;
   transition:
-    background-color 150ms ease-out,
-    border-color 150ms ease-out,
-    color 150ms ease-out;
+    background-color var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 /* ─── Icônes ────────────────────────────────────────────────────────────────── */

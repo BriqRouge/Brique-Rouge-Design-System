@@ -1,5 +1,21 @@
 # Motion design
 
+## Tokens motion du DS
+
+Les durées et les courbes viennent de Figma (`motion/*`, synchronisées par `/sync-tokens`). Les transitions de prototype Figma ne peuvent pas lier de variable : ces tokens servent au code.
+
+| Token | Valeur | Usage |
+|-------|--------|-------|
+| `--motion-duration-fast` | `150ms` | Feedback de survol (Button, MenuButton, MetaInfoItem, AlertBanner, ProjectBentoCard) |
+| `--motion-duration-base` | `300ms` | Ouverture d'un contenu (BulletBrique) |
+| `--motion-easing-standard` | `ease-out` | Courbe par défaut des transitions de survol |
+| `--motion-easing-reveal` | `linear` | Ouverture BulletBrique (Smart Animate Figma linéaire) |
+
+- Jamais de durée ou de courbe en dur quand un token existe
+- Exceptions documentées : les boucles décoratives (lévitation BulletBrique 4993ms, logo TopNav 5s) et l'ouverture/fermeture de `DropdownMenuTrigger` (120ms / 200ms, courbes propres), sans token équivalent
+- `prefers-reduced-motion` : réduire à `1ms` (valeur technique, pas un token)
+
+
 ## Durées — la règle 100/300/500
 
 | Durée | Usage | Exemples |

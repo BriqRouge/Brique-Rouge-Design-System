@@ -56,7 +56,7 @@ Le bouton porte `aria-expanded` et `aria-controls`. Fermée, la liste est en `vi
 - **Lévitation en boucle**, 4993ms. La brique monte de 6,667px (montée sur 32 % du cycle, descente sur le reste, ease-in-out sinusoïdal), l'ombre rétrécit (×0,82) et s'estompe (0,22 → 0,10)
 - **Ouverture** : 300ms linéaire (Smart Animate Figma). Hauteur via `grid-template-rows`, exception documentée à la règle « n'animer que transform/opacity », plus fondu des badges
 - `prefers-reduced-motion: reduce` : lévitation arrêtée, ouverture en 1ms
-- Valeurs codées en dur dans les keyframes : pas de token motion dans le DS
+- Ouverture : `--motion-duration-base` / `--motion-easing-reveal`. Lévitation en boucle : valeurs codées en dur dans les keyframes (animation décorative, décision de Damien du 2026-11-05)
 
 ## Tokens CSS utilisés
 
@@ -64,6 +64,7 @@ Le bouton porte `aria-expanded` et `aria-controls`. Fermée, la liste est en `vi
 |-------|--------|-------|
 | `--color-text-primary` | `#171717` | Intitulé (Figma : `color/text/primary`) |
 | `--color-border-focus` | `#3453dc` | Contour de focus |
+| `--motion-duration-base` / `--motion-easing-reveal` | `300ms` / `linear` | Ouverture du panneau |
 | `--typography-font-family-sans` | — | Intitulé (style Figma `label/2xl-trim`) |
 | `--typography-font-size-2xl` | `24px` | Intitulé |
 | `--typography-font-weight-regular` | `400` | Intitulé |

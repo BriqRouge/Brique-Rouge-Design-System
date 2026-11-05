@@ -39,7 +39,7 @@ interface ProjectOverviewProps extends React.HTMLAttributes<HTMLDivElement> {
 | `--typography-font-size-3xl`/`-base` | `32px`/`16px` | Titre / reste |
 | `--typography-font-weight-medium`/`-regular` | `500`/`400` | Titre / reste |
 | `--spacing-x6`/`-x8` | `24px`/`32px` | Gap colonnes / padding |
-| `--spacing-x10` | `40px` | Border-radius (token de spacing réutilisé en radius côté Figma) |
+| `--border-radius-section-card` | `40px` | Border-radius (Figma : `border-radius/section-card`, depuis le 2026-11-05) |
 
 ## Règles d'usage
 

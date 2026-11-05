@@ -27,7 +27,7 @@
       var(--elevation-4-key-shadow-offset-x) var(--elevation-4-key-shadow-offset-y)
         var(--elevation-4-key-shadow-blur) var(--elevation-4-key-shadow-color)
     );
-  transition: left 150ms ease-out;
+  transition: left var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 :global([data-component='ds-br-project-bento-card']):hover .laptop,
@@ -142,10 +142,10 @@
         var(--elevation-4-key-shadow-blur) var(--elevation-4-key-shadow-color)
     );
   transition:
-    left 150ms ease-out,
-    top 150ms ease-out,
-    width 150ms ease-out,
-    height 150ms ease-out;
+    left var(--motion-duration-fast) var(--motion-easing-standard),
+    top var(--motion-duration-fast) var(--motion-easing-standard),
+    width var(--motion-duration-fast) var(--motion-easing-standard),
+    height var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 :global([data-component='ds-br-project-bento-card']):hover .phone,

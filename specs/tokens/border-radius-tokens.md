@@ -14,6 +14,7 @@
 --border-radius-xl: 16px;
 --border-radius-2xl: 24px;
 --border-radius-full: 999px;
+--border-radius-3xl: 40px;
 ```
 
 ## Sémantiques
@@ -23,4 +24,5 @@
 --border-radius-tag: 4px;
 --border-radius-dropdown-menu-button: 8px;
 --border-radius-bento-section: 12px;
+--border-radius-section-card: 40px;
 ```

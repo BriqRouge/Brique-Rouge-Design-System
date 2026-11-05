@@ -12,7 +12,7 @@
   width: 276px;
   height: 276px;
   box-sizing: border-box;
-  transition: width 150ms ease-out;
+  transition: width var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .card[data-shape='rectangle'] {
@@ -36,7 +36,7 @@
   inset: 0;
   border-radius: var(--border-radius-bento-section);
   opacity: 0;
-  transition: opacity 150ms ease-out;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .card:hover .surfaceBg,
@@ -75,8 +75,8 @@
   border-radius: var(--border-radius-bento-section);
   background-color: var(--color-background-page);
   transition:
-    transform 150ms ease-out,
-    border-color 150ms ease-out;
+    transform var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .card:hover .surfaceFront,
@@ -112,7 +112,7 @@
 }
 
 .hasHoverVisual .content {
-  transition: opacity 150ms ease-out;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .hasHoverVisual:hover .content,
@@ -127,7 +127,7 @@
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 150ms ease-out;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .card:hover .hoverContent,
@@ -147,8 +147,8 @@
   transform: translateY(var(--spacing-x2));
   pointer-events: none;
   transition:
-    opacity 150ms ease-out,
-    transform 150ms ease-out;
+    opacity var(--motion-duration-fast) var(--motion-easing-standard),
+    transform var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .card:hover .description,

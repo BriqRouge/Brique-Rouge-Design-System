@@ -33,11 +33,11 @@
 /* Icône par défaut toujours visible tant qu'aucune hoverIcon n'est fournie */
 .hoverIcon {
   opacity: 0;
-  transition: opacity 150ms ease-out;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .item.hasHoverIcon .icon {
-  transition: opacity 150ms ease-out;
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .item.hasHoverIcon:hover .icon,
@@ -75,8 +75,8 @@
      la plus proche. */
   background-color: var(--color-neutral-300);
   transition:
-    width 150ms ease-out,
-    opacity 150ms ease-out;
+    width var(--motion-duration-fast) var(--motion-easing-standard),
+    opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .item:hover .highlight,

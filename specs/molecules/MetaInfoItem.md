@@ -56,6 +56,7 @@ initialement), il s'avère que ce composant est un **vrai lien externe interacti
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
+| `--motion-duration-fast` / `--motion-easing-standard` | `150ms` / `ease-out` | Transitions de survol |
 | `--color-neutral-800` | `#262626` | Icône |
 | `--color-text-strong` | `#262626` | Texte |
 | `--color-neutral-300` | `#d4d4d4` | Surbrillance au survol |

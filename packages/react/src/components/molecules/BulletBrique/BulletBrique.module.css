@@ -117,9 +117,9 @@
   opacity: 0;
   visibility: hidden;
   transition:
-    grid-template-rows 300ms linear,
-    opacity 300ms linear,
-    visibility 300ms linear;
+    grid-template-rows var(--motion-duration-base) var(--motion-easing-reveal),
+    opacity var(--motion-duration-base) var(--motion-easing-reveal),
+    visibility var(--motion-duration-base) var(--motion-easing-reveal);
 }
 
 .is-expanded .panel {

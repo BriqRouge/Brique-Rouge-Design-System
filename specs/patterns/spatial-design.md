@@ -55,6 +55,14 @@ L'espacement crée la structure sans bordures ni séparateurs. Les éléments qu
 
 Principe : groupements serrés pour les éléments liés, séparations généreuses pour les sections distinctes.
 
+### Mise en page et conteneur
+
+| Token | Valeur | Usage |
+|-------|--------|-------|
+| `--spacing-layout-2xl` | `128px` | Padding horizontal des pages Projet et des cartes de section |
+| `--sizing-container-content` | `696px` | Largeur max du contenu centré de l'accueil (`max-width` + `margin-inline: auto`). À 1440px, elle donne les 372px de marge de la maquette |
+| `--border-radius-section-card` | `40px` | Rayon des grandes cartes de section (ProjectSectionsDescription, ProjectOverview) |
+
 ---
 
 ## Grilles et layouts

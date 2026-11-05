@@ -42,6 +42,7 @@ interface ButtonProps {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
+| `--motion-duration-fast` / `--motion-easing-standard` | `150ms` / `ease-out` | Transitions de survol |
 | `--color-button-primary` / `-hover` | `#262626` / `#404040` | Fond primary neutre |
 | `--color-button-secondary-hover` | `#262626` | Fond secondary neutre (hover, remplit) |
 | `--color-button-info` / `-hover` | `#3453dc` / `#2c41c9` | Fond primary + bordure/fond hover secondary, info |
