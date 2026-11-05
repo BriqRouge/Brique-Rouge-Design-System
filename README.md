@@ -93,6 +93,7 @@ make dev      # compile les tokens et lance Storybook sur http://localhost:6007
 | Fichier | Rôle |
 |---|---|
 | `ds.config.json` | Paramètres du projet : fichier Figma, page DS, responsable design |
+| `CONTRIBUTING.md` | Parcours d'une contribution : Figma d'abord, contrôles, changesets |
 | `CLAUDE.md` | Règles de travail de Claude Code sur ce dépôt |
 | `COMPONENTS.md` | Index des composants → fiches `specs/` |
 | `METHODOLOGY.md` | Les principes et le pourquoi de la méthode |

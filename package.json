@@ -10,9 +10,12 @@
     "lint": "turbo run lint",
     "tokens": "turbo run build --filter=@brique-rouge/tokens",
     "figma:publish": "figma connect publish",
-    "figma:unpublish": "figma connect unpublish"
+    "figma:unpublish": "figma connect unpublish",
+    "changeset": "changeset",
+    "version-packages": "changeset version"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "prettier": "^3.2.0",
     "turbo": "^2.11.10",
     "typescript": "^5.4.0"
