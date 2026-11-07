@@ -10,9 +10,11 @@
 // scripts/figma-sync-tokens.mjs recalcule l'empreinte de chaque morceau recopié
 // sur disque et refuse tout morceau altéré ou tronqué pendant la recopie.
 //
-// Format d'une ligne TSV : <nom>\t<type>\t<valeur>
+// Format d'une ligne TSV : <nom>\t<type>\t<valeur>[\t<valeur du mode suivant>…]
 //   type   : C (couleur) | F (nombre) | S (texte)
-//   valeur : valeur résolue (alias suivis jusqu'à la valeur finale)
+//   valeur : valeur résolue (alias suivis jusqu'à la valeur finale), une
+//            colonne par mode, dans l'ordre de `manifest.collections[].modes`
+//            (le mode par défaut de la collection en premier)
 //            C → #rrggbb, ou #rrggbbaa si alpha < 1
 //            F → nombre arrondi à 4 décimales
 //            S → texte brut
@@ -64,16 +66,22 @@ const manifest = { fileKey: figma.fileKey ?? null, collections: [] };
 const chunks = [];
 
 for (const collection of collections) {
-  const modeId = collection.modes[0].modeId;
+  // Mode par défaut en premier : sa valeur est la valeur de base du token.
+  const modes = [
+    ...collection.modes.filter((m) => m.modeId === collection.defaultModeId),
+    ...collection.modes.filter((m) => m.modeId !== collection.defaultModeId),
+  ];
   const lines = [];
   for (const id of collection.variableIds) {
     const v = byId.get(id);
     if (!v) continue;
-    lines.push(v.name + '\t' + TYPE[v.resolvedType] + '\t' + (await resolve(v, modeId, 0)));
+    const values = [];
+    for (const m of modes) values.push(await resolve(v, m.modeId, 0));
+    lines.push(v.name + '\t' + TYPE[v.resolvedType] + '\t' + values.join('\t'));
   }
   manifest.collections.push({
     name: collection.name,
-    modes: collection.modes.map((m) => m.name),
+    modes: modes.map((m) => m.name),
     count: lines.length,
   });
   for (let i = 0; i < lines.length; i += CHUNK_SIZE) {

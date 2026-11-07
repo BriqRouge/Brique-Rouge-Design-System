@@ -12,6 +12,7 @@ import {
   cssVarName,
   diffTokens,
   findUsages,
+  MODES_EXTENSION,
 } from './figma-sync-tokens.mjs';
 
 const chunk = (index, collection, tsv) => `#chunk ${index} ${collection} ${fnv1a(tsv)}\n${tsv}\n`;
@@ -63,16 +64,82 @@ test('un nom hors convention est refusé, pas corrigé', () => {
   assert.match(errors.join(), /nom hors convention/);
 });
 
-test('une valeur non résolue, une collection non déclarée ou multi-modes sont refusées', () => {
-  const tsv = 'border-radius/tag\tF\t!UNRESOLVED:alias-introuvable';
+test('une valeur non résolue, une collection non déclarée ou multi-modes non déclarée sont refusées', () => {
   const files = {
-    'manifest.json': manifest([{ name: 'theme', modes: ['Light', 'Dark'], count: 1 }], 1),
-    'chunk-0.tsv': chunk(0, 'theme', tsv),
+    'manifest.json': manifest(
+      [
+        { name: 'theme', modes: ['Light'], count: 1 },
+        { name: 'primitive', modes: ['Light', 'Dark'], count: 1 },
+      ],
+      2,
+    ),
+    'chunk-0.tsv': chunk(0, 'theme', 'border-radius/tag\tF\t!UNRESOLVED:alias-introuvable'),
+    'chunk-1.tsv': chunk(1, 'primitive', 'spacing/x2\tF\t8\t4'),
   };
   const all = readExport(files, DECLARED).errors.join('\n');
   assert.match(all, /valeur non résolue/);
   assert.match(all, /absente de packages\/tokens\/mapping\.config\.js/);
-  assert.match(all, /2 modes/);
+  assert.match(all, /2 modes \(Light, Dark\) — déclarer baseMode et belowBreakpointMode/);
+});
+
+// ─── Collections multi-modes (viewport) ──────────────────────────────────────
+const VIEWPORT_DECLARED = [
+  { figmaCollection: 'primitive' },
+  { figmaCollection: 'viewport', baseMode: 'desktop', belowBreakpointMode: 'mobile' },
+];
+const viewportFiles = (modes, tsv) => ({
+  'manifest.json': manifest([{ name: 'viewport', modes, count: 1 }], 1),
+  'chunk-0.tsv': chunk(0, 'viewport', tsv),
+});
+
+test('une collection multi-modes déclarée est lue : mode de base + autres modes', () => {
+  const { variables, errors } = readExport(
+    viewportFiles(['desktop', 'mobile'], 'spacing/layout/nav-inline\tF\t48\t16'),
+    VIEWPORT_DECLARED,
+  );
+  assert.deepEqual(errors, []);
+  assert.deepEqual(variables[0].modeValues, { mobile: '16' });
+  const { tokens } = buildTokens(variables);
+  assert.deepEqual(tokens.viewport.spacing.layout['nav-inline'], {
+    $value: 48,
+    $type: 'number',
+    $extensions: { [MODES_EXTENSION]: { mobile: 16 } },
+  });
+});
+
+test('des modes Figma dans un autre ordre que mapping.config.js sont refusés (défaut ≠ baseMode)', () => {
+  const { errors } = readExport(
+    viewportFiles(['mobile', 'desktop'], 'spacing/layout/nav-inline\tF\t16\t48'),
+    VIEWPORT_DECLARED,
+  );
+  assert.match(errors.join(), /modes Figma mobile, desktop/);
+});
+
+test('une ligne multi-modes avec une valeur manquante ou non résolue est refusée', () => {
+  const short = readExport(viewportFiles(['desktop', 'mobile'], 'spacing/x\tF\t48'), VIEWPORT_DECLARED);
+  assert.match(short.errors.join(), /2 valeur\(s\) attendue\(s\)/);
+  const broken = readExport(
+    viewportFiles(['desktop', 'mobile'], 'spacing/x\tF\t48\t!UNRESOLVED:alias-introuvable'),
+    VIEWPORT_DECLARED,
+  );
+  assert.match(broken.errors.join(), /\(mode mobile\) : valeur non résolue/);
+});
+
+test('deux collections qui produisent la même variable CSS sont refusées', () => {
+  const { errors } = buildTokens([
+    { collection: 'semantic', name: 'spacing/layout/nav-inline', type: 'F', value: '48' },
+    { collection: 'viewport', name: 'spacing/layout/nav-inline', type: 'F', value: '48' },
+  ]);
+  assert.match(errors.join(), /même variable CSS --spacing-layout-nav-inline/);
+});
+
+test('flatten et diffTokens suivent les valeurs de chaque mode', () => {
+  const token = (mobile) => ({
+    viewport: { s: { $value: 48, $type: 'number', $extensions: { [MODES_EXTENSION]: { mobile } } } },
+  });
+  const { changed } = diffTokens(flatten(token(16)), flatten(token(24)));
+  assert.deepEqual(changed, ['viewport/s@mobile']);
+  assert.equal(cssVarName('viewport/s@mobile'), '--s');
 });
 
 test('buildTokens produit le format attendu par Style Dictionary', () => {

@@ -60,3 +60,39 @@
 --typography-button-sm-font-size: 12px;
 --typography-button-sm-font-family: "ABC Favorit Pro Variable", sans-serif;
 ```
+
+## Selon le viewport
+
+Émises à la fin de `semantic.css` : la valeur change seule sous le breakpoint, sans media query côté composant.
+
+```css
+:root {
+  --typography-display-lg-font-size: 48px;
+  --typography-display-lg-line-height: 56px;
+  --typography-expressive-xl-font-size: 48px;
+  --typography-expressive-xl-line-height: 56px;
+  --typography-heading-xl-font-size: 32px;
+  --typography-heading-xl-line-height: 40px;
+  --typography-expressive-lg-font-size: 32px;
+  --typography-expressive-lg-line-height: 40px;
+  --typography-heading-lg-font-size: 24px;
+  --typography-heading-lg-line-height: 32px;
+  --typography-project-overview-title-font-size: 32px;
+}
+
+@media (width < 51em) {
+  :root {
+    --typography-display-lg-font-size: 32px;
+    --typography-display-lg-line-height: 40px;
+    --typography-expressive-xl-font-size: 32px;
+    --typography-expressive-xl-line-height: 40px;
+    --typography-heading-xl-font-size: 24px;
+    --typography-heading-xl-line-height: 32px;
+    --typography-expressive-lg-font-size: 24px;
+    --typography-expressive-lg-line-height: 32px;
+    --typography-heading-lg-font-size: 20px;
+    --typography-heading-lg-line-height: 28px;
+    --typography-project-overview-title-font-size: 24px;
+  }
+}
+```

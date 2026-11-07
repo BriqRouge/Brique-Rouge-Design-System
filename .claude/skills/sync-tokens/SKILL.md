@@ -90,6 +90,8 @@ avant l'étape 3) : chaque ligne qui change doit correspondre au rapport de l'é
 
 - Pas de token hors Figma : un token absent de Figma est supprimé de `tokens.json`.
 - Pas de renommage ni de correction de nom : le script refuse, la correction se fait dans Figma.
-- Pas de thèmes / multi-modes : le script refuse une collection à plusieurs modes tant
-  que `mapping.config.js` et le build ne le gèrent pas.
+- Multi-modes limité au couple « mode de base / mode sous le breakpoint » (collection
+  `viewport`) : une collection à plusieurs modes doit déclarer `baseMode` (= mode par
+  défaut dans Figma) et `belowBreakpointMode` dans `mapping.config.js`, sinon le script
+  la refuse. Pas de thèmes (clair/sombre…).
 - Pas d'export des styles Figma (effets, textes) : seules les Variables sont synchronisées.

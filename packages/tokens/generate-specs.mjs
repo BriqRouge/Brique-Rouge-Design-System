@@ -34,21 +34,33 @@ function collectLeaves(node, path, leaves) {
 const allLeaves = [];
 collectLeaves(tokens, [], allLeaves);
 
-// source = "primitive" | "semantic" (premier segment)
+// Valeurs des modes hors base (collection viewport) et breakpoint : écrits par
+// style-dictionary.config.js, json/nested ne gardant que $value.
+const modesInfo = JSON.parse(readFileSync(resolve(__dirname, 'build/modes.json'), 'utf8'));
+const viewportCol = modesInfo.collections.find((c) => c.name === 'viewport') ?? null;
+
+// source = "primitive" | "semantic" | "viewport" (premier segment)
 // category = "color" | "typography" | "spacing" | "border-radius" | "sizing" | "elevation" (deuxième segment)
 // cssVarName = même construction que le format css/variables-stripped de style-dictionary.config.js :
 //   le chemin sans le premier segment (source), joint par "-"
-const grouped = new Map(); // category -> { primitive: [...], semantic: [...] }
+const grouped = new Map(); // category -> { primitive: [...], semantic: [...], viewport: [...] }
+let breakpoint = null;
 
 for (const leaf of allLeaves) {
   const [source, category, ...rest] = leaf.path;
   if (!category) continue; // ignore d'éventuelles clés racine sans catégorie
+  // Le breakpoint n'est pas une variable CSS : fiche dédiée, voir plus bas.
+  if (modesInfo.breakpoint && leaf.path.join('/') === modesInfo.breakpoint.token) {
+    breakpoint = { ...modesInfo.breakpoint, value: leaf.value };
+    continue;
+  }
   const cssVarName = `--${[category, ...rest].join('-')}`;
   const tokenPath = [category, ...rest].join('.');
+  const below = viewportCol ? modesInfo.modes[leaf.path.join('/')]?.[viewportCol.belowBreakpointMode] : undefined;
 
-  if (!grouped.has(category)) grouped.set(category, { primitive: [], semantic: [] });
+  if (!grouped.has(category)) grouped.set(category, { primitive: [], semantic: [], viewport: [] });
   const bucket = grouped.get(category)[source];
-  if (bucket) bucket.push({ tokenPath, cssVarName, value: leaf.value });
+  if (bucket) bucket.push({ tokenPath, cssVarName, value: leaf.value, below });
 }
 
 const foundationsDir = resolve(repoRoot, 'specs/foundations');
@@ -73,7 +85,9 @@ function titleCase(category) {
     .join(' ');
 }
 
-for (const [category, { primitive, semantic }] of grouped) {
+const bp = breakpoint ? `${breakpoint.em} = ${breakpoint.value}` : '';
+
+for (const [category, { primitive, semantic, viewport }] of grouped) {
   // ─── specs/foundations/{category}.md — lisible humain/LLM ───
   const foundationLines = [HEADER(titleCase(category))];
 
@@ -85,6 +99,18 @@ for (const [category, { primitive, semantic }] of grouped) {
   if (semantic.length) {
     foundationLines.push('## Sémantiques', '', '| Token | Valeur |', '|---|---|');
     for (const t of semantic) foundationLines.push(`| \`${t.tokenPath}\` | \`${t.value}\` |`);
+    foundationLines.push('');
+  }
+  if (viewport.length && viewportCol) {
+    foundationLines.push(
+      '## Selon le viewport',
+      '',
+      `Valeur ${viewportCol.baseMode} par défaut ; valeur ${viewportCol.belowBreakpointMode} sous le breakpoint (${bp}). Voir \`specs/foundations/breakpoint.md\`.`,
+      '',
+      `| Token | ${viewportCol.baseMode} | ${viewportCol.belowBreakpointMode} |`,
+      '|---|---|---|',
+    );
+    for (const t of viewport) foundationLines.push(`| \`${t.tokenPath}\` | \`${t.value}\` | \`${t.below ?? t.value}\` |`);
     foundationLines.push('');
   }
   writeFileSync(resolve(foundationsDir, `${category}.md`), foundationLines.join('\n'));
@@ -102,7 +128,49 @@ for (const [category, { primitive, semantic }] of grouped) {
     for (const t of semantic) cssLines.push(`${t.cssVarName}: ${t.value};`);
     cssLines.push('```', '');
   }
+  if (viewport.length && viewportCol) {
+    cssLines.push(
+      '## Selon le viewport',
+      '',
+      'Émises à la fin de `semantic.css` : la valeur change seule sous le breakpoint, sans media query côté composant.',
+      '',
+      '```css',
+      ':root {',
+    );
+    for (const t of viewport) cssLines.push(`  ${t.cssVarName}: ${t.value};`);
+    cssLines.push('}', '', `@media (width < ${breakpoint?.em}) {`, '  :root {');
+    for (const t of viewport) cssLines.push(`    ${t.cssVarName}: ${t.below ?? t.value};`);
+    cssLines.push('  }', '}', '```', '');
+  }
   writeFileSync(resolve(tokensDir, `${category}-tokens.md`), cssLines.join('\n'));
 }
 
-console.log(`✅ specs/foundations/ et specs/tokens/ générés (${grouped.size} catégories : ${[...grouped.keys()].join(', ')})`);
+// ─── Breakpoint : pas une variable CSS, une media query nommée ───────────
+if (breakpoint) {
+  const lines = [
+    HEADER('Breakpoint'),
+    '| Token Figma | Valeur | Media query |',
+    '|---|---|---|',
+    `| \`${breakpoint.token}\` | \`${breakpoint.value}\` → \`${breakpoint.em}\` | \`@custom-media ${breakpoint.customMedia} (width >= ${breakpoint.em})\` |`,
+    '',
+    "Le breakpoint n'est **jamais** une variable CSS (`var()` est inutilisable dans une media query).",
+    'Il produit :',
+    '',
+    `- le bloc \`@media (width < ${breakpoint.em})\` des tokens « Selon le viewport », à la fin de \`semantic.css\` ;`,
+    `- \`@brique-rouge/tokens/css/custom-media\` : \`${breakpoint.customMedia}\`, pour les changements de mise en page dans les CSS Modules.`,
+    '',
+    '```css',
+    "@import '@brique-rouge/tokens/css/custom-media';",
+    '',
+    `@media not (${breakpoint.customMedia}) {`,
+    '  /* mise en page sous le breakpoint */',
+    '}',
+    '```',
+    '',
+    'Résolu au build par `postcss-custom-media` (configuré dans chaque consommateur).',
+    '',
+  ];
+  writeFileSync(resolve(foundationsDir, 'breakpoint.md'), lines.join('\n'));
+}
+
+console.log(`✅ specs/foundations/ et specs/tokens/ générés (${grouped.size} catégories : ${[...grouped.keys()].join(', ')}${breakpoint ? ', breakpoint' : ''})`);

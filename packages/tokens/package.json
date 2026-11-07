@@ -13,6 +13,7 @@
     "./css/index": "./build/css/index.css",
     "./css/primitive": "./build/css/primitive.css",
     "./css/semantic": "./build/css/semantic.css",
+    "./css/custom-media": "./build/css/custom-media.css",
     "./json": "./build/tokens.json"
   }
 }

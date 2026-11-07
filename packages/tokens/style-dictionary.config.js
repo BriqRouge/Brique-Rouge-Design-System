@@ -5,7 +5,7 @@
 // Ne modifie ce fichier que si tu as besoin d'un transformer ou d'un format custom.
 
 import StyleDictionary from 'style-dictionary';
-import { readFileSync, mkdirSync, writeFileSync } from 'fs';
+import { readFileSync, mkdirSync, writeFileSync, rmSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import mapping from './mapping.config.js';
@@ -39,7 +39,7 @@ if (!hasTokens) {
   }
   // Génère l'index.css qui importe toutes les collections
   const indexContent =
-    mapping.collections.map((col) => `@import './${col.output}';`).join('\n') + '\n';
+    [...new Set(mapping.collections.map((col) => col.output))].map((output) => `@import './${output}';`).join('\n') + '\n';
   writeFileSync(resolve(__dirname, 'build/css/index.css'), indexContent);
   writeFileSync(resolve(__dirname, 'build/tokens.json'), '{}\n');
   console.log('ℹ️  tokens.json vide — fichiers CSS placeholder générés dans build/css/');
@@ -92,12 +92,11 @@ StyleDictionary.registerTransform({
 // Règle : si le chemin du token contient "opacity" → valeur brute (ex: 0.5)
 //         si le chemin contient "duration" → valeur en ms (ex: 150ms)
 //         sinon → valeur en px (ex: 16px)
-StyleDictionary.registerTransform({
-  name: 'number/px-or-opacity',
-  type: 'value',
-  filter: (token) => (token.type ?? token.$type) === 'number',
-  transform: (token) => {
-    const raw = token.original?.$value ?? token.$value;
+// Fonction partagée : appliquée à $value par le transformer, et aux valeurs des
+// autres modes (qui ne passent pas par les transformers) par le format CSS.
+function numberToCss(path, raw) {
+  const token = { path };
+  {
     const num = Number(raw);
     const isOpacity = token.path.some((p) => p.toLowerCase().includes('opacity'));
     // font-weight : toujours brut.
@@ -113,7 +112,14 @@ StyleDictionary.registerTransform({
       LINE_HEIGHT_RATIOS.includes(lastSegment);
     if (token.path.some((p) => p.toLowerCase() === 'duration')) return `${num}ms`;
     return (isOpacity || isFontWeight || isLineHeightRatio) ? String(num) : `${num}px`;
-  },
+  }
+}
+
+StyleDictionary.registerTransform({
+  name: 'number/px-or-opacity',
+  type: 'value',
+  filter: (token) => (token.type ?? token.$type) === 'number',
+  transform: (token) => numberToCss(token.path, token.original?.$value ?? token.$value),
 });
 
 // ─── Transformer : font-family → nom entre guillemets + police de secours ──
@@ -130,43 +136,73 @@ StyleDictionary.registerTransform({
   filter: (token) =>
     (token.type ?? token.$type) === 'text' &&
     token.path.some((p) => p.toLowerCase() === 'font-family'),
-  transform: (token) => {
-    const family = String(token.original?.$value ?? token.$value);
-    return `"${family}", ${FONT_FALLBACKS[family] ?? 'sans-serif'}`;
-  },
+  transform: (token) => fontStack(token.original?.$value ?? token.$value),
 });
+
+function fontStack(raw) {
+  const family = String(raw);
+  return `"${family}", ${FONT_FALLBACKS[family] ?? 'sans-serif'}`;
+}
+
+// ─── Valeurs des modes autres que le mode de base ────────────────────────
+// Portées par $extensions (voir MODES_EXTENSION dans
+// scripts/figma-sync-tokens.mjs) : elles ne passent pas par les transformers
+// Style Dictionary, on leur applique donc les mêmes fonctions ici.
+const MODES_EXTENSION = 'brique-rouge.modes';
+
+function modeValueToCss(token, raw) {
+  const type = token.type ?? token.$type;
+  if (type === 'number') return numberToCss(token.path, raw);
+  if (type === 'text' && token.path.some((p) => p.toLowerCase() === 'font-family')) return fontStack(raw);
+  return String(raw);
+}
 
 // ─── Format CSS : variables avec suppression du préfixe de collection ─────
 // Chaque collection a un préfixe path (ex: ["color", "light"]).
 // Ce format le supprime pour générer des noms sémantiques :
 // "color-light-background-neutral-default" → "--background-neutral-default"
+//
+// Option `belowBreakpoint` ({ mode, media }) : ajoute après le bloc de base un
+// bloc `@media <media> { :root { … } }` avec les valeurs de ce mode.
+// Option `header: false` : pas de commentaire d'en-tête (bloc ajouté à la
+// suite d'un autre dans le même fichier).
 StyleDictionary.registerFormat({
   name: 'css/variables-stripped',
   format: ({ dictionary, options }) => {
-    const { prefixLength = 0, selector = ':root' } = options ?? {};
+    const { prefixLength = 0, selector = ':root', belowBreakpoint, header = true } = options ?? {};
     const tokens = dictionary.allTokens;
 
     if (!tokens.length) return COMMENT_VIDE;
 
+    const cssName = (t) => t.path.slice(prefixLength).join('-');
     const vars = tokens
-      .map((t) => {
-        const name = t.path.slice(prefixLength).join('-');
-        const value = String(t.value ?? t.$value);
-        return `  --${name}: ${value};`;
-      })
+      .map((t) => `  --${cssName(t)}: ${String(t.value ?? t.$value)};`)
       .join('\n');
 
-    return [
-      '/**',
-      ' * Ce fichier est généré automatiquement. Ne pas modifier.',
-      ' * Source : packages/tokens/tokens.json',
-      ' */',
-      '',
-      `${selector} {`,
-      vars,
-      '}',
-      '',
-    ].join('\n');
+    const lines = header
+      ? [
+          '/**',
+          ' * Ce fichier est généré automatiquement. Ne pas modifier.',
+          ' * Source : packages/tokens/tokens.json',
+          ' */',
+          '',
+        ]
+      : [''];
+    lines.push(`${selector} {`, vars, '}', '');
+
+    if (belowBreakpoint) {
+      const modeVars = tokens
+        .filter((t) => t.original?.$extensions?.[MODES_EXTENSION]?.[belowBreakpoint.mode] !== undefined)
+        .map((t) => {
+          const raw = t.original.$extensions[MODES_EXTENSION][belowBreakpoint.mode];
+          return `    --${cssName(t)}: ${modeValueToCss(t, raw)};`;
+        });
+      if (modeVars.length) {
+        lines.push(`@media ${belowBreakpoint.media} {`, `  ${selector} {`, ...modeVars, '  }', '}', '');
+      }
+    }
+
+    return lines.join('\n');
   },
 });
 
@@ -180,10 +216,40 @@ function getSelector(collection) {
   return `[data-theme="${collection.mode}"]`;
 }
 
+// ─── Breakpoint : token primitive en px → em ─────────────────────────────
+// Lu dans tokens.json ; jamais émis en variable CSS (voir mapping.config.js).
+const breakpointPath = mapping.breakpoint?.token.split('/') ?? null;
+let breakpointMedia = null;
+if (breakpointPath) {
+  const px = breakpointPath.reduce((node, seg) => node?.[seg], tokensObj)?.$value;
+  if (typeof px !== 'number') {
+    throw new Error(`Breakpoint introuvable dans tokens.json : ${mapping.breakpoint.token} (variable number attendue)`);
+  }
+  breakpointMedia = { em: `${px / 16}em` };
+}
+const isBreakpointToken = (token) =>
+  breakpointPath !== null &&
+  token.path.length === breakpointPath.length &&
+  breakpointPath.every((seg, i) => token.path[i] === seg);
+
 // ─── Build : une instance Style Dictionary par collection ─────────────────
+// Plusieurs collections peuvent partager un fichier de sortie (viewport →
+// semantic.css) : chacune est écrite dans un fichier intermédiaire, puis les
+// morceaux sont concaténés dans l'ordre de mapping.config.js.
+const PARTS_DIR = 'build/css/.parts/';
+const parts = new Map(); // output → [fichiers intermédiaires]
+
 for (const col of mapping.collections) {
   const prefixSegments = col.figmaCollection.split('/');
   const prefixLength = prefixSegments.length;
+  const isFirstOfOutput = !parts.has(col.output);
+  const partFile = `${col.figmaCollection.replace(/\//g, '-')}.css`;
+  if (isFirstOfOutput) parts.set(col.output, []);
+  parts.get(col.output).push(partFile);
+
+  if (col.belowBreakpointMode && !breakpointMedia) {
+    throw new Error(`Collection « ${col.figmaCollection} » : belowBreakpointMode sans breakpoint dans mapping.config.js`);
+  }
 
   const sd = new StyleDictionary({
     source: [tokensPath],
@@ -194,16 +260,22 @@ for (const col of mapping.collections) {
     platforms: {
       [`css/${col.output}`]: {
         transforms: VALUE_TRANSFORMS,
-        buildPath: 'build/css/',
+        buildPath: PARTS_DIR,
         files: [
           {
-            destination: col.output,
+            destination: partFile,
             format: 'css/variables-stripped',
-            // Filtre : inclut uniquement les tokens appartenant à cette collection
-            filter: (token) => prefixSegments.every((seg, i) => token.path[i] === seg),
+            // Filtre : inclut uniquement les tokens appartenant à cette
+            // collection (le breakpoint n'est jamais une variable CSS)
+            filter: (token) =>
+              prefixSegments.every((seg, i) => token.path[i] === seg) && !isBreakpointToken(token),
             options: {
               prefixLength,
               selector: getSelector(col),
+              header: isFirstOfOutput,
+              belowBreakpoint: col.belowBreakpointMode
+                ? { mode: col.belowBreakpointMode, media: `(width < ${breakpointMedia.em})` }
+                : undefined,
             },
           },
         ],
@@ -214,9 +286,35 @@ for (const col of mapping.collections) {
   await sd.buildAllPlatforms();
 }
 
+for (const [output, files] of parts) {
+  const content = files.map((f) => readFileSync(resolve(__dirname, PARTS_DIR, f), 'utf8')).join('');
+  writeFileSync(resolve(__dirname, 'build/css', output), content);
+}
+rmSync(resolve(__dirname, PARTS_DIR), { recursive: true, force: true });
+
+// ─── Build : custom-media.css — media queries nommées ─────────────────────
+// À importer en tête de chaque CSS Module qui en a besoin ; résolu au build
+// du consommateur par postcss-custom-media (@custom-media n'est pas encore
+// supporté nativement par les navigateurs).
+if (breakpointMedia) {
+  writeFileSync(
+    resolve(__dirname, 'build/css/custom-media.css'),
+    [
+      '/**',
+      ' * Ce fichier est généré automatiquement. Ne pas modifier.',
+      ` * Source : packages/tokens/tokens.json (${mapping.breakpoint.token})`,
+      ' * Résolu par postcss-custom-media : ne produit aucune règle CSS.',
+      ' */',
+      '',
+      `@custom-media ${mapping.breakpoint.customMedia} (width >= ${breakpointMedia.em});`,
+      '',
+    ].join('\n'),
+  );
+}
+
 // ─── Build : index.css qui importe toutes les collections ─────────────────
 const indexContent =
-  mapping.collections.map((col) => `@import './${col.output}';`).join('\n') + '\n';
+  [...parts.keys()].map((output) => `@import './${output}';`).join('\n') + '\n';
 writeFileSync(resolve(__dirname, 'build/css/index.css'), indexContent);
 
 // ─── Build : tokens.json plat (toutes les collections) ────────────────────
@@ -234,5 +332,39 @@ const sdJson = new StyleDictionary({
   },
 });
 await sdJson.buildAllPlatforms();
+
+// ─── Build : modes.json — valeurs CSS des modes hors base + breakpoint ────
+// json/nested ne garde que $value : ce fichier complète build/tokens.json pour
+// generate-specs.mjs (fiches specs/ lisibles sans lancer de build).
+const modes = {};
+(function walk(node, path) {
+  for (const [key, value] of Object.entries(node)) {
+    if (key.startsWith('$') || key === '_comment' || !value || typeof value !== 'object') continue;
+    const next = [...path, key];
+    if ('$value' in value) {
+      for (const [mode, raw] of Object.entries(value.$extensions?.[MODES_EXTENSION] ?? {})) {
+        (modes[next.join('/')] ??= {})[mode] = modeValueToCss({ path: next, $type: value.$type }, raw);
+      }
+    } else {
+      walk(value, next);
+    }
+  }
+})(tokensObj, []);
+writeFileSync(
+  resolve(__dirname, 'build/modes.json'),
+  JSON.stringify(
+    {
+      breakpoint: breakpointMedia
+        ? { token: mapping.breakpoint.token, em: breakpointMedia.em, customMedia: mapping.breakpoint.customMedia }
+        : null,
+      collections: mapping.collections
+        .filter((c) => c.baseMode)
+        .map((c) => ({ name: c.figmaCollection, baseMode: c.baseMode, belowBreakpointMode: c.belowBreakpointMode })),
+      modes,
+    },
+    null,
+    2,
+  ) + '\n',
+);
 
 console.log('\n✅ Tokens générés avec succès dans build/css/');

@@ -38,3 +38,21 @@
 --spacing-layout-xl: 80px;
 --spacing-layout-2xl: 128px;
 ```
+
+## Selon le viewport
+
+Émises à la fin de `semantic.css` : la valeur change seule sous le breakpoint, sans media query côté composant.
+
+```css
+:root {
+  --spacing-layout-section-inline: 128px;
+  --spacing-layout-nav-inline: 48px;
+}
+
+@media (width < 51em) {
+  :root {
+    --spacing-layout-section-inline: 24px;
+    --spacing-layout-nav-inline: 16px;
+  }
+}
+```

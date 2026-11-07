@@ -12,7 +12,10 @@
 //   - nombre de variables différent du manifeste → refus (morceau manquant)
 //   - nom hors convention (minuscules, chiffres, tirets, `/`) → refus
 //   - valeur non résolue (alias cassé), doublon, collection non déclarée dans
-//     packages/tokens/mapping.config.js, collection multi-modes → refus
+//     packages/tokens/mapping.config.js → refus
+//   - collection multi-modes dont les modes ne sont pas déclarés (baseMode,
+//     belowBreakpointMode) dans mapping.config.js, ou pas dans cet ordre → refus
+//   - deux tokens de collections différentes qui donnent la même variable CSS → refus
 // Les corrections se font dans Figma, puis on relance.
 //
 // Usage :
@@ -44,6 +47,19 @@ const SCAN_EXTENSIONS = ['.css', '.ts', '.tsx', '.mdx'];
 const SEGMENT = '[a-z0-9]+(?:-[a-z0-9]+)*';
 export const NAME_PATTERN = new RegExp(`^${SEGMENT}(?:/${SEGMENT})*$`);
 const TYPE_MAP = { C: 'color', F: 'number', S: 'text' };
+// Clé $extensions qui porte les valeurs des modes autres que le mode de base.
+export const MODES_EXTENSION = 'brique-rouge.modes';
+
+// collections de mapping.config.js → { nom: [modes attendus] | null (un seul mode) }
+function expectedModes(declaredCollections) {
+  return Object.fromEntries(
+    declaredCollections.map((c) =>
+      typeof c === 'string'
+        ? [c, null]
+        : [c.figmaCollection, c.baseMode ? [c.baseMode, c.belowBreakpointMode].filter(Boolean) : null],
+    ),
+  );
+}
 
 // ─── Empreinte — identique à celle du snippet Figma ──────────────────────────
 export function fnv1a(str) {
@@ -57,10 +73,14 @@ export function fnv1a(str) {
 
 // ─── Lecture et vérification de l'export ─────────────────────────────────────
 // `files` : { 'manifest.json': string, 'chunk-0.tsv': string, … }
-// Retourne { variables: [{ collection, name, type, value }], errors: string[] }
+// `declaredCollections` : les `collections` de mapping.config.js (ou leurs noms).
+// Retourne { variables: [{ collection, name, type, value, modeValues }], errors: string[] }
+//   value      : valeur du mode de base (mode par défaut dans Figma)
+//   modeValues : { <mode>: valeur } pour les autres modes
 export function readExport(files, declaredCollections) {
   const errors = [];
   const variables = [];
+  const expected = expectedModes(declaredCollections);
 
   if (!files['manifest.json']) return { variables, errors: ['manifest.json absent'] };
   let manifest;
@@ -70,6 +90,7 @@ export function readExport(files, declaredCollections) {
     return { variables, errors: [`manifest.json illisible : ${e.message}`] };
   }
 
+  const modesOf = Object.fromEntries((manifest.collections ?? []).map((c) => [c.name, c.modes ?? []]));
   const counts = {};
   for (let i = 0; i < manifest.chunkCount; i++) {
     const file = `chunk-${i}.tsv`;
@@ -93,23 +114,27 @@ export function readExport(files, declaredCollections) {
       errors.push(`${file} : empreinte ${actual} ≠ ${expected} calculée dans Figma — morceau altéré, à réexporter`);
       continue;
     }
+    const modes = modesOf[collection] ?? [];
+    const columns = Math.max(modes.length, 1);
     for (const line of tsv.split('\n')) {
-      const [name, type, value, ...rest] = line.split('\t');
-      if (rest.length || value === undefined) {
-        errors.push(`${file} : ligne mal formée « ${line} »`);
+      const [name, type, ...values] = line.split('\t');
+      if (values.length !== columns) {
+        errors.push(`${file} : ligne mal formée « ${line} » (${columns} valeur(s) attendue(s))`);
         continue;
       }
-      variables.push({ collection, name, type, value });
+      const modeValues = Object.fromEntries(modes.slice(1).map((m, j) => [m, values[j + 1]]));
+      variables.push({ collection, name, type, value: values[0], modeValues });
       counts[collection] = (counts[collection] ?? 0) + 1;
     }
   }
 
   for (const col of manifest.collections ?? []) {
-    if (!declaredCollections.includes(col.name)) {
+    if (!(col.name in expected)) {
       errors.push(`collection « ${col.name} » absente de packages/tokens/mapping.config.js — à déclarer avant de synchroniser`);
-    }
-    if (col.modes.length !== 1) {
-      errors.push(`collection « ${col.name} » : ${col.modes.length} modes (${col.modes.join(', ')}) — le build ne gère qu'un mode par collection`);
+    } else if (expected[col.name] === null && col.modes.length !== 1) {
+      errors.push(`collection « ${col.name} » : ${col.modes.length} modes (${col.modes.join(', ')}) — déclarer baseMode et belowBreakpointMode dans packages/tokens/mapping.config.js`);
+    } else if (expected[col.name] !== null && col.modes.join(',') !== expected[col.name].join(',')) {
+      errors.push(`collection « ${col.name} » : modes Figma ${col.modes.join(', ')} (défaut en premier) ≠ ${expected[col.name].join(', ')} déclarés dans packages/tokens/mapping.config.js`);
     }
     if ((counts[col.name] ?? 0) !== col.count) {
       errors.push(`collection « ${col.name} » : ${counts[col.name] ?? 0} variables lues, ${col.count} attendues`);
@@ -125,12 +150,14 @@ export function readExport(files, declaredCollections) {
       errors.push(`${id} : nom hors convention (minuscules, chiffres, tirets, « / ») — à renommer dans Figma`);
     }
     if (!TYPE_MAP[v.type]) errors.push(`${id} : type « ${v.type} » non pris en charge`);
-    if (v.value.startsWith('!UNRESOLVED')) errors.push(`${id} : valeur non résolue (${v.value})`);
-    if (v.type === 'C' && !/^#[0-9a-f]{6}([0-9a-f]{2})?$/.test(v.value)) {
-      errors.push(`${id} : couleur invalide « ${v.value} »`);
-    }
-    if (v.type === 'F' && !Number.isFinite(Number(v.value))) {
-      errors.push(`${id} : nombre invalide « ${v.value} »`);
+    const all = [['', v.value], ...Object.entries(v.modeValues ?? {}).map(([m, val]) => [` (mode ${m})`, val])];
+    for (const [label, value] of all) {
+      if (value.startsWith('!UNRESOLVED')) errors.push(`${id}${label} : valeur non résolue (${value})`);
+      else if (v.type === 'C' && !/^#[0-9a-f]{6}([0-9a-f]{2})?$/.test(value)) {
+        errors.push(`${id}${label} : couleur invalide « ${value} »`);
+      } else if (v.type === 'F' && !Number.isFinite(Number(value))) {
+        errors.push(`${id}${label} : nombre invalide « ${value} »`);
+      }
     }
   }
 
@@ -141,7 +168,14 @@ export function readExport(files, declaredCollections) {
 export function buildTokens(variables) {
   const errors = [];
   const tokens = {};
+  const cssNames = new Map();
+  const cast = (v, value) => (v.type === 'F' ? Number(value) : value);
   for (const v of variables) {
+    const css = '--' + v.name.split('/').join('-');
+    if (cssNames.has(css) && cssNames.get(css) !== v.collection) {
+      errors.push(`${v.collection}/${v.name} : même variable CSS ${css} que ${cssNames.get(css)}/${v.name}`);
+    }
+    cssNames.set(css, v.collection);
     const path = [v.collection, ...v.name.split('/')];
     let node = tokens;
     for (const seg of path.slice(0, -1)) {
@@ -156,10 +190,13 @@ export function buildTokens(variables) {
       errors.push(`${path.join('/')} : est à la fois un token et un groupe`);
       continue;
     }
-    node[leaf] = {
-      $value: v.type === 'F' ? Number(v.value) : v.value,
-      $type: TYPE_MAP[v.type],
-    };
+    node[leaf] = { $value: cast(v, v.value), $type: TYPE_MAP[v.type] };
+    const modes = Object.entries(v.modeValues ?? {});
+    if (modes.length) {
+      node[leaf].$extensions = {
+        [MODES_EXTENSION]: Object.fromEntries(modes.map(([m, val]) => [m, cast(v, val)])),
+      };
+    }
   }
   return { tokens, errors };
 }
@@ -175,13 +212,17 @@ export function orderLike(next, prev) {
   return Object.fromEntries(keys.map((k) => [k, orderLike(next[k], prev[k])]));
 }
 
-// { 'primitive/color/neutral/50': { value, type } }
+// { 'primitive/color/neutral/50': { value, type }, 'viewport/…@mobile': { value, type } }
 export function flatten(tokens, prefix = []) {
   const out = {};
   for (const [k, v] of Object.entries(tokens)) {
     if (k.startsWith('$') || k === '_comment') continue;
     if (v && typeof v === 'object' && '$value' in v) {
-      out[[...prefix, k].join('/')] = { value: v.$value, type: v.$type };
+      const key = [...prefix, k].join('/');
+      out[key] = { value: v.$value, type: v.$type };
+      for (const [m, val] of Object.entries(v.$extensions?.[MODES_EXTENSION] ?? {})) {
+        out[`${key}@${m}`] = { value: val, type: v.$type };
+      }
     } else if (v && typeof v === 'object') {
       Object.assign(out, flatten(v, [...prefix, k]));
     }
@@ -191,7 +232,9 @@ export function flatten(tokens, prefix = []) {
 
 // Nom de la variable CSS générée (le préfixe de collection est retiré, voir
 // css/variables-stripped dans style-dictionary.config.js).
-export const cssVarName = (flatPath) => '--' + flatPath.split('/').slice(1).join('-');
+// Un suffixe de mode (`@mobile`) désigne la même variable CSS.
+export const cssVarName = (flatPath) =>
+  '--' + flatPath.replace(/@.*$/, '').split('/').slice(1).join('-');
 
 export function diffTokens(prevFlat, nextFlat) {
   const added = Object.keys(nextFlat).filter((k) => !(k in prevFlat));
@@ -247,7 +290,7 @@ async function main() {
   const { default: mapping } = await import(pathToFileURL(join(repoRoot, 'packages/tokens/mapping.config.js')).href);
   const declared = mapping.collections.map((c) => c.figmaCollection);
 
-  const read = readExport(files, declared);
+  const read = readExport(files, mapping.collections);
   const built = read.errors.length ? { tokens: {}, errors: [] } : buildTokens(read.variables);
   const errors = [...read.errors, ...built.errors];
   if (errors.length) {
@@ -272,7 +315,10 @@ async function main() {
     relative(repoRoot, f),
     readFileSync(f, 'utf8'),
   ]);
-  const usages = findUsages(removed.map(cssVarName), sources);
+  // Une variable CSS n'est supprimée que si aucune entrée (base ou mode) ne la produit encore.
+  const stillThere = new Set(Object.keys(nextFlat).map(cssVarName));
+  const removedVars = [...new Set(removed.map(cssVarName))].filter((name) => !stillThere.has(name));
+  const usages = findUsages(removedVars, sources);
 
   if (!checkOnly) {
     writeFileSync(TOKENS_PATH, JSON.stringify(next, null, 2) + '\n');
