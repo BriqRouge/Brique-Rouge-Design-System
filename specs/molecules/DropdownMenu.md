@@ -2,9 +2,9 @@
 component: DropdownMenu
 tier: molecule
 figma:
-  node: "375:19690"
+  node: "2357:38494"
   name: DropdownMenu
-  type: component
+  type: component-set
 ---
 # DropdownMenu
 
