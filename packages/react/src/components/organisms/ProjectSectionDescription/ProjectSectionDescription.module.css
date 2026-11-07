@@ -37,7 +37,8 @@
 
 .leadText {
   width: 100%;
-  padding-left: var(--spacing-x14);
+  /* Figma : retrait des deux côtés (spacing/x14) */
+  padding-inline: var(--spacing-x14);
   box-sizing: border-box;
   font-family: var(--typography-subtitle-font-family);
   font-size: var(--typography-font-size-2xl);
@@ -102,5 +103,10 @@
   .leadText,
   .bulletList {
     padding-left: var(--spacing-x4);
+  }
+
+  /* Figma mobile : pas de retrait à droite */
+  .leadText {
+    padding-right: 0;
   }
 }

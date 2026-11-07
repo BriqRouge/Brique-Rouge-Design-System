@@ -71,7 +71,7 @@ Figma `Viewport=mobile` (2363:42525). Pas de prop React : l'adaptation passe par
 - En-tête : pleine largeur, padding latéral `--spacing-x4`, numéro et titre centrés verticalement, le titre prend la largeur restante
 - Indentation du texte d'introduction et de la liste : 56px → 16px (`--spacing-x4`)
 - Incohérence Figma signalée : le padding latéral de l'en-tête mobile (16px) n'est pas lié à une variable
-- Écart desktop signalé, non appliqué : dans Figma, le texte d'introduction a aussi un padding droit de 56px (`spacing/x14`), absent du code
+- Texte d'introduction : padding droit 56px (`--spacing-x14`) sur desktop, comme dans Figma (aligné le 2026-11-07, décision de Damien) ; 0 en mobile
 
 ## Règles d'usage
 
