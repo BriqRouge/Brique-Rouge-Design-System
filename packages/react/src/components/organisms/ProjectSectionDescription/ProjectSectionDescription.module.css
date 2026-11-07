@@ -1,3 +1,5 @@
+@import '@brique-rouge/tokens/css/custom-media';
+
 .section {
   display: flex;
   flex-direction: column;
@@ -79,4 +81,26 @@
 
 .alertBanner {
   width: 100%;
+}
+
+/* ─── Sous le breakpoint (Figma Viewport=mobile, 2363:42525) ─────────────── */
+/* Padding du header non lié à une variable dans Figma (16px) : mappé sur
+   spacing/x4, signalé à Damien. */
+@media not (--viewport-desktop) {
+  .header {
+    align-items: center;
+    width: 100%;
+    padding-inline: var(--spacing-x4);
+    box-sizing: border-box;
+  }
+
+  .title {
+    flex: 1 0 0;
+    min-width: 0;
+  }
+
+  .leadText,
+  .bulletList {
+    padding-left: var(--spacing-x4);
+  }
 }
