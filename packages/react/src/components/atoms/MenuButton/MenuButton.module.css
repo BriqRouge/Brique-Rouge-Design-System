@@ -61,7 +61,7 @@
   --icon-size: var(--sizing-x5);
   --button-size: var(--sizing-x12);
   height: var(--button-size);
-  min-width: var(--sizing-x14);
+  min-width: var(--sizing-x12); /* 48px partout — décision Damien (sync-ds 2026-11-07) */
   padding-top: var(--spacing-component-sm);
   padding-bottom: var(--spacing-component-sm);
   padding-left: var(--spacing-x3-5);

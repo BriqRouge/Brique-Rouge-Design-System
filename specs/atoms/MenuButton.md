@@ -50,11 +50,11 @@ interface MenuButtonProps {
 
 **Padding :** sm/nm → 8px vertical / 12px horizontal (`--sizing-x3`), md → 8px vertical / 14px horizontal (`--spacing-x3-5`)
 
-**Largeur minimale :** sm → 24px (`--sizing-x6`, lié à `sizing/x6` dans Figma) · nm → 40px (`--sizing-button-nm`) · md → 56px (`--sizing-x14`, voir point relevé ci-dessous)
+**Largeur minimale :** sm → 24px (`--sizing-x6`, lié à `sizing/x6` dans Figma) · nm → 40px (`--sizing-button-nm`) · md → 48px (`--sizing-x12`, toutes variantes — décision de Damien, 2026-11-07)
 
 ## Règles d'usage
 
-- **Point relevé (non modifié)** : en `md`, Figma montre un `min-width` de 48px (contained desktop), 40px (outlined) et 40px (variantes mobiles), alors que notre CSS garde 56px (`--sizing-x14`) — incohérence interne à Figma, non tranchée par Damien au /sync-ds du 2026-11-07 ; à confirmer
+- **Largeur minimale `md` = 48px partout** (décision de Damien, 2026-11-07) : Figma montrait 48px (contained desktop idle) ou 40px (autres variantes, non liées) et le CSS 56px (`--sizing-x14`) ; harmonisé à `--sizing-x12` dans le code et dans Figma (`sizing/x12`)
 - **Renommage `colorScheme` → `mode` (/sync-ds 2026-11-07, validé par Damien)** : la propriété Figma `Color-scheme` est devenue `Mode`, et ses valeurs `light`/`dark` ont été **inversées** sur les mêmes nodes. Le code suit Figma : l'ancien `colorScheme="light"` (contour blanc, fond sombre) s'écrit désormais `mode="dark"`, l'ancien `colorScheme="dark"` s'écrit `mode="light"`. Consommateurs migrés : `TopNav` (bouton retour), `DropdownMenuTrigger` (`triggerColorScheme` → `triggerMode`)
 - **Axe `Viewport`** : pas de prop React — l'adaptation mobile (ombre `Elevation 2` sur `contained md`) passera par le CSS, quand le breakpoint sera défini (décision du 2026-11-07)
 - **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur) via la classe `iconOnly` — expose `data-icon-only` (`true`/`false`)
