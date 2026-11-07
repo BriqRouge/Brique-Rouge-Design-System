@@ -49,8 +49,8 @@ const meta = {
       control: 'select',
       options: ['contained', 'outlined'],
     },
-    colorScheme: {
-      description: 'Schéma de couleur (ignoré si variant="contained")',
+    mode: {
+      description: 'Mode (ignoré si variant="contained") — dark : contour blanc pour fond sombre ; light : contour noir pour fond clair',
       control: 'select',
       options: ['default', 'light', 'dark'],
     },
@@ -87,9 +87,9 @@ export const Variants: Story = {
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
       <MenuButton variant="contained">Contained</MenuButton>
       <div style={{ background: '#262626', padding: '16px', borderRadius: '8px' }}>
-        <MenuButton variant="outlined" colorScheme="light">Outlined light</MenuButton>
+        <MenuButton variant="outlined" mode="dark">Outlined dark</MenuButton>
       </div>
-      <MenuButton variant="outlined" colorScheme="dark">Outlined dark</MenuButton>
+      <MenuButton variant="outlined" mode="light">Outlined light</MenuButton>
     </div>
   ),
 };
@@ -134,7 +134,7 @@ export const Disabled: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
       <MenuButton disabled variant="contained">Contained désactivé</MenuButton>
-      <MenuButton disabled variant="outlined" colorScheme="dark">Outlined désactivé</MenuButton>
+      <MenuButton disabled variant="outlined" mode="light">Outlined désactivé</MenuButton>
     </div>
   ),
 };
@@ -143,7 +143,7 @@ export const Playground: Story = {
   args: {
     children: 'Enregistrer les modifications',
     variant: 'contained',
-    colorScheme: 'default',
+    mode: 'default',
     size: 'nm',
     disabled: false,
   },

@@ -5,7 +5,7 @@ export { AlertBanner } from './components/molecules/AlertBanner';
 export type { AlertBannerProps, AlertBannerType } from './components/molecules/AlertBanner';
 
 export { MenuButton } from './components/atoms/MenuButton';
-export type { MenuButtonProps, MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize } from './components/atoms/MenuButton';
+export type { MenuButtonProps, MenuButtonVariant, MenuButtonMode, MenuButtonSize } from './components/atoms/MenuButton';
 
 export { FrameLogo } from './components/atoms/FrameLogo';
 export type { FrameLogoProps } from './components/atoms/FrameLogo';

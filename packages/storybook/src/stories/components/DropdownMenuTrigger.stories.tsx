@@ -23,8 +23,8 @@ const meta = {
       control: 'select',
       options: ['contained', 'outlined'],
     },
-    triggerColorScheme: {
-      description: 'Color scheme du bouton trigger',
+    triggerMode: {
+      description: 'Mode du bouton trigger (propriété Figma Mode)',
       control: 'select',
       options: ['default', 'light', 'dark'],
     },
@@ -100,7 +100,7 @@ export const Playground: Story = {
   args: {
     triggerLabel: 'Sélection projets',
     triggerVariant: 'contained',
-    triggerColorScheme: 'default',
+    triggerMode: 'default',
     triggerSize: 'nm',
     children: items,
   },

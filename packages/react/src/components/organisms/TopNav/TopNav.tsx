@@ -73,7 +73,7 @@ const TopNav = forwardRef<HTMLElement, TopNavProps>(
           <div className={styles.pill} data-project={project}>
             <MenuButton
               variant="outlined"
-              colorScheme="light"
+              mode="dark"
               size="md"
               leftIcon={<ArrowLeftIcon />}
               onClick={onBackClick}
