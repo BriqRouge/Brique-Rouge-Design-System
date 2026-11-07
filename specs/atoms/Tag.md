@@ -36,7 +36,8 @@ interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
 |-------|--------|-------|
 | `--color-background-surface-raised` | `#e5e5e5` | Fond (contained) |
 | `--color-border-subtle` | `#e5e5e5` | Bordure (outlined) |
-| `--color-text-primary` | `#171717` | Texte/icône (contained) |
+| `--color-text-primary` | `#171717` | Texte |
+| `--color-icon-button-secondary` | `#262626` | Icônes (contained et outlined) |
 | `--border-radius-tag` | `4px` | Border-radius |
 | `--spacing-x1`/`-x2` | `4px`/`8px` | Gap, padding |
 | `--spacing-x3`/`-x4`/`-x6`/`-x8` | `12px`/`16px`/`24px`/`32px` | Taille des icônes par taille de tag |
@@ -47,7 +48,7 @@ interface TagProps extends React.HTMLAttributes<HTMLDivElement> {
 ## Règles d'usage
 
 - **Icônes fixes, pas des slots arbitraires** : contrairement à `Button`/`MenuButton` (où `leftIcon`/`rightIcon` acceptent n'importe quel `ReactNode`), les icônes de `Tag` sont **fixes** (indicateur rond à gauche, croix de fermeture à droite) et seulement togglées par booléen — fidèle à la structure du Figma source, qui ne montre jamais d'icône différente
-- Icônes dessinées à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `AlertBanner`/`TopNav`
+- Icônes dessinées à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `AlertBanner`/`TopNav` ; leur couleur est `--color-icon-button-secondary` (#262626) dans les deux styles, liée ainsi dans Figma (/sync-ds du 2026-11-07, auparavant `neutral/900`)
 - **Nommage des tailles** : `sm`/`nm`/`md`/`lg` dans Figma comme dans l'API (Figma harmonisé le 2026-11-02 — anciennement `Smallsm` et `l` selon le style)
 - **Style `outlined`** : bordure `--color-neutral-200`, texte et icônes `--color-neutral-900` — contraste conforme WCAG AA sur fond clair. Décision de Damien (2026-11-02), appliquée dans Figma et dans le code ; remplace l'ancien texte `neutral-200`/`neutral-100` quasi invisible
 - **Graisse** : `--typography-font-weight-medium` (500), liée à la variable `typography/font-weight/medium` dans Figma (anciennement style « Medium » de la police variable, ~571)
