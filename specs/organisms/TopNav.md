@@ -66,7 +66,7 @@ Figma `Viewport=mobile` (header : 2353:38724). Pas de prop React : l'adaptation 
 `specs/foundations/breakpoint.md`).
 
 - Header (homepage) : padding horizontal 16px (token viewport), bloc logo avec `--spacing-x4` sur les 4 côtés et hauteur ajustée au contenu (72px, contre 88px fixe sur desktop)
-- **Barre projet mobile (`Type=bottomnav-bar`) : pas encore implémentée** — décisions en attente (rôle du bouton →, barre fixée en bas ou non, API). Sous le breakpoint, la barre projet garde pour l'instant la mise en page desktop avec un padding horizontal de 16px
+- **Barre projet mobile (`Type=bottomnav-bar`) : non implémentée, volontairement** — ses deux boutons servent à passer d'un projet à l'autre, mais c'est une idée de design que Damien n'a pas encore confirmée (2026-11-07). Rien à implémenter tant qu'elle n'est pas validée. Sous le breakpoint, la barre projet garde pour l'instant la mise en page desktop avec un padding horizontal de 16px
 
 ## Règles d'usage
 
