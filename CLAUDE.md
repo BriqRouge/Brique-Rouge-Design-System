@@ -422,7 +422,7 @@ Ces décisions sont prises et ne se remettent pas en question sauf demande expli
 | Tokens | Style Dictionary v4, `usesDtcg: true` |
 | Nomenclature tokens | Préfixe x (`x10`, `x12`…) — alignée sur Figma |
 | Figma | Source de vérité absolue |
-| Code Connect | Fait — `figma.config.json` configuré, premier mapping (`MenuButton.figma.tsx`) en place |
+| Code Connect | Fait — `figma.config.json` configuré, les 21 composants mappés (`*.figma.tsx`, format parser `figma.connect`) ; non publié (plan Figma Organization/Enterprise requis) |
 | Component tokens | Intentionnellement minimaliste — pas de sur-tokenisation |
 
 ---
