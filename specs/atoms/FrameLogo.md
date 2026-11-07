@@ -35,7 +35,7 @@ interface FrameLogoProps extends React.HTMLAttributes<HTMLDivElement> {
 
 ## Règles d'usage
 
-- **Axe Figma `Viewport` (/sync-ds 2026-11-07)** : la variante `type=logo-container` est devenue `Viewport=desktop`, et une variante `Viewport=mobile` a été ajoutée. Les deux sont strictement identiques (24×24, mêmes tokens) : aucune adaptation dans le code. Incohérence signalée, à trancher par Damien (garder l'axe ou le retirer)
+- **Axe Figma `Viewport` (/sync-ds 2026-11-07)** : la variante `type=logo-container` est devenue `Viewport=desktop`, et une variante `Viewport=mobile` a été ajoutée. Les deux sont strictement identiques (24×24, mêmes tokens) : aucune adaptation dans le code. Axe conservé volontairement (décision de Damien, 2026-11-07), en prévision d'une version mobile distincte
 
 - Conteneur fixe 24×24px, `overflow: hidden`, `flex-shrink: 0`
 - Image en `object-fit: cover` — toujours passer une URL valide
