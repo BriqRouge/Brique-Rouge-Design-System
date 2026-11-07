@@ -1,3 +1,5 @@
+@import '@brique-rouge/tokens/css/custom-media';
+
 .card {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,8 @@
   gap: var(--spacing-x16);
   border-radius: var(--border-radius-section-card);
   background-color: var(--color-neutral-50);
-  padding: var(--spacing-x20) var(--spacing-layout-2xl);
+  /* Inline : token viewport section-inline (128px desktop, 24px sous le breakpoint) */
+  padding: var(--spacing-x20) var(--spacing-layout-section-inline);
   box-sizing: border-box;
   width: 100%;
 }
@@ -62,4 +65,11 @@
   height: 2px;
   border-radius: var(--border-radius-full);
   background: linear-gradient(to bottom, var(--color-neutral-200), transparent);
+}
+
+/* ─── Sous le breakpoint (Figma Viewport=mobile, 2363:42650) ─────────────── */
+@media not (--viewport-desktop) {
+  .card {
+    padding-block: var(--spacing-x6);
+  }
 }
