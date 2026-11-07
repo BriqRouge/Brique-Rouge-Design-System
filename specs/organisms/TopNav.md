@@ -48,7 +48,8 @@ interface TopNavProps {
 | `--color-background-projects-{project}` | — | Fond de la pilule (un par projet) |
 | `--color-text-nav-bar-{project}` | — | Couleur du titre **et** du sous-titre (un par projet — même couleur pour les deux) |
 | `--color-border-menu-button-outlined-white`, `--color-text-menu-button-outline-white` | — | Bouton retour (`MenuButton` outlined/light/md) |
-| `--spacing-x10`, `--spacing-x12`, `--spacing-x6` | `40px`, `48px`, `24px` | Padding du conteneur |
+| `--spacing-x10`, `--spacing-x6` | `40px`, `24px` | Padding vertical du conteneur |
+| `--spacing-layout-nav-inline` | `48px` (mobile `16px`) | Padding horizontal du conteneur — token viewport (Figma `spacing/layout/nav-inline`) |
 | `--spacing-component-md`, `--spacing-component-lg`, `--spacing-component-sm` | `16px`, `24px`, `8px` | Padding/gap de la pilule |
 | `--border-radius-button` | `999px` | Border-radius de la pilule |
 | `--typography-font-size-xl` | `20px` | Taille du titre/sous-titre |
@@ -57,6 +58,15 @@ interface TopNavProps {
 | `--color-text-body` | `#525252` | Couleur du logo-texte |
 | `--sizing-x12` | `48px` | Largeur du logo animé |
 | `--spacing-component-md` | `16px` | Écart logo / logo-texte, padding droit homepage |
+
+## Sous le breakpoint (mobile)
+
+Figma `Viewport=mobile` (header : 2353:38724). Pas de prop React : l'adaptation passe par le CSS
+(`@media not (--viewport-desktop)`, breakpoint 816px = 51em, voir
+`specs/foundations/breakpoint.md`).
+
+- Header (homepage) : padding horizontal 16px (token viewport), bloc logo avec `--spacing-x4` sur les 4 côtés et hauteur ajustée au contenu (72px, contre 88px fixe sur desktop)
+- **Barre projet mobile (`Type=bottomnav-bar`) : pas encore implémentée** — décisions en attente (rôle du bouton →, barre fixée en bas ou non, API). Sous le breakpoint, la barre projet garde pour l'instant la mise en page desktop avec un padding horizontal de 16px
 
 ## Règles d'usage
 
