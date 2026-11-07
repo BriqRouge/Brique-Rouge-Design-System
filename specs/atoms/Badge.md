@@ -46,7 +46,8 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-neutral-100` | `#f5f5f5` | Fond (contained) ; bordure et texte (outlined) |
-| `--color-neutral-900` | `#171717` | Texte et icônes (contained) |
+| `--color-text-primary` | `#171717` | Texte (contained) |
+| `--color-icon-button-secondary` | `#262626` | Icônes (contained) |
 | `--border-radius-button` | `999px` | Forme pilule |
 | `--spacing-x1`/`-x2` | `4px`/`8px` | Gap, padding |
 | `--spacing-x4`/`-x6`/`-x8` | `16px`/`24px`/`32px` | Hauteur sm/md/lg |
@@ -56,13 +57,13 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 Styles de texte Figma : `label/xs-medium` (sm), `label/base-medium` (md), `label/2xl-medium` (lg).
 
-Les couleurs reprennent les variables liées dans Figma (primitives `color/neutral/*`).
+Les couleurs reprennent les variables liées dans Figma : `color/neutral/100`, `color/text/primary` et `color/icon/button/secondary` (texte et icônes du `contained` liés à des tokens sémantiques depuis le /sync-ds du 2026-11-07).
 
 ## Règles d'usage
 
 - **Badge ≠ Tag** : même structure que `Tag` (indicateur rond, texte, croix), mais en forme de pilule, avec un fond `neutral/100` et un `outlined` pour fond sombre. Composant distinct, décision de Damien (2026-11-04)
 - **`outlined` = fond sombre uniquement** : bordure et texte `neutral/100`, illisibles sur fond clair (décision de Damien, 2026-11-04)
-- Icônes fixes, togglées par booléen, dessinées en SVG inline (`currentColor`), comme `Tag`
+- Icônes fixes, togglées par booléen, dessinées en SVG inline (`currentColor`), comme `Tag` ; en `contained`, leur couleur est `--color-icon-button-secondary` (#262626), distincte du texte (#171717) comme dans Figma
 - Pas d'interaction : la croix est décorative, aucun `onClick` (Figma ne spécifie aucun comportement)
 - **Valeurs par défaut** : celles du code font référence (`size='md'`, taille utilisée par la bullet brique ; icônes masquées)
 

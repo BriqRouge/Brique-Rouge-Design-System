@@ -2,9 +2,9 @@
 component: ProjectOverview
 tier: molecule
 figma:
-  node: "2248:55550"
+  node: "2353:39997"
   name: Overview Projet
-  type: component
+  type: component-set
 ---
 # ProjectOverview
 

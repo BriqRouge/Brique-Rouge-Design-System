@@ -1,5 +1,5 @@
 ﻿import figma from "@figma/code-connect";
-import { MenuButton, type MenuButtonVariant, type MenuButtonColorScheme, type MenuButtonSize } from "./MenuButton";
+import { MenuButton, type MenuButtonVariant, type MenuButtonMode, type MenuButtonSize } from "./MenuButton";
 
 /**
  * Code Connect — MenuButton
@@ -8,9 +8,10 @@ import { MenuButton, type MenuButtonVariant, type MenuButtonColorScheme, type Me
  *
  * Mapping des propriétés Figma → props React :
  *   Type          → variant     (contained | outlined)
- *   Color-scheme  → colorScheme (default | light | dark)
- *   Size          → size        (nm | md)
+ *   Mode          → mode        (default | light | dark — dark = contour blanc, fond sombre)
+ *   Size          → size        (sm | nm | md)
  *   State         → interne     (géré via CSS :hover, jamais exposé)
+ *   Viewport      → aucun       (l'adaptation mobile passe par le CSS, décision 2026-11-07)
  */
 figma.connect(
   MenuButton,
@@ -21,19 +22,20 @@ figma.connect(
         contained: "contained",
         outlined: "outlined",
       }),
-      colorScheme: figma.enum("Color-scheme", {
+      mode: figma.enum("Mode", {
         default: "default",
         light: "light",
         dark: "dark",
       }),
       size: figma.enum("Size", {
+        sm: "sm",
         nm: "nm",
         md: "md",
       }),
       children: figma.string("Label"),
     },
-    example: ({ variant, colorScheme, size, children }: { variant: MenuButtonVariant; colorScheme: MenuButtonColorScheme; size: MenuButtonSize; children: string }) => (
-      <MenuButton variant={variant} colorScheme={colorScheme} size={size}>
+    example: ({ variant, mode, size, children }: { variant: MenuButtonVariant; mode: MenuButtonMode; size: MenuButtonSize; children: string }) => (
+      <MenuButton variant={variant} mode={mode} size={size}>
         {children}
       </MenuButton>
     ),

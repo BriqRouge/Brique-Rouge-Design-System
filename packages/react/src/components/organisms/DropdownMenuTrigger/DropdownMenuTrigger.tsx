@@ -1,7 +1,7 @@
 import { forwardRef, useState, useEffect, useRef, useId } from 'react';
 import { MenuButton } from '../../atoms/MenuButton';
 import { DropdownMenu } from '../../molecules/DropdownMenu';
-import type { MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize } from '../../atoms/MenuButton';
+import type { MenuButtonVariant, MenuButtonMode, MenuButtonSize } from '../../atoms/MenuButton';
 import styles from './DropdownMenuTrigger.module.css';
 
 interface DropdownMenuTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,7 +16,7 @@ interface DropdownMenuTriggerProps extends React.HTMLAttributes<HTMLDivElement> 
   /** Variant du bouton trigger */
   triggerVariant?: MenuButtonVariant;
   /** Color scheme du bouton trigger */
-  triggerColorScheme?: MenuButtonColorScheme;
+  triggerMode?: MenuButtonMode;
   /** Size du bouton trigger */
   triggerSize?: MenuButtonSize;
   /** État contrôlé (optionnel — si non fourni, le composant gère son état en interne) */
@@ -33,7 +33,7 @@ const DropdownMenuTrigger = forwardRef<HTMLDivElement, DropdownMenuTriggerProps>
       triggerLeftIcon,
       triggerRightIcon,
       triggerVariant = 'contained',
-      triggerColorScheme = 'default',
+      triggerMode = 'default',
       triggerSize = 'nm',
       open: controlledOpen,
       onOpenChange,
@@ -131,7 +131,7 @@ const DropdownMenuTrigger = forwardRef<HTMLDivElement, DropdownMenuTriggerProps>
       >
         <MenuButton
           variant={triggerVariant}
-          colorScheme={triggerColorScheme}
+          mode={triggerMode}
           size={triggerSize}
           leftIcon={triggerLeftIcon}
           rightIcon={triggerRightIcon}

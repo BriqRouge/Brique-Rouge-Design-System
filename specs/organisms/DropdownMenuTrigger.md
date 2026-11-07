@@ -19,7 +19,7 @@ figma:
 
 ```ts
 type MenuButtonVariant     = 'contained' | 'outlined';
-type MenuButtonColorScheme = 'default' | 'light' | 'dark';
+type MenuButtonMode        = 'default' | 'light' | 'dark';
 type MenuButtonSize        = 'nm' | 'md';
 
 interface DropdownMenuTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -28,7 +28,7 @@ interface DropdownMenuTriggerProps extends React.HTMLAttributes<HTMLDivElement> 
   triggerLeftIcon?: React.ReactNode;
   triggerRightIcon?: React.ReactNode;
   triggerVariant?:  MenuButtonVariant;      // défaut: 'contained'
-  triggerColorScheme?: MenuButtonColorScheme; // défaut: 'default'
+  triggerMode?:     MenuButtonMode;         // défaut: 'default' (anciennement triggerColorScheme, renommé au /sync-ds du 2026-11-07)
   triggerSize?:     MenuButtonSize;         // défaut: 'nm'
   open?:            boolean;                // mode contrôlé
   onOpenChange?:    (open: boolean) => void;

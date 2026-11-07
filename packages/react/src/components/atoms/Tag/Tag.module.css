@@ -17,6 +17,7 @@
 .icon {
   display: flex;
   flex-shrink: 0;
+  color: var(--color-icon-button-secondary);
 }
 
 /* ─── Tailles ──────────────────────────────────────────────────────────── */

@@ -40,10 +40,25 @@ describe('MenuButton — data-attributes', () => {
   });
 
   it('expose data-variant="outlined" et data-size="md"', () => {
-    render(<MenuButton variant="outlined" colorScheme="dark" size="md">Action</MenuButton>);
+    render(<MenuButton variant="outlined" mode="light" size="md">Action</MenuButton>);
     const btn = screen.getByRole('button');
     expect(btn).toHaveAttribute('data-variant', 'outlined');
     expect(btn).toHaveAttribute('data-size', 'md');
+  });
+
+  it('outlined mode="dark" applique la classe mode-dark (contour blanc)', () => {
+    render(<MenuButton variant="outlined" mode="dark">Action</MenuButton>);
+    expect(screen.getByRole('button').className).toMatch(/mode-dark/);
+  });
+
+  it('outlined mode="light" applique la classe mode-light (contour noir)', () => {
+    render(<MenuButton variant="outlined" mode="light">Action</MenuButton>);
+    expect(screen.getByRole('button').className).toMatch(/mode-light/);
+  });
+
+  it('contained ignore le mode', () => {
+    render(<MenuButton variant="contained" mode="dark">Action</MenuButton>);
+    expect(screen.getByRole('button').className).not.toMatch(/mode-/);
   });
 
   it('expose data-size="sm"', () => {
@@ -111,16 +126,16 @@ describe('MenuButton — accessibilité', () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('outlined light : aucune violation axe', async () => {
+  it('outlined mode dark (fond sombre) : aucune violation axe', async () => {
     const { container } = render(
-      <MenuButton variant="outlined" colorScheme="light">Créer le projet</MenuButton>
+      <MenuButton variant="outlined" mode="dark">Créer le projet</MenuButton>
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('outlined dark : aucune violation axe', async () => {
+  it('outlined mode light (fond clair) : aucune violation axe', async () => {
     const { container } = render(
-      <MenuButton variant="outlined" colorScheme="dark">Créer le projet</MenuButton>
+      <MenuButton variant="outlined" mode="light">Créer le projet</MenuButton>
     );
     expect(await axe(container)).toHaveNoViolations();
   });

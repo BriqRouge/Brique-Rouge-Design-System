@@ -2,14 +2,17 @@ import { forwardRef } from 'react';
 import styles from './MenuButton.module.css';
 
 type MenuButtonVariant = 'contained' | 'outlined';
-type MenuButtonColorScheme = 'default' | 'light' | 'dark';
+type MenuButtonMode = 'default' | 'light' | 'dark';
 type MenuButtonSize = 'sm' | 'nm' | 'md';
 
 interface MenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Type visuel du bouton */
   variant?: MenuButtonVariant;
-  /** Schéma de couleur — 'default' pour contained, 'light'|'dark' pour outlined */
-  colorScheme?: MenuButtonColorScheme;
+  /**
+   * Mode (propriété Figma `Mode`) — 'default' pour contained ; pour outlined :
+   * 'dark' = contour blanc, pour fond sombre · 'light' = contour noir, pour fond clair
+   */
+  mode?: MenuButtonMode;
   /** Taille du bouton */
   size?: MenuButtonSize;
   /** Icône à gauche du label */
@@ -24,7 +27,7 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
   (
     {
       variant = 'contained',
-      colorScheme = 'default',
+      mode = 'default',
       size = 'nm',
       leftIcon,
       rightIcon,
@@ -41,7 +44,7 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
       styles.menuButton,
       styles[`variant-${variant}`],
       styles[`size-${size}`],
-      variant === 'outlined' ? styles[`color-scheme-${colorScheme}`] : '',
+      variant === 'outlined' ? styles[`mode-${mode}`] : '',
       isIconOnly ? styles.iconOnly : '',
       className,
     ]
@@ -79,4 +82,4 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
 MenuButton.displayName = 'MenuButton';
 
 export { MenuButton };
-export type { MenuButtonProps, MenuButtonVariant, MenuButtonColorScheme, MenuButtonSize };
+export type { MenuButtonProps, MenuButtonVariant, MenuButtonMode, MenuButtonSize };

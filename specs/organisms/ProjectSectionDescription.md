@@ -2,9 +2,9 @@
 component: ProjectSectionDescription
 tier: organism
 figma:
-  node: "2248:28967"
-  name: "Cards / Project_Section_Description"
-  type: component
+  node: "2363:42524"
+  name: Cards
+  type: component-set
 ---
 # ProjectSectionDescription
 
