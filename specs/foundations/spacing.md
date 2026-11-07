@@ -38,3 +38,12 @@
 | `spacing.layout.lg` | `64px` |
 | `spacing.layout.xl` | `80px` |
 | `spacing.layout.2xl` | `128px` |
+
+## Selon le viewport
+
+Valeur desktop par défaut ; valeur mobile sous le breakpoint (51em = 816px). Voir `specs/foundations/breakpoint.md`.
+
+| Token | desktop | mobile |
+|---|---|---|
+| `spacing.layout.section-inline` | `128px` | `24px` |
+| `spacing.layout.nav-inline` | `48px` | `16px` |

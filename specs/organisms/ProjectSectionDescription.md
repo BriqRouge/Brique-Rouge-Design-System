@@ -59,8 +59,19 @@ Accepte `alertBanner` en slot optionnel — typiquement rempli avec `<AlertBanne
 | `--typography-body-font-family` | — | Texte des puces |
 | `--typography-font-size-base`/`-3xl`/`-2xl` | `16px`/`32px`/`24px` | Numéro, titre, texte d'introduction |
 | `--typography-font-weight-medium`/`-regular` | `500`/`400` | Numéro (medium), reste (regular) |
-| `--spacing-x6`/`-x4`/`-x14` | `24px`/`16px`/`56px` | Gaps et indentation |
+| `--spacing-x6`/`-x4`/`-x14` | `24px`/`16px`/`56px` | Gaps et indentation (mobile : indentation `--spacing-x4`) |
 | `--sizing-x6` | `24px` | Taille de l'icône des puces |
+
+## Sous le breakpoint (mobile)
+
+Figma `Viewport=mobile` (2363:42525). Pas de prop React : l'adaptation passe par le CSS
+(`@media not (--viewport-desktop)`, breakpoint 816px = 51em, voir
+`specs/foundations/breakpoint.md`).
+
+- En-tête : pleine largeur, padding latéral `--spacing-x4`, numéro et titre centrés verticalement, le titre prend la largeur restante
+- Indentation du texte d'introduction et de la liste : 56px → 16px (`--spacing-x4`)
+- Incohérence Figma signalée : le padding latéral de l'en-tête mobile (16px) n'est pas lié à une variable
+- Texte d'introduction : padding droit 56px (`--spacing-x14`) sur desktop, comme dans Figma (aligné le 2026-11-07, décision de Damien) ; 0 en mobile
 
 ## Règles d'usage
 

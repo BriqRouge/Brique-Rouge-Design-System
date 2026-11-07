@@ -51,8 +51,19 @@ Réutilise `ProjectSectionDescription` (organisme) — chaque section est fourni
 | `--typography-font-size-5xl` | `48px` | Titre de la carte |
 | `--spacing-x16`/`-x4`/`-x6`/`-x2` | `64px`/`16px`/`24px`/`8px` | Gaps internes |
 | `--border-radius-section-card` | `40px` | Border-radius de la carte (Figma : `border-radius/section-card`, depuis le 2026-11-05) |
-| `--spacing-layout-2xl` | `128px` | Padding horizontal de la carte |
+| `--spacing-layout-section-inline` | `128px` (mobile `24px`) | Padding horizontal de la carte — token viewport (Figma `spacing/layout/section-inline`) |
+| `--spacing-x20` | `80px` (mobile `--spacing-x6`, `24px`) | Padding vertical de la carte |
 | `--border-radius-full` | `999px` | Barres d'accent et séparateur |
+
+## Sous le breakpoint (mobile)
+
+Figma `Viewport=mobile` (2363:42650). Pas de prop React : l'adaptation passe par le CSS
+(`@media not (--viewport-desktop)`, breakpoint 816px = 51em, voir
+`specs/foundations/breakpoint.md`).
+
+- Padding de la carte : 24px sur les 4 côtés (inline par le token viewport, vertical par media query)
+- Les sections passent d'elles-mêmes en mobile (`ProjectSectionDescription`)
+- Incohérence Figma signalée : en mobile, le padding est lié à `spacing/x6` sur les 4 côtés, pas à `spacing/layout/section-inline` (même valeur, 24px)
 
 ## Règles d'usage
 

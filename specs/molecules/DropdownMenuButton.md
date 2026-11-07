@@ -71,6 +71,7 @@ Attention au vocabulaire : dans Figma, `Type=activated` signifie « disponible �
 - `hoverLabel` : remplace visuellement `children` au survol. Le libellé est **toujours** annoncé aux lecteurs d'écran à la suite de `children` (« Vinci, Showcase à venir »), car un bouton désactivé n'est pas focalisable et le survol n'existe ni au clavier ni au toucher
 - `rightIcon` : l'icône suit la couleur du texte (gris au repos, couleur de marque au survol). Le booléen Figma `Right Icon` n'est relié à aucun calque (incohérence signalée le 2026-11-04)
 - `company` accepte toutes les valeurs de `LogoCompany` (voir `LogoCompanies`), mais l'accent couleur ne s'applique qu'à `odaptos`/`bpce`/`ibp`
+- **Sous le breakpoint (mobile)** : la version desktop est conservée telle quelle. La variante Figma `Viewport=mobile` n'est pas implémentée (décision de Damien, 2026-11-07) — aucune media query dans le CSS du composant
 
 ## Tests
 

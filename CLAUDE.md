@@ -88,8 +88,10 @@ design-system/
 Figma Variables — fichier `NZtxQVYKRqeaGcC7hT5pjw`
 
 ### Collections Figma
-- `primitive` (1 mode)
+- `primitive` (1 mode) — dont `breakpoint/desktop` (816px), seuil desktop / mobile
 - `semantic` (1 mode) — alias vers les primitives
+- `viewport` (2 modes : `desktop` par défaut, `mobile`) — alias vers les primitives,
+  valeurs qui changent sous le breakpoint (décision du 2026-11-07)
 
 ### Synchronisation Figma → code
 `tokens.json` est **généré** depuis Figma par le skill `/sync-tokens`
@@ -100,7 +102,9 @@ nom ou de valeur se fait dans Figma, puis on relance la synchro.
 - `usesDtcg: true`
 - Transformers custom : `color/figma-hex`, `number/px-or-opacity`
 - Format de `tokens.json` : `$value` résolu — couleur `#rrggbb` (ou `#rrggbbaa` si transparence), nombre, ou texte ; toujours lire via `token.original.$value`
-- Sorties : `primitive.css` (tokens bruts — couleurs, spacing, sizing, border-radius, elevation, typography), `semantic.css` (tokens sémantiques composants — boutons, dropdown, etc.), `index.css` (importe les deux), `tokens.json`
+- Sorties : `primitive.css` (tokens bruts — couleurs, spacing, sizing, border-radius, elevation, typography), `semantic.css` (tokens sémantiques composants — boutons, dropdown, etc. — puis, à la fin, les tokens `viewport` : desktop dans `:root`, mobile dans `@media (width < 51em)`), `index.css` (importe les deux), `custom-media.css` (`@custom-media --viewport-desktop`), `tokens.json`, `modes.json` (valeurs mobiles, pour `generate-specs.mjs`)
+- Breakpoint : jamais émis en variable CSS. Saisi en px dans Figma, converti en em (÷ 16) par le build. Syntaxe par intervalle uniquement (`width <` / `width >=`), jamais `max-width` / `min-width`
+- Mise en page sous le breakpoint dans un CSS Module : `@import '@brique-rouge/tokens/css/custom-media';` puis `@media not (--viewport-desktop) { … }`, résolu par `postcss-custom-media` (à configurer dans chaque consommateur : `packages/storybook/postcss.config.mjs`, portfolio). Les variantes Figma `Viewport=mobile` ne deviennent pas des props React
 
 ### Nomenclature
 Échelle numérique (`spacing.01`, `spacing.02`…) — pas de t-shirt sizing.
@@ -110,6 +114,7 @@ nom ou de valeur se fait dans Figma, puis on relance la synchro.
 @brique-rouge/tokens/css/index      ← principal (charge primitive + semantic)
 @brique-rouge/tokens/css/primitive  ← tokens bruts uniquement
 @brique-rouge/tokens/css/semantic   ← tokens sémantiques uniquement
+@brique-rouge/tokens/css/custom-media ← @custom-media (aucune règle CSS, à résoudre par postcss-custom-media)
 @brique-rouge/tokens/json           ← JSON complet
 ```
 

@@ -60,3 +60,21 @@
 | `typography.button.md.font-size` | `16px` |
 | `typography.button.sm.font-size` | `12px` |
 | `typography.button.sm.font-family` | `"ABC Favorit Pro Variable", sans-serif` |
+
+## Selon le viewport
+
+Valeur desktop par défaut ; valeur mobile sous le breakpoint (51em = 816px). Voir `specs/foundations/breakpoint.md`.
+
+| Token | desktop | mobile |
+|---|---|---|
+| `typography.display-lg.font-size` | `48px` | `32px` |
+| `typography.display-lg.line-height` | `56px` | `40px` |
+| `typography.expressive-xl.font-size` | `48px` | `32px` |
+| `typography.expressive-xl.line-height` | `56px` | `40px` |
+| `typography.heading-xl.font-size` | `32px` | `24px` |
+| `typography.heading-xl.line-height` | `40px` | `32px` |
+| `typography.expressive-lg.font-size` | `32px` | `24px` |
+| `typography.expressive-lg.line-height` | `40px` | `32px` |
+| `typography.heading-lg.font-size` | `24px` | `20px` |
+| `typography.heading-lg.line-height` | `32px` | `28px` |
+| `typography.project-overview-title.font-size` | `32px` | `24px` |

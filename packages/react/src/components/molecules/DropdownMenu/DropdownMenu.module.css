@@ -1,3 +1,5 @@
+@import '@brique-rouge/tokens/css/custom-media';
+
 .dropdownMenu {
   display: flex;
   flex-direction: column;
@@ -7,4 +9,15 @@
   background-color: var(--color-background-surface, #f5f5f5);
   border: 0.5px solid var(--color-border-default, #d4d4d4);
   border-radius: var(--border-radius-lg, 12px);
+}
+
+/* Sous le breakpoint — Figma `Viewport=mobile` (2357:38495). Paddings gauche/droit
+   inchangés (spacing/x2). La largeur (390px dans Figma = largeur de l'écran) relève
+   du conteneur qui positionne le menu, pas du menu lui-même. */
+@media not (--viewport-desktop) {
+  .dropdownMenu {
+    gap: var(--spacing-x6);
+    padding-top: var(--spacing-x4);
+    padding-bottom: var(--spacing-x6);
+  }
 }

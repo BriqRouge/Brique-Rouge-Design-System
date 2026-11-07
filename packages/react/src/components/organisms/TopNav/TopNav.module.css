@@ -1,10 +1,13 @@
+@import '@brique-rouge/tokens/css/custom-media';
+
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
 
 .topNav {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: var(--spacing-x10) var(--spacing-x12) var(--spacing-x6);
+  /* Inline : token viewport nav-inline (48px desktop, 16px sous le breakpoint) */
+  padding: var(--spacing-x10) var(--spacing-layout-nav-inline) var(--spacing-x6);
   box-sizing: border-box;
 }
 
@@ -278,4 +281,14 @@
   92% { transform: translate(0.01px, -0.03px); }
   94% { transform: translate(0px, 0px); }
   100% { transform: translate(0px, 0px); }
+}
+
+/* ─── Sous le breakpoint (Figma Type=header, Viewport=mobile, 2353:38724) ── */
+/* Le bloc logo prend 16px de padding sur les 4 côtés (desktop : à droite seul).
+   La barre projet mobile (Type=bottomnav-bar) attend la décision de Damien. */
+@media not (--viewport-desktop) {
+  .brand {
+    min-height: 0; /* Figma : hauteur ajustée au contenu (88px fixe sur desktop) */
+    padding: var(--spacing-x4);
+  }
 }

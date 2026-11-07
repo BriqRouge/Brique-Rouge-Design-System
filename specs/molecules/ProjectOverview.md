@@ -36,10 +36,20 @@ interface ProjectOverviewProps extends React.HTMLAttributes<HTMLDivElement> {
 | `--color-text-secondary` | `#404040` | Texte de description |
 | `--color-text-tertiary` | `#737373` | Rôle et contributions |
 | `--typography-font-family-sans` | — | Tous les textes |
-| `--typography-font-size-3xl`/`-base` | `32px`/`16px` | Titre / reste |
+| `--typography-project-overview-title-font-size` | `32px` (mobile `24px`) | Titre — token viewport |
+| `--typography-font-size-base` | `16px` | Reste |
 | `--typography-font-weight-medium`/`-regular` | `500`/`400` | Titre / reste |
 | `--spacing-x6`/`-x8` | `24px`/`32px` | Gap colonnes / padding |
 | `--border-radius-section-card` | `40px` | Border-radius (Figma : `border-radius/section-card`, depuis le 2026-11-05) |
+
+## Sous le breakpoint (mobile)
+
+Figma `Viewport=mobile` (2353:39987). Pas de prop React : l'adaptation passe par le CSS
+(`@media not (--viewport-desktop)`, breakpoint 816px = 51em, voir
+`specs/foundations/breakpoint.md`).
+
+- Colonnes empilées (titre puis description), chacune en pleine largeur, gap `--spacing-x6`
+- Titre 24px via le token viewport `--typography-project-overview-title-font-size`
 
 ## Règles d'usage
 

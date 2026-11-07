@@ -1,3 +1,5 @@
+@import '@brique-rouge/tokens/css/custom-media';
+
 .overview {
   display: flex;
   align-items: flex-start;
@@ -20,7 +22,8 @@
   min-width: 0;
   margin: 0;
   font-family: var(--typography-font-family-sans);
-  font-size: var(--typography-font-size-3xl);
+  /* Token viewport : 32px desktop, 24px sous le breakpoint */
+  font-size: var(--typography-project-overview-title-font-size);
   font-weight: var(--typography-font-weight-medium);
   line-height: normal;
   color: var(--color-text-primary);
@@ -65,4 +68,18 @@
   font-weight: var(--typography-font-weight-regular);
   line-height: var(--typography-line-height-x6);
   color: var(--color-text-tertiary);
+}
+
+/* ─── Sous le breakpoint (Figma Viewport=mobile, 2353:39987) ─────────────── */
+/* Colonnes empilées ; en fin de fichier pour surcharger les règles ci-dessus. */
+@media not (--viewport-desktop) {
+  .overview {
+    flex-direction: column;
+  }
+
+  .titleColumn,
+  .descriptionColumn {
+    flex: none;
+    width: 100%;
+  }
 }
