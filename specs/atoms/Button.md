@@ -51,9 +51,9 @@ interface ButtonProps {
 | `--color-button-error` / `-hover` | `#e22020` / `#be1717` | Idem, error |
 | `--color-button-focus` | `#567be9` | Bordure focus-visible (primary/secondary, intégrée — pas un anneau extérieur) |
 | `--color-border-button-secondary` | `#262626` | Bordure secondary neutre |
-| `--color-text-button-primary` / `-hover` | `#fafafa` | Texte sur fond plein (primary, ou secondary au hover) |
-| `--color-text-button-secondary` / `-hover` | `#262626` / `#fafafa` | Texte secondary neutre (idle / hover) |
-| `--color-text-button-tertiary` / `-hover` / `-focus` | `#262626` / `#404040` / `#3453dc` | Texte tertiary selon l'état |
+| `--color-text-button-primary-idle` / `-hover` | `#fafafa` | Texte sur fond plein (primary idle / hover) |
+| `--color-text-button-secondary-idle` / `-hover` | `#262626` / `#fafafa` | Texte secondary (idle / hover, y compris hover des colorScheme sémantiques) |
+| `--color-text-button-tertiary-idle` / `-hover` / `-focus` | `#262626` / `#404040` / `#3453dc` | Texte tertiary selon l'état |
 | `--color-icon-button-info` / `warning` | `#3453dc` / `#e1742e` | Icône + texte secondary info/warning (idle) |
 | `--color-background-button-disabled` / `--color-border-button-disabled` / `--color-text-button-disabled` / `--color-icon-button-disabled` | `#f5f5f5` / `#d4d4d4` / `#d4d4d4` / `#d4d4d4` | État disabled (neutre, tous variants) |
 | `--border-radius-button` | `999px` | Border-radius (pill) |

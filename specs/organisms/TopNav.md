@@ -47,7 +47,7 @@ interface TopNavProps {
 |-------|--------|-------|
 | `--color-background-projects-{project}` | — | Fond de la pilule (un par projet) |
 | `--color-text-nav-bar-{project}` | — | Couleur du titre **et** du sous-titre (un par projet — même couleur pour les deux) |
-| `--color-border-menu-button-outlined-white`, `--color-text-menu-button-outline-white` | — | Bouton retour (`MenuButton` outlined/light/md) |
+| `--color-border-menu-button-outlined-white`, `--color-text-menu-button-outlined-light-hover` | — | Bouton retour (`MenuButton` outlined/light/md) |
 | `--spacing-x10`, `--spacing-x6` | `40px`, `24px` | Padding vertical du conteneur |
 | `--spacing-layout-nav-inline` | `48px` (mobile `16px`) | Padding horizontal du conteneur — token viewport (Figma `spacing/layout/nav-inline`) |
 | `--spacing-component-md`, `--spacing-component-lg`, `--spacing-component-sm` | `16px`, `24px`, `8px` | Padding/gap de la pilule |

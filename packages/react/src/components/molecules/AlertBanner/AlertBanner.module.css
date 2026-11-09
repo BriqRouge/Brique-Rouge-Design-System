@@ -57,11 +57,11 @@
 }
 
 .banner[data-type='info'] .title {
-  color: var(--color-text-notification-info);
+  color: var(--color-text-notification-info-message);
 }
 
 .banner[data-type='warning'] .title {
-  color: var(--color-text-notification-warning);
+  color: var(--color-text-notification-warning-message);
 }
 
 .timestampWrapper {
@@ -140,11 +140,11 @@
 }
 
 .banner[data-type='info'] .description {
-  color: var(--color-text-notification-info);
+  color: var(--color-text-notification-info-message);
 }
 
 .banner[data-type='warning'] .description {
-  color: var(--color-text-notification-warning);
+  color: var(--color-text-notification-warning-message);
 }
 
 /* ─── CTA ──────────────────────────────────────────────────────────────────── */

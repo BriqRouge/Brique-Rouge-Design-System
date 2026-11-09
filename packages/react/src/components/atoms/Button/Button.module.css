@@ -48,7 +48,7 @@
 
 .variant-primary {
   background-color: var(--color-button-primary);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-primary-idle);
 }
 
 .variant-primary:hover:not(:disabled) {
@@ -61,7 +61,7 @@
 .variant-secondary {
   background-color: transparent;
   border-color: var(--color-border-button-secondary);
-  color: var(--color-text-button-secondary);
+  color: var(--color-text-button-secondary-idle);
 }
 
 .variant-secondary:hover:not(:disabled) {
@@ -78,7 +78,7 @@
   min-width: 0;
   padding-left: 0;
   padding-right: 0;
-  color: var(--color-text-button-tertiary);
+  color: var(--color-text-button-tertiary-idle);
   text-decoration: underline;
 }
 
@@ -94,7 +94,7 @@
 
 .variant-primary.color-scheme-info {
   background-color: var(--color-button-info);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-primary-idle);
 }
 
 .variant-primary.color-scheme-info:hover:not(:disabled) {
@@ -110,14 +110,14 @@
 .variant-secondary.color-scheme-info:hover:not(:disabled) {
   background-color: var(--color-button-info-hover);
   border-color: var(--color-button-info-hover);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-secondary-hover);
 }
 
 /* ─── Schéma de couleur : warning ─────────────────────────────────────────────── */
 
 .variant-primary.color-scheme-warning {
   background-color: var(--color-button-warning);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-primary-idle);
 }
 
 .variant-primary.color-scheme-warning:hover:not(:disabled) {
@@ -133,14 +133,14 @@
 .variant-secondary.color-scheme-warning:hover:not(:disabled) {
   background-color: var(--color-button-warning-hover);
   border-color: var(--color-button-warning-hover);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-secondary-hover);
 }
 
 /* ─── Schéma de couleur : success ─────────────────────────────────────────────── */
 
 .variant-primary.color-scheme-success {
   background-color: var(--color-button-success);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-primary-idle);
 }
 
 .variant-primary.color-scheme-success:hover:not(:disabled) {
@@ -156,14 +156,14 @@
 .variant-secondary.color-scheme-success:hover:not(:disabled) {
   background-color: var(--color-button-success-hover);
   border-color: var(--color-button-success-hover);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-secondary-hover);
 }
 
 /* ─── Schéma de couleur : error ────────────────────────────────────────────────── */
 
 .variant-primary.color-scheme-error {
   background-color: var(--color-button-error);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-primary-idle);
 }
 
 .variant-primary.color-scheme-error:hover:not(:disabled) {
@@ -179,7 +179,7 @@
 .variant-secondary.color-scheme-error:hover:not(:disabled) {
   background-color: var(--color-button-error-hover);
   border-color: var(--color-button-error-hover);
-  color: var(--color-text-button-primary);
+  color: var(--color-text-button-secondary-hover);
 }
 
 /* ─── État désactivé ─────────────────────────────────────────────────────────── */
