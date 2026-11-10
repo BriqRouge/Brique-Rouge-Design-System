@@ -60,10 +60,8 @@ Réutilise `ProjectCardDescription` (molécule) comme panneau de description ré
 | `--motion-duration-fast` / `--motion-easing-standard` | `150ms` / `ease-out` | Transitions de survol |
 | `--color-border-bento-cards-idle` | `#e5e5e5` | Bordure de la façade au repos |
 | `--color-background-page` | `#fafafa` | Fond de la façade (`background/homepage`, doublon, fusionné le 2026-11-04) |
-| `--color-background-projects-odaptos` | `#3453dc` | Plaque de fond + bordure au survol, Odaptos |
-| `--color-background-projects-bpce` | `#9b75ab` | Plaque de fond + bordure au survol, BPCE |
-| `--color-background-projects-ibp` | `#949ae5` | Plaque de fond + bordure au survol, iBP |
-| `--color-background-projects-conseil-constitutionnel` | `#5bdb50` | Plaque de fond + bordure au survol, Conseil constitutionnel |
+| `--color-background-project-brand` | `#3453dc` odaptos · `#9b75ab` bpce · `#949ae5` ibp · `#5bdb50` conseil-constitutionnel | Plaque de fond. Collection `project` : valeur résolue par `data-project` sur la carte (déjà posé par le composant) |
+| `--color-border-project-brand` | mêmes valeurs par projet | Bordure de la façade au survol (variable distincte du fond, comme `border/project/subtle`) |
 | `--color-background-projects-cv` | `#efde59` | Plaque de fond + bordure au survol, CV |
 | `--border-radius-bento-section` | `12px` | Arrondi des deux plaques (token ajouté avec ce composant) |
 | `--spacing-x2` | `8px` | Décalage de la façade au survol ; décalage vertical de la description avant apparition |

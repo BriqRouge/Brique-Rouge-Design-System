@@ -38,10 +38,15 @@ suffit de changer l'alias dans Figma. Contraste mesuré sur `background/page` (#
 lot 7 (2026-11-10) : utiliser `primary`, `secondary` et `tertiary`.
 
 Les ratios sont vérifiés en CI par `scripts/contrast-audit.mjs` sur les combinaisons
-déclarées dans `packages/tokens/contrast-pairs.config.js`.
+déclarées dans `packages/tokens/contrast-pairs.config.js`, puis sur le rendu réel de chaque
+story par `scripts/rendered-contrast-audit.mjs` (axe-core dans Chromium, job Test) : ce second
+contrôle voit les combinaisons non déclarées (ex. un libellé sur le fond d'un composant parent).
 | `--color-background-page` | neutral/50 | Fond de page | — |
 | `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |
 | `--color-background-surface-raised` | neutral/200 | Surfaces surélevées, survol neutre | — |
+| `--color-background-inverse` | neutral/950 | Sections sombres (hero, footer) ; fond de référence des variantes « sur fond foncé » | — |
+| `--color-background-inverse-raised` | neutral/800 | Élément posé sur un fond inverse | — |
+| `--color-background-accent-subtle` | deep-sea/100 | Fond léger d'accent (pastille d'icône) | — |
 | `--color-border-default` | neutral/300 | Bordures de conteneur | — |
 | `--color-border-subtle` | neutral/200 | Bordures discrètes | — |
 | `--color-border-focus` | deep-sea/600 | Indicateur de focus | — |

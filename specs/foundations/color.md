@@ -184,11 +184,6 @@
 | `color.icon.menu-button.outline-black` | `#171717` |
 | `color.icon.menu-button.disabled` | `#d4d4d4` |
 | `color.background.button.disabled` | `#f5f5f5` |
-| `color.background.projects.odaptos` | `#3453dc` |
-| `color.background.projects.bpce` | `#9b75ab` |
-| `color.background.projects.ibp` | `#949ae5` |
-| `color.background.projects.opco-atlas` | `#f53e3e` |
-| `color.background.projects.conseil-constitutionnel` | `#5bdb50` |
 | `color.background.projects.body` | `#e5e5e5` |
 | `color.background.projects.cv` | `#efde59` |
 | `color.background.notification.info` | `#f0f4fe` |
@@ -200,6 +195,9 @@
 | `color.background.page` | `#fafafa` |
 | `color.background.surface` | `#f5f5f5` |
 | `color.background.surface-raised` | `#e5e5e5` |
+| `color.background.inverse` | `#0a0a0a` |
+| `color.background.inverse-raised` | `#262626` |
+| `color.background.accent-subtle` | `#dee6fb` |
 | `color.button.primary` | `#262626` |
 | `color.button.primary-hover` | `#404040` |
 | `color.button.secondary-hover` | `#262626` |
@@ -228,6 +226,8 @@ Une valeur par projet, appliquée par l'attribut `data-project` posé sur le com
 |---|---|---|---|---|---|
 | `color.background.project.accent` | `#2c41c9` | `#6d5079` | `#594fb3` | `#9d1717` | `#1d6318` |
 | `color.background.project.subtle` | `#dee6fb` | `#ece4f0` | `#e5eafa` | `#ffe1e1` | `#e0fbdd` |
+| `color.background.project.brand` | `#3453dc` | `#9b75ab` | `#949ae5` | `#f53e3e` | `#5bdb50` |
 | `color.text.project.on-accent` | `#c4d5f9` | `#ece4f0` | `#d0d6f5` | `#ffc8c8` | `#c2f6bc` |
 | `color.text.project.on-subtle` | `#3453dc` | `#6d5079` | `#594fb3` | `#9d1717` | `#1d6318` |
 | `color.border.project.subtle` | `#9bb9f5` | `#b08ebe` | `#b3bcee` | `#ffb5b5` | `#90ed88` |
+| `color.border.project.brand` | `#3453dc` | `#9b75ab` | `#949ae5` | `#f53e3e` | `#5bdb50` |

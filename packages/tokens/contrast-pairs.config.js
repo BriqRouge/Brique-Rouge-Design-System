@@ -15,9 +15,10 @@ const PAGE = 'semantic/color/background/page';
 const SURFACE = 'semantic/color/background/surface';
 const SURFACE_RAISED = 'semantic/color/background/surface-raised';
 // Fond sombre de référence pour les variantes « sur fond foncé » (Link theme=dark,
-// MenuButton outlined mode=dark, Badge outlined) : le DS n'a pas de token de fond
-// sombre, ces composants se posent sur un visuel ou une couleur de projet.
-const DARK = 'primitive/color/neutral/900';
+// MenuButton outlined mode=dark, Badge outlined) : le token de fond inverse
+// (ajouté le 2026-11-10). Ces composants peuvent aussi se poser sur un visuel
+// ou une couleur de projet, non couverts ici.
+const DARK = 'semantic/color/background/inverse';
 const T = (name) => `semantic/color/text/${name}`;
 const S = (name) => `semantic/color/${name}`;
 
@@ -74,6 +75,7 @@ export default {
     ]),
 
     // ─── DropdownMenuButton ─────────────────────────────────────────────────
+    { fg: T('secondary'), bg: SURFACE, where: 'DropdownMenuButton au repos, dans le DropdownMenu' },
     { fg: T('secondary'), bg: SURFACE_RAISED, where: 'DropdownMenuButton :hover neutre' },
     { fg: 'project/color/text/project/on-subtle', bg: 'project/color/background/project/subtle', where: 'DropdownMenuButton :hover par projet' },
 
