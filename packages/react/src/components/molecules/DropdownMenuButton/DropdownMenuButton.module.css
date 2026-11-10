@@ -14,7 +14,7 @@
   font-family: var(--typography-dropdown-menu-button-font-family);
   font-size: var(--typography-dropdown-menu-button-font-size);
   font-weight: var(--typography-font-weight-medium);
-  color: var(--color-text-menu-button-contained);
+  color: var(--color-text-tertiary);
   text-align: left;
   box-sizing: border-box;
   position: relative; /* ancre .srOnly */

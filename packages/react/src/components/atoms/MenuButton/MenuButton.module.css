@@ -84,7 +84,7 @@
 .variant-contained {
   background-color: var(--color-menu-button-idle);
   border-color: var(--color-border-menu-button-contained);
-  color: var(--color-text-menu-button-contained);
+  color: var(--color-text-menu-button-contained-idle);
 }
 
 .variant-contained:hover:not(:disabled) {
@@ -101,19 +101,19 @@
 .variant-outlined.mode-dark {
   background-color: transparent;
   border-color: var(--color-border-menu-button-outlined-white);
-  color: var(--color-text-menu-button-outline-white);
+  color: var(--color-text-menu-button-outlined-dark-idle);
 }
 
 .variant-outlined.mode-dark:hover:not(:disabled) {
   background-color: var(--color-menu-button-hovered);
   border-color: var(--color-border-menu-button-contained);
-  color: var(--color-text-menu-button-contained);
+  color: var(--color-text-menu-button-outlined-dark-hover);
 }
 
 .variant-outlined.mode-dark:focus-visible {
   background-color: var(--color-menu-button-hovered);
   border-color: var(--color-border-menu-button-focus);
-  color: var(--color-text-menu-button-contained);
+  color: var(--color-text-menu-button-outlined-dark-hover);
 }
 
 /* ─── Variant : outlined, Mode=light (contour noir, pour fond clair) ──────────── */
@@ -121,19 +121,19 @@
 .variant-outlined.mode-light {
   background-color: transparent;
   border-color: var(--color-border-menu-button-outlined-black);
-  color: var(--color-text-menu-button-outline-black);
+  color: var(--color-text-menu-button-outlined-light-idle);
 }
 
 .variant-outlined.mode-light:hover:not(:disabled) {
   background-color: var(--color-menu-button-hovered-black);
   border-color: var(--color-menu-button-hovered-black);
-  color: var(--color-text-menu-button-outline-white);
+  color: var(--color-text-menu-button-outlined-light-hover);
 }
 
 .variant-outlined.mode-light:focus-visible {
   background-color: var(--color-menu-button-hovered-black);
   border-color: var(--color-border-menu-button-focus);
-  color: var(--color-text-menu-button-outline-white);
+  color: var(--color-text-menu-button-outlined-light-hover);
 }
 
 /* ─── État désactivé ────────────────────────────────────────────────────────── */

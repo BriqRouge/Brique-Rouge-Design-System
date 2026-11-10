@@ -41,8 +41,8 @@ interface AlertBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 | `--color-background-notification-warning` | `#fdf7ef` | Fond, type warning |
 | `--color-border-notification-info` | `#6c95ee` | Bordure, type info |
 | `--color-border-notification-warning` | `#e68c47` | Bordure, type warning |
-| `--color-text-notification-info` | `#2c41c9` | Texte titre + description, info |
-| `--color-text-notification-warning` | `#af471f` | Texte titre + description, warning |
+| `--color-text-notification-info-message` | `#2c41c9` | Texte titre + description, info |
+| `--color-text-notification-warning-message` | `#af471f` | Texte titre + description, warning |
 | `--color-text-notification-info-timestamp` | `#567be9` | Texte horodatage, info |
 | `--color-text-notification-warning-timestamp` | `#e1742e` | Texte horodatage, warning |
 | `--color-icon-notification-info` | `#3453dc` | Icône d'en-tête, info |
