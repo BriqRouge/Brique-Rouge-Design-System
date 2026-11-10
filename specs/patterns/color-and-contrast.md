@@ -33,10 +33,9 @@ suffit de changer l'alias dans Figma. Contraste mesuré sur `background/page` (#
 | `--color-text-accent` | deep-sea/600 | Accent interactif, mise en valeur | 5.9:1 |
 | `--color-text-info` / `--color-text-warning` | deep-sea/700 / autumn/700 | Messages d'information / d'avertissement | 7.05:1 / 5.27:1 sur leur fond de notification |
 
-Échelle à 3 niveaux décidée par l'ADR-001 (lot 4, 2026-11-10). `--color-text-strong`,
-`--color-text-body` et `--color-text-muted` sont **dépréciés** : ils pointent vers
-`primary`, `secondary` et `tertiary`, ne sont plus utilisés par le DS et seront supprimés
-au lot 7. Ne pas les utiliser.
+Échelle à 3 niveaux décidée par l'ADR-001 (lot 4, 2026-11-10). Les anciens
+`--color-text-strong`, `--color-text-body` et `--color-text-muted` ont été supprimés au
+lot 7 (2026-11-10) : utiliser `primary`, `secondary` et `tertiary`.
 | `--color-background-page` | neutral/50 | Fond de page | — |
 | `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |
 | `--color-background-surface-raised` | neutral/200 | Surfaces surélevées, survol neutre | — |
