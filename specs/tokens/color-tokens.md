@@ -136,6 +136,10 @@
 --color-text-button-tertiary-idle: #171717;
 --color-text-button-tertiary-hover: #525252;
 --color-text-button-tertiary-focus: #3453dc;
+--color-text-button-secondary-info-idle: #3453dc;
+--color-text-button-secondary-warning-idle: #af471f;
+--color-text-button-secondary-success-idle: #1f7d18;
+--color-text-button-secondary-error-idle: #e22020;
 --color-text-notification-info-message: #2c41c9;
 --color-text-notification-info-timestamp: #3453dc;
 --color-text-notification-warning-message: #af471f;
@@ -158,8 +162,12 @@
 --color-text-inverse: #fafafa;
 --color-text-info: #2c41c9;
 --color-text-warning: #af471f;
+--color-text-success: #1f7d18;
+--color-text-danger: #e22020;
+--color-text-inverse-secondary: #d4d4d4;
+--color-text-inverse-disabled: #737373;
 --color-icon-button-info: #3453dc;
---color-icon-button-warning: #e1742e;
+--color-icon-button-warning: #af471f;
 --color-icon-button-primary-hover: #fafafa;
 --color-icon-button-secondary: #262626;
 --color-icon-button-secondary-hover: #fafafa;
@@ -168,7 +176,7 @@
 --color-icon-button-tertiary-focus: #567be9;
 --color-icon-button-primary: #fafafa;
 --color-icon-button-error: #e22020;
---color-icon-button-success: #32c126;
+--color-icon-button-success: #1f7d18;
 --color-icon-button-disabled: #d4d4d4;
 --color-icon-notification-info: #3453dc;
 --color-icon-notification-warning: #e1742e;
@@ -200,10 +208,10 @@
 --color-button-secondary-hover: #262626;
 --color-button-info: #3453dc;
 --color-button-info-hover: #2c41c9;
---color-button-warning: #e1742e;
---color-button-warning-hover: #d35c23;
---color-button-success: #23a019;
---color-button-success-hover: #1f7d18;
+--color-button-warning: #af471f;
+--color-button-warning-hover: #8c3920;
+--color-button-success: #1f7d18;
+--color-button-success-hover: #1d6318;
 --color-button-error: #e22020;
 --color-button-error-hover: #be1717;
 --color-button-focus: #567be9;
@@ -223,22 +231,37 @@
 ```css
 [data-project='odaptos'] {
   --color-background-project-accent: #2c41c9;
+  --color-background-project-subtle: #dee6fb;
   --color-text-project-on-accent: #c4d5f9;
+  --color-text-project-on-subtle: #3453dc;
+  --color-border-project-subtle: #9bb9f5;
 }
 [data-project='bpce'] {
   --color-background-project-accent: #6d5079;
+  --color-background-project-subtle: #ece4f0;
   --color-text-project-on-accent: #ece4f0;
+  --color-text-project-on-subtle: #6d5079;
+  --color-border-project-subtle: #b08ebe;
 }
 [data-project='ibp'] {
   --color-background-project-accent: #594fb3;
+  --color-background-project-subtle: #e5eafa;
   --color-text-project-on-accent: #d0d6f5;
+  --color-text-project-on-subtle: #594fb3;
+  --color-border-project-subtle: #b3bcee;
 }
 [data-project='opco-atlas'] {
   --color-background-project-accent: #9d1717;
+  --color-background-project-subtle: #ffe1e1;
   --color-text-project-on-accent: #ffc8c8;
+  --color-text-project-on-subtle: #9d1717;
+  --color-border-project-subtle: #ffb5b5;
 }
 [data-project='conseil-constitutionnel'] {
   --color-background-project-accent: #1d6318;
+  --color-background-project-subtle: #e0fbdd;
   --color-text-project-on-accent: #c2f6bc;
+  --color-text-project-on-subtle: #1d6318;
+  --color-border-project-subtle: #90ed88;
 }
 ```

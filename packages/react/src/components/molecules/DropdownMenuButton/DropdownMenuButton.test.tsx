@@ -23,6 +23,8 @@ describe('DropdownMenuButton — rendu', () => {
   it('expose data-company quand company est fourni', () => {
     render(<DropdownMenuButton company="bpce">BPCE</DropdownMenuButton>);
     expect(screen.getByRole('button')).toHaveAttribute('data-company', 'bpce');
+    // data-project sélectionne les couleurs de la collection Figma `project` (ADR-001, lot 5)
+    expect(screen.getByRole('button')).toHaveAttribute('data-project', 'bpce');
   });
 
   it('ajoute une className supplémentaire', () => {

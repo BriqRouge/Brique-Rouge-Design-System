@@ -45,7 +45,8 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-neutral-100` | `#f5f5f5` | Fond (contained) ; bordure et texte (outlined) |
+| `--color-neutral-100` | `#f5f5f5` | Fond (contained) ; bordure (outlined) |
+| `--color-text-inverse` | `#fafafa` | Texte (outlined) |
 | `--color-text-primary` | `#171717` | Texte (contained) |
 | `--color-icon-button-secondary` | `#262626` | Icônes (contained) |
 | `--border-radius-button` | `999px` | Forme pilule |

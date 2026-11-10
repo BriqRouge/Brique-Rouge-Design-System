@@ -46,15 +46,16 @@ interface ButtonProps {
 | `--color-button-primary` / `-hover` | `#262626` / `#404040` | Fond primary neutre |
 | `--color-button-secondary-hover` | `#262626` | Fond secondary neutre (hover, remplit) |
 | `--color-button-info` / `-hover` | `#3453dc` / `#2c41c9` | Fond primary + bordure/fond hover secondary, info |
-| `--color-button-warning` / `-hover` | `#e1742e` / `#d35c23` | Idem, warning |
-| `--color-button-success` / `-hover` | `#23a019` / `#1f7d18` | Idem, success |
+| `--color-button-warning` / `-hover` | `#af471f` / `#8c3920` | Idem, warning (foncé le 2026-11-10 : texte blanc 5,37:1) |
+| `--color-button-success` / `-hover` | `#1f7d18` / `#1d6318` | Idem, success (foncé le 2026-11-10 : texte blanc 5,02:1) |
 | `--color-button-error` / `-hover` | `#e22020` / `#be1717` | Idem, error |
 | `--color-button-focus` | `#567be9` | Bordure focus-visible (primary/secondary, intégrée — pas un anneau extérieur) |
 | `--color-border-button-secondary` | `#262626` | Bordure secondary neutre |
 | `--color-text-button-primary-idle` / `-hover` | `#fafafa` | Texte sur fond plein (primary idle / hover) |
 | `--color-text-button-secondary-idle` / `-hover` | `#171717` / `#fafafa` | Texte secondary (idle / hover, y compris hover des colorScheme sémantiques) |
 | `--color-text-button-tertiary-idle` / `-hover` / `-focus` | `#171717` / `#525252` / `#3453dc` | Texte tertiary selon l'état |
-| `--color-icon-button-info` / `warning` | `#3453dc` / `#e1742e` | Icône + texte secondary info/warning (idle) |
+| `--color-text-button-secondary-{info,warning,success,error}-idle` | `#3453dc` / `#af471f` / `#1f7d18` / `#e22020` | Texte secondary coloré (idle), ≥ 4,5:1 sur la page (ADR-001 lot 5) |
+| `--color-icon-button-info` / `warning` / `success` | `#3453dc` / `#af471f` / `#1f7d18` | Icône secondary coloré (idle) |
 | `--color-background-button-disabled` / `--color-border-button-disabled` / `--color-text-button-disabled` / `--color-icon-button-disabled` | `#f5f5f5` / `#d4d4d4` / `#d4d4d4` / `#d4d4d4` | État disabled (neutre, tous variants) |
 | `--border-radius-button` | `999px` | Border-radius (pill) |
 | `--spacing-component-sm` | `8px` | Gap + padding vertical |
