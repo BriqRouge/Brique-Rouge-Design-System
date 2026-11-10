@@ -10,7 +10,7 @@ figma:
 
 **Package :** `@brique-rouge/react`
 **Chemin :** `packages/react/src/components/molecules/BulletBrique/`
-**Figma :** `State=closed|opened`. Survol (Smart Animate 300ms linéaire) : ouverture, révélation de 6 `Badge`. Utilisé 3 fois sur la page d'accueil du Portfolio
+**Figma :** `State=closed|opened`. Survol (Smart Animate 300ms, `cubic-bezier(0.05, 0.7, 0.1, 1)`) : ouverture, révélation de 6 `Badge`. Utilisé 3 fois sur la page d'accueil du Portfolio
 
 ## API
 
@@ -54,7 +54,7 @@ Le bouton porte `aria-expanded` et `aria-controls`. Fermée, la liste est en `vi
 ## Animation (get_motion_context, 2131:21897)
 
 - **Lévitation en boucle**, 4993ms. La brique monte de 6,667px (montée sur 32 % du cycle, descente sur le reste, ease-in-out sinusoïdal), l'ombre rétrécit (×0,82) et s'estompe (0,22 → 0,10)
-- **Ouverture** : 300ms linéaire (Smart Animate Figma). Hauteur via `grid-template-rows`, exception documentée à la règle « n'animer que transform/opacity », plus fondu des badges
+- **Ouverture** : 300ms, courbe *emphasized decelerate* `cubic-bezier(0.05, 0.7, 0.1, 1)` (Smart Animate Figma, linéaire jusqu'au 2026-11-10). Hauteur via `grid-template-rows`, exception documentée à la règle « n'animer que transform/opacity », plus fondu des badges
 - `prefers-reduced-motion: reduce` : lévitation arrêtée, ouverture en 1ms
 - Ouverture : `--motion-duration-base` / `--motion-easing-reveal`. Lévitation en boucle : valeurs codées en dur dans les keyframes (animation décorative, décision de Damien du 2026-11-05)
 
@@ -64,7 +64,7 @@ Le bouton porte `aria-expanded` et `aria-controls`. Fermée, la liste est en `vi
 |-------|--------|-------|
 | `--color-text-primary` | `#171717` | Intitulé (Figma : `color/text/primary`) |
 | `--color-border-focus` | `#3453dc` | Contour de focus |
-| `--motion-duration-base` / `--motion-easing-reveal` | `300ms` / `linear` | Ouverture du panneau |
+| `--motion-duration-base` / `--motion-easing-reveal` | `300ms` / `cubic-bezier(0.05, 0.7, 0.1, 1)` | Ouverture du panneau |
 | `--typography-font-family-sans` | — | Intitulé (style Figma `label/2xl-trim`) |
 | `--typography-font-size-2xl` | `24px` | Intitulé |
 | `--typography-font-weight-regular` | `400` | Intitulé |
