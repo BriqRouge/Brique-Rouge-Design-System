@@ -55,6 +55,7 @@ const DropdownMenuButton = forwardRef<HTMLButtonElement, DropdownMenuButtonProps
         data-component="ds-br-dropdown-menu-button"
         data-activated={activated}
         data-company={company}
+        data-project={company}
         className={classes}
         disabled={disabled}
         {...props}

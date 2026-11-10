@@ -38,8 +38,8 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 |-------|--------|-------|
 | `--color-text-primary` | `#171717` | Texte et icônes au repos (light) |
 | `--color-text-tertiary` | `#737373` | Survol et disabled (light) — AA, remplace le `#8e8e8e` de la librairie externe |
-| `--color-neutral-100` | `#f5f5f5` | Texte et icônes au repos (dark) |
-| `--color-neutral-300` | `#d4d4d4` | Survol et disabled (dark) |
+| `--color-text-inverse` | `#fafafa` | Texte et icônes au repos (dark) |
+| `--color-text-inverse-secondary` / `--color-text-inverse-disabled` | `#d4d4d4` / `#737373` | Survol / disabled (dark) — distincts depuis l'ADR-001 lot 5 (2026-11-10) |
 | `--color-border-focus` | `#3453dc` | Contour de focus 2px |
 | `--typography-font-size-sm`/`-base`/`-2xl` | `14px`/`16px`/`24px` | Taille sm/md/lg |
 | `--typography-font-weight-medium` | `500` | Toutes tailles |

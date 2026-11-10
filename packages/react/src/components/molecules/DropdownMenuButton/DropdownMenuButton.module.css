@@ -39,23 +39,16 @@
 }
 
 /* ─── Couleurs de marque par compagnie (hover activé) ───────────────────────── */
+/* Collection Figma `project` (ADR-001, lot 5) : l'attribut data-project du bouton
+   sélectionne les valeurs du projet dans semantic.css. Seuls les projets dessinés
+   dans Figma (Type=activated) ont un survol coloré. */
 
-.company-odaptos:hover:not(:disabled) {
-  background-color: var(--color-deep-sea-100);
-  border-color: var(--color-deep-sea-300);
-  color: var(--color-deep-sea-600);
-}
-
-.company-bpce:hover:not(:disabled) {
-  background-color: var(--color-maroon-flush-100);
-  border-color: var(--color-maroon-flush-300);
-  color: var(--color-maroon-flush-900);
-}
-
+.company-odaptos:hover:not(:disabled),
+.company-bpce:hover:not(:disabled),
 .company-ibp:hover:not(:disabled) {
-  background-color: var(--color-purple-mountain-200);
-  border-color: var(--color-purple-mountain-500);
-  color: var(--color-purple-mountain-800);
+  background-color: var(--color-background-project-subtle);
+  border-color: var(--color-border-project-subtle);
+  color: var(--color-text-project-on-subtle);
 }
 
 /* ─── Logo frame ─────────────────────────────────────────────────────────────── */

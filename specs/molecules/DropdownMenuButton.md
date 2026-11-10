@@ -30,7 +30,7 @@ interface DropdownMenuButtonProps extends React.HTMLAttributes<HTMLButtonElement
 ```
 
 **Types exportés :** `DropdownMenuButtonProps`
-**data-attributes :** `data-activated`, `data-company`
+**data-attributes :** `data-activated`, `data-company`, `data-project` (= `company`, sélectionne les valeurs de la collection Figma `project`)
 
 ## Correspondance Figma ↔ code (synchro du 2026-11-04)
 
@@ -62,7 +62,7 @@ Attention au vocabulaire : dans Figma, `Type=activated` signifie « disponible �
 - `--color-text-tertiary` (texte au repos et au survol neutre)
 - `--color-background-surface-raised`, `--color-border-default` (survol neutre)
 - `--color-border-focus` (contour de focus)
-- Couleurs accent par compagnie : `--color-deep-sea-*`, `--color-maroon-flush-*`, `--color-purple-mountain-*`
+- Couleurs accent par compagnie (survol activé) : `--color-background-project-subtle`, `--color-border-project-subtle`, `--color-text-project-on-subtle` — une valeur par projet (`[data-project]`, ADR-001 lot 5). Depuis le 2026-11-10, BPCE utilise son violet de marque (`purple-mountain`) et IBP le sien (`purple`) ; contraste du texte ≥ 4,9:1
 - `--typography-dropdown-menu-button-font-family` / `-font-size` (16px) — graisse `--typography-font-weight-medium` dans tous les états, disabled compris (style Figma `label/md-medium`, aligné le 2026-11-02)
 
 ## Règles d'usage
