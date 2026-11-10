@@ -75,7 +75,7 @@
 }
 
 .card:not([data-project='cv']):is(:hover, :focus-within) .surfaceFront {
-  border-color: var(--color-background-project-brand);
+  border-color: var(--color-border-project-brand);
 }
 
 .card[data-project='cv']:is(:hover, :focus-within) .surfaceFront {

@@ -230,3 +230,4 @@ Une valeur par projet, appliquée par l'attribut `data-project` posé sur le com
 | `color.text.project.on-accent` | `#c4d5f9` | `#ece4f0` | `#d0d6f5` | `#ffc8c8` | `#c2f6bc` |
 | `color.text.project.on-subtle` | `#3453dc` | `#6d5079` | `#594fb3` | `#9d1717` | `#1d6318` |
 | `color.border.project.subtle` | `#9bb9f5` | `#b08ebe` | `#b3bcee` | `#ffb5b5` | `#90ed88` |
+| `color.border.project.brand` | `#3453dc` | `#9b75ab` | `#949ae5` | `#f53e3e` | `#5bdb50` |

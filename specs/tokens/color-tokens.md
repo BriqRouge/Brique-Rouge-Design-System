@@ -230,6 +230,7 @@
   --color-text-project-on-accent: #c4d5f9;
   --color-text-project-on-subtle: #3453dc;
   --color-border-project-subtle: #9bb9f5;
+  --color-border-project-brand: #3453dc;
 }
 [data-project='bpce'] {
   --color-background-project-accent: #6d5079;
@@ -238,6 +239,7 @@
   --color-text-project-on-accent: #ece4f0;
   --color-text-project-on-subtle: #6d5079;
   --color-border-project-subtle: #b08ebe;
+  --color-border-project-brand: #9b75ab;
 }
 [data-project='ibp'] {
   --color-background-project-accent: #594fb3;
@@ -246,6 +248,7 @@
   --color-text-project-on-accent: #d0d6f5;
   --color-text-project-on-subtle: #594fb3;
   --color-border-project-subtle: #b3bcee;
+  --color-border-project-brand: #949ae5;
 }
 [data-project='opco-atlas'] {
   --color-background-project-accent: #9d1717;
@@ -254,6 +257,7 @@
   --color-text-project-on-accent: #ffc8c8;
   --color-text-project-on-subtle: #9d1717;
   --color-border-project-subtle: #ffb5b5;
+  --color-border-project-brand: #f53e3e;
 }
 [data-project='conseil-constitutionnel'] {
   --color-background-project-accent: #1d6318;
@@ -262,5 +266,6 @@
   --color-text-project-on-accent: #c2f6bc;
   --color-text-project-on-subtle: #1d6318;
   --color-border-project-subtle: #90ed88;
+  --color-border-project-brand: #5bdb50;
 }
 ```
