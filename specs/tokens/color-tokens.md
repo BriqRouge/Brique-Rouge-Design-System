@@ -136,11 +136,6 @@
 --color-text-button-tertiary-idle: #171717;
 --color-text-button-tertiary-hover: #525252;
 --color-text-button-tertiary-focus: #3453dc;
---color-text-nav-bar-odaptos: #c4d5f9;
---color-text-nav-bar-bpce: #ece4f0;
---color-text-nav-bar-ibp: #d0d6f5;
---color-text-nav-bar-opco-atlas: #ffc8c8;
---color-text-nav-bar-conseil-constitutionnel: #c2f6bc;
 --color-text-notification-info-message: #2c41c9;
 --color-text-notification-info-timestamp: #3453dc;
 --color-text-notification-warning-message: #af471f;
@@ -219,4 +214,31 @@
 --color-menu-button-hovered: #e5e5e5;
 --color-menu-button-hovered-black: #171717;
 --color-menu-button-disabled: #f5f5f5;
+```
+
+## Selon le projet
+
+Émises à la fin de `semantic.css`. Le composant pose `data-project`.
+
+```css
+[data-project='odaptos'] {
+  --color-background-project-accent: #2c41c9;
+  --color-text-project-on-accent: #c4d5f9;
+}
+[data-project='bpce'] {
+  --color-background-project-accent: #6d5079;
+  --color-text-project-on-accent: #ece4f0;
+}
+[data-project='ibp'] {
+  --color-background-project-accent: #594fb3;
+  --color-text-project-on-accent: #d0d6f5;
+}
+[data-project='opco-atlas'] {
+  --color-background-project-accent: #9d1717;
+  --color-text-project-on-accent: #ffc8c8;
+}
+[data-project='conseil-constitutionnel'] {
+  --color-background-project-accent: #1d6318;
+  --color-text-project-on-accent: #c2f6bc;
+}
 ```

@@ -48,31 +48,13 @@
 }
 
 /* ─── Couleurs par projet ──────────────────────────────────────────────────── */
-/* Titre et sous-titre partagent la même couleur de texte (color/text/nav-bar/{project}) */
+/* Collection Figma `project` (ADR-001, lot 6) : semantic.css définit les deux
+   variables dans un bloc [data-project='<projet>'] par projet. L'attribut
+   data-project est posé sur .pill : fond et texte suivent le projet. */
 
-.pill[data-project='odaptos'] {
-  background-color: var(--color-background-projects-odaptos);
-  --top-nav-text-color: var(--color-text-nav-bar-odaptos);
-}
-
-.pill[data-project='bpce'] {
-  background-color: var(--color-background-projects-bpce);
-  --top-nav-text-color: var(--color-text-nav-bar-bpce);
-}
-
-.pill[data-project='ibp'] {
-  background-color: var(--color-background-projects-ibp);
-  --top-nav-text-color: var(--color-text-nav-bar-ibp);
-}
-
-.pill[data-project='opco-atlas'] {
-  background-color: var(--color-background-projects-opco-atlas);
-  --top-nav-text-color: var(--color-text-nav-bar-opco-atlas);
-}
-
-.pill[data-project='conseil-constitutionnel'] {
-  background-color: var(--color-background-projects-conseil-constitutionnel);
-  --top-nav-text-color: var(--color-text-nav-bar-conseil-constitutionnel);
+.pill {
+  background-color: var(--color-background-project-accent);
+  --top-nav-text-color: var(--color-text-project-on-accent);
 }
 
 /* ─── Homepage : logo animé + logo-texte (Figma Type=homepage) ─────────────── */

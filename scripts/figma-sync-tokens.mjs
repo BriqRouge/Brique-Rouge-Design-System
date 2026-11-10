@@ -13,8 +13,9 @@
 //   - nom hors convention (minuscules, chiffres, tirets, `/`) → refus
 //   - valeur non résolue (alias cassé), doublon, collection non déclarée dans
 //     packages/tokens/mapping.config.js → refus
-//   - collection multi-modes dont les modes ne sont pas déclarés (baseMode,
-//     belowBreakpointMode) dans mapping.config.js, ou pas dans cet ordre → refus
+//   - collection multi-modes dont les modes ne sont pas déclarés (baseMode +
+//     belowBreakpointMode, ou modes + modeAttribute) dans mapping.config.js,
+//     ou pas dans cet ordre → refus
 //   - deux tokens de collections différentes qui donnent la même variable CSS → refus
 // Les corrections se font dans Figma, puis on relance.
 //
@@ -56,7 +57,10 @@ function expectedModes(declaredCollections) {
     declaredCollections.map((c) =>
       typeof c === 'string'
         ? [c, null]
-        : [c.figmaCollection, c.baseMode ? [c.baseMode, c.belowBreakpointMode].filter(Boolean) : null],
+        : [
+            c.figmaCollection,
+            c.modes ? [...c.modes] : c.baseMode ? [c.baseMode, c.belowBreakpointMode].filter(Boolean) : null,
+          ],
     ),
   );
 }
@@ -132,7 +136,7 @@ export function readExport(files, declaredCollections) {
     if (!(col.name in expected)) {
       errors.push(`collection « ${col.name} » absente de packages/tokens/mapping.config.js — à déclarer avant de synchroniser`);
     } else if (expected[col.name] === null && col.modes.length !== 1) {
-      errors.push(`collection « ${col.name} » : ${col.modes.length} modes (${col.modes.join(', ')}) — déclarer baseMode et belowBreakpointMode dans packages/tokens/mapping.config.js`);
+      errors.push(`collection « ${col.name} » : ${col.modes.length} modes (${col.modes.join(', ')}) — déclarer baseMode et belowBreakpointMode (viewport) ou modes et modeAttribute (thème par attribut) dans packages/tokens/mapping.config.js`);
     } else if (expected[col.name] !== null && col.modes.join(',') !== expected[col.name].join(',')) {
       errors.push(`collection « ${col.name} » : modes Figma ${col.modes.join(', ')} (défaut en premier) ≠ ${expected[col.name].join(', ')} déclarés dans packages/tokens/mapping.config.js`);
     }

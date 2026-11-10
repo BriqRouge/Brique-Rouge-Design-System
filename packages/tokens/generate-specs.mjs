@@ -38,12 +38,13 @@ collectLeaves(tokens, [], allLeaves);
 // style-dictionary.config.js, json/nested ne gardant que $value.
 const modesInfo = JSON.parse(readFileSync(resolve(__dirname, 'build/modes.json'), 'utf8'));
 const viewportCol = modesInfo.collections.find((c) => c.name === 'viewport') ?? null;
+const projectCol = modesInfo.collections.find((c) => c.name === 'project') ?? null;
 
 // source = "primitive" | "semantic" | "viewport" (premier segment)
 // category = "color" | "typography" | "spacing" | "border-radius" | "sizing" | "elevation" (deuxième segment)
 // cssVarName = même construction que le format css/variables-stripped de style-dictionary.config.js :
 //   le chemin sans le premier segment (source), joint par "-"
-const grouped = new Map(); // category -> { primitive: [...], semantic: [...], viewport: [...] }
+const grouped = new Map(); // category -> { primitive: [...], semantic: [...], viewport: [...], project: [...] }
 let breakpoint = null;
 
 for (const leaf of allLeaves) {
@@ -57,10 +58,13 @@ for (const leaf of allLeaves) {
   const cssVarName = `--${[category, ...rest].join('-')}`;
   const tokenPath = [category, ...rest].join('.');
   const below = viewportCol ? modesInfo.modes[leaf.path.join('/')]?.[viewportCol.belowBreakpointMode] : undefined;
+  const byMode = projectCol && source === 'project'
+    ? Object.fromEntries(projectCol.modes.map((m, i) => [m, i === 0 ? leaf.value : (modesInfo.modes[leaf.path.join('/')]?.[m] ?? leaf.value)]))
+    : undefined;
 
-  if (!grouped.has(category)) grouped.set(category, { primitive: [], semantic: [], viewport: [] });
+  if (!grouped.has(category)) grouped.set(category, { primitive: [], semantic: [], viewport: [], project: [] });
   const bucket = grouped.get(category)[source];
-  if (bucket) bucket.push({ tokenPath, cssVarName, value: leaf.value, below });
+  if (bucket) bucket.push({ tokenPath, cssVarName, value: leaf.value, below, byMode });
 }
 
 const foundationsDir = resolve(repoRoot, 'specs/foundations');
@@ -87,7 +91,7 @@ function titleCase(category) {
 
 const bp = breakpoint ? `${breakpoint.em} = ${breakpoint.value}` : '';
 
-for (const [category, { primitive, semantic, viewport }] of grouped) {
+for (const [category, { primitive, semantic, viewport, project }] of grouped) {
   // ─── specs/foundations/{category}.md — lisible humain/LLM ───
   const foundationLines = [HEADER(titleCase(category))];
 
@@ -111,6 +115,18 @@ for (const [category, { primitive, semantic, viewport }] of grouped) {
       '|---|---|---|',
     );
     for (const t of viewport) foundationLines.push(`| \`${t.tokenPath}\` | \`${t.value}\` | \`${t.below ?? t.value}\` |`);
+    foundationLines.push('');
+  }
+  if (project.length && projectCol) {
+    foundationLines.push(
+      '## Selon le projet',
+      '',
+      `Une valeur par projet, appliquée par l'attribut \`${projectCol.modeAttribute}\` posé sur le composant. Aucune valeur par défaut dans \`:root\`.`,
+      '',
+      `| Token | ${projectCol.modes.join(' | ')} |`,
+      `|---|${projectCol.modes.map(() => '---').join('|')}|`,
+    );
+    for (const t of project) foundationLines.push(`| \`${t.tokenPath}\` | ${projectCol.modes.map((m) => `\`${t.byMode[m]}\``).join(' | ')} |`);
     foundationLines.push('');
   }
   writeFileSync(resolve(foundationsDir, `${category}.md`), foundationLines.join('\n'));
@@ -141,6 +157,15 @@ for (const [category, { primitive, semantic, viewport }] of grouped) {
     cssLines.push('}', '', `@media (width < ${breakpoint?.em}) {`, '  :root {');
     for (const t of viewport) cssLines.push(`    ${t.cssVarName}: ${t.below ?? t.value};`);
     cssLines.push('  }', '}', '```', '');
+  }
+  if (project.length && projectCol) {
+    cssLines.push('## Selon le projet', '', `Émises à la fin de \`semantic.css\`. Le composant pose \`${projectCol.modeAttribute}\`.`, '', '```css');
+    for (const m of projectCol.modes) {
+      cssLines.push(`[${projectCol.modeAttribute}='${m}'] {`);
+      for (const t of project) cssLines.push(`  ${t.cssVarName}: ${t.byMode[m]};`);
+      cssLines.push('}');
+    }
+    cssLines.push('```', '');
   }
   writeFileSync(resolve(tokensDir, `${category}-tokens.md`), cssLines.join('\n'));
 }
