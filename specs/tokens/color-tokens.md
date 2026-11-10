@@ -183,11 +183,6 @@
 --color-icon-menu-button-outline-black: #171717;
 --color-icon-menu-button-disabled: #d4d4d4;
 --color-background-button-disabled: #f5f5f5;
---color-background-projects-odaptos: #3453dc;
---color-background-projects-bpce: #9b75ab;
---color-background-projects-ibp: #949ae5;
---color-background-projects-opco-atlas: #f53e3e;
---color-background-projects-conseil-constitutionnel: #5bdb50;
 --color-background-projects-body: #e5e5e5;
 --color-background-projects-cv: #efde59;
 --color-background-notification-info: #f0f4fe;
@@ -199,6 +194,9 @@
 --color-background-page: #fafafa;
 --color-background-surface: #f5f5f5;
 --color-background-surface-raised: #e5e5e5;
+--color-background-inverse: #0a0a0a;
+--color-background-inverse-raised: #262626;
+--color-background-accent-subtle: #dee6fb;
 --color-button-primary: #262626;
 --color-button-primary-hover: #404040;
 --color-button-secondary-hover: #262626;
@@ -228,6 +226,7 @@
 [data-project='odaptos'] {
   --color-background-project-accent: #2c41c9;
   --color-background-project-subtle: #dee6fb;
+  --color-background-project-brand: #3453dc;
   --color-text-project-on-accent: #c4d5f9;
   --color-text-project-on-subtle: #3453dc;
   --color-border-project-subtle: #9bb9f5;
@@ -235,6 +234,7 @@
 [data-project='bpce'] {
   --color-background-project-accent: #6d5079;
   --color-background-project-subtle: #ece4f0;
+  --color-background-project-brand: #9b75ab;
   --color-text-project-on-accent: #ece4f0;
   --color-text-project-on-subtle: #6d5079;
   --color-border-project-subtle: #b08ebe;
@@ -242,6 +242,7 @@
 [data-project='ibp'] {
   --color-background-project-accent: #594fb3;
   --color-background-project-subtle: #e5eafa;
+  --color-background-project-brand: #949ae5;
   --color-text-project-on-accent: #d0d6f5;
   --color-text-project-on-subtle: #594fb3;
   --color-border-project-subtle: #b3bcee;
@@ -249,6 +250,7 @@
 [data-project='opco-atlas'] {
   --color-background-project-accent: #9d1717;
   --color-background-project-subtle: #ffe1e1;
+  --color-background-project-brand: #f53e3e;
   --color-text-project-on-accent: #ffc8c8;
   --color-text-project-on-subtle: #9d1717;
   --color-border-project-subtle: #ffb5b5;
@@ -256,6 +258,7 @@
 [data-project='conseil-constitutionnel'] {
   --color-background-project-accent: #1d6318;
   --color-background-project-subtle: #e0fbdd;
+  --color-background-project-brand: #5bdb50;
   --color-text-project-on-accent: #c2f6bc;
   --color-text-project-on-subtle: #1d6318;
   --color-border-project-subtle: #90ed88;

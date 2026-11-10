@@ -44,20 +44,10 @@
   opacity: 1;
 }
 
-.card[data-project='odaptos'] .surfaceBg {
-  background-color: var(--color-background-projects-odaptos);
-}
-
-.card[data-project='bpce'] .surfaceBg {
-  background-color: var(--color-background-projects-bpce);
-}
-
-.card[data-project='ibp'] .surfaceBg {
-  background-color: var(--color-background-projects-ibp);
-}
-
-.card[data-project='conseil-constitutionnel'] .surfaceBg {
-  background-color: var(--color-background-projects-conseil-constitutionnel);
+/* Couleur de marque : collection `project` de Figma, résolue par data-project
+   (bloc [data-project='…'] de semantic.css). Le CV n'est pas un projet client. */
+.card:not([data-project='cv']) .surfaceBg {
+  background-color: var(--color-background-project-brand);
 }
 
 .card[data-project='cv'] .surfaceBg {
@@ -84,20 +74,8 @@
   transform: translate(var(--spacing-x2), calc(-1 * var(--spacing-x2)));
 }
 
-.card[data-project='odaptos']:is(:hover, :focus-within) .surfaceFront {
-  border-color: var(--color-background-projects-odaptos);
-}
-
-.card[data-project='bpce']:is(:hover, :focus-within) .surfaceFront {
-  border-color: var(--color-background-projects-bpce);
-}
-
-.card[data-project='ibp']:is(:hover, :focus-within) .surfaceFront {
-  border-color: var(--color-background-projects-ibp);
-}
-
-.card[data-project='conseil-constitutionnel']:is(:hover, :focus-within) .surfaceFront {
-  border-color: var(--color-background-projects-conseil-constitutionnel);
+.card:not([data-project='cv']):is(:hover, :focus-within) .surfaceFront {
+  border-color: var(--color-background-project-brand);
 }
 
 .card[data-project='cv']:is(:hover, :focus-within) .surfaceFront {
