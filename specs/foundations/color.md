@@ -137,11 +137,6 @@
 | `color.text.button.tertiary.idle` | `#171717` |
 | `color.text.button.tertiary.hover` | `#525252` |
 | `color.text.button.tertiary.focus` | `#3453dc` |
-| `color.text.nav-bar.odaptos` | `#c4d5f9` |
-| `color.text.nav-bar.bpce` | `#ece4f0` |
-| `color.text.nav-bar.ibp` | `#d0d6f5` |
-| `color.text.nav-bar.opco-atlas` | `#ffc8c8` |
-| `color.text.nav-bar.conseil-constitutionnel` | `#c2f6bc` |
 | `color.text.notification.info.message` | `#2c41c9` |
 | `color.text.notification.info.timestamp` | `#3453dc` |
 | `color.text.notification.warning.message` | `#af471f` |
@@ -220,3 +215,12 @@
 | `color.menu-button.hovered` | `#e5e5e5` |
 | `color.menu-button.hovered-black` | `#171717` |
 | `color.menu-button.disabled` | `#f5f5f5` |
+
+## Selon le projet
+
+Une valeur par projet, appliquée par l'attribut `data-project` posé sur le composant. Aucune valeur par défaut dans `:root`.
+
+| Token | odaptos | bpce | ibp | opco-atlas | conseil-constitutionnel |
+|---|---|---|---|---|---|
+| `color.background.project.accent` | `#2c41c9` | `#6d5079` | `#594fb3` | `#9d1717` | `#1d6318` |
+| `color.text.project.on-accent` | `#c4d5f9` | `#ece4f0` | `#d0d6f5` | `#ffc8c8` | `#c2f6bc` |

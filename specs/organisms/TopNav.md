@@ -45,8 +45,7 @@ interface TopNavProps {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-background-projects-{project}` | — | Fond de la pilule (un par projet) |
-| `--color-text-nav-bar-{project}` | — | Couleur du titre **et** du sous-titre (un par projet — même couleur pour les deux) |
+| `--color-background-project-accent` / `--color-text-project-on-accent` | une valeur par projet (`[data-project]`) | Fond de la pastille / couleur du titre **et** du sous-titre. Collection Figma `project`, un mode par projet (ADR-001, lot 6). Contraste ≥ 4,5:1 pour chaque projet |
 | `--color-border-menu-button-outlined-white`, `--color-text-menu-button-outlined-light-hover` | — | Bouton retour (`MenuButton` outlined/light/md) |
 | `--spacing-x10`, `--spacing-x6` | `40px`, `24px` | Padding vertical du conteneur |
 | `--spacing-layout-nav-inline` | `48px` (mobile `16px`) | Padding horizontal du conteneur — token viewport (Figma `spacing/layout/nav-inline`) |
@@ -73,7 +72,7 @@ Figma `Viewport=mobile` (header : 2353:38724). Pas de prop React : l'adaptation 
 - **États** : homepage (pas de `project`) → logo animé + logo-texte alignés en haut à gauche, sans sélecteur ; page projet (`project` fourni) → fond coloré, bouton retour "Accueil", titre + sous-titre centré dans l'espace libre, sélecteur à droite (`space-between`, comme Figma)
 - **Motion** : les 4 briques se décalent puis reviennent, boucle de 5 s, interpolation linéaire entre les points exportés de Figma (`get_motion_context`). Figé sous `prefers-reduced-motion: reduce`. Logo décoratif : `aria-hidden`, images `alt=""`
 - **Marges** : 40 / 48 / 24 px pour tous les variants (Figma homepage aligné sur 48 px le 2026-11-04)
-- Titre et sous-titre partagent la même couleur (`--color-text-nav-bar-{project}`), seul le `font-weight` diffère (medium vs regular)
+- Titre et sous-titre partagent la même couleur (`--color-text-project-on-accent`), seul le `font-weight` diffère (medium vs regular)
 
 ## Tests
 
