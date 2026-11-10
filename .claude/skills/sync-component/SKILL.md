@@ -187,6 +187,7 @@ Puis :
 ```bash
 node scripts/token-audit.mjs
 node scripts/contrast-audit.mjs
+(cd packages/storybook && pnpm exec storybook build -o storybook-static) && node scripts/rendered-contrast-audit.mjs
 node --test scripts/figma-sync-ds.test.mjs
 pnpm turbo run lint
 pnpm test
