@@ -42,7 +42,7 @@ interface MenuButtonProps {
 
 - `--color-menu-button-idle|hovered|hovered-black|disabled`
 - `--color-border-menu-button-contained|outlined-white|outlined-black|focus|disabled`
-- `--color-text-menu-button-contained-idle`, `-outlined-light-idle|hover`, `-outlined-dark-idle|hover`, `-disabled` (`:focus-visible` réutilise le token `hover`)
+- `--color-text-menu-button-contained-idle`, `-outlined-light-idle|hover`, `-outlined-dark-idle|hover`, `-disabled` (`:focus-visible` réutilise le token `hover`). `contained-idle` et `outlined-dark-hover` valent `#525252` (`text/secondary`) depuis le 2026-11-10 : `#737373` n'atteignait que 4,35:1 et 3,76:1
 - `--color-icon-menu-button-contained|outline-white|outline-black|disabled` (namespace `menu-button` — **renommé côté Figma** pour distinguer du composant `Button`, qui garde le namespace générique `button`)
 - `--border-radius-button`
 - `--motion-duration-fast` / `--motion-easing-standard` (transitions de survol, 150ms ease-out)

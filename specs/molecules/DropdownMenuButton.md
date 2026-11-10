@@ -49,7 +49,7 @@ Attention au vocabulaire : dans Figma, `Type=activated` signifie « disponible �
 ## États
 
 - **Repos** : texte `--color-text-tertiary`
-- **Survol neutre** (sans `company`, ou `disabled`) : fond `--color-background-surface-raised`, bordure `--color-border-default` (0.5px), texte `--color-text-tertiary`
+- **Survol neutre** (sans `company`, ou `disabled`) : fond `--color-background-surface-raised`, bordure `--color-border-default` (0.5px), texte `--color-text-secondary` (6,1:1 ; `tertiary` n'atteignait que 3,76:1, corrigé le 2026-11-10)
 - **Survol de marque** (`odaptos`/`bpce`/`ibp`, hors `disabled`) : fond, bordure et texte aux couleurs de la marque
 - **Désactivé** : opacité 0.5, `cursor: not-allowed`. Le survol reste visible, comme dans Figma (décision Damien, 2026-11-04)
 - **Focus clavier** : contour 2px `--color-border-focus`, décalé de 2px. Figma n'a pas d'état focus ; contour ajouté pour WCAG 2.4.7 (décision Damien, 2026-11-04)
@@ -59,7 +59,7 @@ Attention au vocabulaire : dans Figma, `Type=activated` signifie « disponible �
 - `--spacing-component-sm` (gap + padding)
 - `--sizing-x10` (hauteur)
 - `--border-radius-dropdown-menu-button`
-- `--color-text-tertiary` (texte au repos et au survol neutre)
+- `--color-text-tertiary` (texte au repos), `--color-text-secondary` (texte au survol neutre)
 - `--color-background-surface-raised`, `--color-border-default` (survol neutre)
 - `--color-border-focus` (contour de focus)
 - Couleurs accent par compagnie (survol activé) : `--color-background-project-subtle`, `--color-border-project-subtle`, `--color-text-project-on-subtle` — une valeur par projet (`[data-project]`, ADR-001 lot 5). Depuis le 2026-11-10, BPCE utilise son violet de marque (`purple-mountain`) et IBP le sien (`purple`) ; contraste du texte ≥ 4,9:1
