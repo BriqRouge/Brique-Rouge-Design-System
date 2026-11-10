@@ -36,6 +36,9 @@ suffit de changer l'alias dans Figma. Contraste mesuré sur `background/page` (#
 Échelle à 3 niveaux décidée par l'ADR-001 (lot 4, 2026-11-10). Les anciens
 `--color-text-strong`, `--color-text-body` et `--color-text-muted` ont été supprimés au
 lot 7 (2026-11-10) : utiliser `primary`, `secondary` et `tertiary`.
+
+Les ratios sont vérifiés en CI par `scripts/contrast-audit.mjs` sur les combinaisons
+déclarées dans `packages/tokens/contrast-pairs.config.js`.
 | `--color-background-page` | neutral/50 | Fond de page | — |
 | `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |
 | `--color-background-surface-raised` | neutral/200 | Surfaces surélevées, survol neutre | — |

@@ -22,10 +22,12 @@ jobs:
       - run: pnpm turbo run lint
       - name: Token audit (couleurs hardcodées)
         run: node scripts/token-audit.mjs
+      - name: Contraste des paires de tokens (WCAG 1.4.3 / 1.4.11)
+        run: node scripts/contrast-audit.mjs
       - name: Cohérence composants ↔ fiches specs
         run: node scripts/check-specs.mjs
       - name: Tests des scripts (synchro Figma, fiches specs)
-        run: node --test scripts/figma-sync-tokens.test.mjs scripts/figma-sync-ds.test.mjs scripts/check-specs.test.mjs
+        run: node --test scripts/figma-sync-tokens.test.mjs scripts/figma-sync-ds.test.mjs scripts/check-specs.test.mjs scripts/contrast-audit.test.mjs
 
   test:
     name: Test

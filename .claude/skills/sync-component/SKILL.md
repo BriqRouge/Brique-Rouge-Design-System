@@ -54,6 +54,9 @@ s'applique pas : suivre CLAUDE.md « Workflow composants » directement.
   Un texte sans style est un écart à signaler, pas à corriger d'office.
 - **Couleurs** : toute couleur de texte, de fond ou de bordure est liée à une
   variable `color/*`. Une couleur non liée sans token exact est une incohérence.
+- **Contraste** : chaque combinaison texte/fond ou icône/fond du composant figure
+  dans `packages/tokens/contrast-pairs.config.js`. Une combinaison nouvelle s'y
+  ajoute ; si elle échoue, c'est un écart à présenter, pas à corriger d'office.
 - **Contenu illustratif** (mockups, logos texte, captures d'écran recomposées,
   polices hors `figma.textFontFamilies` de `ds.config.json`, comme Helvetica) :
   hors périmètre, ignoré.
@@ -183,6 +186,7 @@ Puis :
 
 ```bash
 node scripts/token-audit.mjs
+node scripts/contrast-audit.mjs
 node --test scripts/figma-sync-ds.test.mjs
 pnpm turbo run lint
 pnpm test
