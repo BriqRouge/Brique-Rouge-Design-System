@@ -13,6 +13,8 @@
     "figma:unpublish": "figma connect unpublish"
   },
   "devDependencies": {
+    "axe-core": "4.11.1",
+    "playwright": "1.63.0",
     "prettier": "^3.2.0",
     "turbo": "^2.11.10",
     "typescript": "^5.4.0"

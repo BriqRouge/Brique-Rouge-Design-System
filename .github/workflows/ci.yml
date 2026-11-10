@@ -27,7 +27,7 @@ jobs:
       - name: Cohérence composants ↔ fiches specs
         run: node scripts/check-specs.mjs
       - name: Tests des scripts (synchro Figma, fiches specs)
-        run: node --test scripts/figma-sync-tokens.test.mjs scripts/figma-sync-ds.test.mjs scripts/check-specs.test.mjs scripts/contrast-audit.test.mjs
+        run: node --test scripts/figma-sync-tokens.test.mjs scripts/figma-sync-ds.test.mjs scripts/check-specs.test.mjs scripts/contrast-audit.test.mjs scripts/rendered-contrast-audit.test.mjs
 
   test:
     name: Test
@@ -55,3 +55,8 @@ jobs:
             exit 0
           fi
           pnpm test
+      - name: Contraste rendu dans Chromium (axe-core sur chaque story)
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          pnpm turbo run build --filter=@brique-rouge/storybook
+          node scripts/rendered-contrast-audit.mjs packages/storybook/storybook-static
