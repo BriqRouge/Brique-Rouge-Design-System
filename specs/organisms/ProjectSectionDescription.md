@@ -49,10 +49,10 @@ Accepte `alertBanner` en slot optionnel — typiquement rempli avec `<AlertBanne
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-text-muted` | `#737373` | Numéro de section (neutral/500 depuis le 2026-11-04, contraste AA) |
+| `--color-text-tertiary` | `#737373` | Numéro de section (neutral/500 depuis le 2026-11-04, contraste AA) |
 | `--color-text-primary` | `#171717` | Titre de section |
-| `--color-text-strong` | `#262626` | Texte d'introduction |
-| `--color-text-body` | `#525252` | Texte des puces |
+| `--color-text-primary` | `#171717` | Texte d'introduction (`#262626` jusqu'au lot 4 de l'ADR-001) |
+| `--color-text-secondary` | `#525252` | Texte des puces |
 | `--color-deep-sea-600` | `#3453dc` | Icône des puces |
 | `--typography-font-family-sans` | — | Numéro de section |
 | `--typography-subtitle-font-family`/`-font-weight` | — | Titre de section, texte d'introduction |
@@ -78,7 +78,7 @@ Figma `Viewport=mobile` (2363:42525). Pas de prop React : l'adaptation passe par
 - Icône des puces dessinée à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `AlertBanner`/`TopNav` — pas d'asset Figma exporté
 - `bulletPoints` : tableau de chaînes simples (le Figma source ne montre que du texte brut dans les puces, pas de mise en forme riche)
 - `alertBanner` : rendu tel quel si fourni, rien autrement — pas de fond/bordure par défaut ajouté par ce composant (le style vient entièrement de l'`<AlertBanner>` fourni)
-- **Couleur du numéro de section** : `--color-text-muted` (neutral/500) — passé de neutral/400 (2.5:1) à neutral/500 (4.5:1) le 2026-11-04 pour respecter le contraste AA (décision Damien)
+- **Couleur du numéro de section** : `--color-text-tertiary` (neutral/500) — passé de neutral/400 (2.5:1) à neutral/500 (4.5:1) le 2026-11-04 pour respecter le contraste AA (décision Damien)
 - **Graisse du texte d'introduction et des puces** : `regular` (400) — Figma aligné le 2026-11-02 (l'ancien style « Book » ~333 est désormais lié à `typography/font-weight/regular`)
 - **Écart signalé vs Figma** : le gap entre numéro et titre varie légèrement entre les deux sections du frame source (24px vs 26px) — standardisé à 24px (`--spacing-x6`), traité comme une dérive d'auteur Figma plutôt qu'une différence intentionnelle entre sections
 

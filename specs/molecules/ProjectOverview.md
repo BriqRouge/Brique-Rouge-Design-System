@@ -32,8 +32,8 @@ interface ProjectOverviewProps extends React.HTMLAttributes<HTMLDivElement> {
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-text-primary` | `#171717` | Titre du projet |
-| `--color-text-body` | `#525252` | Accroche (après le tiret) |
-| `--color-text-secondary` | `#404040` | Texte de description |
+| `--color-text-secondary` | `#525252` | Accroche (après le tiret) |
+| `--color-text-secondary` | `#525252` | Texte de description (`#404040` jusqu'au lot 4 de l'ADR-001) |
 | `--color-text-tertiary` | `#737373` | Rôle et contributions |
 | `--typography-font-family-sans` | — | Tous les textes |
 | `--typography-project-overview-title-font-size` | `32px` (mobile `24px`) | Titre — token viewport |

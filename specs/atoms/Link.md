@@ -37,7 +37,7 @@ interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 | Token | Valeur | Usage |
 |-------|--------|-------|
 | `--color-text-primary` | `#171717` | Texte et icônes au repos (light) |
-| `--color-text-muted` | `#737373` | Survol et disabled (light) — AA, remplace le `#8e8e8e` de la librairie externe |
+| `--color-text-tertiary` | `#737373` | Survol et disabled (light) — AA, remplace le `#8e8e8e` de la librairie externe |
 | `--color-neutral-100` | `#f5f5f5` | Texte et icônes au repos (dark) |
 | `--color-neutral-300` | `#d4d4d4` | Survol et disabled (dark) |
 | `--color-border-focus` | `#3453dc` | Contour de focus 2px |

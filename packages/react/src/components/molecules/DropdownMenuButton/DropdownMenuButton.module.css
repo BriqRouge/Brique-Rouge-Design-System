@@ -25,7 +25,7 @@
 .dropdownMenuButton:hover {
   background-color: var(--color-background-surface-raised);
   border-color: var(--color-border-default);
-  color: var(--color-text-muted);
+  color: var(--color-text-tertiary);
 }
 
 .dropdownMenuButton:focus-visible {

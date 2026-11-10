@@ -22,7 +22,7 @@
   letter-spacing: 2.4px;
   text-transform: uppercase;
   /* text/muted = neutral/500 (#737373) depuis le 2026-11-04 : contraste AA (4.5:1) */
-  color: var(--color-text-muted);
+  color: var(--color-text-tertiary);
   margin: 0;
 }
 
@@ -46,7 +46,7 @@
      même convention que ProjectCardDescription. */
   font-weight: var(--typography-font-weight-regular);
   line-height: var(--typography-line-height-x8);
-  color: var(--color-text-strong);
+  color: var(--color-text-primary);
   margin: 0;
 }
 
@@ -70,7 +70,7 @@
   font-size: var(--typography-body-font-size);
   font-weight: var(--typography-font-weight-regular);
   line-height: var(--typography-body-line-height);
-  color: var(--color-text-body);
+  color: var(--color-text-secondary);
 }
 
 .bulletIcon {
