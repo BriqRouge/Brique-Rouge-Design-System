@@ -173,6 +173,7 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 - **Jamais de valeur px hardcodée** si un token de spacing, sizing ou border-radius existe
 - La règle §17 ("aucune valeur arbitraire si un token existe") s'applique au code **et** à Figma
 - **Vérifié en CI** : `scripts/token-audit.mjs` (job Lint) détecte toute couleur hexadécimale codée en dur dans les CSS Modules (hors fallback `var(--token, #hex)`, usage légitime). Portée volontairement limitée aux couleurs — voir commentaire en tête du script pour le raisonnement. Exception explicite via `/* token-audit-ignore */` en tête de fichier, réservée au contenu illustratif bespoke sans équivalent DS (ex: assets Figma composés à la main)
+- **Contraste vérifié en CI** : `scripts/contrast-audit.mjs` (job Lint) calcule le ratio WCAG de chaque combinaison texte/fond et composant/fond déclarée dans `packages/tokens/contrast-pairs.config.js` (4,5:1 texte, 3:1 bordures et icônes, chaque mode de la collection `project`). **Toute nouvelle combinaison texte/fond dans un composant s'ajoute à ce fichier dans la même PR.** Un écart à arbitrer va dans `knownIssues` avec sa raison, jamais en silence. Les tests `jest-axe` tournent sous jsdom et ne vérifient **pas** le contraste (démontré le 2026-11-10)
 
 ---
 
