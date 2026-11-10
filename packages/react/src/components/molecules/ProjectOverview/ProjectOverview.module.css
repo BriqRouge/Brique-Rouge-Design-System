@@ -31,7 +31,7 @@
 
 .tagline {
   font-weight: var(--typography-font-weight-regular);
-  color: var(--color-text-body);
+  color: var(--color-text-secondary);
 }
 
 .descriptionColumn {

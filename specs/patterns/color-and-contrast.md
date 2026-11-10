@@ -25,13 +25,18 @@ suffit de changer l'alias dans Figma. Contraste mesuré sur `background/page` (#
 
 | Token CSS | Alias | Rôle | Contraste |
 |---|---|---|---|
-| `--color-text-primary` | neutral/900 | Titres, texte principal | 17.2:1 |
-| `--color-text-strong` | neutral/800 | Texte d'introduction, libellés | 14.5:1 |
-| `--color-text-secondary` | neutral/700 | Texte courant de description | 9.9:1 |
-| `--color-text-body` | neutral/600 | Paragraphes, puces, accroches | 7.5:1 |
-| `--color-text-tertiary` | neutral/500 | Métadonnées (rôle, contributions) | 4.5:1 — limite AA ; **uniquement sur `background/page`** (4.35:1 sur `surface`, sous AA) |
-| `--color-text-muted` | neutral/500 | Numéros de section | 4.5:1 (passé de neutral/400, 2.5:1, le 2026-11-04 pour atteindre AA) ; même règle que `tertiary` : pas sur `surface` |
-| `--color-text-accent` | deep-sea/600 | Texte mis en valeur | 5.9:1 |
+| `--color-text-primary` | neutral/900 | Titres, texte principal, introductions, libellés | 17.2:1 |
+| `--color-text-secondary` | neutral/600 | Texte courant, descriptions, puces, accroches | 7.5:1 |
+| `--color-text-tertiary` | neutral/500 | Métadonnées, numéros de section, aide | 4.5:1 — limite AA ; **uniquement sur `background/page`** (4.35:1 sur `surface`, sous AA) |
+| `--color-text-disabled` | neutral/300 | Texte d'un élément désactivé | exempté (WCAG 1.4.3) |
+| `--color-text-inverse` | neutral/50 | Texte sur fond foncé ou coloré | selon le fond |
+| `--color-text-accent` | deep-sea/600 | Accent interactif, mise en valeur | 5.9:1 |
+| `--color-text-info` / `--color-text-warning` | deep-sea/700 / autumn/700 | Messages d'information / d'avertissement | 7.05:1 / 5.27:1 sur leur fond de notification |
+
+Échelle à 3 niveaux décidée par l'ADR-001 (lot 4, 2026-11-10). `--color-text-strong`,
+`--color-text-body` et `--color-text-muted` sont **dépréciés** : ils pointent vers
+`primary`, `secondary` et `tertiary`, ne sont plus utilisés par le DS et seront supprimés
+au lot 7. Ne pas les utiliser.
 | `--color-background-page` | neutral/50 | Fond de page | — |
 | `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |
 | `--color-background-surface-raised` | neutral/200 | Surfaces surélevées, survol neutre | — |
