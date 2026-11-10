@@ -5,7 +5,7 @@
 // Ne modifie ce fichier que si tu as besoin d'un transformer ou d'un format custom.
 
 import StyleDictionary from 'style-dictionary';
-import { readFileSync, mkdirSync, writeFileSync, rmSync } from 'fs';
+import { readFileSync, mkdirSync, writeFileSync, rmSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import mapping from './mapping.config.js';
@@ -166,10 +166,13 @@ function modeValueToCss(token, raw) {
 // bloc `@media <media> { :root { … } }` avec les valeurs de ce mode.
 // Option `header: false` : pas de commentaire d'en-tête (bloc ajouté à la
 // suite d'un autre dans le même fichier).
+// Option `byAttribute` ({ attribute, modes }) : au lieu du bloc :root, un bloc
+// `[<attribute>='<mode>'] { … }` par mode — le premier mode prend la valeur de
+// base, les autres celle de $extensions.
 StyleDictionary.registerFormat({
   name: 'css/variables-stripped',
   format: ({ dictionary, options }) => {
-    const { prefixLength = 0, selector = ':root', belowBreakpoint, header = true } = options ?? {};
+    const { prefixLength = 0, selector = ':root', belowBreakpoint, byAttribute, header = true } = options ?? {};
     const tokens = dictionary.allTokens;
 
     if (!tokens.length) return COMMENT_VIDE;
@@ -188,6 +191,18 @@ StyleDictionary.registerFormat({
           '',
         ]
       : [''];
+    if (byAttribute) {
+      const [baseMode, ...otherModes] = byAttribute.modes;
+      lines.push(`[${byAttribute.attribute}='${baseMode}'] {`, vars, '}', '');
+      for (const mode of otherModes) {
+        const modeVars = tokens
+          .filter((t) => t.original?.$extensions?.[MODES_EXTENSION]?.[mode] !== undefined)
+          .map((t) => `  --${cssName(t)}: ${modeValueToCss(t, t.original.$extensions[MODES_EXTENSION][mode])};`);
+        if (modeVars.length) lines.push(`[${byAttribute.attribute}='${mode}'] {`, ...modeVars, '}', '');
+      }
+      return lines.join('\n');
+    }
+
     lines.push(`${selector} {`, vars, '}', '');
 
     if (belowBreakpoint) {
@@ -276,6 +291,7 @@ for (const col of mapping.collections) {
               belowBreakpoint: col.belowBreakpointMode
                 ? { mode: col.belowBreakpointMode, media: `(width < ${breakpointMedia.em})` }
                 : undefined,
+              byAttribute: col.modeAttribute ? { attribute: col.modeAttribute, modes: col.modes } : undefined,
             },
           },
         ],
@@ -287,7 +303,13 @@ for (const col of mapping.collections) {
 }
 
 for (const [output, files] of parts) {
-  const content = files.map((f) => readFileSync(resolve(__dirname, PARTS_DIR, f), 'utf8')).join('');
+  // Une collection sans token (ex. déclarée avant sa création dans Figma) ne
+  // produit pas de fichier intermédiaire : elle est ignorée.
+  const content = files
+    .map((f) => resolve(__dirname, PARTS_DIR, f))
+    .filter((f) => existsSync(f))
+    .map((f) => readFileSync(f, 'utf8'))
+    .join('');
   writeFileSync(resolve(__dirname, 'build/css', output), content);
 }
 rmSync(resolve(__dirname, PARTS_DIR), { recursive: true, force: true });
@@ -358,8 +380,12 @@ writeFileSync(
         ? { token: mapping.breakpoint.token, em: breakpointMedia.em, customMedia: mapping.breakpoint.customMedia }
         : null,
       collections: mapping.collections
-        .filter((c) => c.baseMode)
-        .map((c) => ({ name: c.figmaCollection, baseMode: c.baseMode, belowBreakpointMode: c.belowBreakpointMode })),
+        .filter((c) => c.baseMode || c.modeAttribute)
+        .map((c) =>
+          c.modeAttribute
+            ? { name: c.figmaCollection, modeAttribute: c.modeAttribute, modes: c.modes }
+            : { name: c.figmaCollection, baseMode: c.baseMode, belowBreakpointMode: c.belowBreakpointMode },
+        ),
       modes,
     },
     null,

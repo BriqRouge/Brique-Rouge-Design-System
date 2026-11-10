@@ -125,6 +125,39 @@ test('une ligne multi-modes avec une valeur manquante ou non résolue est refus�
   assert.match(broken.errors.join(), /\(mode mobile\) : valeur non résolue/);
 });
 
+// ─── Collections à un mode par attribut (project) ────────────────────────────
+const PROJECT_DECLARED = [
+  { figmaCollection: 'project', modeAttribute: 'data-project', modes: ['odaptos', 'bpce'] },
+];
+const projectFiles = (modes, tsv) => ({
+  'manifest.json': manifest([{ name: 'project', modes, count: 1 }], 1),
+  'chunk-0.tsv': chunk(0, 'project', tsv),
+});
+
+test('une collection à modes par attribut est lue : une valeur par mode', () => {
+  const { variables, errors } = readExport(
+    projectFiles(['odaptos', 'bpce'], 'color/text/project/on-accent\tC\t#c4d5f9\t#ece4f0'),
+    PROJECT_DECLARED,
+  );
+  assert.deepEqual(errors, []);
+  const { tokens } = buildTokens(variables);
+  assert.deepEqual(tokens.project.color.text.project['on-accent'], {
+    $value: '#c4d5f9',
+    $type: 'color',
+    $extensions: { [MODES_EXTENSION]: { bpce: '#ece4f0' } },
+  });
+});
+
+test('une collection à modes par attribut dont les modes Figma diffèrent de mapping.config.js est refusée', () => {
+  const reordered = readExport(projectFiles(['bpce', 'odaptos'], 'color/x\tC\t#ece4f0\t#c4d5f9'), PROJECT_DECLARED);
+  assert.match(reordered.errors.join('\n'), /modes Figma bpce, odaptos .* ≠ odaptos, bpce/);
+  const extra = readExport(
+    { 'manifest.json': manifest([{ name: 'project', modes: ['odaptos', 'bpce', 'ibp'], count: 1 }], 1), 'chunk-0.tsv': chunk(0, 'project', 'color/x\tC\t#000000\t#111111\t#222222') },
+    PROJECT_DECLARED,
+  );
+  assert.match(extra.errors.join('\n'), /≠ odaptos, bpce/);
+});
+
 test('deux collections qui produisent la même variable CSS sont refusées', () => {
   const { errors } = buildTokens([
     { collection: 'semantic', name: 'spacing/layout/nav-inline', type: 'F', value: '48' },

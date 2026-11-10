@@ -19,6 +19,16 @@
       baseMode: 'desktop',
       belowBreakpointMode: 'mobile',
     },
+    // Collection à un mode par projet (ADR-001, règle 4 — décision du 2026-11-10) :
+    // chaque mode est émis dans un bloc `[data-project='<mode>']`, à la fin de
+    // semantic.css. Aucune valeur dans :root : le composant pose l'attribut.
+    // `modes` liste les modes dans l'ordre Figma, mode par défaut en premier.
+    {
+      figmaCollection: 'project',
+      output: 'semantic.css',
+      modeAttribute: 'data-project',
+      modes: ['odaptos', 'bpce', 'ibp', 'opco-atlas', 'conseil-constitutionnel'],
+    },
   ],
   // Seuil desktop / mobile : variable number de `primitive`, saisie en px dans
   // Figma, convertie en em (÷ 16) par le build. Jamais émise en variable CSS
