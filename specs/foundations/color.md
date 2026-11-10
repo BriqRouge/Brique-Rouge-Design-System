@@ -145,10 +145,10 @@
 | `color.text.notification.info.timestamp` | `#3453dc` |
 | `color.text.notification.warning.message` | `#af471f` |
 | `color.text.notification.warning.timestamp` | `#af471f` |
-| `color.text.menu-button.contained.idle` | `#737373` |
+| `color.text.menu-button.contained.idle` | `#525252` |
 | `color.text.menu-button.disabled` | `#d4d4d4` |
 | `color.text.menu-button.outlined-dark.idle` | `#fafafa` |
-| `color.text.menu-button.outlined-dark.hover` | `#737373` |
+| `color.text.menu-button.outlined-dark.hover` | `#525252` |
 | `color.text.menu-button.outlined-light.idle` | `#171717` |
 | `color.text.menu-button.outlined-light.hover` | `#fafafa` |
 | `color.text.primary` | `#171717` |
@@ -176,7 +176,7 @@
 | `color.icon.button.success` | `#1f7d18` |
 | `color.icon.button.disabled` | `#d4d4d4` |
 | `color.icon.notification.info` | `#3453dc` |
-| `color.icon.notification.warning` | `#e1742e` |
+| `color.icon.notification.warning` | `#af471f` |
 | `color.icon.notification.info-close` | `#263282` |
 | `color.icon.notification.warning-close` | `#71311d` |
 | `color.icon.menu-button.contained` | `#737373` |

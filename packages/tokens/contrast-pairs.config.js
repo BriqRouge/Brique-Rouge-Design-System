@@ -74,7 +74,7 @@ export default {
     ]),
 
     // ─── DropdownMenuButton ─────────────────────────────────────────────────
-    { fg: T('tertiary'), bg: SURFACE_RAISED, where: 'DropdownMenuButton :hover neutre' },
+    { fg: T('secondary'), bg: SURFACE_RAISED, where: 'DropdownMenuButton :hover neutre' },
     { fg: 'project/color/text/project/on-subtle', bg: 'project/color/background/project/subtle', where: 'DropdownMenuButton :hover par projet' },
 
     // ─── TopNav, cartes ─────────────────────────────────────────────────────
@@ -84,11 +84,5 @@ export default {
 
   // Écarts connus : signalés à chaque exécution sans faire échouer la CI.
   // Chaque entrée a une raison et attend une décision de design (voir l'ADR-001).
-  knownIssues: [
-    // Relevés par la première exécution du contrôle (2026-11-10), en attente de décision de Damien.
-    { fg: T('menu-button/contained/idle'), bg: S('menu-button/idle'), reason: '#737373 sur #f5f5f5 (4,35:1) — à décider' },
-    { fg: T('menu-button/outlined-dark/hover'), bg: S('menu-button/hovered'), reason: '#737373 sur #e5e5e5 (3,76:1) — à décider' },
-    { fg: T('tertiary'), bg: SURFACE_RAISED, reason: 'DropdownMenuButton survol neutre, #737373 sur #e5e5e5 (3,76:1) — à décider' },
-    { fg: S('icon/notification/warning'), bg: S('background/notification/warning'), reason: 'icône #e1742e sur #fdf7ef (2,93:1 < 3:1) — à décider' },
-  ],
+  knownIssues: [],
 };
