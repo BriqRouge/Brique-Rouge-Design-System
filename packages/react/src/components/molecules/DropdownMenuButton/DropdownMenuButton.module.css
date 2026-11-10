@@ -14,7 +14,8 @@
   font-family: var(--typography-dropdown-menu-button-font-family);
   font-size: var(--typography-dropdown-menu-button-font-size);
   font-weight: var(--typography-font-weight-medium);
-  color: var(--color-text-tertiary);
+  /* text-secondary : tertiary n'atteint que 4,34:1 sur le fond surface du DropdownMenu (contraste rendu, 2026-11-10) */
+  color: var(--color-text-secondary);
   text-align: left;
   box-sizing: border-box;
   position: relative; /* ancre .srOnly */
