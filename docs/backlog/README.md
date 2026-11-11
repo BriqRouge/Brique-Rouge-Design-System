@@ -24,6 +24,8 @@ Un fichier par entrée : `NNN-titre-court.md` (numéro sur 3 chiffres, jamais r�
 ```
 
 « Ce qui existe déjà » est obligatoire : on vérifie le repo avant de proposer.
+Une entrée qui débouche sur une décision transversale renvoie à son ADR (`docs/adr/`) dans
+« Lié à » : le raisonnement vit dans l'ADR, l'entrée passe à « Fait ».
 Une entrée abandonnée reste dans le dossier avec sa raison.
 
 ## Index
@@ -32,3 +34,6 @@ Une entrée abandonnée reste dans le dossier avec sa raison.
 |---|---|---|
 | 001 | [Contrôle des breaking changes sur les tokens](001-breaking-changes-tokens.md) | À explorer |
 | 002 | [Nomenclature des tokens incohérente dans CLAUDE.md](002-nomenclature-tokens-claude-md.md) | Prêt |
+| 003 | [`background/project-page/<client>` : des noms de clients dans `semantic`](003-project-page-noms-clients.md) | Prêt |
+| 004 | [Aligner les tokens d'icône et de bordure sur l'échelle du texte](004-tokens-icone-bordure.md) | À explorer |
+| 005 | [Tokens créés pour la page Accueil, sans usage depuis sa suppression](005-tokens-sans-usage-accueil.md) | À explorer |
