@@ -1,9 +1,18 @@
-# 004 — Aligner les tokens d'icône et de bordure sur l'échelle du texte
+---
+id: "004"
+title: Aligner les tokens d'icône et de bordure sur l'échelle du texte
+status: a-explorer
+created: 2026-11-10
+origin: "Audit de suivi de l'ADR-001, 2026-11-10"
+adr: [ADR-001, ADR-003]
+claude_md: ["6.6", "6.7"]
+related_components: [Button, MenuButton, AlertBanner, Tag, Badge]
+related_tokens: [color/icon, color/border]
+references: [packages/tokens/contrast-pairs.config.js]
+prs: []
+---
 
-**Statut :** À explorer
-**Origine :** audit de suivi de l'ADR-001, 2026-11-10
-**Lié à :** [ADR-001](../adr/001-vocabulaire-tokens-texte.md) (règles 1 à 3, écrites pour
-le texte seulement) · CLAUDE.md §6.6 · `packages/tokens/contrast-pairs.config.js`
+# 004 — Aligner les tokens d'icône et de bordure sur l'échelle du texte
 
 ## Problème
 L'ADR-001 a rangé les tokens de **texte** : échelle globale par rang, tokens de composant

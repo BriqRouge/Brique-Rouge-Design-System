@@ -1,10 +1,18 @@
-# 003 — `background/project-page/<client>` : des noms de clients dans `semantic`
+---
+id: "003"
+title: "background/project-page/<client> : des noms de clients dans semantic"
+status: pret
+created: 2026-11-10
+origin: "Relevé le 2026-11-10 pendant la migration de background/projects/<client> (PR #101), vérifié dans Figma le 2026-11-11"
+adr: [ADR-002]
+claude_md: ["6.7"]
+related_components: []
+related_tokens: [color/background/project-page]
+references: []
+prs: [101]
+---
 
-**Statut :** Prêt
-**Origine :** relevé le 2026-11-10 pendant la migration de `background/projects/<client>`
-(PR #101), vérifié dans Figma le 2026-11-11
-**Lié à :** [ADR-002](../adr/002-collection-project.md) (collection `project`) ·
-CLAUDE.md §6.7 (ne jamais casser une référence)
+# 003 — `background/project-page/<client>` : des noms de clients dans `semantic`
 
 ## Problème
 Quatre variables de la collection `semantic` portent un nom de client, ce que

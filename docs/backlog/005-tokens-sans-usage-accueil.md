@@ -1,10 +1,18 @@
-# 005 — Tokens créés pour la page Accueil, sans usage depuis sa suppression
+---
+id: "005"
+title: Tokens créés pour la page Accueil, sans usage depuis sa suppression
+status: en-cours
+created: 2026-11-11
+origin: "Constaté le 2026-11-11 : la page Figma « Accueil » n'existe plus (remplacée par « Ressources »)"
+adr: [ADR-001]
+claude_md: ["6.7"]
+related_components: []
+related_tokens: [color/background/inverse-raised, color/background/accent-subtle, color/background/inverse]
+references: []
+prs: [101]
+---
 
-**Statut :** À explorer
-**Origine :** constaté le 2026-11-11 : la page Figma « Accueil » n'existe plus (remplacée
-par « Ressources »)
-**Lié à :** CLAUDE.md §6.7 (cycle de dépréciation) · règle « on ne crée pas de token
-sans usage » de l'[ADR-001](../adr/001-vocabulaire-tokens-texte.md) · PR #101
+# 005 — Tokens créés pour la page Accueil, sans usage depuis sa suppression
 
 ## Problème
 Trois tokens `semantic` ont été créés le 2026-11-10 (PR #101) pour relier la page

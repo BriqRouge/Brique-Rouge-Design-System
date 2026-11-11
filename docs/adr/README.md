@@ -13,7 +13,7 @@ répond à la question « pourquoi c'est comme ça ? » quand plus personne ne s
 | `CLAUDE.md` | La **règle à appliquer**, courte, avec un lien vers l'ADR | Oui |
 
 Cycle habituel : une entrée du backlog mûrit → Damien tranche → un ADR fige le
-raisonnement → l'entrée passe à « Fait » et pointe vers l'ADR (« Lié à »). Les
+raisonnement → l'entrée passe à `fait` et pointe vers l'ADR (champ `adr`). Les
 « Conséquences » d'un ADR peuvent à leur tour créer des entrées de backlog.
 
 ## Quand écrire un ADR
