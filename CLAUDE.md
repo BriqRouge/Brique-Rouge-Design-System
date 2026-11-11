@@ -175,6 +175,32 @@ S'applique à **tout travail direct dans Figma via `use_figma`** (création de f
 - **Vérifié en CI** : `scripts/token-audit.mjs` (job Lint) détecte toute couleur hexadécimale codée en dur dans les CSS Modules (hors fallback `var(--token, #hex)`, usage légitime). Portée volontairement limitée aux couleurs — voir commentaire en tête du script pour le raisonnement. Exception explicite via `/* token-audit-ignore */` en tête de fichier, réservée au contenu illustratif bespoke sans équivalent DS (ex: assets Figma composés à la main)
 - **Contraste vérifié en CI** : `scripts/contrast-audit.mjs` (job Lint) calcule le ratio WCAG de chaque combinaison texte/fond et composant/fond déclarée dans `packages/tokens/contrast-pairs.config.js` (4,5:1 texte, 3:1 bordures et icônes, chaque mode de la collection `project`). **Toute nouvelle combinaison texte/fond dans un composant s'ajoute à ce fichier dans la même PR.** Un écart à arbitrer va dans `knownIssues` avec sa raison, jamais en silence. Les tests `jest-axe` tournent sous jsdom et ne vérifient **pas** le contraste (démontré le 2026-11-10) : le rendu réel est contrôlé par `scripts/rendered-contrast-audit.mjs` (job Test, axe-core dans Chromium sur chaque story Storybook ; seul l'état au chargement, les états `:hover`/`:focus` restent couverts par les paires déclarées)
 
+### 6.7 Ne jamais casser une référence existante (décidé le 2026-11-11)
+S'applique aux variables Figma, tokens, styles, composants et à leurs noms.
+
+**Interdit sans validation explicite de Damien :**
+- Supprimer un élément potentiellement utilisé (calques Figma, alias, code)
+- Le supprimer puis le recréer — nouvel ID, toutes les liaisons cassent
+- Le renommer — casse les références par nom (code syntax, CSS, imports)
+
+**Procédure obligatoire :**
+1. **Vérifier les usages** : calques liés, alias, occurrences dans le code.
+2. **Signaler** ce qui serait impacté, avec le nombre d'usages trouvés. Si les usages
+   n'ont pas pu être vérifiés, le dire explicitement.
+3. **Proposer l'alternative non destructive** (ajouter plutôt que remplacer, action
+   manuelle à faire dans l'interface Figma…) et attendre la validation.
+
+**Si un retrait est réellement nécessaire — cycle de dépréciation :**
+1. Créer le nouvel élément.
+2. Migrer les usages vers lui.
+3. Marquer l'ancien comme déprécié (description : `DEPRECATED — utiliser <nouveau>`).
+4. Ne supprimer l'ancien qu'une fois zéro usage confirmé, avec validation.
+
+Côté code, `/sync-tokens` applique déjà ce principe (code de sortie `2` : variable CSS
+supprimée encore utilisée → s'arrêter et demander). **Limite connue** : cette règle encadre
+les agents, elle ne protège pas d'une suppression manuelle dans Figma — voir
+`docs/backlog/001-breaking-changes-tokens.md`.
+
 ---
 
 ## 7. Workflow composants
@@ -441,6 +467,9 @@ Ces décisions sont prises et ne se remettent pas en question sauf demande expli
      → issue « Drift Figma ». Variables non couvertes (API REST Enterprise) :
      vérifiées par `/sync-ds` via `/sync-tokens`
    - Niveau 3 (optionnel) — PR draft automatiques sur drift détecté
+6. **Backlog de consolidation** — tout ce qui rend le DS plus consistant, cohérent et
+   déterministe est consigné dans `docs/backlog/` (voir son `README.md`). Tout écart
+   ou chantier identifié en cours de tâche y est ajouté plutôt que traité hors périmètre.
 
 ---
 
