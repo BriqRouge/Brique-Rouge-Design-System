@@ -45,8 +45,6 @@ contrôle voit les combinaisons non déclarées (ex. un libellé sur le fond d'u
 | `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |
 | `--color-background-surface-raised` | neutral/200 | Surfaces surélevées, survol neutre | — |
 | `--color-background-inverse` | neutral/950 | Sections sombres (hero, footer) ; fond de référence des variantes « sur fond foncé » | — |
-| `--color-background-inverse-raised` | neutral/800 | Élément posé sur un fond inverse | — |
-| `--color-background-accent-subtle` | deep-sea/100 | Fond léger d'accent (pastille d'icône) | — |
 | `--color-border-default` | neutral/300 | Bordures de conteneur | — |
 | `--color-border-subtle` | neutral/200 | Bordures discrètes | — |
 | `--color-border-focus` | deep-sea/600 | Indicateur de focus | — |

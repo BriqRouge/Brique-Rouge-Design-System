@@ -1,8 +1,18 @@
-# 002 — Nomenclature des tokens incohérente dans CLAUDE.md
+---
+id: "002"
+title: Nomenclature des tokens incohérente dans CLAUDE.md
+status: pret
+created: 2026-11-11
+origin: "Relevé le 2026-11-11 en préparant la règle §6.7"
+adr: []
+claude_md: ["5", "13"]
+related_components: []
+related_tokens: [spacing]
+references: []
+prs: []
+---
 
-**Statut :** Prêt
-**Origine :** relevé le 2026-11-11 en préparant la règle §6.7
-**Lié à :** CLAUDE.md §5 (Nomenclature) et §13 (Décisions techniques)
+# 002 — Nomenclature des tokens incohérente dans CLAUDE.md
 
 ## Problème
 CLAUDE.md se contredit sur la nomenclature des tokens :

@@ -196,8 +196,6 @@
 | `color.background.surface` | `#f5f5f5` |
 | `color.background.surface-raised` | `#e5e5e5` |
 | `color.background.inverse` | `#0a0a0a` |
-| `color.background.inverse-raised` | `#262626` |
-| `color.background.accent-subtle` | `#dee6fb` |
 | `color.button.primary` | `#262626` |
 | `color.button.primary-hover` | `#404040` |
 | `color.button.secondary-hover` | `#262626` |

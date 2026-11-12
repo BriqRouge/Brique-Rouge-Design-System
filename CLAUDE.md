@@ -52,6 +52,9 @@ design-system/
 │   ├── tokens/          # Design tokens → CSS Variables + JSON
 │   ├── react/           # Composants React (atoms/molecules/organisms)
 │   └── storybook/       # Documentation et vitrine
+├── docs/
+│   ├── adr/             # Décisions d'architecture (le pourquoi, figé)
+│   └── backlog/         # Écarts et chantiers non encore décidés
 ├── specs/               # Référence LLM : foundations, tokens, composants, patterns
 │   ├── foundations/     # Généré — valeurs par catégorie de token
 │   ├── tokens/          # Généré — catalogue --css-var: valeur
@@ -200,6 +203,14 @@ Côté code, `/sync-tokens` applique déjà ce principe (code de sortie `2` : va
 supprimée encore utilisée → s'arrêter et demander). **Limite connue** : cette règle encadre
 les agents, elle ne protège pas d'une suppression manuelle dans Figma — voir
 `docs/backlog/001-breaking-changes-tokens.md`.
+
+### 6.8 Décisions : ADR et backlog (décidé le 2026-11-11)
+- **Décision transversale validée par Damien** (convention, collection, outil ou contrôle
+  de CI, suppression ou renommage d'une famille) → un ADR dans `docs/adr/`, **dans la même
+  PR** que sa mise en œuvre. Format et critères : `docs/adr/README.md`.
+- **Écart, risque ou idée hors périmètre** → une entrée dans `docs/backlog/`.
+- Un ADR accepté ne se réécrit pas : un changement de décision passe par un nouvel ADR.
+- CLAUDE.md garde la règle à appliquer, courte, avec un lien vers l'ADR qui l'explique.
 
 ---
 

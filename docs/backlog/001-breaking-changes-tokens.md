@@ -1,10 +1,18 @@
-# 001 — Contrôle des breaking changes sur les tokens
+---
+id: "001"
+title: Contrôle des breaking changes sur les tokens
+status: a-explorer
+created: 2026-11-11
+origin: "Discussion du 2026-11-11, ajout de spacing/x22 et spacing/x24 : la variable spacing/x32, mal ordonnée, n'a pas été recréée pour ne pas casser ses liaisons"
+adr: []
+claude_md: ["6.7"]
+related_components: []
+related_tokens: [spacing]
+references: ["Passe 04 du schéma metadata (Gouvernance)", "Passe 03 (qualityGates.onBreach)"]
+prs: []
+---
 
-**Statut :** À explorer
-**Origine :** discussion du 2026-11-11, ajout de `spacing/x22` et `spacing/x24` —
-la variable `spacing/x32`, mal ordonnée, n'a pas été recréée pour ne pas casser ses liaisons
-**Lié à :** CLAUDE.md §6.7 (niveau 1 de cette règle) · Passe 04 du schéma metadata
-(Gouvernance) · Passe 03 (`qualityGates.onBreach`)
+# 001 — Contrôle des breaking changes sur les tokens
 
 ## Problème
 Supprimer ou renommer un token est un breaking change pour tout consommateur du DS.
