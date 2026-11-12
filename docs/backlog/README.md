@@ -51,5 +51,5 @@ Une entrée abandonnée reste dans le dossier avec sa raison.
 | 002 | [Nomenclature des tokens incohérente dans CLAUDE.md](002-nomenclature-tokens-claude-md.md) | Prêt |
 | 003 | [`background/project-page/<client>` : des noms de clients dans `semantic`](003-project-page-noms-clients.md) | Prêt |
 | 004 | [Aligner les tokens d'icône et de bordure sur l'échelle du texte](004-tokens-icone-bordure.md) | À explorer |
-| 005 | [Tokens créés pour la page Accueil, sans usage depuis sa suppression](005-tokens-sans-usage-accueil.md) | En cours |
+| 005 | [Tokens créés pour la page Accueil, sans usage depuis sa suppression](005-tokens-sans-usage-accueil.md) | Fait |
 | 006 | [Fiabiliser l'installation de Chromium en CI](006-ci-installation-chromium.md) | Prêt |

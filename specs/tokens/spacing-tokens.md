@@ -22,6 +22,8 @@
 --spacing-x20: 80px;
 --spacing-x3-5: 14px;
 --spacing-x32: 128px;
+--spacing-x22: 88px;
+--spacing-x24: 96px;
 ```
 
 ## Sémantiques
