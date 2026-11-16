@@ -4,7 +4,7 @@
     {
       "name": "storybook",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["turbo", "run", "dev", "--filter=@starter/storybook"],
+      "runtimeArgs": ["turbo", "run", "dev", "--filter=@brique-rouge/storybook"],
       "port": 6007
     }
   ]

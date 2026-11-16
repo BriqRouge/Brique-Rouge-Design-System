@@ -7,8 +7,8 @@ Tous les espacements passent par les tokens du DS `@brique-rouge/tokens`. Jamais
 ```css
 /* ✅ Correct */
 .container {
-  padding: var(--spacing\/x12);
-  gap: var(--spacing\/x3-5);
+  padding: var(--spacing-x12);
+  gap: var(--spacing-x3-5);
 }
 
 /* ❌ Incorrect */
@@ -18,7 +18,11 @@ Tous les espacements passent par les tokens du DS `@brique-rouge/tokens`. Jamais
 }
 ```
 
-Les tokens `--spacing/*` et `--sizing/*` suivent une échelle préfixée x. Vérifier les valeurs disponibles dans `packages/tokens/build/css/numbers.css`.
+Les tokens `--spacing-*` et `--sizing-*` suivent une échelle préfixée x (`--spacing-x12` = 48px),
+complétée par des tokens sémantiques (`--spacing-component-*`, `--spacing-layout-*`). Catalogue :
+`specs/tokens/spacing-tokens.md` et `specs/tokens/sizing-tokens.md` ; CSS réel :
+`packages/tokens/build/css/primitive.css` et `semantic.css` (générés par
+`pnpm --filter @brique-rouge/tokens build`).
 
 ---
 

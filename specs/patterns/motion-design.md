@@ -10,6 +10,11 @@ Les durées et les courbes viennent de Figma (`motion/*`, synchronisées par `/s
 | `--motion-duration-base` | `300ms` | Ouverture d'un contenu (BulletBrique) |
 | `--motion-easing-standard` | `ease-out` | Courbe par défaut des transitions de survol |
 | `--motion-easing-reveal` | `cubic-bezier(0.05, 0.7, 0.1, 1)` | Révélation de contenu : ouverture BulletBrique, menu mobile (decelerate, décision du 2026-11-10) |
+| `--motion-duration-reveal` | `400ms` | Défini, pas encore utilisé par un composant |
+| `--motion-duration-dismiss` | `300ms` | Défini, pas encore utilisé par un composant |
+| `--motion-easing-dismiss` | `cubic-bezier(0.2, 0, 0, 1)` | Défini, pas encore utilisé par un composant |
+
+Liste complète (primitives et ressorts compris) : `specs/foundations/motion.md`.
 
 - Jamais de durée ou de courbe en dur quand un token existe
 - Exceptions documentées : les boucles décoratives (lévitation BulletBrique 4993ms, logo TopNav 5s) et l'ouverture/fermeture de `DropdownMenuTrigger` (120ms / 200ms, courbes propres), sans token équivalent
@@ -27,25 +32,26 @@ Les durées et les courbes viennent de Figma (`motion/*`, synchronisées par `/s
 
 Les animations de sortie sont plus rapides que les entrées — utiliser ~75% de la durée d'entrée.
 
+Dans le DS, ces ordres de grandeur se traduisent par les tokens : `--motion-duration-fast`
+(150ms), `-base` (300ms), `-reveal` (400ms), `-dismiss` (300ms, soit 75 % de `reveal`).
+Une durée sans token équivalent est un écart à signaler, pas une valeur à coder en dur.
+
 ---
 
 ## Easing — choisir la bonne courbe
 
 Ne pas utiliser `ease` — c'est un compromis rarement optimal.
 
-| Courbe | Usage | CSS |
-|--------|-------|-----|
-| **ease-out** | Éléments qui entrent | `cubic-bezier(0.16, 1, 0.3, 1)` |
-| **ease-in** | Éléments qui sortent | `cubic-bezier(0.7, 0, 0.84, 0)` |
-| **ease-in-out** | Toggles d'état | `cubic-bezier(0.65, 0, 0.35, 1)` |
+Dans le DS, une courbe est toujours un token :
 
-Pour les micro-interactions, utiliser des courbes exponentielles :
+| Situation | Token |
+|-----------|-------|
+| Survol, changement de couleur | `--motion-easing-standard` |
+| Contenu qui entre ou se révèle | `--motion-easing-reveal` |
+| Contenu qui sort | `--motion-easing-dismiss` |
 
-```css
---ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);   /* Fluide, raffiné — défaut recommandé */
---ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);   /* Légèrement plus dramatique */
---ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);     /* Vif, confiant */
-```
+Les courbes exponentielles (ease-out-quart, -quint, -expo) ne font pas partie du DS. Si aucun
+token ne convient, le signaler à Damien plutôt que de coder une courbe en dur.
 
 **Éviter absolument bounce et elastic easing** — daté depuis 2015, amateur.
 
@@ -60,8 +66,8 @@ Pour les animations de hauteur (accordéons) : utiliser `grid-template-rows: 0fr
 ```css
 /* ✅ Correct — pas de recalcul layout */
 .element {
-  transition: transform 250ms cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 250ms cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform var(--motion-duration-base) var(--motion-easing-standard),
+              opacity var(--motion-duration-base) var(--motion-easing-standard);
 }
 
 /* ❌ Incorrect — recalcul layout */
@@ -80,17 +86,17 @@ Un seul reveal orchestré à l'entrée de page crée plus d'impact que des micro
 
 ```css
 .panelLeft {
-  animation: fadeIn 400ms cubic-bezier(0.25, 1, 0.5, 1) both;
+  animation: fadeIn var(--motion-duration-reveal) var(--motion-easing-reveal) both;
 }
 
 .panelRight {
-  animation: fadeIn 400ms cubic-bezier(0.25, 1, 0.5, 1) 100ms both;
+  animation: fadeIn var(--motion-duration-reveal) var(--motion-easing-reveal) 100ms both;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(var(--spacing-x3));
   }
   to {
     opacity: 1;
@@ -105,16 +111,25 @@ Un seul reveal orchestré à l'entrée de page crée plus d'impact que des micro
 
 ## prefers-reduced-motion — obligatoire
 
+Pratique du DS (ProjectBentoCard, MetaInfoItem, BulletBrique, TopNav) : les transitions
+passent à `1ms`, les boucles décoratives sont coupées.
+
 ```css
-/* Animation normale */
 .card {
-  animation: slideUp 500ms cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
-/* Alternative pour reduced motion */
+.brick {
+  animation: brique-levitation 4993ms infinite; /* boucle décorative de BulletBrique, exception documentée */
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card {
-    animation: fadeIn 200ms ease-out;
+    transition-duration: 1ms;
+  }
+
+  .brick {
+    animation: none;
   }
 }
 ```

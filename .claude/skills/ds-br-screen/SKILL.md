@@ -1,6 +1,6 @@
 ---
 name: ds-br-screen
-description: Génère des écrans et interfaces UI en utilisant exclusivement les composants et tokens du Design System @brique-rouge. Utiliser pour tout écran, page, formulaire ou layout devant utiliser les composants DS (Button). Vise un niveau de qualité UI Linear/Vercel/Stripe.
+description: Génère des écrans et interfaces UI en utilisant exclusivement les composants et tokens du Design System @brique-rouge. Utiliser pour tout écran, page, formulaire ou layout devant utiliser les composants DS (index : COMPONENTS.md). Vise un niveau de qualité UI Linear/Vercel/Stripe.
 ---
 
 # Générateur d'écrans — Design System @brique-rouge
@@ -36,10 +36,17 @@ Le DS @brique-rouge est ton vocabulaire. La composition, la typographie, le ryth
 
 Les variables CSS utilisent les tokens définis dans `@brique-rouge/tokens`.
 
-✅ `var(--color/background/button/idle)`, `var(--border-radius/button)`, `var(--spacing/x12)`
+✅ `var(--color-text-primary)`, `var(--border-radius-button)`, `var(--spacing-x12)`
 ❌ Valeurs hexadécimales arbitraires. Valeurs px hardcodées. Styles inline.
 
-En cas de doute : vérifier dans `packages/tokens/build/css/`.
+Nommage : le chemin de la variable Figma, segments joints par des tirets
+(`spacing/x12` → `--spacing-x12`). Jamais de `/` dans un nom de variable CSS.
+
+Une `var()` vers un token qui n'existe pas ne lève aucune erreur : la propriété se comporte
+comme `unset` (valeur héritée, ou valeur initiale si la propriété n'est pas héritée). Vérifier chaque nom avant de l'utiliser :
+- catalogue versionné : `specs/tokens/*.md` (généré à chaque build, vérifié en CI)
+- CSS réel : `packages/tokens/build/css/` — absent d'un clone neuf (gitignoré), généré par
+  `pnpm --filter @brique-rouge/tokens build`
 
 Zéro valeur hexadécimale arbitraire. Zéro style inline. Tout passe par `var(--token)` en CSS Modules.
 
@@ -130,7 +137,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 
 **À faire :**
 - Concentrer l'animation sur les moments à fort impact : un seul reveal orchestré à l'entrée de page
-- Utiliser des courbes exponentielles (ease-out-quart/quint/expo) pour une décélération naturelle
+- Utiliser les durées et courbes du DS (`--motion-duration-*`, `--motion-easing-*`) — une courbe absente du DS est un écart à signaler, jamais une valeur en dur
 - Animer uniquement `transform` et `opacity`
 
 **À ne jamais faire :**
@@ -177,7 +184,7 @@ Fingerprints à éviter : palette cyan/violet/dégradé générique · glassmorp
 
 ## Structure des fichiers
 
-Pattern depuis `packages/storybook/src/stories/screens/` :
+Dans `packages/storybook/src/stories/screens/` (dossier à créer au premier écran) :
 
 ```
 [NomEcran].tsx
@@ -214,6 +221,6 @@ Trois filtres dans l'ordre :
 - Composants + tokens : `COMPONENTS.md` à la racine, détail dans `specs/{atoms,molecules,organisms}/`
 - Patterns de composition : `specs/patterns/`
 - Commandes disponibles : `/audit-screen`, `/critique-screen`, `/polish-screen`
-- Écrans existants : `packages/storybook/src/stories/screens/`
-- Source des tokens : `packages/tokens/build/css/`
+- Écrans existants : `packages/storybook/src/stories/screens/` (aucun à ce jour)
+- Catalogue des tokens : `specs/tokens/*.md` — CSS généré : `packages/tokens/build/css/` (après `pnpm --filter @brique-rouge/tokens build`)
 - Storybook : http://localhost:6007
