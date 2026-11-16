@@ -77,7 +77,7 @@ Chaque élément interactif a tous ses états :
 - Pas d'imports inutilisés
 - Pas de TypeScript `any`
 - Pas de valeurs CSS arbitraires hors tokens
-- Noms de classes CSS Modules en camelCase
+- Noms de classes CSS Modules : éléments en camelCase, modificateurs en kebab-case préfixé (`node scripts/css-class-audit.mjs`)
 
 ## Checklist finale
 

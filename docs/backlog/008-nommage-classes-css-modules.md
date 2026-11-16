@@ -1,12 +1,12 @@
 ---
 id: "008"
 title: "Nommage des classes CSS Modules : règle de CLAUDE.md et de la skill ds-br-screen contradictoires"
-status: pret
+status: fait
 created: 2026-11-16
 origin: "Relevé le 2026-11-16 en vérifiant la chaîne de la skill ds-br-screen avant un test de génération d'écrans"
-adr: []
+adr: [ADR-005]
 claude_md: ["8"]
-related_components: [Button, MenuButton, ProjectBentoCard]
+related_components: [Button, MenuButton, ProjectBentoCard, MetaInfoItem, DropdownMenuButton]
 related_tokens: []
 references: [.claude/skills/ds-br-screen/SKILL.md, .claude/skills/ds-br-screen/commands/polish-screen.md]
 prs: []
@@ -23,7 +23,13 @@ prs: []
 Un agent qui génère un écran reçoit deux règles incompatibles.
 
 ## Ce qui existe déjà
-Comptage des sélecteurs de classe en début de ligne dans
+> **Correction du 2026-11-16** : le premier comptage ci-dessous ne lisait que les sélecteurs
+> en début de ligne. Avec les sélecteurs composés : 127 classes, 27 en kebab-case (toutes des
+> modificateurs préfixés, dont `mode-*` et `color-scheme-*`), 52 en camelCase, 48 d'un mot ;
+> **4** modificateurs booléens en camelCase (`hasHoverIcon` de MetaInfoItem en plus), et
+> `is-activated` appliqué sans être défini. Chiffres retenus dans l'ADR-005.
+
+Premier comptage — sélecteurs de classe en début de ligne dans
 `packages/react/src/components/*/*/*.module.css` (2026-11-16) :
 - **21 en kebab-case**, tous des modificateurs à préfixe sémantique : `variant-*`,
   `size-*`, `theme-*`, `company-*`, `is-expanded`, `has-hover-label`. Conforme à §8.
@@ -43,8 +49,10 @@ sémantique », dans CLAUDE.md §8, la skill et `/polish-screen`. Décider ensui
 3 exceptions (les renommer touche le TSX et les tests des composants concernés).
 
 ## Prérequis / questions ouvertes
-- [ ] Damien valide la règle (convention transversale : ADR dans la même PR).
-- [ ] Les 3 exceptions : renommer, ou les accepter explicitement.
+- [x] Règle validée par Damien le 2026-11-16, avec contrôle en CI → [ADR-005](../adr/005-nommage-classes-css-modules.md).
+- [x] Exceptions renommées : `is-icon-only`, `is-expand-on-hover`, `has-hover-visual`,
+      `has-hover-icon` (rendu vérifié identique par mesure).
+- [x] `is-activated` : gardé, style en attente du design → backlog [012](012-dropdownmenubutton-etat-selectionne.md).
 
 ## Non couvert
 Les classes des stories et des contenus illustratifs (`packages/storybook/src/stories/`).

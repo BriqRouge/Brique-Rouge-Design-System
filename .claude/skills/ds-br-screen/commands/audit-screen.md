@@ -21,6 +21,7 @@ Effectuer un audit technique systématique. Ne pas corriger les problèmes — l
 - Valeurs hexadécimales arbitraires (doit être 0)
 - Propriétés CSS hors tokens (`font-size`, `padding`, `gap` en px arbitraires)
 - Variables CSS citées qui n'existent pas dans `packages/tokens/build/css/` — une `var()` vers un token absent échoue sans erreur (la propriété se comporte comme `unset`)
+- Nommage des classes CSS Modules (CLAUDE.md §8, ADR-005) : `node scripts/css-class-audit.mjs` sans erreur
 - Composants DS non utilisés alors qu'ils existent (index : `COMPONENTS.md`)
 - Props de composants incorrectement utilisées (API : fiche `specs/{atoms,molecules,organisms}/` du composant)
 - Replis (ADR-004) : chaque élément qui comble un composant absent porte `data-ds-missing`, est un élément HTML natif (pas un `div` qui imite un contrôle) et figure dans l'en-tête du `.tsx`. Signaler tout repli non marqué, et tout repli d'un composant qui existe dans `COMPONENTS.md` (*shadow component*)

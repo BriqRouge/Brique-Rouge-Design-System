@@ -54,7 +54,8 @@ Une entrée abandonnée reste dans le dossier avec sa raison.
 | 005 | [Tokens créés pour la page Accueil, sans usage depuis sa suppression](005-tokens-sans-usage-accueil.md) | Fait |
 | 006 | [Fiabiliser l'installation de Chromium en CI](006-ci-installation-chromium.md) | Prêt |
 | 007 | [Tailles de texte : px émis par le build, `rem` recommandé par les patterns](007-tailles-texte-px-rem.md) | À explorer |
-| 008 | [Nommage des classes CSS Modules : règle de CLAUDE.md et de la skill contradictoires](008-nommage-classes-css-modules.md) | Prêt |
+| 008 | [Nommage des classes CSS Modules : règle de CLAUDE.md et de la skill contradictoires](008-nommage-classes-css-modules.md) | Fait |
 | 009 | [Contrôler en CI que les variables CSS citées dans `specs/` et les skills existent](009-ci-references-tokens-docs.md) | À explorer |
 | 010 | [Écrans : que faire quand un composant nécessaire n'existe pas dans le DS](010-ecrans-composants-manquants.md) | Fait |
 | 011 | [Écarts mineurs relevés dans la chaîne de génération d'écrans](011-ecarts-mineurs-chaine-ecrans.md) | À explorer |
+| 012 | [DropdownMenuButton : l'état « sélectionné » (prop `activated`) n'a pas de design](012-dropdownmenubutton-etat-selectionne.md) | À explorer |
