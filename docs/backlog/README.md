@@ -56,5 +56,5 @@ Une entrée abandonnée reste dans le dossier avec sa raison.
 | 007 | [Tailles de texte : px émis par le build, `rem` recommandé par les patterns](007-tailles-texte-px-rem.md) | À explorer |
 | 008 | [Nommage des classes CSS Modules : règle de CLAUDE.md et de la skill contradictoires](008-nommage-classes-css-modules.md) | Prêt |
 | 009 | [Contrôler en CI que les variables CSS citées dans `specs/` et les skills existent](009-ci-references-tokens-docs.md) | À explorer |
-| 010 | [Écrans : que faire quand un composant nécessaire n'existe pas dans le DS](010-ecrans-composants-manquants.md) | À explorer |
+| 010 | [Écrans : que faire quand un composant nécessaire n'existe pas dans le DS](010-ecrans-composants-manquants.md) | Fait |
 | 011 | [Écarts mineurs relevés dans la chaîne de génération d'écrans](011-ecarts-mineurs-chaine-ecrans.md) | À explorer |
