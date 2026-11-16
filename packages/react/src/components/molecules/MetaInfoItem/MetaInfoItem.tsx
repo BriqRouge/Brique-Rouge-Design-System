@@ -18,7 +18,7 @@ interface MetaInfoItemProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorEl
 
 const MetaInfoItem = forwardRef<HTMLAnchorElement, MetaInfoItemProps>(
   ({ href, icon, hoverIcon, children, className, ...props }, ref) => {
-    const classes = [styles.item, hoverIcon ? styles.hasHoverIcon : '', className]
+    const classes = [styles.item, hoverIcon ? styles['has-hover-icon'] : '', className]
       .filter(Boolean)
       .join(' ');
 

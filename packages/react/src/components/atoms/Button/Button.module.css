@@ -37,7 +37,7 @@
 
 /* ─── Icône seule (bouton strictement rond) ──────────────────────────────────── */
 
-.iconOnly {
+.is-icon-only {
   width: var(--sizing-button-nm);
   min-width: var(--sizing-button-nm);
   padding-left: 0;

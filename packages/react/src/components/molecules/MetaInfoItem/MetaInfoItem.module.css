@@ -36,17 +36,17 @@
   transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
-.item.hasHoverIcon .icon {
+.item.has-hover-icon .icon {
   transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
-.item.hasHoverIcon:hover .icon,
-.item.hasHoverIcon:focus-visible .icon {
+.item.has-hover-icon:hover .icon,
+.item.has-hover-icon:focus-visible .icon {
   opacity: 0;
 }
 
-.item.hasHoverIcon:hover .hoverIcon,
-.item.hasHoverIcon:focus-visible .hoverIcon {
+.item.has-hover-icon:hover .hoverIcon,
+.item.has-hover-icon:focus-visible .hoverIcon {
   opacity: 1;
 }
 
