@@ -9,7 +9,7 @@ superseded_by: null
 related_components: []
 related_tokens: []
 backlog: ["010"]
-prs: []
+prs: [105]
 tags: [ecrans, skill, gouvernance, observabilite]
 ---
 

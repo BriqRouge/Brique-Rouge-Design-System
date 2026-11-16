@@ -9,7 +9,7 @@ claude_md: ["17", "18", "19"]
 related_components: []
 related_tokens: []
 references: [.claude/skills/ds-br-screen/SKILL.md, COMPONENTS.md, specs/patterns/interaction-design.md]
-prs: []
+prs: [105]
 ---
 
 # 010 — Écrans : que faire quand un composant nécessaire n'existe pas dans le DS
