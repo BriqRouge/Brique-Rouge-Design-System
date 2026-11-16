@@ -34,13 +34,9 @@ export const MODIFIER_PREFIXES = ['variant', 'size', 'theme', 'mode', 'color-sch
 // Écarts connus : signalés à chaque exécution sans faire échouer la CI.
 // Chaque entrée a une raison et renvoie au backlog. Une entrée qui ne correspond
 // plus à rien fait échouer le contrôle : la retirer.
-export const KNOWN_ISSUES = [
-  {
-    file: 'packages/react/src/components/molecules/DropdownMenuButton/DropdownMenuButton.tsx',
-    className: 'is-activated',
-    reason: 'état « sélectionné » sans variante Figma — style en attente du design (backlog 012)',
-  },
-];
+// Format : { file: 'packages/…/X.tsx', className: 'is-…', reason: '… (backlog NNN)' }.
+// Historique : is-activated (DropdownMenuButton), résolu le 2026-11-17 (backlog 012).
+export const KNOWN_ISSUES = [];
 
 const CAMEL = /^[a-z][a-zA-Z0-9]*$/;
 const MODIFIER = new RegExp(`^(?:${MODIFIER_PREFIXES.join('|')})-[a-z0-9]+(?:-[a-z0-9]+)*$`);

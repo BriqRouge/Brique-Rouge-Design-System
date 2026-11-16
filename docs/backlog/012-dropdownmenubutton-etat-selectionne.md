@@ -1,7 +1,7 @@
 ---
 id: "012"
 title: "DropdownMenuButton : l'état « sélectionné » (prop activated) n'a pas de design"
-status: a-explorer
+status: fait
 created: 2026-11-16
 origin: "Relevé le 2026-11-16 par le contrôle css-class-audit (ADR-005) : styles['is-activated'] appliqué mais défini dans aucun CSS"
 adr: [ADR-005]
@@ -37,14 +37,23 @@ garder la référence et de lui donner un style (2026-11-16), mais aucun design 
    `KNOWN_ISSUES` est retirée.
 
 ## Prérequis / questions ouvertes
-- [ ] Où l'état sert-il ? Probablement le projet courant dans le menu du `TopNav` : à
-      confirmer, aucun usage dans le DS aujourd'hui.
-- [ ] Accessibilité : un item « courant » s'annonce aussi aux lecteurs d'écran
-      (`aria-current`), pas seulement par le style (WCAG 1.3.1, 1.4.1).
-- [ ] Contraste : la nouvelle combinaison texte/fond s'ajoute à
-      `packages/tokens/contrast-pairs.config.js` dans la même PR (CLAUDE.md §6.6).
+- [x] Feu vert de Damien le 2026-11-17 pour créer la variante Figma et le style ; version
+      nommée enregistrée avant l'écriture (CLAUDE.md §6.6).
+- [x] Figma : propriété `Selected` (défaut `false`) ; 12 variantes `Selected=true`, une par
+      variante `Type=activated` (desktop et mobile), liées aux variables, sans valeur en dur.
+- [x] Design fondé sur l'existant : projet = pastille projet du `TopNav`
+      (`background/project/accent`, `text/project/on-accent`) ; neutre = `background/inverse`,
+      `text/inverse`. Inchangé au survol, distinct du survol subtil des autres items.
+- [x] Accessibilité : `aria-current="true"` (précisable en `"page"`) ; forme du fond
+      ≥ 6:1 contre le menu (WCAG 1.4.11).
+- [x] Contraste : 4 paires ajoutées à `contrast-pairs.config.js` (texte ≥ 4,58:1, iBP au
+      plus juste ; forme ≥ 6,03:1).
+- [x] `KNOWN_ISSUES` de `css-class-audit` vidé.
+- [ ] Empreinte Figma du composant (`node scripts/figma-sync-ds.mjs update --only
+      DropdownMenuButton`) : demande `FIGMA_TOKEN`, absent de la session qui a fait le
+      changement. À lancer en local, sinon la détection nocturne ouvrira l'issue « Drift Figma ».
 - [ ] Renommer la prop (`selected` ?) pour lever l'ambiguïté avec Figma relève de §6.7 :
-      à décider séparément.
+      à décider séparément, rien ne l'impose aujourd'hui.
 
 ## Non couvert
 Le comportement du menu (fermeture, navigation clavier), déjà traité par `DropdownMenuTrigger`.

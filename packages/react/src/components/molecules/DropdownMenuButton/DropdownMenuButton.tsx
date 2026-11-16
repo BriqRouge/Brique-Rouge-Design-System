@@ -13,7 +13,11 @@ interface DropdownMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonE
   alt?: string;
   /** Affiche l'icône de lien externe */
   rightIcon?: boolean;
-  /** Indique si cet item est l'item actif (sélectionné) */
+  /**
+   * Item courant (sélectionné) — Figma `Selected=true`, à ne pas confondre avec
+   * `Type=activated` (« disponible »). Fond plein et `aria-current="true"`, que le
+   * consommateur peut préciser (`aria-current="page"`).
+   */
   activated?: boolean;
   /**
    * Libellé affiché au survol à la place de children (ex : « Showcase à venir »).
@@ -54,6 +58,7 @@ const DropdownMenuButton = forwardRef<HTMLButtonElement, DropdownMenuButtonProps
         type="button"
         data-component="ds-br-dropdown-menu-button"
         data-activated={activated}
+        aria-current={activated ? 'true' : undefined}
         data-company={company}
         data-project={company}
         className={classes}

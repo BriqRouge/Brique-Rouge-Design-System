@@ -53,6 +53,31 @@
   color: var(--color-text-project-on-subtle);
 }
 
+/* ─── Sélectionné (prop activated — Figma Selected=true) ────────────────────── */
+/* Fond plein, distinct du survol subtil : la forme reste perceptible sans la couleur
+   (6:1 à 18:1 contre le fond du menu, WCAG 1.4.11). Neutre : fond et texte inverses.
+   Projet : mêmes tokens que la pastille projet du TopNav (accent / on-accent),
+   résolus par data-project. Le survol ne modifie pas un item sélectionné.
+   Placé après les règles de survol : à spécificité égale, il l'emporte. */
+
+.is-activated,
+.is-activated:hover {
+  background-color: var(--color-background-inverse);
+  border-color: transparent;
+  color: var(--color-text-inverse);
+}
+
+.is-activated.company-odaptos,
+.is-activated.company-bpce,
+.is-activated.company-ibp,
+.is-activated.company-odaptos:hover,
+.is-activated.company-bpce:hover,
+.is-activated.company-ibp:hover {
+  background-color: var(--color-background-project-accent);
+  border-color: transparent;
+  color: var(--color-text-project-on-accent);
+}
+
 /* ─── Logo frame ─────────────────────────────────────────────────────────────── */
 
 .logoFrame {

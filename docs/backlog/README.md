@@ -58,4 +58,4 @@ Une entrée abandonnée reste dans le dossier avec sa raison.
 | 009 | [Contrôler en CI que les variables CSS citées dans `specs/` et les skills existent](009-ci-references-tokens-docs.md) | À explorer |
 | 010 | [Écrans : que faire quand un composant nécessaire n'existe pas dans le DS](010-ecrans-composants-manquants.md) | Fait |
 | 011 | [Écarts mineurs relevés dans la chaîne de génération d'écrans](011-ecarts-mineurs-chaine-ecrans.md) | À explorer |
-| 012 | [DropdownMenuButton : l'état « sélectionné » (prop `activated`) n'a pas de design](012-dropdownmenubutton-etat-selectionne.md) | À explorer |
+| 012 | [DropdownMenuButton : l'état « sélectionné » (prop `activated`) n'a pas de design](012-dropdownmenubutton-etat-selectionne.md) | Fait |
