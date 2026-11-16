@@ -9,7 +9,7 @@ superseded_by: null
 related_components: [Button, MenuButton, ProjectBentoCard, MetaInfoItem, DropdownMenuButton]
 related_tokens: []
 backlog: ["008", "012"]
-prs: []
+prs: [106]
 tags: [conventions, css-modules, ci, gouvernance]
 ---
 

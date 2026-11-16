@@ -9,7 +9,7 @@ claude_md: ["6.1", "7", "15"]
 related_components: [DropdownMenuButton, DropdownMenuTrigger, TopNav]
 related_tokens: []
 references: [specs/molecules/DropdownMenuButton.md, scripts/css-class-audit.mjs]
-prs: []
+prs: [106]
 ---
 
 # 012 — DropdownMenuButton : l'état « sélectionné » (prop `activated`) n'a pas de design

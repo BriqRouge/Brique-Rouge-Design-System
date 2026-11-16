@@ -9,7 +9,7 @@ claude_md: ["8"]
 related_components: [Button, MenuButton, ProjectBentoCard, MetaInfoItem, DropdownMenuButton]
 related_tokens: []
 references: [.claude/skills/ds-br-screen/SKILL.md, .claude/skills/ds-br-screen/commands/polish-screen.md]
-prs: []
+prs: [106]
 ---
 
 # 008 — Nommage des classes CSS Modules : règle de CLAUDE.md et de la skill contradictoires
