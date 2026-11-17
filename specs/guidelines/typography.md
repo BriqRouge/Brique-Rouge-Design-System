@@ -1,5 +1,7 @@
 # Typographie
 
+> Adapté d'[Impeccable](https://github.com/pbakaus/impeccable) (© 2025 Paul Bakaus, licence Apache 2.0) : traduit, réduit et modifié pour Brique Rouge. Voir [NOTICE.md](../../NOTICE.md).
+
 ## Principes fondamentaux
 
 ### Rythme vertical

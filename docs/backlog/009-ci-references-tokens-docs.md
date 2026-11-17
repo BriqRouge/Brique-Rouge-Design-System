@@ -3,19 +3,19 @@ id: "009"
 title: Contrôler en CI que les variables CSS citées dans specs/ et les skills existent
 status: a-explorer
 created: 2026-11-16
-origin: "Le 2026-11-16, 36 références à des tokens inexistants ont été trouvées dans la chaîne de la skill ds-br-screen (specs/patterns/, SKILL.md, commandes) ; aucun contrôle ne les avait signalées"
+origin: "Le 2026-11-16, 36 références à des tokens inexistants ont été trouvées dans la chaîne de la skill ds-br-screen (specs/guidelines/, SKILL.md, commandes) ; aucun contrôle ne les avait signalées"
 adr: []
 claude_md: ["6.6", "17", "19"]
 related_components: []
 related_tokens: []
-references: [specs/patterns/, .claude/skills/, scripts/check-specs.mjs, scripts/token-audit.mjs]
+references: [specs/guidelines/, .claude/skills/, scripts/check-specs.mjs, scripts/token-audit.mjs]
 prs: []
 ---
 
 # 009 — Contrôler en CI que les variables CSS citées dans `specs/` et les skills existent
 
 ## Problème
-Les patterns et skills que lisent les agents citaient des tokens qui n'existent pas
+Les guidelines (alors dans `specs/patterns/`, voir ADR-006) et les skills que lisent les agents citaient des tokens qui n'existent pas
 (syntaxe à slash `--color/background/button/idle`, noms du template de départ). Une
 `var()` vers un token absent n'échoue pas : la propriété se comporte comme `unset`. Un
 agent qui recopie l'exemple produit un écran faux sans aucune erreur, ni au build ni en CI.

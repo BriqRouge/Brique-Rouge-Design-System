@@ -8,7 +8,7 @@ adr: [ADR-004]
 claude_md: ["17", "18", "19"]
 related_components: []
 related_tokens: []
-references: [.claude/skills/ds-br-screen/SKILL.md, COMPONENTS.md, specs/patterns/interaction-design.md]
+references: [.claude/skills/ds-br-screen/SKILL.md, COMPONENTS.md, specs/guidelines/interaction-design.md]
 prs: [105]
 ---
 
@@ -22,7 +22,7 @@ liste déroulante, ni case à cocher, ni tableau, ni modale (`COMPONENTS.md`, 21
 composants). La skill ne dit pas quoi faire dans ce cas : l'agent s'arrête, ou il improvise
 (HTML natif stylé avec les tokens, composant inventé), sans règle commune.
 
-`specs/patterns/interaction-design.md` traite déjà le cas du bouton sur fond sombre :
+`specs/guidelines/interaction-design.md` traite déjà le cas du bouton sur fond sombre :
 « un manque du DS à signaler, pas à styler à la main ». Rien n'est dit pour les autres
 manques.
 

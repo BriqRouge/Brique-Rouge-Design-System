@@ -96,7 +96,7 @@ make dev      # compile les tokens et lance Storybook sur http://localhost:6007
 | `CLAUDE.md` | Règles de travail de Claude Code sur ce dépôt |
 | `COMPONENTS.md` | Index des composants → fiches `specs/` |
 | `METHODOLOGY.md` | Les principes et le pourquoi de la méthode |
-| `specs/` | Référence pour les LLM : fondations, tokens, composants, patterns |
+| `specs/` | Référence pour les LLM : fondations, tokens, composants, guidelines, patterns |
 
 ---
 

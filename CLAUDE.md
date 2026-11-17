@@ -55,13 +55,14 @@ design-system/
 ├── docs/
 │   ├── adr/             # Décisions d'architecture (le pourquoi, figé)
 │   └── backlog/         # Écarts et chantiers non encore décidés
-├── specs/               # Référence LLM : foundations, tokens, composants, patterns
+├── specs/               # Référence LLM : foundations, tokens, composants, guidelines, patterns
 │   ├── foundations/     # Généré — valeurs par catégorie de token
 │   ├── tokens/          # Généré — catalogue --css-var: valeur
 │   ├── atoms/           # Fiche par composant atome
 │   ├── molecules/       # Fiche par composant molécule
 │   ├── organisms/       # Fiche par composant organisme
-│   └── patterns/        # Règles de composition (typo, couleur, spacing, motion…)
+│   ├── guidelines/      # Règles de métier (typo, couleur, spacing, motion, interaction, rédaction)
+│   └── patterns/        # Solutions à une tâche ou un type de page qui revient (ADR-006)
 ├── scripts/
 │   ├── token-audit.mjs  # CI — détecte les couleurs hardcodées
 │   ├── check-specs.mjs  # CI — cohérence composants React ↔ fiches specs (en-tête YAML)
@@ -326,10 +327,10 @@ Avant d'implémenter, systématiquement :
   `caption`, `eyebrow`, `label/*` — décidé le 2026-11-02 ; `expressive/*` pour la police
   d'affichage GT Ultra — décidé le 2026-11-04), lui-même lié aux variables.
   Un texte sans style est un écart signalé, jamais restylé d'office. Table rôle →
-  tokens CSS : `specs/patterns/typography.md`
+  tokens CSS : `specs/guidelines/typography.md`
 - Appliquer un style de texte remplace **toutes** les propriétés du texte (rognage,
   casse, soulignement compris) : vérifier ces propriétés et les dimensions avant/après,
-  voir `specs/patterns/typography.md`
+  voir `specs/guidelines/typography.md`
 - Variables Figma : scope typé (jamais `ALL_SCOPES`) et code syntax WEB `var(--…)`
   égale au nom de la variable CSS générée
 - Vérification déterministe : `node scripts/figma-sync-ds.mjs lint` (aussi chaque nuit)
@@ -585,11 +586,13 @@ Le skill `.claude/skills/ds-br-screen/` doit être chargé **avant tout travail 
 ### Ordre de chargement obligatoire
 
 1. Lire `.claude/skills/ds-br-screen/SKILL.md`
-2. Lire les patterns obligatoires dans `specs/patterns/` :
-   - `specs/patterns/typography.md`
-   - `specs/patterns/color-and-contrast.md`
-   - `specs/patterns/spatial-design.md`
-3. Lire les patterns additionnels selon le contexte (motion, interaction, ux-writing)
+2. Lire les guidelines obligatoires dans `specs/guidelines/` :
+   - `specs/guidelines/typography.md`
+   - `specs/guidelines/color-and-contrast.md`
+   - `specs/guidelines/spatial-design.md`
+3. Lire les guidelines additionnelles selon le contexte (motion, interaction, ux-writing)
+4. Lire l'index `specs/patterns/README.md`. Si un pattern couvre l'écran, il s'applique :
+   la direction créative ne porte que sur ce qu'il laisse libre ([ADR-006](docs/adr/006-definition-patterns.md))
 
 ### Après toute création ou modification
 
@@ -597,6 +600,7 @@ Lancer `/audit-screen` pour vérifier systématiquement :
 - Tokens DS : zéro valeur hardcodée (couleurs, spacing, border-radius, **effets/shadows**)
 - Accessibilité
 - Anti-patterns visuels
+- Conformité au pattern, si l'écran en relève
 
 **Ne jamais déclarer un screen « terminé » sans avoir passé `/audit-screen`**, ni, s'il
 contient un repli `data-ds-missing`, sans l'arbitrage de Damien ([ADR-004](docs/adr/004-ecrans-repli-balise.md)).

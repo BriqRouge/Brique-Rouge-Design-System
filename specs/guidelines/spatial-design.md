@@ -1,5 +1,7 @@
 # Design spatial
 
+> Adapté d'[Impeccable](https://github.com/pbakaus/impeccable) (© 2025 Paul Bakaus, licence Apache 2.0) : traduit, réduit et modifié pour Brique Rouge. Voir [NOTICE.md](../../NOTICE.md).
+
 ## Système de tokens spacing et sizing
 
 Tous les espacements passent par les tokens du DS `@brique-rouge/tokens`. Jamais de valeur px arbitraire.
