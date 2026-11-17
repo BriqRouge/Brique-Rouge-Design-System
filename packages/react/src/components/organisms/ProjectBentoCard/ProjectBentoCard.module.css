@@ -24,8 +24,8 @@
   z-index: 1;
 }
 
-.expandOnHover:hover,
-.expandOnHover:focus-within {
+.is-expand-on-hover:hover,
+.is-expand-on-hover:focus-within {
   width: 576px;
 }
 
@@ -89,12 +89,12 @@
   inset: 0;
 }
 
-.hasHoverVisual .content {
+.has-hover-visual .content {
   transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
-.hasHoverVisual:hover .content,
-.hasHoverVisual:focus-within .content {
+.has-hover-visual:hover .content,
+.has-hover-visual:focus-within .content {
   opacity: 0;
 }
 

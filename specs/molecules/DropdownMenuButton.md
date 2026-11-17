@@ -44,7 +44,7 @@ interface DropdownMenuButtonProps extends React.HTMLAttributes<HTMLButtonElement
 | Libellé au survol en `deactivated` (« Showcase à venir », « Projet à venir ») | `hoverLabel` |
 | Booléen `Right Icon` | `rightIcon` |
 
-Attention au vocabulaire : dans Figma, `Type=activated` signifie « disponible ». Dans le code, la prop `activated` signifie « item sélectionné » (`data-activated`, sans style propre).
+Attention au vocabulaire : dans Figma, `Type=activated` signifie « disponible ». Dans le code, la prop `activated` signifie « item sélectionné » (`data-activated`, sans style propre). La classe `is-activated` est posée mais n'a pas encore de règle CSS : Figma n'a pas de variante « sélectionné », style en attente du design (backlog [012](../../docs/backlog/012-dropdownmenubutton-etat-selectionne.md), écart connu de `css-class-audit`).
 
 ## États
 

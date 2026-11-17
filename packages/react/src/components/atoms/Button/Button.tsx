@@ -38,7 +38,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       styles.button,
       styles[`variant-${variant}`],
       hasSemanticColorScheme ? styles[`color-scheme-${colorScheme}`] : '',
-      isIconOnly ? styles.iconOnly : '',
+      isIconOnly ? styles['is-icon-only'] : '',
       className,
     ]
       .filter(Boolean)

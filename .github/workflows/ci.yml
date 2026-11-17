@@ -26,8 +26,10 @@ jobs:
         run: node scripts/contrast-audit.mjs
       - name: Cohérence composants ↔ fiches specs
         run: node scripts/check-specs.mjs
-      - name: Tests des scripts (synchro Figma, fiches specs)
-        run: node --test scripts/figma-sync-tokens.test.mjs scripts/figma-sync-ds.test.mjs scripts/check-specs.test.mjs scripts/contrast-audit.test.mjs scripts/rendered-contrast-audit.test.mjs
+      - name: Nommage et usage des classes CSS Modules (ADR-005)
+        run: node scripts/css-class-audit.mjs
+      - name: Tests des scripts (synchro Figma, fiches specs, classes CSS)
+        run: node --test scripts/figma-sync-tokens.test.mjs scripts/figma-sync-ds.test.mjs scripts/check-specs.test.mjs scripts/contrast-audit.test.mjs scripts/rendered-contrast-audit.test.mjs scripts/css-class-audit.test.mjs
 
   test:
     name: Test

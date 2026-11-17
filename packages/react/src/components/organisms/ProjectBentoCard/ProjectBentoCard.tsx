@@ -45,8 +45,8 @@ const ProjectBentoCard = forwardRef<HTMLDivElement, ProjectBentoCardProps>(
   ) => {
     const classes = [
       styles.card,
-      expandOnHover ? styles.expandOnHover : '',
-      hoverChildren ? styles.hasHoverVisual : '',
+      expandOnHover ? styles['is-expand-on-hover'] : '',
+      hoverChildren ? styles['has-hover-visual'] : '',
       className,
     ]
       .filter(Boolean)

@@ -65,6 +65,7 @@ design-system/
 ├── scripts/
 │   ├── token-audit.mjs  # CI — détecte les couleurs hardcodées
 │   ├── check-specs.mjs  # CI — cohérence composants React ↔ fiches specs (en-tête YAML)
+│   ├── css-class-audit.mjs  # CI — nommage et usage des classes CSS Modules (ADR-005)
 │   ├── figma-sync-tokens.mjs  # /sync-tokens — Figma Variables → tokens.json
 │   ├── figma-sync-ds.mjs  # /sync-ds + CI nocturne — détection des composants modifiés (REST)
 │   └── figma/           # Snippets Plugin API exécutés via use_figma
@@ -349,7 +350,12 @@ Avant d'implémenter, systématiquement :
 - `displayName` défini
 
 ### CSS Modules
-- Classes : kebab-case avec préfixe sémantique (`variant-contained`, `size-nm`, `is-activated`)
+- Classes ([ADR-005](docs/adr/005-nommage-classes-css-modules.md), vérifié en CI par `node scripts/css-class-audit.mjs`) :
+  - **élément** : camelCase (`titleBlock`, `hoverIcon`)
+  - **modificateur** (variante, taille, état — toute classe appliquée sous condition) : kebab-case
+    avec un préfixe de la liste `variant-`, `size-`, `theme-`, `mode-`, `color-scheme-`,
+    `company-`, `is-`, `has-` (`variant-contained`, `size-nm`, `is-icon-only`)
+  - toute classe référencée dans le TSX existe dans le CSS Module (une classe absente vaut `undefined`, sans erreur)
 - États disabled : sélecteur `:disabled` natif uniquement — **pas** `[aria-disabled='true']`
 - L'attribut `aria-disabled` sert à la communication avec les lecteurs d'écran, pas au style
 

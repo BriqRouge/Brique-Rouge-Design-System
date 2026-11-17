@@ -45,7 +45,7 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
       styles[`variant-${variant}`],
       styles[`size-${size}`],
       variant === 'outlined' ? styles[`mode-${mode}`] : '',
-      isIconOnly ? styles.iconOnly : '',
+      isIconOnly ? styles['is-icon-only'] : '',
       className,
     ]
       .filter(Boolean)

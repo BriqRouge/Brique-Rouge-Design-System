@@ -217,7 +217,7 @@ Dans `packages/storybook/src/stories/screens/` (dossier à créer au premier éc
 [NomEcran].stories.tsx
 ```
 
-CSS Modules : noms de classes en camelCase, `var(--token)` pour tout.
+CSS Modules : éléments en camelCase, modificateurs (états, variantes) en kebab-case préfixé `is-`, `has-`, `variant-`… (CLAUDE.md §8, ADR-005 — vérifié par `node scripts/css-class-audit.mjs`), `var(--token)` pour tout.
 Storybook : titre `Screens/[NomEcran]`, au minimum une story Default.
 
 ---
