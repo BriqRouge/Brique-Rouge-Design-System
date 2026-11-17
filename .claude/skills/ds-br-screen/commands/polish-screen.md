@@ -18,7 +18,7 @@ Effectuer une passe finale méticuleuse pour attraper tous les petits détails q
 ### Alignement et espacement
 
 - **Alignement pixel-perfect** : tout s'aligne sur la grille
-- **Espacements cohérents** : tous les gaps utilisent les tokens `--spacing/*` (pas de valeurs px isolées)
+- **Espacements cohérents** : tous les gaps utilisent les tokens `--spacing-*` (pas de valeurs px isolées)
 - **Alignement optique** : ajuster pour le poids visuel (les icônes nécessitent parfois un offset)
 - **Rythme d'espacement** : variation assumée, pas les mêmes gaps partout
 
@@ -44,13 +44,13 @@ Effectuer une passe finale méticuleuse pour attraper tous les petits détails q
 
 Chaque élément interactif a tous ses états :
 - Default, Hover, Focus, Active, Disabled
-- Transitions fluides (150–300ms, ease-out-quart)
+- Transitions fluides (tokens `--motion-duration-*` / `--motion-easing-*`)
 - Aucun état abrupt (pas de changement instantané sans transition)
 
 ### Micro-interactions et transitions
 
 - **Transitions fluides** : changements d'état animés (150–300ms)
-- **Easing cohérent** : ease-out-quart/quint/expo — jamais bounce ou elastic
+- **Easing cohérent** : tokens `--motion-easing-*` du DS — jamais bounce ou elastic
 - **60fps** : animer uniquement `transform` et `opacity`
 - **Motion intentionnelle** : la motion sert un but
 - **`prefers-reduced-motion`** : respecté
@@ -81,11 +81,11 @@ Chaque élément interactif a tous ses états :
 
 ## Checklist finale
 
-- [ ] Espacements via tokens `--spacing/*` partout
+- [ ] Espacements via tokens `--spacing-*` partout
 - [ ] Zéro valeur hexadécimale arbitraire
 - [ ] Hiérarchie typographique cohérente
 - [ ] Tous les états interactifs implémentés
-- [ ] Toutes les transitions fluides (60fps, ease-out-quart)
+- [ ] Toutes les transitions fluides (60fps, tokens motion du DS)
 - [ ] `prefers-reduced-motion` respecté
 - [ ] Contenu réaliste en français
 - [ ] Labels de boutons = verbes d'action

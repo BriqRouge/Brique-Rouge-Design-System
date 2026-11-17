@@ -20,8 +20,9 @@ Effectuer un audit technique systématique. Ne pas corriger les problèmes — l
 **Vérifier :**
 - Valeurs hexadécimales arbitraires (doit être 0)
 - Propriétés CSS hors tokens (`font-size`, `padding`, `gap` en px arbitraires)
-- Composants DS non utilisés alors qu'ils existent (`Button`)
-- Props de composants incorrectement utilisées
+- Variables CSS citées qui n'existent pas dans `packages/tokens/build/css/` — une `var()` vers un token absent échoue sans erreur (la propriété se comporte comme `unset`)
+- Composants DS non utilisés alors qu'ils existent (index : `COMPONENTS.md`)
+- Props de composants incorrectement utilisées (API : fiche `specs/{atoms,molecules,organisms}/` du composant)
 
 **Score 0–4 :** 0 = Aucun token (tout hardcodé), 1 = Tokens minoritaires, 2 = Tokens partiels (gaps notables), 3 = Tokens majoritaires (quelques valeurs isolées), 4 = Tokens complets, zéro valeur arbitraire
 

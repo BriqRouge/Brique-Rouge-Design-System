@@ -10,7 +10,7 @@ La hauteur de ligne est l'unité de base de tout espacement vertical. Si le corp
 
 L'erreur courante : trop de tailles trop proches (14px, 15px, 16px, 18px). La hiérarchie devient floue.
 
-**Utiliser moins de tailles avec plus de contraste.** Vérifier les tokens disponibles dans `packages/tokens/build/css/typography.css`.
+**Utiliser moins de tailles avec plus de contraste.** Vérifier les tokens disponibles dans `specs/tokens/typography-tokens.md` (CSS réel : `packages/tokens/build/css/primitive.css` et `semantic.css`).
 
 | Rôle | Usage |
 |------|-------|
@@ -30,7 +30,7 @@ Utiliser `max-width: 65ch` pour les colonnes de texte long.
 
 ## Typographie du DS
 
-Le token `--typography/font-size/base` est défini à `16px`. Utiliser les tokens de typographie disponibles pour toutes les tailles — jamais de valeurs px arbitraires.
+Le token `--typography-font-size-base` est défini à `16px`. Utiliser les tokens de typographie disponibles pour toutes les tailles — jamais de valeurs px arbitraires.
 
 **Varier les graisses** pour créer de la hiérarchie. Les différentes graisses (Regular, Medium, Semibold, Bold) sont quatre niveaux de hiérarchie disponibles.
 
@@ -140,17 +140,20 @@ l'autre.
 Tous les tokens typographiques via `var(--token)`. Jamais de valeurs px arbitraires.
 
 ```css
-/* ✅ Correct */
+/* ✅ Correct — rôle heading/xl (table ci-dessus) */
 .title {
-  font-size: var(--typography\/font-size\/base);
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: var(--typography-font-size-3xl);
+  font-weight: var(--typography-font-weight-medium);
+  line-height: var(--typography-line-height-x10);
+  color: var(--color-text-primary);
 }
 
+/* ✅ Correct — rôle body/md */
 .body {
-  font-size: var(--typography\/font-size\/base);
-  line-height: 1.5;
-  color: var(--color\/text\/button\/contained);
+  font-size: var(--typography-font-size-base);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: var(--typography-line-height-x6);
+  color: var(--color-text-secondary);
 }
 
 /* ❌ Incorrect */
@@ -166,8 +169,8 @@ Tous les tokens typographiques via `var(--token)`. Jamais de valeurs px arbitrai
 ## Accessibilité
 
 - Jamais de `user-scalable=no`
-- `rem` pour les tailles de texte — respecte les préférences du navigateur
-- Minimum 14px pour les textes UI, 16px pour le corps
+- Tailles de texte : uniquement les tokens `--typography-font-size-*`, émis en px par le build — ne pas les recalculer en `rem` à la main (CLAUDE.md §17). Un passage du build en `rem` est à arbitrer (backlog 007)
+- Minimum 16px pour le corps (`body/md`) et 14px pour les textes UI, hors rôles 12px définis par le DS (`caption`, `label/xs`, `label/xs-medium`)
 - Les liens dans le texte doivent avoir une zone de tap d'au moins 44px via padding ou line-height
 
 ---

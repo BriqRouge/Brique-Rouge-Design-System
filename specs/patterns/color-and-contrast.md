@@ -6,15 +6,22 @@ Toutes les couleurs passent par les tokens `@brique-rouge/tokens`. Jamais de val
 
 ### Structure des tokens
 
+Nom CSS = chemin de la variable Figma, segments joints par des tirets
+(`color/text/primary` → `--color-text-primary`). Jamais de `/` dans un nom de variable CSS.
+
 | Catégorie | Exemples | Usage |
 |-----------|----------|-------|
-| `--color/background/button/*` | `--color/background/button/idle`, `--color/background/button/hovered` | Fonds de boutons |
-| `--color/text/button/*` | `--color/text/button/contained`, `--color/text/button/outline-white` | Textes de boutons |
-| `--color/border/button/*` | `--color/border/button/contained`, `--color/border/button/outlined-black` | Bordures de boutons |
-| `--color/icon/button/*` | `--color/icon/button/contained`, `--color/icon/button/outline-white` | Icônes de boutons |
-| `--border-radius/button` | `--border-radius/button` | Border-radius pill |
+| `--color-text-*`, `--color-background-*`, `--color-border-*` | `--color-text-primary`, `--color-background-page`, `--color-border-focus` | Socle sémantique générique (ci-dessous) — à utiliser en premier |
+| `--color-*-project-*` | `--color-background-project-brand`, `--color-text-project-on-accent` | Couleurs par projet (collection `project`, voir plus bas) |
+| `--color-button-*` | `--color-button-primary`, `--color-button-primary-hover` | Fonds de `Button` |
+| `--color-text-button-*` | `--color-text-button-primary-idle`, `--color-text-button-secondary-idle` | Textes de `Button` |
+| `--color-border-button-*` | `--color-border-button-secondary`, `--color-border-button-disabled` | Bordures de `Button` |
+| `--color-icon-button-*` | `--color-icon-button-primary`, `--color-icon-button-info` | Icônes de `Button` |
+| `--border-radius-button` | `--border-radius-button` | Border-radius pill |
 
-En cas de doute sur les tokens disponibles : vérifier dans `packages/tokens/build/css/`.
+Les tokens propres à un composant sont listés dans sa fiche `specs/{atoms,molecules,organisms}/`.
+Catalogue complet : `specs/tokens/color-tokens.md` (généré, vérifié en CI). CSS réel :
+`packages/tokens/build/css/`, généré par `pnpm --filter @brique-rouge/tokens build`.
 
 ### Socle sémantique générique (décidé le 2026-11-04)
 
@@ -32,6 +39,13 @@ suffit de changer l'alias dans Figma. Contraste mesuré sur `background/page` (#
 | `--color-text-inverse` | neutral/50 | Texte sur fond foncé ou coloré | selon le fond |
 | `--color-text-accent` | deep-sea/600 | Accent interactif, mise en valeur | 5.9:1 |
 | `--color-text-info` / `--color-text-warning` | deep-sea/700 / autumn/700 | Messages d'information / d'avertissement | 7.05:1 / 5.27:1 sur leur fond de notification |
+| `--color-background-page` | neutral/50 | Fond de page | — |
+| `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |
+| `--color-background-surface-raised` | neutral/200 | Surfaces surélevées, survol neutre | — |
+| `--color-background-inverse` | neutral/950 | Sections sombres (hero, footer) ; fond de référence des variantes « sur fond foncé » | — |
+| `--color-border-default` | neutral/300 | Bordures de conteneur | — |
+| `--color-border-subtle` | neutral/200 | Bordures discrètes | — |
+| `--color-border-focus` | deep-sea/600 | Indicateur de focus | — |
 
 Échelle à 3 niveaux décidée par l'ADR-001 (lot 4, 2026-11-10). Les anciens
 `--color-text-strong`, `--color-text-body` et `--color-text-muted` ont été supprimés au
@@ -41,18 +55,14 @@ Les ratios sont vérifiés en CI par `scripts/contrast-audit.mjs` sur les combin
 déclarées dans `packages/tokens/contrast-pairs.config.js`, puis sur le rendu réel de chaque
 story par `scripts/rendered-contrast-audit.mjs` (axe-core dans Chromium, job Test) : ce second
 contrôle voit les combinaisons non déclarées (ex. un libellé sur le fond d'un composant parent).
-| `--color-background-page` | neutral/50 | Fond de page | — |
-| `--color-background-surface` | neutral/100 | Surfaces (menus, cadres de logo) | — |
-| `--color-background-surface-raised` | neutral/200 | Surfaces surélevées, survol neutre | — |
-| `--color-background-inverse` | neutral/950 | Sections sombres (hero, footer) ; fond de référence des variantes « sur fond foncé » | — |
-| `--color-border-default` | neutral/300 | Bordures de conteneur | — |
-| `--color-border-subtle` | neutral/200 | Bordures discrètes | — |
-| `--color-border-focus` | deep-sea/600 | Indicateur de focus | — |
 
-Les primitives restent légitimes pour les **couleurs de marque des projets**, comme les
-variantes entreprise de `DropdownMenuButton` ; préférer alors `background/projects/*` et
-`text/nav-bar/*` quand ils existent. Elles restent aussi légitimes pour les icônes et le
-contenu illustratif.
+**Couleurs de marque des projets** : collection `project`, un mode par client
+([ADR-002](../../docs/adr/002-collection-project.md)) — `--color-background-project-*`,
+`--color-text-project-*`, `--color-border-project-*`. Ces variables n'ont de valeur que
+sous un attribut `data-project='<mode>'` (modes : `odaptos`, `bpce`, `ibp`, `opco-atlas`,
+`conseil-constitutionnel`) : sans lui, elles sont vides. `background/project-page/<client>`
+porte encore des noms de clients (backlog [003](../../docs/backlog/003-project-page-noms-clients.md)).
+Les primitives restent légitimes pour les icônes et le contenu illustratif.
 
 ---
 
@@ -61,7 +71,7 @@ contenu illustratif.
 | Type de contenu | Ratio minimum |
 |-----------------|---------------|
 | Texte body | 4.5:1 |
-| Texte large (18px+ ou 14px bold) | 3:1 |
+| Texte large (≥ 24px, ou ≥ 18,66px en gras ≥ 700 — « 18pt / 14pt bold » dans WCAG) | 3:1 |
 | Composants UI, icônes | 3:1 |
 | Décorations non essentielles | Aucun |
 
@@ -103,7 +113,13 @@ Les couleurs d'accent fonctionnent *parce qu'elles sont rares*. La surutilisatio
 
 ## Mode sombre
 
-Le DS génère `colors-light.css` et `colors-dark.css`. Le mode sombre n'est pas l'inversion du mode clair — les tokens sémantiques changent de valeur, pas de nom. Utiliser les tokens correctement garantit que le mode sombre fonctionne sans surcharge CSS.
+Le DS n'a **pas de mode sombre** : le build génère `primitive.css`, `semantic.css`,
+`index.css` et `custom-media.css`, sans fichier clair/sombre. Les seules collections à
+modes sont `viewport` (desktop / mobile) et `project` (un mode par client).
+
+Une section sombre se compose avec `--color-background-inverse` et `--color-text-inverse`,
+et avec les variantes « sur fond foncé » des composants qui en ont une (par exemple
+`MenuButton` `mode="dark"`, `Link` `theme="dark"` — voir leur fiche).
 
 ---
 
@@ -111,17 +127,17 @@ Le DS génère `colors-light.css` et `colors-dark.css`. Le mode sombre n'est pas
 
 ```css
 /* ✅ Correct */
-.button {
-  background-color: var(--color\/background\/button\/idle);
-  border: 1px solid var(--color\/border\/button\/contained);
-  color: var(--color\/text\/button\/contained);
+.panel {
+  background-color: var(--color-background-surface);
+  border: 1px solid var(--color-border-default);
+  color: var(--color-text-secondary);
 }
 
 /* ❌ Incorrect */
-.button {
+.panel {
   background-color: #f5f5f5;
   border: 1px solid #d4d4d4;
-  color: #737373;
+  color: #525252;
 }
 ```
 
