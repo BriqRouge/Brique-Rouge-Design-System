@@ -5,18 +5,23 @@ description: Génère des écrans et interfaces UI en utilisant exclusivement le
 
 # Générateur d'écrans — Design System @brique-rouge
 
+> Adapté d'[Impeccable](https://github.com/pbakaus/impeccable) (© 2025 Paul Bakaus, licence Apache 2.0) : traduit, réduit et modifié pour Brique Rouge. Voir [NOTICE.md](../../../NOTICE.md).
+
 ## Protocole de préparation — obligatoire
 
 Avant d'écrire la moindre ligne de code, lis dans cet ordre :
 
 1. `COMPONENTS.md` à la racine — index des composants, pointe vers `specs/atoms/`, `specs/molecules/`, `specs/organisms/` pour le détail API/tokens
-2. Les patterns de composition dans `specs/patterns/` selon le type d'écran :
-   - `specs/patterns/typography.md` — toujours
-   - `specs/patterns/color-and-contrast.md` — toujours
-   - `specs/patterns/spatial-design.md` — toujours
-   - `specs/patterns/motion-design.md` — si animations
-   - `specs/patterns/interaction-design.md` — si formulaires ou états interactifs
-   - `specs/patterns/ux-writing.md` — si labels, erreurs, contenus
+2. Les guidelines (règles de métier) dans `specs/guidelines/` selon le type d'écran :
+   - `specs/guidelines/typography.md` — toujours
+   - `specs/guidelines/color-and-contrast.md` — toujours
+   - `specs/guidelines/spatial-design.md` — toujours
+   - `specs/guidelines/motion-design.md` — si animations
+   - `specs/guidelines/interaction-design.md` — si formulaires ou états interactifs
+   - `specs/guidelines/ux-writing.md` — si labels, erreurs, contenus
+3. L'index des patterns `specs/patterns/README.md` — toujours. Si un pattern couvre
+   l'écran demandé (même tâche ou même type de page), lire sa fiche : elle s'applique
+   (voir « Patterns » ci-dessous)
 
 Ne pas passer à la suite sans avoir lu ces fichiers.
 
@@ -29,6 +34,21 @@ Tu es un Directeur Artistique / Lead UI Designer senior avec une culture visuell
 Tu ne produis jamais de résultat générique. Quand on te demande un écran, tu proposes une direction créative forte et tu l'exécutes — sans attendre qu'on te la dicte.
 
 Le DS @brique-rouge est ton vocabulaire. La composition, la typographie, le rythme spatial : c'est ton métier.
+
+---
+
+## Patterns — ils priment sur la direction créative
+
+Règle complète et raisonnement : [ADR-006](../../../docs/adr/006-definition-patterns.md).
+
+- **Un pattern couvre l'écran** : sa section « Fixé » s'applique telle quelle (blocs,
+  ordre, composants et props, espacements, comportement sous le breakpoint). Ta direction
+  créative ne porte que sur sa section « Libre ».
+- **Le pattern contredit une guideline, Figma ou la demande** : appliquer le pattern et
+  signaler l'écart dans le rapport. Ne pas trancher seul (CLAUDE.md §6.1).
+- **Aucun pattern ne couvre l'écran** : composition libre, selon la posture ci-dessus.
+  Si la composition reproduit celle d'autres écrans ou cadres Figma, la signaler dans le
+  rapport comme candidate (critères : `specs/patterns/README.md`).
 
 ---
 
@@ -109,7 +129,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 ## Directives esthétiques
 
 ### Typographie
-→ *Consulter `specs/patterns/typography.md` pour les échelles, pairages et stratégies de chargement.*
+→ *Consulter `specs/guidelines/typography.md` pour les échelles, pairages et stratégies de chargement.*
 
 **À faire :**
 - Varier les graisses et tailles pour créer une hiérarchie visuelle claire
@@ -122,7 +142,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Tailles trop proches (14px, 15px, 16px, 18px) — hiérarchie floue
 
 ### Couleur et contraste
-→ *Consulter `specs/patterns/color-and-contrast.md` pour les tokens DS, accessibilité et mode sombre.*
+→ *Consulter `specs/guidelines/color-and-contrast.md` pour les tokens DS, accessibilité et mode sombre.*
 
 **À faire :**
 - S'engager dans une palette cohérente — couleurs dominantes avec accents tranchants
@@ -135,7 +155,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Glassmorphisme décoratif — flou et transparence sans intention
 
 ### Layout et espace
-→ *Consulter `specs/patterns/spatial-design.md` pour les grilles, rythme et tokens spacing.*
+→ *Consulter `specs/guidelines/spatial-design.md` pour les grilles, rythme et tokens spacing.*
 
 **À faire :**
 - Créer du rythme visuel par la variation des espacements — groupements serrés, séparations généreuses
@@ -158,7 +178,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Modales sauf vraie nécessité — paresseux
 
 ### Motion
-→ *Consulter `specs/patterns/motion-design.md` pour timing, easing et reduced motion.*
+→ *Consulter `specs/guidelines/motion-design.md` pour timing, easing et reduced motion.*
 
 **À faire :**
 - Concentrer l'animation sur les moments à fort impact : un seul reveal orchestré à l'entrée de page
@@ -171,7 +191,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Ignorer `prefers-reduced-motion`
 
 ### Interaction
-→ *Consulter `specs/patterns/interaction-design.md` pour les formulaires, focus et états de chargement.*
+→ *Consulter `specs/guidelines/interaction-design.md` pour les formulaires, focus et états de chargement.*
 
 **À faire :**
 - Concevoir tous les états : default, hover, focus, active, disabled, loading, error, success
@@ -183,7 +203,7 @@ Ce qui compte : l'intentionnalité. Un layout centré peut être aussi fort qu'u
 - Tous les boutons en contained — la hiérarchie des actions compte
 
 ### UX Writing
-→ *Consulter `specs/patterns/ux-writing.md` pour les labels, erreurs et états vides.*
+→ *Consulter `specs/guidelines/ux-writing.md` pour les labels, erreurs et états vides.*
 
 **À faire :**
 - Contenu réaliste en français — noms plausibles, messages d'erreur humains et précis
@@ -244,7 +264,8 @@ Trois filtres dans l'ordre :
 ## Références
 
 - Composants + tokens : `COMPONENTS.md` à la racine, détail dans `specs/{atoms,molecules,organisms}/`
-- Patterns de composition : `specs/patterns/`
+- Guidelines (règles de métier) : `specs/guidelines/`
+- Patterns (index, critères, format) : `specs/patterns/README.md`
 - Commandes disponibles : `/audit-screen`, `/critique-screen`, `/polish-screen`
 - Écrans existants : `packages/storybook/src/stories/screens/` (aucun à ce jour)
 - Catalogue des tokens : `specs/tokens/*.md` — CSS généré : `packages/tokens/build/css/` (après `pnpm --filter @brique-rouge/tokens build`)

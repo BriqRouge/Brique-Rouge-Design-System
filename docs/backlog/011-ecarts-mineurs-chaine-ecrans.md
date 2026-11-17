@@ -8,7 +8,7 @@ adr: []
 claude_md: ["6.6", "11", "18"]
 related_components: [ProjectSectionsDescription]
 related_tokens: [motion/easing/dismiss]
-references: [CLAUDE.md, package.json, Makefile, specs/organisms/ProjectSectionsDescription.md, specs/patterns/motion-design.md]
+references: [CLAUDE.md, package.json, Makefile, specs/organisms/ProjectSectionsDescription.md, specs/guidelines/motion-design.md]
 prs: [104]
 ---
 
@@ -32,7 +32,7 @@ Petits écarts, chacun sans gravité, regroupés pour ne pas les perdre :
    contredit la convention « code syntax WEB = nom de la variable CSS générée » (CLAUDE.md
    §7). Non vérifié : demande un `node scripts/figma-sync-ds.mjs lint` avec `FIGMA_TOKEN`.
 5. ~~**`--motion-easing-dismiss`**~~ : défini, utilisé par aucun composant. La PR #104
-   l'indique pour « contenu qui sort » dans `specs/patterns/motion-design.md`, en se
+   l'indique pour « contenu qui sort » dans `specs/guidelines/motion-design.md`, en se
    fondant sur son nom — **confirmé par Damien le 2026-11-16**.
 
 ## Ce qui existe déjà

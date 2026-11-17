@@ -71,3 +71,4 @@ Le suivi d'avancement (lots, PR) vit dans les PR et le backlog, pas dans l'ADR.
 | 003 | [Contraste contrôlé en CI à deux niveaux](003-controle-contraste-ci.md) | accepted | 2026-11-10 |
 | 004 | [Écrans : repli balisé quand un composant n'existe pas dans le DS](004-ecrans-repli-balise.md) | accepted | 2026-11-16 |
 | 005 | [Classes CSS Modules : éléments en camelCase, modificateurs en kebab-case préfixé, contrôlé en CI](005-nommage-classes-css-modules.md) | accepted | 2026-11-16 |
+| 006 | [Patterns : une définition unique, et les règles de métier renommées en guidelines](006-definition-patterns.md) | accepted | 2026-11-17 |

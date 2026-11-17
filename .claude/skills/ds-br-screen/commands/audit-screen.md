@@ -5,6 +5,8 @@ user-invocable: true
 argument-hint: "[nom de l'écran ou composant]"
 ---
 
+> Adapté d'[Impeccable](https://github.com/pbakaus/impeccable) (© 2025 Paul Bakaus, licence Apache 2.0) : traduit, réduit et modifié pour Brique Rouge. Voir [NOTICE.md](../../../../NOTICE.md).
+
 ## Préparation obligatoire
 
 Lire `.claude/skills/ds-br-screen/SKILL.md` avant de procéder.
@@ -24,6 +26,7 @@ Effectuer un audit technique systématique. Ne pas corriger les problèmes — l
 - Nommage des classes CSS Modules (CLAUDE.md §8, ADR-005) : `node scripts/css-class-audit.mjs` sans erreur
 - Composants DS non utilisés alors qu'ils existent (index : `COMPONENTS.md`)
 - Props de composants incorrectement utilisées (API : fiche `specs/{atoms,molecules,organisms}/` du composant)
+- Pattern ([ADR-006](../../../../docs/adr/006-definition-patterns.md)) : si un pattern de `specs/patterns/` couvre l'écran, sa section « Fixé » est respectée (blocs, ordre, composants, props, espacements)
 - Replis (ADR-004) : chaque élément qui comble un composant absent porte `data-ds-missing`, est un élément HTML natif (pas un `div` qui imite un contrôle) et figure dans l'en-tête du `.tsx`. Signaler tout repli non marqué, et tout repli d'un composant qui existe dans `COMPONENTS.md` (*shadow component*)
 
 **Score 0–4 :** 0 = Aucun token (tout hardcodé), 1 = Tokens minoritaires, 2 = Tokens partiels (gaps notables), 3 = Tokens majoritaires (quelques valeurs isolées), 4 = Tokens complets, zéro valeur arbitraire
@@ -93,6 +96,12 @@ Fingerprints AI slop à détecter : palette cyan/violet/dégradé générique ·
 Lister chaque élément `[data-ds-missing]` : nom, fichier, besoin couvert. Rappeler qu'un
 écran avec au moins un repli n'est pas « terminé » sans l'arbitrage de Damien (créer le
 composant, garder le repli, ou revoir l'écran). Écrire « Aucun » s'il n'y en a pas.
+
+### Pattern (ADR-006)
+
+Nommer le pattern appliqué et lister chaque écart à sa section « Fixé ». Si aucun pattern
+ne couvre l'écran, l'écrire, et signaler la composition comme candidate si elle reproduit
+celle d'autres écrans ou cadres Figma (critères : `specs/patterns/README.md`).
 
 ### Résumé exécutif
 - Score de santé : **??/20**

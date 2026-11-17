@@ -50,7 +50,7 @@ s'applique pas : suivre CLAUDE.md « Workflow composants » directement.
   variable `spacing/*` est une incohérence. Chaque texte porte un **style de texte
   par rôle** (`display/*`, `heading/*`, `body/*`, `caption`, `eyebrow`, `label/*`,
   et `expressive/*` pour GT Ultra / GT Ultra Median, polices du DS depuis le 2026-11-04) ;
-  le code utilise les tokens CSS correspondants (`specs/patterns/typography.md`).
+  le code utilise les tokens CSS correspondants (`specs/guidelines/typography.md`).
   Un texte sans style est un écart à signaler, pas à corriger d'office.
 - **Couleurs** : toute couleur de texte, de fond ou de bordure est liée à une
   variable `color/*`. Une couleur non liée sans token exact est une incohérence.

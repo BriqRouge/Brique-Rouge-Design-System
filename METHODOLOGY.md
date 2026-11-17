@@ -89,7 +89,9 @@ Un composant qui n'est pas accessible n'est pas terminé.
 
 Storybook documente pour les humains. `specs/` documente pour les LLM : une
 fiche par composant (API, tokens, règles d'usage) avec un en-tête YAML qui le
-relie à son nœud Figma, et des patterns de composition. Les fiches de tokens et
+relie à son nœud Figma, des guidelines (règles de métier : typographie, couleur,
+espacement, motion, interaction, rédaction) et des patterns (solutions documentées
+à une tâche ou à un type de page qui revient, voir l'ADR-006). Les fiches de tokens et
 de fondations sont générées par le build, donc toujours à jour.
 
 ### Un système simple vaut mieux qu'un système parfait

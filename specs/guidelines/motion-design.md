@@ -1,5 +1,7 @@
 # Motion design
 
+> Adapté d'[Impeccable](https://github.com/pbakaus/impeccable) (© 2025 Paul Bakaus, licence Apache 2.0) : traduit, réduit et modifié pour Brique Rouge. Voir [NOTICE.md](../../NOTICE.md).
+
 ## Tokens motion du DS
 
 Les durées et les courbes viennent de Figma (`motion/*`, synchronisées par `/sync-tokens`). Les transitions de prototype Figma ne peuvent pas lier de variable : ces tokens servent au code.
