@@ -83,6 +83,39 @@ describe('DropdownMenuButton — état activated', () => {
     );
     expect(screen.getByRole('button')).toHaveAttribute('data-activated', 'true');
   });
+
+  // Une sélection seulement visuelle échoue à WCAG 1.3.1 / 1.4.1 : l'état est annoncé.
+  it("n'expose pas aria-current par défaut", () => {
+    render(<DropdownMenuButton company="odaptos">Odaptos</DropdownMenuButton>);
+    expect(screen.getByRole('button')).not.toHaveAttribute('aria-current');
+  });
+
+  it('expose aria-current="true" quand activated', () => {
+    render(
+      <DropdownMenuButton company="odaptos" activated>
+        Odaptos
+      </DropdownMenuButton>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-current', 'true');
+  });
+
+  it('laisse le consommateur préciser aria-current (ex : "page")', () => {
+    render(
+      <DropdownMenuButton company="odaptos" activated aria-current="page">
+        Odaptos
+      </DropdownMenuButton>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('pose la classe de modificateur is-activated (Figma Selected=true)', () => {
+    render(
+      <DropdownMenuButton company="odaptos" activated>
+        Odaptos
+      </DropdownMenuButton>
+    );
+    expect(screen.getByRole('button').className).toMatch(/is-activated/);
+  });
 });
 
 describe('DropdownMenuButton — right icon', () => {
@@ -151,6 +184,20 @@ describe('DropdownMenuButton — accessibilité', () => {
       <DropdownMenuButton company="odaptos" activated>
         Odaptos
       </DropdownMenuButton>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('item courant dans un menu (aria-current sur un menuitem) : aucune violation axe', async () => {
+    const { container } = render(
+      <div role="menu" aria-label="Projets">
+        <DropdownMenuButton role="menuitem" company="odaptos" activated aria-current="page">
+          Odaptos
+        </DropdownMenuButton>
+        <DropdownMenuButton role="menuitem" company="bpce">
+          BPCE
+        </DropdownMenuButton>
+      </div>
     );
     expect(await axe(container)).toHaveNoViolations();
   });

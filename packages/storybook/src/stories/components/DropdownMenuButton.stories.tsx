@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { DropdownMenuButton } from '@brique-rouge/react';
+import { DropdownMenu, DropdownMenuButton } from '@brique-rouge/react';
 
 const meta = {
   title: 'Molécules/DropdownMenuButton',
@@ -35,7 +35,8 @@ const meta = {
       control: 'boolean',
     },
     activated: {
-      description: "Indique si cet item est l'item actif",
+      description:
+        'Item courant (Figma `Selected=true`) : fond plein et `aria-current`. À ne pas confondre avec Figma `Type=activated`, qui signifie « disponible »',
       control: 'boolean',
     },
     disabled: {
@@ -61,12 +62,58 @@ export const Default: Story = {
 };
 
 export const Activated: Story = {
-  name: 'Activé',
+  name: 'Sélectionné (projet)',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Item courant d’un projet : mêmes tokens que la pastille projet du TopNav (`background/project/accent`, `text/project/on-accent`). Le survol ne le modifie pas.',
+      },
+    },
+  },
   args: {
     children: 'Odaptos',
     company: 'odaptos',
     activated: true,
   },
+};
+
+export const ActivatedNeutre: Story = {
+  name: 'Sélectionné (Company=none)',
+  parameters: {
+    docs: {
+      description: { story: 'Item courant sans projet : fond et texte inverses (`background/inverse`, `text/inverse`).' },
+    },
+  },
+  args: {
+    children: 'Company Name',
+    activated: true,
+  },
+};
+
+export const SelectionDansUnMenu: Story = {
+  name: 'Sélection dans un menu',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Un seul item courant par menu. Le fond plein le distingue du survol (subtil) des autres items ; `aria-current` l’annonce aux lecteurs d’écran.',
+      },
+    },
+  },
+  args: { children: 'Odaptos', company: 'odaptos' },
+  render: () => (
+    <DropdownMenu aria-label="Sélection projets">
+      <DropdownMenuButton role="menuitem" company="odaptos">Odaptos</DropdownMenuButton>
+      <DropdownMenuButton role="menuitem" company="bpce" activated aria-current="page">
+        BPCE
+      </DropdownMenuButton>
+      <DropdownMenuButton role="menuitem" company="ibp">iBP</DropdownMenuButton>
+      <DropdownMenuButton role="menuitem" company="vinci" disabled hoverLabel="Showcase à venir">
+        Vinci
+      </DropdownMenuButton>
+    </DropdownMenu>
+  ),
 };
 
 export const Disabled: Story = {

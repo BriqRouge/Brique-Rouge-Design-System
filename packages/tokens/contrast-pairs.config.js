@@ -78,6 +78,11 @@ export default {
     { fg: T('secondary'), bg: SURFACE, where: 'DropdownMenuButton au repos, dans le DropdownMenu' },
     { fg: T('secondary'), bg: SURFACE_RAISED, where: 'DropdownMenuButton :hover neutre' },
     { fg: 'project/color/text/project/on-subtle', bg: 'project/color/background/project/subtle', where: 'DropdownMenuButton :hover par projet' },
+    // Sélectionné (activated, Figma Selected=true) : fond plein, distinct du survol
+    { fg: T('inverse'), bg: DARK, where: 'DropdownMenuButton sélectionné (neutre)' },
+    { fg: 'project/color/text/project/on-accent', bg: 'project/color/background/project/accent', where: 'DropdownMenuButton sélectionné (projet)' },
+    { fg: DARK, bg: SURFACE, kind: 'ui', where: 'DropdownMenuButton sélectionné (neutre) : forme du fond sur le menu' },
+    { fg: 'project/color/background/project/accent', bg: SURFACE, kind: 'ui', where: 'DropdownMenuButton sélectionné (projet) : forme du fond sur le menu' },
 
     // ─── TopNav, cartes ─────────────────────────────────────────────────────
     { fg: 'project/color/text/project/on-accent', bg: 'project/color/background/project/accent', where: 'TopNav pastille projet' },
