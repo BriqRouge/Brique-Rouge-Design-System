@@ -23,6 +23,7 @@ Effectuer un audit technique systématique. Ne pas corriger les problèmes — l
 - Variables CSS citées qui n'existent pas dans `packages/tokens/build/css/` — une `var()` vers un token absent échoue sans erreur (la propriété se comporte comme `unset`)
 - Composants DS non utilisés alors qu'ils existent (index : `COMPONENTS.md`)
 - Props de composants incorrectement utilisées (API : fiche `specs/{atoms,molecules,organisms}/` du composant)
+- Replis (ADR-004) : chaque élément qui comble un composant absent porte `data-ds-missing`, est un élément HTML natif (pas un `div` qui imite un contrôle) et figure dans l'en-tête du `.tsx`. Signaler tout repli non marqué, et tout repli d'un composant qui existe dans `COMPONENTS.md` (*shadow component*)
 
 **Score 0–4 :** 0 = Aucun token (tout hardcodé), 1 = Tokens minoritaires, 2 = Tokens partiels (gaps notables), 3 = Tokens majoritaires (quelques valeurs isolées), 4 = Tokens complets, zéro valeur arbitraire
 
@@ -85,6 +86,12 @@ Fingerprints AI slop à détecter : palette cyan/violet/dégradé générique ·
 
 ### Verdict anti-patterns
 **Commencer ici.** Pass/fail : est-ce que ça ressemble à du travail IA générique ? Lister les fingerprints spécifiques détectées. Être direct.
+
+### Replis balisés (ADR-004)
+
+Lister chaque élément `[data-ds-missing]` : nom, fichier, besoin couvert. Rappeler qu'un
+écran avec au moins un repli n'est pas « terminé » sans l'arbitrage de Damien (créer le
+composant, garder le repli, ou revoir l'écran). Écrire « Aucun » s'il n'y en a pas.
 
 ### Résumé exécutif
 - Score de santé : **??/20**

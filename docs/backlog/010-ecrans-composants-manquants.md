@@ -1,15 +1,15 @@
 ---
 id: "010"
 title: "Écrans : que faire quand un composant nécessaire n'existe pas dans le DS"
-status: a-explorer
+status: fait
 created: 2026-11-16
 origin: "Relevé le 2026-11-16 en préparant un test de génération d'écrans avec la skill ds-br-screen"
-adr: []
+adr: [ADR-004]
 claude_md: ["17", "18", "19"]
 related_components: []
 related_tokens: []
 references: [.claude/skills/ds-br-screen/SKILL.md, COMPONENTS.md, specs/patterns/interaction-design.md]
-prs: []
+prs: [105]
 ---
 
 # 010 — Écrans : que faire quand un composant nécessaire n'existe pas dans le DS
@@ -35,14 +35,17 @@ manques.
 ## Proposition
 Une règle explicite dans la skill, au choix de Damien :
 - **A — Arrêt** : lister les composants manquants avant de générer, et attendre.
-- **B — Repli balisé** : élément HTML natif stylé uniquement avec des tokens, marqué
-  (`data-component="ds-br-missing-<nom>"`, par exemple), et listé dans le rapport
-  `/audit-screen` comme candidat composant.
+- **B — Repli balisé** : élément HTML natif stylé uniquement avec des tokens, marqué, et
+  listé dans le rapport `/audit-screen` comme candidat composant. (Marquage d'abord
+  envisagé : `data-component="ds-br-missing-<nom>"` — écarté, la requête
+  `[data-component^="ds-br"]` de CLAUDE.md §18 l'aurait compté comme un composant du DS ;
+  retenu : `data-ds-missing`.)
 
 ## Prérequis / questions ouvertes
-- [ ] Choix A ou B.
-- [ ] Un test de génération d'écran hors du périmètre du DS (un formulaire, par exemple)
-      montrerait le comportement actuel de la skill sans règle.
+- [x] Choix A ou B : **B**, décidé par Damien le 2026-11-16 → [ADR-004](../adr/004-ecrans-repli-balise.md).
+- [x] ~~Test hors périmètre sans règle~~ : abandonné. L'agent qui l'aurait mené est celui
+      qui a écrit cette entrée ; il ne pouvait plus se comporter naïvement, le résultat
+      n'aurait rien mesuré.
 
 ## Non couvert
 La création des composants manquants eux-mêmes (workflow composants, CLAUDE.md §7).

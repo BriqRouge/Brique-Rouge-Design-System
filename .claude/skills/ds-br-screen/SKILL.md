@@ -52,9 +52,34 @@ Zéro valeur hexadécimale arbitraire. Zéro style inline. Tout passe par `var(-
 
 ---
 
+## Composant absent du DS — repli balisé
+
+Règle complète et raisonnement : [ADR-004](../../../docs/adr/004-ecrans-repli-balise.md).
+
+Avant de composer, liste les composants dont l'écran a besoin et vérifie chacun dans
+`COMPONENTS.md`. Pour un composant **absent** (champ de saisie, liste déroulante, tableau…) :
+
+- Élément HTML natif et sémantique (`input`, `select`, `textarea`, `table`, `dialog`…),
+  jamais un `div` qui imite un contrôle
+- Stylé uniquement avec des tokens, dans le CSS Module de l'écran
+- Accessible comme un composant : libellé associé, focus visible, tous les états
+- Marqué `data-ds-missing="<nom-kebab>"` sur son élément racine (`text-field`, `select`,
+  `data-table`…) — jamais `data-component`, réservé aux composants du DS
+- Listé dans le commentaire d'en-tête du `.tsx` (nom, besoin couvert)
+
+Pas de repli pour un composant qui **existe** : l'utiliser. Une **variante** manquante d'un
+composant existant (exemple : `Button` sur fond sombre) ne justifie pas de repli : prendre
+la variante la plus proche et signaler le manque. Réimplémenter un composant existant
+crée un *shadow component*, c'est-à-dire de la dette.
+
+Un écran qui contient un repli n'est pas « terminé » sans l'arbitrage de Damien : créer le
+composant, garder le repli, ou revoir l'écran.
+
+---
+
 ## Phase 1 — Direction créative
 
-Avant de composer, réponds à ces trois questions. Documente les réponses en commentaire en tête du fichier `.tsx`.
+Avant de composer, réponds à ces trois questions. Documente les réponses en commentaire en tête du fichier `.tsx`, avec la liste des replis éventuels (section précédente).
 
 **1. Qu'est-ce que cet écran doit ressentir ?**
 Un outil B2B ne ressemble pas à un service grand public. Les deux peuvent utiliser le même DS. Aucun des deux ne devrait se ressembler.

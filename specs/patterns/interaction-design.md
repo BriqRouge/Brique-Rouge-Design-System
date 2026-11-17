@@ -64,7 +64,7 @@ complète : `specs/atoms/Button.md` (`variant` : `primary` | `secondary` | `tert
 - Toujours des verbes d'action (`Créer`, `Enregistrer`, `Supprimer`)
 - `aria-label` obligatoire si le bouton ne contient que des icônes
 - Ne pas mettre tous les boutons en `primary` — la hiérarchie des actions compte
-- `colorScheme` porte une couleur sémantique (info, warning, success, error), pas un thème clair/sombre : `Button` n'a pas de variante pour fond sombre. Un bouton sur fond sombre est un manque du DS à signaler, pas à styler à la main (`MenuButton` a un `mode="dark"`, mais c'est un composant distinct au périmètre différent — voir sa fiche)
+- `colorScheme` porte une couleur sémantique (info, warning, success, error), pas un thème clair/sombre : `Button` n'a pas de variante pour fond sombre. Un bouton sur fond sombre est un manque du DS à signaler, pas à styler à la main (`MenuButton` a un `mode="dark"`, mais c'est un composant distinct au périmètre différent — voir sa fiche). Une variante manquante ne justifie pas de repli balisé ([ADR-004](../../docs/adr/004-ecrans-repli-balise.md))
 
 ---
 

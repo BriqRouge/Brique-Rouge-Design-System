@@ -544,7 +544,7 @@ Claude Code lit `COMPONENTS.md` puis les fiches `specs/` des composants concern�
 - `packages/storybook/src/stories/screens/NomEcran.stories.tsx`
 
 Règles strictes :
-- Uniquement les composants de `@brique-rouge/react`
+- Uniquement les composants de `@brique-rouge/react` ; pour un composant absent du DS : repli balisé `data-ds-missing` ([ADR-004](docs/adr/004-ecrans-repli-balise.md))
 - Uniquement les tokens CSS de `@brique-rouge/tokens` (variables CSS, aucune valeur arbitraire)
 - Accessibilité WCAG 2.1 AA obligatoire
 - Story sous `Screens/NomEcran`
@@ -592,6 +592,7 @@ Lancer `/audit-screen` pour vérifier systématiquement :
 - Accessibilité
 - Anti-patterns visuels
 
-**Ne jamais déclarer un screen « terminé » sans avoir passé `/audit-screen`.**
+**Ne jamais déclarer un screen « terminé » sans avoir passé `/audit-screen`**, ni, s'il
+contient un repli `data-ds-missing`, sans l'arbitrage de Damien ([ADR-004](docs/adr/004-ecrans-repli-balise.md)).
 
 ---
