@@ -1,0 +1,46 @@
+/* ─── Page ──────────────────────────────────────────────────────────────────── */
+
+.page {
+  min-height: 100vh;
+  background-color: var(--color-background-page);
+}
+
+/* Padding horizontal des pages Projet : --spacing-layout-2xl (specs/patterns/spatial-design.md).
+   Séparations généreuses entre l'en-tête du projet et la première section. */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-layout-lg);
+  padding: var(--spacing-layout-xl) var(--spacing-layout-2xl) var(--spacing-layout-2xl);
+}
+
+/* ─── Alignement de l'en-tête du projet ──────────────────────────────────────── */
+/* Le padding horizontal de ProjectOverview (--spacing-x8) est remplacé par celui des
+   cartes de section (--spacing-layout-section-inline) : en-tête et sections partagent
+   le même bord gauche. */
+
+.overview {
+  padding-inline: var(--spacing-layout-section-inline);
+}
+
+/* ─── Mots-clés mis en avant dans la description ────────────────────────────── */
+/* Accent sémantique (specs/molecules/ProjectOverview.md : mots-clés en deep-sea/600). */
+
+.keyword {
+  color: var(--color-text-accent);
+}
+
+/* ─── Titre de page, masqué visuellement ────────────────────────────────────── */
+/* Aucun composant du DS ne porte de <h1> : l'écran le fournit aux lecteurs d'écran. */
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
