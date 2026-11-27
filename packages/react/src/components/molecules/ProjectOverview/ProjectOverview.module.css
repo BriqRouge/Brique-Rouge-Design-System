@@ -75,6 +75,8 @@
 @media not (--viewport-desktop) {
   .overview {
     flex-direction: column;
+    /* Figma Viewport=mobile : padding spacing/x1 (4px), confirmé par Damien le 2026-11-27 */
+    padding: var(--spacing-x1);
   }
 
   .titleColumn,

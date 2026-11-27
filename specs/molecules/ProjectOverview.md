@@ -40,6 +40,7 @@ interface ProjectOverviewProps extends React.HTMLAttributes<HTMLDivElement> {
 | `--typography-font-size-base` | `16px` | Reste |
 | `--typography-font-weight-medium`/`-regular` | `500`/`400` | Titre / reste |
 | `--spacing-x6`/`-x8` | `24px`/`32px` | Gap colonnes / padding |
+| `--spacing-x1` | `4px` | Padding sous le breakpoint |
 | `--border-radius-section-card` | `40px` | Border-radius (Figma : `border-radius/section-card`, depuis le 2026-11-05) |
 
 ## Sous le breakpoint (mobile)
@@ -49,6 +50,7 @@ Figma `Viewport=mobile` (2353:39987). Pas de prop React : l'adaptation passe par
 `specs/foundations/breakpoint.md`).
 
 - Colonnes empilées (titre puis description), chacune en pleine largeur, gap `--spacing-x6`
+- Padding `--spacing-x1` (4px) au lieu de 32px — valeur Figma confirmée par Damien le 2026-11-27
 - Titre 24px via le token viewport `--typography-project-overview-title-font-size`
 
 ## Règles d'usage
