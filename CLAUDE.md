@@ -102,6 +102,11 @@ Figma Variables — fichier `NZtxQVYKRqeaGcC7hT5pjw`
 (`.claude/skills/sync-tokens/`) — ne pas l'éditer à la main. Toute correction de
 nom ou de valeur se fait dans Figma, puis on relance la synchro.
 
+### Tokens d'icône
+Une icône a la même couleur que le texte de son état : chaque token `icon/*` pointe vers le
+token global de ce texte, et le code colore les icônes par `currentColor`
+([ADR-006](docs/adr/006-tokens-icone-suivent-texte.md)).
+
 ### Build (Style Dictionary v4)
 - `usesDtcg: true`
 - Transformers custom : `color/figma-hex`, `number/px-or-opacity`

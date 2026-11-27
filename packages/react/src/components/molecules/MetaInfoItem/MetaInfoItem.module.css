@@ -12,7 +12,8 @@
   flex-shrink: 0;
   width: var(--spacing-x4);
   height: var(--spacing-x4);
-  color: var(--color-neutral-800);
+  /* Figma : icônes liées à color/neutral/900 (/sync-ds du 2026-11-27, auparavant neutral/800) */
+  color: var(--color-neutral-900);
 }
 
 .icon,
@@ -70,9 +71,7 @@
   inset: -1.5px 0;
   width: 2px;
   opacity: 0;
-  /* Écart signalé vs Figma (#d9d9d9) : aucun token ne correspond
-     exactement, --color-neutral-300 (#d4d4d4) est la valeur existante
-     la plus proche. */
+  /* Figma : rectangle lié à color/neutral/300 (aligné le 2026-11-02) */
   background-color: var(--color-neutral-300);
   transition:
     width var(--motion-duration-fast) var(--motion-easing-standard),

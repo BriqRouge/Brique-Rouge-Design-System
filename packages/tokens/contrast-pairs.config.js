@@ -50,6 +50,9 @@ export default {
     { fg: T('button/tertiary/idle'), bg: PAGE, where: 'Button tertiary' },
     { fg: T('button/tertiary/hover'), bg: PAGE, where: 'Button tertiary :hover' },
     { fg: T('button/tertiary/focus'), bg: PAGE, where: 'Button tertiary :focus-visible' },
+    // Bordure de focus à 1px depuis le 2026-11-27 : seul repère visuel, contrôlée en 3:1
+    { fg: S('button/focus'), bg: PAGE, kind: 'ui', where: 'bordure de focus Button (fond de page)' },
+    { fg: S('button/focus'), bg: S('button/primary'), kind: 'ui', where: 'bordure de focus Button primary' },
 
     // ─── MenuButton ─────────────────────────────────────────────────────────
     { fg: T('menu-button/contained/idle'), bg: S('menu-button/idle'), where: 'MenuButton contained' },
@@ -57,6 +60,8 @@ export default {
     { fg: T('menu-button/outlined-light/hover'), bg: S('menu-button/hovered-black'), where: 'MenuButton outlined light :hover/:focus' },
     { fg: T('menu-button/outlined-dark/idle'), bg: DARK, where: 'MenuButton outlined dark (fond sombre)' },
     { fg: T('menu-button/outlined-dark/hover'), bg: S('menu-button/hovered'), where: 'MenuButton outlined dark :hover/:focus' },
+    { fg: S('border/menu-button/focus'), bg: S('menu-button/hovered'), kind: 'ui', where: 'bordure de focus MenuButton contained et outlined dark (1px)' },
+    { fg: S('border/menu-button/focus'), bg: PAGE, kind: 'ui', where: 'bordure de focus MenuButton outlined light, côté page (1px)' },
 
     // ─── Link ───────────────────────────────────────────────────────────────
     { fg: T('inverse'), bg: DARK, where: 'Link theme=dark, Badge outlined' },
@@ -64,6 +69,7 @@ export default {
 
     // ─── Badge, Tag ─────────────────────────────────────────────────────────
     { fg: T('primary'), bg: 'primitive/color/neutral/100', where: 'Badge contained' },
+    { fg: 'primitive/color/neutral/100', bg: DARK, kind: 'ui', where: 'Badge outlined (bordure, icônes)' },
     { fg: T('primary'), bg: SURFACE_RAISED, where: 'Tag' },
 
     // ─── AlertBanner ────────────────────────────────────────────────────────
@@ -72,6 +78,7 @@ export default {
       { fg: T(`notification/${t}/timestamp`), bg: S(`background/notification/${t}`), where: `AlertBanner ${t} (horodatage)` },
       { fg: S(`icon/notification/${t}`), bg: S(`background/notification/${t}`), kind: 'ui', where: `AlertBanner ${t} (icône)` },
       { fg: S(`icon/notification/${t}-close`), bg: S(`background/notification/${t}`), kind: 'ui', where: `AlertBanner ${t} (fermer)` },
+      { fg: S('border/focus'), bg: S(`background/notification/${t}`), kind: 'ui', where: `AlertBanner ${t} (fermer :focus-visible)` },
     ]),
 
     // ─── DropdownMenuButton ─────────────────────────────────────────────────

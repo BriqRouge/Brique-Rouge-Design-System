@@ -1,3 +1,5 @@
+@import '@brique-rouge/tokens/css/custom-media';
+
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
 
 .menuButton {
@@ -6,10 +8,12 @@
   justify-content: center;
   gap: var(--spacing-component-sm);
   min-width: var(--sizing-button-nm);
-  border: 2px solid transparent;
+  /* 1px sur toutes les variantes et tous les états, comme Figma (décision de Damien, 2026-11-27) */
+  border: 1px solid transparent;
   border-radius: var(--border-radius-button);
   cursor: pointer;
-  font-weight: var(--typography-label-font-weight);
+  /* Styles Figma label/sm|nm|md : Regular (400), voir specs/patterns/typography.md */
+  font-weight: var(--typography-font-weight-regular);
   line-height: 1;
   white-space: nowrap;
   text-decoration: none;
@@ -153,4 +157,24 @@
 
 .menuButton:focus {
   outline: none;
+}
+
+/* ─── Sous le breakpoint (Figma Viewport=mobile) ─────────────────────────────── */
+/* Contained md : ombre « Drop Shadow/Elevation 2 » (Figma Type=contained, Size=md,
+   Viewport=mobile). Adaptation par le CSS, sans prop React (décision du 2026-11-07),
+   implémentée au /sync-ds du 2026-11-27. En fin de fichier pour l'ordre de cascade. */
+@media not (--viewport-desktop) {
+  .variant-contained.size-md {
+    box-shadow:
+      var(--elevation-2-key-shadow-offset-x)
+      var(--elevation-2-key-shadow-offset-y)
+      var(--elevation-2-key-shadow-blur)
+      var(--elevation-2-key-shadow-spread)
+      var(--elevation-2-key-shadow-color),
+      var(--elevation-2-ambient-shadow-offset-x)
+      var(--elevation-2-ambient-shadow-offset-y)
+      var(--elevation-2-ambient-shadow-blur)
+      var(--elevation-2-ambient-shadow-spread)
+      var(--elevation-2-ambient-shadow-color);
+  }
 }
