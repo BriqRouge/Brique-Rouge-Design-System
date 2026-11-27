@@ -64,6 +64,7 @@ export default {
 
     // ─── Badge, Tag ─────────────────────────────────────────────────────────
     { fg: T('primary'), bg: 'primitive/color/neutral/100', where: 'Badge contained' },
+    { fg: 'primitive/color/neutral/100', bg: DARK, kind: 'ui', where: 'Badge outlined (bordure, icônes)' },
     { fg: T('primary'), bg: SURFACE_RAISED, where: 'Tag' },
 
     // ─── AlertBanner ────────────────────────────────────────────────────────

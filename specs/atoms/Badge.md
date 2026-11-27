@@ -45,10 +45,10 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 | Token | Valeur | Usage |
 |-------|--------|-------|
-| `--color-neutral-100` | `#f5f5f5` | Fond (contained) ; bordure (outlined) |
+| `--color-neutral-100` | `#f5f5f5` | Fond (contained) ; bordure et icônes (outlined) |
 | `--color-text-inverse` | `#fafafa` | Texte (outlined) |
 | `--color-text-primary` | `#171717` | Texte (contained) |
-| `--color-icon-button-secondary` | `#262626` | Icônes (contained) |
+| `--color-icon-button-secondary` | `#171717` | Icônes (contained) |
 | `--border-radius-button` | `999px` | Forme pilule |
 | `--spacing-x1`/`-x2` | `4px`/`8px` | Gap, padding |
 | `--spacing-x4`/`-x6`/`-x8` | `16px`/`24px`/`32px` | Hauteur sm/md/lg |
@@ -63,8 +63,8 @@ Les couleurs reprennent les variables liées dans Figma : `color/neutral/100`, `
 ## Règles d'usage
 
 - **Badge ≠ Tag** : même structure que `Tag` (indicateur rond, texte, croix), mais en forme de pilule, avec un fond `neutral/100` et un `outlined` pour fond sombre. Composant distinct, décision de Damien (2026-11-04)
-- **`outlined` = fond sombre uniquement** : bordure et texte `neutral/100`, illisibles sur fond clair (décision de Damien, 2026-11-04)
-- Icônes fixes, togglées par booléen, dessinées en SVG inline (`currentColor`), comme `Tag` ; en `contained`, leur couleur est `--color-icon-button-secondary` (#262626), distincte du texte (#171717) comme dans Figma
+- **`outlined` = fond sombre uniquement** : bordure et icônes `neutral/100`, texte `text/inverse`, illisibles sur fond clair (décision de Damien, 2026-11-04)
+- Icônes fixes, togglées par booléen, dessinées en SVG inline (`currentColor`), comme `Tag`. Leur couleur suit Figma : en `contained`, `--color-icon-button-secondary` (#171717 depuis le 2026-11-27, même valeur que le texte : les tokens d'icône suivent le texte, [ADR-006](../../docs/adr/006-tokens-icone-suivent-texte.md)) ; en `outlined`, `--color-neutral-100` (#f5f5f5), comme la bordure — et non `text/inverse` (#fafafa) qu'elles prendraient par `currentColor` (/sync-ds du 2026-11-27)
 - Pas d'interaction : la croix est décorative, aucun `onClick` (Figma ne spécifie aucun comportement)
 - **Valeurs par défaut** : celles du code font référence (`size='md'`, taille utilisée par la bullet brique ; icônes masquées)
 
