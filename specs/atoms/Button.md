@@ -61,19 +61,22 @@ interface ButtonProps {
 | `--spacing-component-sm` | `8px` | Gap + padding vertical |
 | `--sizing-x3` | `12px` | Padding horizontal |
 | `--sizing-button-nm` | `40px` | Hauteur (taille unique, pas de variant size) |
+| `--typography-font-weight-regular` | `400` | Graisse du libellé (style Figma `label/md`, Regular — aligné le 2026-11-27, auparavant 500) |
 
 ## Règles d'usage
 
 - `primary` : fond plein — neutre (`#262626`) ou couleur sémantique
-- `secondary` : bordure 2px, fond transparent — au hover, se remplit en plein (couleur sémantique ou neutre) avec texte blanc
-- `tertiary` : lien souligné, sans fond ni bordure — **toujours neutre**, `colorScheme` est ignoré
+- `secondary` : bordure 1px, fond transparent — au hover, se remplit en plein (couleur sémantique ou neutre) avec texte blanc
+- `tertiary` : lien souligné, sans fond ni bordure, **sans padding horizontal ni largeur minimale** — **toujours neutre**, `colorScheme` est ignoré. Le padding de 12px et la largeur minimale de 40px présents dans Figma ont été retirés le 2026-11-27 : le code fait référence (décision de Damien)
+- **Contours à 1px partout** (secondary neutre et coloré, focus, disabled) — décision de Damien du 2026-11-27, Figma aligné le même jour. Le contraste de la bordure de focus (3:1) est contrôlé en CI
 - `colorScheme` (`info`/`warning`/`success`/`error`) s'applique à `primary` et `secondary`, jamais à `tertiary`
 - Taille unique (40px de hauteur) — pas de variant `size` comme sur `MenuButton`
-- État disabled : un seul rendu neutre quel que soit `colorScheme` (`State=disabled` existe en `Color-scheme=neutral` uniquement dans Figma) — fond `--color-background-button-disabled`, bordure 2px `--color-border-button-disabled`, texte `--color-text-button-disabled` ; icônes `--color-icon-button-disabled` ; `tertiary` disabled reste sans fond ni bordure
+- État disabled : un seul rendu neutre quel que soit `colorScheme` (`State=disabled` existe en `Color-scheme=neutral` uniquement dans Figma) — fond `--color-background-button-disabled`, bordure 1px `--color-border-button-disabled`, texte `--color-text-button-disabled` ; icônes `--color-icon-button-disabled` ; `tertiary` disabled reste sans fond ni bordure
+- **Icônes** : elles suivent la couleur du texte (`currentColor`). Depuis le 2026-11-27, les tokens `icon/button/*` de Figma ont la même valeur que le texte de leur état (secondary et tertiary neutres : `#171717`, tertiary hover `#525252`, focus `#3453dc`) — [ADR-006](../../docs/adr/006-tokens-icone-suivent-texte.md)
 - Toujours fournir `aria-label` si le bouton ne contient que des icônes — passer `children={null}`
-- **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur = 40px) via la classe `is-icon-only`, qui force `width` (le `min-width` seul ne suffisait pas : la bordure de 2px faisait dépasser la largeur naturelle du contenu au-delà du `min-width`, donnant un bouton ovale de ~43px de large)
+- **Icône seule** : quand `children` est vide (`null`) et qu'une icône est fournie, le bouton devient strictement rond (largeur = hauteur = 40px) via la classe `is-icon-only`, qui force `width` (le `min-width` seul ne suffisait pas : la bordure, alors de 2px, faisait dépasser la largeur naturelle du contenu au-delà du `min-width`, donnant un bouton ovale de ~43px de large)
 - Ne pas confondre avec `MenuButton` : composant distinct, plus ancien, utilisé notamment par `TopNav` (bouton retour, trigger de dropdown) — les deux composants coexistent intentionnellement, périmètres différents
-- **Focus visible — corrigé après audit rétroactif des états de tous les composants** : la première implémentation utilisait un anneau extérieur générique (`outline: 2px solid`). Vérification des variantes `State=focus` du Figma source (ex: `1729:19123` primary-focus, `1506:20752` secondary-focus) : Figma ne montre pas d'anneau extérieur mais une **bordure intégrée de 2px** sur le bouton lui-même, fond inchangé par rapport à l'idle. La bordure focus est **universelle** (`--color-button-focus`, toujours la même quelle que soit `colorScheme`). `tertiary` n'a ni bordure ni fond à aucun état — seule sa couleur de texte change (déjà correct avant l'audit). Vérifié par mesure réelle (`getComputedStyle` après `Tab`), pas seulement par capture d'écran.
+- **Focus visible — corrigé après audit rétroactif des états de tous les composants** : la première implémentation utilisait un anneau extérieur générique (`outline: 2px solid`). Vérification des variantes `State=focus` du Figma source (ex: `1729:19123` primary-focus, `1506:20752` secondary-focus) : Figma ne montre pas d'anneau extérieur mais une **bordure intégrée** sur le bouton lui-même, fond inchangé par rapport à l'idle — **1px depuis le 2026-11-27** (2px auparavant). La bordure focus est **universelle** (`--color-button-focus`, toujours la même quelle que soit `colorScheme`). `tertiary` n'a ni bordure ni fond à aucun état — seule sa couleur de texte change (déjà correct avant l'audit). Vérifié par mesure réelle (`getComputedStyle` après `Tab`), pas seulement par capture d'écran.
 
 ## Tests
 

@@ -50,6 +50,9 @@ export default {
     { fg: T('button/tertiary/idle'), bg: PAGE, where: 'Button tertiary' },
     { fg: T('button/tertiary/hover'), bg: PAGE, where: 'Button tertiary :hover' },
     { fg: T('button/tertiary/focus'), bg: PAGE, where: 'Button tertiary :focus-visible' },
+    // Bordure de focus à 1px depuis le 2026-11-27 : seul repère visuel, contrôlée en 3:1
+    { fg: S('button/focus'), bg: PAGE, kind: 'ui', where: 'bordure de focus Button (fond de page)' },
+    { fg: S('button/focus'), bg: S('button/primary'), kind: 'ui', where: 'bordure de focus Button primary' },
 
     // ─── MenuButton ─────────────────────────────────────────────────────────
     { fg: T('menu-button/contained/idle'), bg: S('menu-button/idle'), where: 'MenuButton contained' },
