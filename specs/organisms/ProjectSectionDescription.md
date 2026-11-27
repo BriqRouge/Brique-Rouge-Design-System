@@ -54,12 +54,13 @@ Accepte `alertBanner` en slot optionnel — typiquement rempli avec `<AlertBanne
 | `--color-text-primary` | `#171717` | Texte d'introduction (`#262626` jusqu'au lot 4 de l'ADR-001) |
 | `--color-text-secondary` | `#525252` | Texte des puces |
 | `--color-deep-sea-600` | `#3453dc` | Icône des puces |
-| `--typography-font-family-sans` | — | Numéro de section |
-| `--typography-subtitle-font-family`/`-font-weight` | — | Titre de section, texte d'introduction |
+| `--typography-font-family-sans` | — | Numéro, titre de section, texte d'introduction |
 | `--typography-body-font-family` | — | Texte des puces |
-| `--typography-font-size-base`/`-3xl`/`-2xl` | `16px`/`32px`/`24px` | Numéro, titre, texte d'introduction |
-| `--typography-font-weight-medium`/`-regular` | `500`/`400` | Numéro (medium), reste (regular) |
-| `--spacing-x6`/`-x4`/`-x14` | `24px`/`16px`/`56px` | Gaps et indentation (mobile : indentation `--spacing-x4`) |
+| `--typography-font-size-base` | `16px` | Numéro |
+| `--typography-heading-xl-font-size`/`-line-height` | `32px`/`40px` (mobile `24px`/`32px`) | Titre de section — style Figma `heading/xl`, tokens viewport |
+| `--typography-heading-lg-font-size`/`-line-height` | `24px`/`32px` (mobile `20px`/`28px`) | Texte d'introduction — style Figma `heading/lg`, tokens viewport |
+| `--typography-font-weight-medium`/`-regular` | `500`/`400` | Numéro et titre (medium), reste (regular) |
+| `--spacing-x6`/`-x4` | `24px`/`16px` | Gaps ; indentation de la liste (`--spacing-x4`, toutes tailles) |
 | `--sizing-x6` | `24px` | Taille de l'icône des puces |
 
 ## Sous le breakpoint (mobile)
@@ -68,10 +69,14 @@ Figma `Viewport=mobile` (2363:42525). Pas de prop React : l'adaptation passe par
 (`@media not (--viewport-desktop)`, breakpoint 816px = 51em, voir
 `specs/foundations/breakpoint.md`).
 
-- En-tête : pleine largeur, padding latéral `--spacing-x4`, numéro et titre centrés verticalement, le titre prend la largeur restante
-- Indentation du texte d'introduction et de la liste : 56px → 16px (`--spacing-x4`)
-- Incohérence Figma signalée : le padding latéral de l'en-tête mobile (16px) n'est pas lié à une variable
-- Texte d'introduction : padding droit 56px (`--spacing-x14`) sur desktop, comme dans Figma (aligné le 2026-11-07, décision de Damien) ; 0 en mobile
+- En-tête : pleine largeur, sans padding latéral, le titre prend la largeur restante
+- Titre et texte d'introduction : plus petits grâce aux tokens viewport (`heading/xl` 24/32, `heading/lg` 20/28), sans règle dans le media query
+
+**Mise en page alignée sur Figma le 2026-11-27 (/sync-ds, décision de Damien)** : le retrait de 56px
+(`--spacing-x14`) du texte d'introduction (gauche et droite) et de la liste sur desktop est
+**abandonné**. Le texte d'introduction n'a plus de retrait, la liste a un retrait de 16px
+(`--spacing-x4`) à toutes les tailles, et le numéro et le titre sont centrés verticalement
+(alignés en bas auparavant). Le padding de 16px de l'en-tête mobile a disparu de Figma.
 
 ## Règles d'usage
 

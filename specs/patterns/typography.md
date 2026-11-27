@@ -46,9 +46,9 @@ rôle avec d'autres valeurs.
 
 | Style Figma | Taille | Graisse | Interligne | Espacement | Rendu | Usage |
 |---|---|---|---|---|---|---|
-| `display/lg` | `--typography-font-size-5xl` | `--typography-font-weight-bold` | `--typography-line-height-x14` | `-0.02em` | — | Titre principal d'une page projet |
-| `heading/xl` | `--typography-font-size-3xl` | `--typography-font-weight-medium` | `--typography-line-height-x10` | — | — | Titre de section |
-| `heading/lg` | `--typography-font-size-2xl` | `--typography-font-weight-regular` | `--typography-line-height-x8` | — | — | Sous-titre, accroche |
+| `display/lg` | `--typography-display-lg-font-size` ¹ | `--typography-font-weight-bold` | `--typography-display-lg-line-height` ¹ | `-0.02em` | — | Titre principal d'une page projet |
+| `heading/xl` | `--typography-heading-xl-font-size` ¹ | `--typography-font-weight-medium` | `--typography-heading-xl-line-height` ¹ | — | — | Titre de section |
+| `heading/lg` | `--typography-heading-lg-font-size` ¹ | `--typography-font-weight-regular` | `--typography-heading-lg-line-height` ¹ | — | — | Sous-titre, accroche |
 | `heading/md` | `--typography-font-size-xl` | `--typography-font-weight-medium` | `normal` | — | — | Titre compact (navigation) |
 | `heading/md-regular` | `--typography-font-size-xl` | `--typography-font-weight-regular` | `normal` | — | — | Titre compact, graisse normale (sous-titre TopNav) |
 | `body/md` | `--typography-font-size-base` | `--typography-font-weight-regular` | `--typography-line-height-x6` | — | — | Corps de texte |
@@ -76,6 +76,8 @@ rôle avec d'autres valeurs.
 | `label/sm-medium-underline` | `--typography-font-size-sm` | `--typography-font-weight-medium` | `normal` | — | souligné | Lien sm (Link) |
 | `label/base-medium-underline` | `--typography-font-size-base` | `--typography-font-weight-medium` | `normal` | — | souligné | Lien md (Link) |
 | `label/2xl-medium-underline` | `--typography-font-size-2xl` | `--typography-font-weight-medium` | `normal` | — | souligné | Lien lg (Link) |
+
+¹ **Token viewport** (collection Figma `viewport`) : la valeur change sous le breakpoint, sans media query dans le composant — `display/lg` 48/56 → 32/40, `heading/xl` 32/40 → 24/32, `heading/lg` 24/32 → 20/28, `expressive/xl` 48/56 → 32/40, `expressive/lg` 32/40 → 24/32. Les styles de texte Figma sont liés à ces variables (vérifié le 2026-11-27).
 
 Colonne **Rendu** — propriétés que le style porte en plus de la taille et de la
 graisse, à reproduire en CSS :
@@ -106,8 +108,8 @@ libellés de contrôles.
 
 | Style Figma | Police | Taille | Graisse | Interligne | Rendu | Usage |
 |---|---|---|---|---|---|---|
-| `expressive/xl` | `--typography-font-family-display-median` | `--typography-font-size-5xl` | `--typography-font-weight-black` | `--typography-line-height-x14` | rognage | Titre d'accroche (hero) |
-| `expressive/lg` | `--typography-font-family-display-median` | `--typography-font-size-3xl` | `--typography-font-weight-black` | `--typography-line-height-x10` | rognage | Titre d'accroche secondaire |
+| `expressive/xl` | `--typography-font-family-display-median` | `--typography-expressive-xl-font-size` ¹ | `--typography-font-weight-black` | `--typography-expressive-xl-line-height` ¹ | rognage | Titre d'accroche (hero) |
+| `expressive/lg` | `--typography-font-family-display-median` | `--typography-expressive-lg-font-size` ¹ | `--typography-font-weight-black` | `--typography-expressive-lg-line-height` ¹ | rognage | Titre d'accroche secondaire |
 | `expressive/md` | `--typography-font-family-display-median` | `--typography-font-size-2xl` | `--typography-font-weight-black` | `--typography-line-height-x10` | — | Logo-texte, partie grasse (TopNav) |
 | `expressive/md-light` | `--typography-font-family-display-median` | `--typography-font-size-2xl` | `--typography-font-weight-light` | `--typography-line-height-x10` | — | Logo-texte, partie légère (TopNav) |
 | `expressive/lead` | `--typography-font-family-display` | `--typography-font-size-xl` | `--typography-font-weight-regular` | `--typography-line-height-x7` | rognage | Paragraphe d'introduction |
@@ -140,11 +142,11 @@ l'autre.
 Tous les tokens typographiques via `var(--token)`. Jamais de valeurs px arbitraires.
 
 ```css
-/* ✅ Correct — rôle heading/xl (table ci-dessus) */
+/* ✅ Correct — rôle heading/xl (table ci-dessus) : tokens viewport, 32/40 → 24/32 sous le breakpoint */
 .title {
-  font-size: var(--typography-font-size-3xl);
+  font-size: var(--typography-heading-xl-font-size);
   font-weight: var(--typography-font-weight-medium);
-  line-height: var(--typography-line-height-x10);
+  line-height: var(--typography-heading-xl-line-height);
   color: var(--color-text-primary);
 }
 
