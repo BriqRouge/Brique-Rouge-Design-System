@@ -78,6 +78,7 @@ export default {
       { fg: T(`notification/${t}/timestamp`), bg: S(`background/notification/${t}`), where: `AlertBanner ${t} (horodatage)` },
       { fg: S(`icon/notification/${t}`), bg: S(`background/notification/${t}`), kind: 'ui', where: `AlertBanner ${t} (icône)` },
       { fg: S(`icon/notification/${t}-close`), bg: S(`background/notification/${t}`), kind: 'ui', where: `AlertBanner ${t} (fermer)` },
+      { fg: S('border/focus'), bg: S(`background/notification/${t}`), kind: 'ui', where: `AlertBanner ${t} (fermer :focus-visible)` },
     ]),
 
     // ─── DropdownMenuButton ─────────────────────────────────────────────────

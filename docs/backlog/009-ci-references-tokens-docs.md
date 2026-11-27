@@ -6,9 +6,9 @@ created: 2026-11-16
 origin: "Le 2026-11-16, 36 références à des tokens inexistants ont été trouvées dans la chaîne de la skill ds-br-screen (specs/patterns/, SKILL.md, commandes) ; aucun contrôle ne les avait signalées"
 adr: []
 claude_md: ["6.6", "17", "19"]
-related_components: []
+related_components: [AlertBanner]
 related_tokens: []
-references: [specs/patterns/, .claude/skills/, scripts/check-specs.mjs, scripts/token-audit.mjs]
+references: [specs/patterns/, .claude/skills/, scripts/check-specs.mjs, scripts/token-audit.mjs, packages/react/src/components/molecules/AlertBanner/AlertBanner.module.css]
 prs: []
 ---
 
@@ -32,6 +32,15 @@ Corrigé à la main par la PR `fix/skill-ds-br-screen` ; rien n'empêche que ça
   les seuls faux positifs sont des options de ligne de commande (`--only`, `--test`), la
   notation `{info,warning,…}` et les mentions volontaires de tokens supprimés.
 
+### Cas réel dans un CSS Module (2026-11-27)
+Le /sync-ds du 2026-11-27 a trouvé `var(--color-border-button-focus)` dans
+`AlertBanner.module.css`, sur le contour de focus du bouton de fermeture. Ce token n'a
+jamais existé dans `tokens.json`. La déclaration `outline` était ignorée : **aucun focus
+visible au clavier** (WCAG 2.4.7), sans erreur au build ni en CI. Corrigé dans la même PR
+(`--color-border-focus`). Le contrôle de contraste ne pouvait pas le voir : il lit
+`contrast-pairs.config.js`, pas les CSS Modules. Cela répond à la troisième question
+ci-dessous : oui, les CSS Modules doivent être couverts, et c'est même le cas le plus grave.
+
 ## Proposition
 Un script dans le job Lint, après le build des tokens : extraire les `var(--…)` (et les
 noms entre backticks) des fichiers Markdown de `specs/` et `.claude/skills/`, les comparer
@@ -43,8 +52,10 @@ modèle de `/* token-audit-ignore */`.
 - [ ] Nouveau contrôle de CI : décision de Damien et ADR (CLAUDE.md §6.8).
 - [ ] Portée : `var(--…)` seulement (aucun faux positif constaté) ou aussi les noms entre
       backticks (couvre les tableaux, demande les exceptions ci-dessus) ?
-- [ ] Couvrir aussi les CSS Modules des composants et des écrans (`var()` vers un token
-      supprimé) ?
+- [x] Couvrir aussi les CSS Modules des composants et des écrans (`var()` vers un token
+      supprimé ou inexistant) ? **Oui** : cas réel trouvé le 2026-11-27 (AlertBanner, ci-dessus).
+      Exclure les variables locales définies dans le même fichier (`--icon-size`,
+      `--button-size`…).
 
 ## Non couvert
 Les noms de variables Figma (`color/text/primary`) et de styles de texte (`body/md`), qui

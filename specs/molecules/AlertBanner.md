@@ -49,6 +49,7 @@ interface AlertBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 | `--color-icon-notification-warning` | `#af471f` | Icône d'en-tête, warning |
 | `--color-icon-notification-info-close` | `#263282` | Bouton de fermeture, info |
 | `--color-icon-notification-warning-close` | `#71311d` | Bouton de fermeture, warning |
+| `--color-border-focus` | `#3453dc` | Contour de focus du bouton de fermeture (`outline` 2px, décalé de 2px) |
 | `--border-radius-lg` | `12px` | Border-radius de la carte |
 | `--spacing-x4` | `16px` | Padding de la carte |
 | `--spacing-x2` | `8px` | Gap entre header/description/CTA |
@@ -62,6 +63,7 @@ interface AlertBannerProps extends React.HTMLAttributes<HTMLDivElement> {
 - Icônes (`InfoIcon`/`WarningIcon`/`CloseIcon`) dessinées à la main en SVG inline (`currentColor`), cohérent avec la convention déjà établie par `TopNav` — pas d'assets Figma exportés (nécessaire pour la recoloration par type)
 - **Écart signalé vs Figma** (validé par Damien) : le contenu du Figma est du lorem ipsum générique avec des icônes de boutons placeholder (téléchargement/mail) — le composant expose donc `leftIcon`/`rightIcon`/label entièrement personnalisables via `Button`, rien n'est figé en dur
 - **Hover du bouton de fermeture — ajout DS, pas une correction de fidélité Figma** : ajouté lors de l'audit rétroactif des états manquants. Le nœud Figma de l'icône de fermeture (`755:21868`, "Menu / Close_SM") ne définit aucune variante `State` — Figma ne spécifie donc aucun style hover pour ce bouton. Ajouté par choix UX (validé par Damien) : `opacity: 0.7` au survol, transition 150ms, cohérent avec les conventions de transition déjà établies sur `Button`/`MenuButton`.
+- **Focus du bouton de fermeture — corrigé le 2026-11-27** : le CSS appelait `--color-border-button-focus`, un token qui n'a jamais existé. La déclaration `outline` était donc ignorée et aucun focus n'était visible au clavier (WCAG 2.4.7). Il utilise désormais `--color-border-focus`. Ce type d'erreur n'est détecté par aucun contrôle de CI : voir `docs/backlog/009-ci-references-tokens-docs.md`
 
 ## Tests
 
