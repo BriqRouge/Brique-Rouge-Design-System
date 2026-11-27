@@ -4,7 +4,7 @@ title: Aligner les tokens d'icône et de bordure sur l'échelle du texte
 status: a-explorer
 created: 2026-11-10
 origin: "Audit de suivi de l'ADR-001, 2026-11-10"
-adr: [ADR-001, ADR-003]
+adr: [ADR-001, ADR-003, ADR-006]
 claude_md: ["6.6", "6.7"]
 related_components: [Button, MenuButton, AlertBanner, Tag, Badge]
 related_tokens: [color/icon, color/border]
@@ -49,10 +49,18 @@ Appliquer les règles 1 à 3 de l'ADR-001 aux icônes et aux bordures, dans un A
   retire les tokens d'icône redondants), soit elle garde ses tokens (cas où elle doit
   différer du texte).
 
+## Avancement — 2026-11-27 ([ADR-006](../adr/006-tokens-icone-suivent-texte.md))
+Décision de Damien (/sync-ds) : **une icône a la même couleur que le texte de son état**.
+Les 6 tokens `icon/button/*` et `icon/menu-button/*` qui différaient du texte pointent
+désormais, dans Figma, vers le token global de ce texte ; le code garde `currentColor`.
+Reste ouvert ci-dessous : la famille `border/*`, une échelle globale `icon/*`, et les
+emprunts de Tag et Badge.
+
 ## Prérequis / questions ouvertes
-- [ ] Décision de design : l'icône et la bordure de Button secondary doivent-elles être
-      `#171717` comme le texte, ou `#262626` est-il voulu ?
-- [ ] `currentColor` par défaut pour les icônes, ou tokens dédiés ?
+- [x] Décision de design : l'**icône** de Button secondary doit-elle être `#171717` comme le
+      texte ? **Oui** (ADR-006). La **bordure** (`border/button/secondary`, `#262626`) reste à trancher.
+- [x] `currentColor` par défaut pour les icônes, ou tokens dédiés ? **`currentColor`**, les tokens
+      d'icône prenant la valeur du texte (ADR-006).
 - [ ] Tag et Badge : leur propre token d'icône, ou un token global ?
 - [ ] Inventaire complet des liaisons Figma avant tout renommage (§6.7).
 
