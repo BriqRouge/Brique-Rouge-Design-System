@@ -3,11 +3,11 @@
   "components": {
     "AlertBanner": {
       "node": "755:21871",
-      "hash": "e376ba67",
+      "hash": "d9c13969",
       "props": "644b7a27",
       "variants": {
-        "Type=info": "d297f273",
-        "Type=warning": "564bd374"
+        "Type=info": "f6ea95f8",
+        "Type=warning": "3fec1ed0"
       },
       "deps": [
         "Button"
@@ -15,24 +15,24 @@
     },
     "Badge": {
       "node": "184:18566",
-      "hash": "fe16d2da",
+      "hash": "9b11c4b4",
       "props": "230f022c",
       "variants": {
-        "Size=lg, Style=contained": "4274df9c",
-        "Size=lg, Style=outlined": "ef64995c",
-        "Size=md, Style=contained": "1579f2c0",
-        "Size=md, Style=outlined": "3831acd0",
-        "Size=sm, Style=contained": "c62f84c2",
-        "Size=sm, Style=outlined": "95bc14c1"
+        "Size=lg, Style=contained": "3597088a",
+        "Size=lg, Style=outlined": "e88dec42",
+        "Size=md, Style=contained": "e666a91c",
+        "Size=md, Style=outlined": "aacf573e",
+        "Size=sm, Style=contained": "e820f340",
+        "Size=sm, Style=outlined": "f189bf6f"
       },
       "deps": []
     },
     "BentoBox": {
       "node": "2049:20632",
-      "hash": "04c698f0",
+      "hash": "2b556283",
       "props": null,
       "variants": {
-        "Bento-box": "1057b261"
+        "Bento-box": "08ea363a"
       },
       "deps": [
         "MacbookMockup",
@@ -41,11 +41,11 @@
     },
     "BulletBrique": {
       "node": "2131:21897",
-      "hash": "7606b327",
+      "hash": "a8786f09",
       "props": "17ea1915",
       "variants": {
-        "State=closed": "cb711b88",
-        "State=opened": "90ca9421"
+        "State=closed": "27a4f8d7",
+        "State=opened": "ec4608f4"
       },
       "deps": [
         "Badge"
@@ -53,54 +53,55 @@
     },
     "Button": {
       "node": "1506:20751",
-      "hash": "f9b1b373",
+      "hash": "cb46640a",
       "props": "6aa28756",
       "variants": {
-        "Variant=primary, Color-scheme=error, State=focus": "0405545b",
+        "Variant=primary, Color-scheme=error, State=focus": "d4539ff6",
         "Variant=primary, Color-scheme=error, State=hovered": "aefbeb75",
         "Variant=primary, Color-scheme=error, State=idle": "440986bd",
-        "Variant=primary, Color-scheme=info, State=focus": "77d14b16",
+        "Variant=primary, Color-scheme=info, State=focus": "0c5b82fb",
         "Variant=primary, Color-scheme=info, State=hovered": "83094b02",
         "Variant=primary, Color-scheme=info, State=idle": "4efec474",
-        "Variant=primary, Color-scheme=neutral, State=disabled": "e44cae28",
-        "Variant=primary, Color-scheme=neutral, State=focus": "e14c2d85",
+        "Variant=primary, Color-scheme=neutral, State=disabled": "4af897f1",
+        "Variant=primary, Color-scheme=neutral, State=focus": "27be8564",
         "Variant=primary, Color-scheme=neutral, State=hovered": "8d660493",
         "Variant=primary, Color-scheme=neutral, State=idle": "562e7cb3",
-        "Variant=primary, Color-scheme=success, State=focus": "bc52008c",
-        "Variant=primary, Color-scheme=success, State=hovered": "780611b5",
-        "Variant=primary, Color-scheme=success, State=idle": "5a5619ea",
-        "Variant=primary, Color-scheme=warning, State=focus": "0524e654",
-        "Variant=primary, Color-scheme=warning, State=hovered": "998f8186",
-        "Variant=primary, Color-scheme=warning, State=idle": "1e042156",
-        "Variant=secondary, Color-scheme=error, State=focus": "be60a104",
+        "Variant=primary, Color-scheme=success, State=focus": "51e5222d",
+        "Variant=primary, Color-scheme=success, State=hovered": "625b9791",
+        "Variant=primary, Color-scheme=success, State=idle": "89772652",
+        "Variant=primary, Color-scheme=warning, State=focus": "427d2291",
+        "Variant=primary, Color-scheme=warning, State=hovered": "4c640677",
+        "Variant=primary, Color-scheme=warning, State=idle": "25ed60ce",
+        "Variant=secondary, Color-scheme=error, State=focus": "a4420da5",
         "Variant=secondary, Color-scheme=error, State=hovered": "6f8cb7d9",
         "Variant=secondary, Color-scheme=error, State=idle": "34ea5197",
-        "Variant=secondary, Color-scheme=info, State=focus": "45d317ef",
+        "Variant=secondary, Color-scheme=info, State=focus": "8e9b8a7a",
         "Variant=secondary, Color-scheme=info, State=hovered": "f4e92932",
         "Variant=secondary, Color-scheme=info, State=idle": "76e5bd5d",
-        "Variant=secondary, Color-scheme=neutral, State=disabled": "1e441338",
-        "Variant=secondary, Color-scheme=neutral, State=focus": "4d32c3f8",
+        "Variant=secondary, Color-scheme=neutral, State=disabled": "65c2f141",
+        "Variant=secondary, Color-scheme=neutral, State=focus": "dc6c2efe",
         "Variant=secondary, Color-scheme=neutral, State=hovered": "80e44bc6",
-        "Variant=secondary, Color-scheme=neutral, State=idle": "bda36427",
-        "Variant=secondary, Color-scheme=success, State=focus": "807e1089",
-        "Variant=secondary, Color-scheme=success, State=hovered": "e4e28bd1",
-        "Variant=secondary, Color-scheme=success, State=idle": "154260e8",
-        "Variant=secondary, Color-scheme=warning, State=focus": "0b43ebfd",
-        "Variant=secondary, Color-scheme=warning, State=hovered": "cbe8e21e",
-        "Variant=secondary, Color-scheme=warning, State=idle": "0b01ac93",
-        "Variant=tertiary, Color-scheme=neutral, State=disabled": "278ee233",
-        "Variant=tertiary, Color-scheme=neutral, State=focus": "9b0defe2",
-        "Variant=tertiary, Color-scheme=neutral, State=hovered": "6dac298b",
-        "Variant=tertiary, Color-scheme=neutral, State=idle": "de809283"
+        "Variant=secondary, Color-scheme=neutral, State=idle": "47c8c04f",
+        "Variant=secondary, Color-scheme=success, State=focus": "21c113aa",
+        "Variant=secondary, Color-scheme=success, State=hovered": "f7f3d075",
+        "Variant=secondary, Color-scheme=success, State=idle": "96a25cec",
+        "Variant=secondary, Color-scheme=warning, State=focus": "d2414b6c",
+        "Variant=secondary, Color-scheme=warning, State=hovered": "7a27b6db",
+        "Variant=secondary, Color-scheme=warning, State=idle": "90f67b43",
+        "Variant=tertiary, Color-scheme=neutral, State=disabled": "2ddf62f3",
+        "Variant=tertiary, Color-scheme=neutral, State=focus": "8c8169e6",
+        "Variant=tertiary, Color-scheme=neutral, State=hovered": "d45849b1",
+        "Variant=tertiary, Color-scheme=neutral, State=idle": "b6efed04"
       },
       "deps": []
     },
     "DropdownMenu": {
-      "node": "375:19690",
-      "hash": "cf06b87f",
-      "props": "918c8c57",
+      "node": "2357:38494",
+      "hash": "134c1759",
+      "props": "e76c8547",
       "variants": {
-        "DropdownMenu": "99dc48a1"
+        "Viewport=desktop": "e8ce80c8",
+        "Viewport=mobile": "e33a3930"
       },
       "deps": [
         "DropdownMenuButton",
@@ -174,32 +175,32 @@
     },
     "Link": {
       "node": "2326:37384",
-      "hash": "a0aa3a77",
+      "hash": "5ddb4db7",
       "props": "0b553f5e",
       "variants": {
-        "Size=lg, State=disabled, Theme=dark": "378be114",
+        "Size=lg, State=disabled, Theme=dark": "5fd3e61c",
         "Size=lg, State=disabled, Theme=light": "b4b0956c",
-        "Size=lg, State=focus, Theme=dark": "1a7d1443",
+        "Size=lg, State=focus, Theme=dark": "c94caa1f",
         "Size=lg, State=focus, Theme=light": "141f0369",
         "Size=lg, State=hovered, Theme=dark": "f61bdcb9",
         "Size=lg, State=hovered, Theme=light": "bb6920ff",
-        "Size=lg, State=idle, Theme=dark": "dc8e30a4",
+        "Size=lg, State=idle, Theme=dark": "4b092ef0",
         "Size=lg, State=idle, Theme=light": "419835ae",
-        "Size=md, State=disabled, Theme=dark": "a30ce14c",
+        "Size=md, State=disabled, Theme=dark": "c9a91998",
         "Size=md, State=disabled, Theme=light": "8680aea4",
-        "Size=md, State=focus, Theme=dark": "eadd4dd3",
+        "Size=md, State=focus, Theme=dark": "177eba7b",
         "Size=md, State=focus, Theme=light": "d7191dc5",
         "Size=md, State=hovered, Theme=dark": "26b3c3a1",
         "Size=md, State=hovered, Theme=light": "12c62247",
-        "Size=md, State=idle, Theme=dark": "2cd058d0",
+        "Size=md, State=idle, Theme=dark": "b8cd6a38",
         "Size=md, State=idle, Theme=light": "561aa826",
-        "Size=sm, State=disabled, Theme=dark": "77f35696",
+        "Size=sm, State=disabled, Theme=dark": "455b6296",
         "Size=sm, State=disabled, Theme=light": "c6f548fe",
-        "Size=sm, State=focus, Theme=dark": "89762c4d",
+        "Size=sm, State=focus, Theme=dark": "5bd787c9",
         "Size=sm, State=focus, Theme=light": "e99131f7",
         "Size=sm, State=hovered, Theme=dark": "434b9113",
         "Size=sm, State=hovered, Theme=light": "06ac7179",
-        "Size=sm, State=idle, Theme=dark": "6b7bb1c2",
+        "Size=sm, State=idle, Theme=dark": "4b63023e",
         "Size=sm, State=idle, Theme=light": "0bbc5840"
       },
       "deps": []
@@ -260,64 +261,64 @@
     },
     "MenuButton": {
       "node": "1345:21426",
-      "hash": "e4deb06e",
+      "hash": "bf032822",
       "props": "bef83860",
       "variants": {
-        "Type=contained, State=disabled, Size=md, Viewport=desktop, Mode=default": "49b9a3cf",
+        "Type=contained, State=disabled, Size=md, Viewport=desktop, Mode=default": "069d3e2e",
         "Type=contained, State=disabled, Size=nm, Viewport=desktop, Mode=default": "e2472c8a",
         "Type=contained, State=disabled, Size=sm, Viewport=desktop, Mode=default": "bbccc187",
-        "Type=contained, State=focus, Size=md, Viewport=desktop, Mode=default": "d51dc140",
-        "Type=contained, State=focus, Size=nm, Viewport=desktop, Mode=default": "e6bd80c3",
-        "Type=contained, State=focus, Size=sm, Viewport=desktop, Mode=default": "82c56840",
-        "Type=contained, State=hovered, Size=md, Viewport=desktop, Mode=default": "89b50554",
-        "Type=contained, State=hovered, Size=nm, Viewport=desktop, Mode=default": "d3a17473",
-        "Type=contained, State=hovered, Size=sm, Viewport=desktop, Mode=default": "804f51ea",
-        "Type=contained, State=idle, Size=md, Viewport=desktop, Mode=default": "de4a80e0",
-        "Type=contained, State=idle, Size=md, Viewport=mobile, Mode=default": "e7c220fd",
-        "Type=contained, State=idle, Size=nm, Viewport=desktop, Mode=default": "347fb893",
-        "Type=contained, State=idle, Size=sm, Viewport=desktop, Mode=default": "a9d8bf05",
-        "Type=outlined, State=disabled, Size=md, Viewport=desktop, Mode=dark": "edaf04b3",
-        "Type=outlined, State=disabled, Size=md, Viewport=desktop, Mode=light": "7dc03ed3",
+        "Type=contained, State=focus, Size=md, Viewport=desktop, Mode=default": "d6e6637d",
+        "Type=contained, State=focus, Size=nm, Viewport=desktop, Mode=default": "a0629b79",
+        "Type=contained, State=focus, Size=sm, Viewport=desktop, Mode=default": "05877b2a",
+        "Type=contained, State=hovered, Size=md, Viewport=desktop, Mode=default": "af1fd36f",
+        "Type=contained, State=hovered, Size=nm, Viewport=desktop, Mode=default": "cf3ed835",
+        "Type=contained, State=hovered, Size=sm, Viewport=desktop, Mode=default": "177781d0",
+        "Type=contained, State=idle, Size=md, Viewport=desktop, Mode=default": "2877315f",
+        "Type=contained, State=idle, Size=md, Viewport=mobile, Mode=default": "616af9ac",
+        "Type=contained, State=idle, Size=nm, Viewport=desktop, Mode=default": "1cb1d059",
+        "Type=contained, State=idle, Size=sm, Viewport=desktop, Mode=default": "94d27387",
+        "Type=outlined, State=disabled, Size=md, Viewport=desktop, Mode=dark": "376f0f76",
+        "Type=outlined, State=disabled, Size=md, Viewport=desktop, Mode=light": "43535c46",
         "Type=outlined, State=disabled, Size=nm, Viewport=desktop, Mode=dark": "7150583e",
         "Type=outlined, State=disabled, Size=nm, Viewport=desktop, Mode=light": "4dffce99",
         "Type=outlined, State=disabled, Size=sm, Viewport=desktop, Mode=dark": "01756041",
         "Type=outlined, State=disabled, Size=sm, Viewport=desktop, Mode=light": "cb57ace6",
-        "Type=outlined, State=focus, Size=md, Viewport=desktop, Mode=dark": "44d3e25a",
-        "Type=outlined, State=focus, Size=md, Viewport=desktop, Mode=light": "e084e0c8",
-        "Type=outlined, State=focus, Size=nm, Viewport=desktop, Mode=dark": "8952dd3d",
-        "Type=outlined, State=focus, Size=nm, Viewport=desktop, Mode=light": "77b91b9f",
-        "Type=outlined, State=focus, Size=sm, Viewport=desktop, Mode=dark": "5f9ce218",
-        "Type=outlined, State=focus, Size=sm, Viewport=desktop, Mode=light": "c599a67c",
-        "Type=outlined, State=hovered, Size=md, Viewport=desktop, Mode=dark": "15d29dfc",
-        "Type=outlined, State=hovered, Size=md, Viewport=desktop, Mode=light": "25d00a7e",
-        "Type=outlined, State=hovered, Size=nm, Viewport=desktop, Mode=dark": "285ab1c7",
-        "Type=outlined, State=hovered, Size=nm, Viewport=desktop, Mode=light": "488088ad",
-        "Type=outlined, State=hovered, Size=sm, Viewport=desktop, Mode=dark": "c2e12368",
-        "Type=outlined, State=hovered, Size=sm, Viewport=desktop, Mode=light": "5279d184",
-        "Type=outlined, State=idle, Size=md, Viewport=desktop, Mode=dark": "fe1b9409",
-        "Type=outlined, State=idle, Size=md, Viewport=desktop, Mode=light": "1aceb7cf",
-        "Type=outlined, State=idle, Size=md, Viewport=mobile, Mode=dark": "b59365c6",
-        "Type=outlined, State=idle, Size=md, Viewport=mobile, Mode=light": "ebdcec5a",
-        "Type=outlined, State=idle, Size=nm, Viewport=desktop, Mode=dark": "5ebcc8c8",
+        "Type=outlined, State=focus, Size=md, Viewport=desktop, Mode=dark": "ae0d6803",
+        "Type=outlined, State=focus, Size=md, Viewport=desktop, Mode=light": "dbbb9b1d",
+        "Type=outlined, State=focus, Size=nm, Viewport=desktop, Mode=dark": "bf9ad717",
+        "Type=outlined, State=focus, Size=nm, Viewport=desktop, Mode=light": "891922c9",
+        "Type=outlined, State=focus, Size=sm, Viewport=desktop, Mode=dark": "2ce070b6",
+        "Type=outlined, State=focus, Size=sm, Viewport=desktop, Mode=light": "58e214f2",
+        "Type=outlined, State=hovered, Size=md, Viewport=desktop, Mode=dark": "89837deb",
+        "Type=outlined, State=hovered, Size=md, Viewport=desktop, Mode=light": "4fd17455",
+        "Type=outlined, State=hovered, Size=nm, Viewport=desktop, Mode=dark": "078d6795",
+        "Type=outlined, State=hovered, Size=nm, Viewport=desktop, Mode=light": "b1456e67",
+        "Type=outlined, State=hovered, Size=sm, Viewport=desktop, Mode=dark": "08193d5a",
+        "Type=outlined, State=hovered, Size=sm, Viewport=desktop, Mode=light": "cdee5cca",
+        "Type=outlined, State=idle, Size=md, Viewport=desktop, Mode=dark": "6eb5e8de",
+        "Type=outlined, State=idle, Size=md, Viewport=desktop, Mode=light": "5d6ed6c4",
+        "Type=outlined, State=idle, Size=md, Viewport=mobile, Mode=dark": "eebac967",
+        "Type=outlined, State=idle, Size=md, Viewport=mobile, Mode=light": "f7b3c067",
+        "Type=outlined, State=idle, Size=nm, Viewport=desktop, Mode=dark": "372dda92",
         "Type=outlined, State=idle, Size=nm, Viewport=desktop, Mode=light": "91e9894c",
-        "Type=outlined, State=idle, Size=sm, Viewport=desktop, Mode=dark": "95862e01",
+        "Type=outlined, State=idle, Size=sm, Viewport=desktop, Mode=dark": "a467eacb",
         "Type=outlined, State=idle, Size=sm, Viewport=desktop, Mode=light": "087c48ab"
       },
       "deps": []
     },
     "MetaInfoItem": {
       "node": "797:19440",
-      "hash": "bac5abde",
+      "hash": "1e060595",
       "props": "762c4a51",
       "variants": {
-        "Interests=lecture, State=hovered": "8e8954ea",
-        "Interests=lecture, State=idle": "b48049f0",
-        "Interests=location, State=hovered": "058c59e0",
-        "Interests=location, State=idle": "bfe600c3",
-        "Interests=music, State=hovered": "c83f5889",
-        "Interests=music, State=idle": "6511543c",
-        "Interests=video-game, State=hovered": "152d4087",
-        "Interests=video-game, State=idle": "86257281"
+        "Interests=lecture, State=hovered": "a605a811",
+        "Interests=lecture, State=idle": "a9bca90b",
+        "Interests=location, State=hovered": "5331c90d",
+        "Interests=location, State=idle": "5bc197fe",
+        "Interests=music, State=hovered": "1243393c",
+        "Interests=music, State=idle": "73ba68c1",
+        "Interests=video-game, State=hovered": "fa8e4da6",
+        "Interests=video-game, State=idle": "fd6a5be8"
       },
       "deps": [
         "LogoCompanies"
@@ -325,19 +326,19 @@
     },
     "ProjectBentoCard": {
       "node": "2032:20121",
-      "hash": "e9875ded",
+      "hash": "feae7c17",
       "props": "32b0f90c",
       "variants": {
-        "State=hovered, Project=bpce": "fea63586",
-        "State=hovered, Project=conseil-constitutionnel": "d86e0aca",
-        "State=hovered, Project=cv": "63f7849b",
-        "State=hovered, Project=ibp": "5c6dc410",
-        "State=hovered, Project=odaptos": "1a9f603d",
-        "State=idle, Project=bpce": "c7a116de",
-        "State=idle, Project=conseil-constitutionnel": "832ddb99",
+        "State=hovered, Project=bpce": "d9fb8362",
+        "State=hovered, Project=conseil-constitutionnel": "3b1e17fc",
+        "State=hovered, Project=cv": "548fa57a",
+        "State=hovered, Project=ibp": "fa3a21d2",
+        "State=hovered, Project=odaptos": "89510e9f",
+        "State=idle, Project=bpce": "defed7c8",
+        "State=idle, Project=conseil-constitutionnel": "a95e2aa2",
         "State=idle, Project=cv": "2037444f",
-        "State=idle, Project=ibp": "5937d04d",
-        "State=idle, Project=odaptos": "f2c5f16c"
+        "State=idle, Project=ibp": "839d556e",
+        "State=idle, Project=odaptos": "217ae7fd"
       },
       "deps": [
         "MacbookMockup",
@@ -355,20 +356,24 @@
       "deps": []
     },
     "ProjectOverview": {
-      "node": "2248:55550",
-      "hash": "ed058e03",
-      "props": null,
+      "node": "2353:39997",
+      "hash": "1d9a6b8f",
+      "props": "ab2833ef",
       "variants": {
-        "Overview Projet": "ee1acfeb"
+        "Viewport=desktop": "ec5a4aaa",
+        "Viewport=mobile": "5f1fd59a"
       },
-      "deps": []
+      "deps": [
+        "LogoCompanies"
+      ]
     },
     "ProjectSectionDescription": {
-      "node": "2248:28967",
-      "hash": "15a323bc",
-      "props": "39180b45",
+      "node": "2363:42524",
+      "hash": "f0958a11",
+      "props": "af7455e9",
       "variants": {
-        "Cards / Project_Section_Description": "17898b5f"
+        "Viewport=desktop": "414d9e6a",
+        "Viewport=mobile": "9d22b371"
       },
       "deps": [
         "AlertBanner",
@@ -376,11 +381,12 @@
       ]
     },
     "ProjectSectionsDescription": {
-      "node": "744:20765",
-      "hash": "6ca18f53",
-      "props": "db072c1b",
+      "node": "2363:42649",
+      "hash": "c04bf4f9",
+      "props": "6bd41977",
       "variants": {
-        "Cards / Project_Sections_Descritpion": "2737898a"
+        "Viewport=desktop": "c111a187",
+        "Viewport=mobile": "f8ed5931"
       },
       "deps": [
         "AlertBanner",
@@ -390,17 +396,17 @@
     },
     "Tag": {
       "node": "184:18522",
-      "hash": "33c7ced2",
+      "hash": "90a4c17c",
       "props": "1d6ea4f0",
       "variants": {
-        "Size=lg, Style=contained": "45635293",
-        "Size=lg, Style=outlined": "9a1ff029",
-        "Size=md, Style=contained": "10765970",
-        "Size=md, Style=outlined": "0a8fd94a",
-        "Size=nm, Style=contained": "c868767b",
-        "Size=nm, Style=outlined": "0737c6dd",
-        "Size=sm, Style=contained": "a4498136",
-        "Size=sm, Style=outlined": "bac75ac6"
+        "Size=lg, Style=contained": "43f0e6bb",
+        "Size=lg, Style=outlined": "bb9ab141",
+        "Size=md, Style=contained": "0eb2945a",
+        "Size=md, Style=outlined": "9c7a53cc",
+        "Size=nm, Style=contained": "bfa12bc3",
+        "Size=nm, Style=outlined": "99a1ad75",
+        "Size=sm, Style=contained": "dc46f5f0",
+        "Size=sm, Style=outlined": "237e6a90"
       },
       "deps": []
     },
