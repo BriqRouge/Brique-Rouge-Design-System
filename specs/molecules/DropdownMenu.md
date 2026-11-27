@@ -33,12 +33,13 @@ interface DropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
 | `--color-background-surface` | — | Fond |
 | `--color-border-default` | — | Bordure 0.5px solid |
 | `--border-radius-lg` | — | Border-radius |
+| `--spacing-x2` | `8px` | Gap et padding (desktop) ; paddings gauche/droit en mobile |
 | `--spacing-x6` | `24px` | Mobile : gap et padding bas |
 | `--spacing-x4` | `16px` | Mobile : padding haut |
 
 ## Règles d'usage
 
-- Layout : flex column, gap 8px, padding 8px, `align-items: stretch` (les enfants remplissent la largeur du menu)
+- Layout : flex column, gap et padding `--spacing-x2` (8px — valeurs en dur jusqu'au 2026-11-27), `align-items: stretch` (les enfants remplissent la largeur du menu)
 - Conteneur générique, agnostique de son contenu — typiquement rempli de `DropdownMenuButton`
 
 ## Sous le breakpoint (mobile)
