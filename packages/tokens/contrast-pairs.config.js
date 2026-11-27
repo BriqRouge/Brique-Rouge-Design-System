@@ -60,6 +60,8 @@ export default {
     { fg: T('menu-button/outlined-light/hover'), bg: S('menu-button/hovered-black'), where: 'MenuButton outlined light :hover/:focus' },
     { fg: T('menu-button/outlined-dark/idle'), bg: DARK, where: 'MenuButton outlined dark (fond sombre)' },
     { fg: T('menu-button/outlined-dark/hover'), bg: S('menu-button/hovered'), where: 'MenuButton outlined dark :hover/:focus' },
+    { fg: S('border/menu-button/focus'), bg: S('menu-button/hovered'), kind: 'ui', where: 'bordure de focus MenuButton contained et outlined dark (1px)' },
+    { fg: S('border/menu-button/focus'), bg: PAGE, kind: 'ui', where: 'bordure de focus MenuButton outlined light, côté page (1px)' },
 
     // ─── Link ───────────────────────────────────────────────────────────────
     { fg: T('inverse'), bg: DARK, where: 'Link theme=dark, Badge outlined' },
