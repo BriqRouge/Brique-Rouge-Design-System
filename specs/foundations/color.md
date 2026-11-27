@@ -166,11 +166,11 @@
 | `color.icon.button.info` | `#3453dc` |
 | `color.icon.button.warning` | `#af471f` |
 | `color.icon.button.primary-hover` | `#fafafa` |
-| `color.icon.button.secondary` | `#262626` |
+| `color.icon.button.secondary` | `#171717` |
 | `color.icon.button.secondary-hover` | `#fafafa` |
-| `color.icon.button.tertiary` | `#262626` |
-| `color.icon.button.tertiary-hover` | `#404040` |
-| `color.icon.button.tertiary-focus` | `#567be9` |
+| `color.icon.button.tertiary` | `#171717` |
+| `color.icon.button.tertiary-hover` | `#525252` |
+| `color.icon.button.tertiary-focus` | `#3453dc` |
 | `color.icon.button.primary` | `#fafafa` |
 | `color.icon.button.error` | `#e22020` |
 | `color.icon.button.success` | `#1f7d18` |
@@ -179,8 +179,8 @@
 | `color.icon.notification.warning` | `#af471f` |
 | `color.icon.notification.info-close` | `#263282` |
 | `color.icon.notification.warning-close` | `#71311d` |
-| `color.icon.menu-button.contained` | `#737373` |
-| `color.icon.menu-button.outline-white` | `#f5f5f5` |
+| `color.icon.menu-button.contained` | `#525252` |
+| `color.icon.menu-button.outline-white` | `#fafafa` |
 | `color.icon.menu-button.outline-black` | `#171717` |
 | `color.icon.menu-button.disabled` | `#d4d4d4` |
 | `color.background.button.disabled` | `#f5f5f5` |
