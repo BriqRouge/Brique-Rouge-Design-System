@@ -47,8 +47,8 @@ Réutilise `ProjectSectionDescription` (organisme) — chaque section est fourni
 | `--color-neutral-200` | `#e5e5e5` | Début du dégradé du séparateur |
 | `--color-deep-sea-600` | `#3453dc` | Barre d'accent longue |
 | `--color-deep-sea-200` | `#c4d5f9` | Barre d'accent courte |
-| `--typography-heading-font-family`/`-font-weight` | — | Titre de la carte |
-| `--typography-font-size-5xl` | `48px` | Titre de la carte |
+| `--typography-font-family-sans` / `--typography-font-weight-bold` | — / `700` | Titre de la carte (style Figma `display/lg`) |
+| `--typography-display-lg-font-size`/`-line-height` | `48px`/`56px` (mobile `32px`/`40px`) | Titre de la carte — tokens viewport ; interlettrage `-0.02em` (aligné le 2026-11-27, auparavant 48/56 fixe et `-0.96px`) |
 | `--spacing-x16`/`-x4`/`-x6`/`-x2` | `64px`/`16px`/`24px`/`8px` | Gaps internes |
 | `--border-radius-section-card` | `40px` | Border-radius de la carte (Figma : `border-radius/section-card`, depuis le 2026-11-05) |
 | `--spacing-layout-section-inline` | `128px` (mobile `24px`) | Padding horizontal de la carte — token viewport (Figma `spacing/layout/section-inline`) |
@@ -63,6 +63,7 @@ Figma `Viewport=mobile` (2363:42650). Pas de prop React : l'adaptation passe par
 
 - Padding de la carte : 24px sur les 4 côtés (inline par le token viewport, vertical par media query)
 - Les sections passent d'elles-mêmes en mobile (`ProjectSectionDescription`)
+- Titre : 32/40 grâce aux tokens viewport du style `display/lg` (48/56 sur desktop), sans règle dans le media query
 - Incohérence Figma signalée : en mobile, le padding est lié à `spacing/x6` sur les 4 côtés, pas à `spacing/layout/section-inline` (même valeur, 24px)
 
 ## Règles d'usage
