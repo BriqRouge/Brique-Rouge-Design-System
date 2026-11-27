@@ -9,7 +9,7 @@ claude_md: ["6.6", "6.7"]
 related_components: [Button, MenuButton, AlertBanner, Tag, Badge]
 related_tokens: [color/icon, color/border]
 references: [packages/tokens/contrast-pairs.config.js]
-prs: []
+prs: [110]
 ---
 
 # 004 — Aligner les tokens d'icône et de bordure sur l'échelle du texte

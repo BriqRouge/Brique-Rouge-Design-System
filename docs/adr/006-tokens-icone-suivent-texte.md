@@ -9,7 +9,7 @@ superseded_by: null
 related_components: [Button, MenuButton, Badge, Tag, DropdownMenuTrigger, TopNav]
 related_tokens: [color/icon/button, color/icon/menu-button]
 backlog: ["004"]
-prs: []
+prs: [110]
 tags: [tokens, couleur, icônes, figma]
 ---
 

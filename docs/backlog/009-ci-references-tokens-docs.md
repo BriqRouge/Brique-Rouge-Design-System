@@ -9,7 +9,7 @@ claude_md: ["6.6", "17", "19"]
 related_components: [AlertBanner]
 related_tokens: []
 references: [specs/patterns/, .claude/skills/, scripts/check-specs.mjs, scripts/token-audit.mjs, packages/react/src/components/molecules/AlertBanner/AlertBanner.module.css]
-prs: []
+prs: [110]
 ---
 
 # 009 — Contrôler en CI que les variables CSS citées dans `specs/` et les skills existent
